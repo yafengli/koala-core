@@ -18,6 +18,7 @@ import cn.hpt.dao.IOperatorDao;
 import cn.hpt.model.Operator;
 import cn.hpt.ui.LoginWindow;
 import cn.hpt.ui.MainFrame;
+import cn.hpt.ui.view.PriceDialog;
 import cn.hpt.util.PropertiesLoader;
 
 @Component(ListenerDefinition.LOGIN_BEAN_NAME)
@@ -32,6 +33,8 @@ public class LoginActionListener extends KeyAdapter implements ActionListener {
 	private IOperatorDao operatorDao;
 	@Autowired
 	private PropertiesLoader pl;
+        @Autowired
+        private PriceDialog priceDialog;
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -58,6 +61,7 @@ public class LoginActionListener extends KeyAdapter implements ActionListener {
 			mainFrame.setRole(op.getRole());
 			mainFrame.actionTabbedPane.removeAll();
 			mainFrame.setVisible(true);
+                        priceDialog.operatorField.setText(op.getLoginname());
 		} else {
 			JOptionPane.showMessageDialog(null, String.format(pl.getString("login.error"),op.getLoginname()), pl.getString("login.msg"), JOptionPane.CLOSED_OPTION);
 		}

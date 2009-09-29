@@ -30,6 +30,7 @@ import cn.hpt.dao.IBillRecordDao;
 import cn.hpt.extend.PrintableComponent;
 import cn.hpt.model.Bill;
 import cn.hpt.model.BillRecord;
+import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.component.PricePanel;
 import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.model.PriceTabelModel;
@@ -37,6 +38,7 @@ import cn.hpt.util.PropertiesLoader;
 
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import java.awt.Color;
 
 @Service
 public class PriceDialog extends javax.swing.JDialog {
@@ -81,6 +83,8 @@ public class PriceDialog extends javax.swing.JDialog {
     private IBillDao billDao;
     @Autowired
     private IBillRecordDao billRecordDao;
+    @Autowired
+    private MainFrame mainFrame;
 
     private Bill bill;
 
@@ -197,6 +201,7 @@ public class PriceDialog extends javax.swing.JDialog {
                         }
                         {
                             dateField = new JLabel();
+                            dateField.setBackground(Color.WHITE);
                             dateField.setText(DateFormatUtils
                                     .format(System.currentTimeMillis(),
                                     "yyyy-MM-dd HH:mm:ss"));
@@ -216,8 +221,8 @@ public class PriceDialog extends javax.swing.JDialog {
                         }
                         {
                             operatorField = new JLabel();
-                            pricePanel.add(operatorField);
-                            operatorField.setText("\u6536\u8d39\u5458");
+                            operatorField.setBackground(Color.WHITE);
+                            pricePanel.add(operatorField);                            
                         }
                         {
                             priceLabel = new JLabel();
@@ -227,6 +232,7 @@ public class PriceDialog extends javax.swing.JDialog {
                         }
                         {
                             priceField = new JLabel();
+                            priceField.setBackground(Color.WHITE);
                             pricePanel.add(priceField);
                             priceField.setText("0");
                         }
