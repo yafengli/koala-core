@@ -1,0 +1,42 @@
+<rich:toolBar
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:rich="http://richfaces.org/rich">
+    <rich:toolBarGroup>
+        <h:outputText value="#{projectName}:"/>
+        <s:link view="/home.xhtml" value="主页" propagation="none"/>
+    </rich:toolBarGroup>   
+    <s:link view="/admin/AccountList.xhtml"
+           value="账号"
+     propagation="none">
+       <f:param name="from"/>
+    </s:link>
+    <s:link view="/admin/RoleList.xhtml"
+           value="角色"
+     propagation="none">
+       <f:param name="from"/>
+    </s:link>    
+	 <s:link view="/admin/UserRoleList.xhtml"
+           value="账号-角色"
+     propagation="none">
+       <f:param name="from"/>
+    </s:link>
+    <s:link view="/demo/hello.xhtml"
+           value="演示-1"
+     propagation="none" rendered="#{identity.hasRole('admin')}"/>
+    <s:link view="/admin/DemoPersonList.xhtml"
+           value="演示-2"
+     propagation="none" rendered="#{identity.hasRole('admin')}">
+       <f:param name="from"/>
+    </s:link>
+
+    <!-- @newMenuItem@ -->
+    <rich:toolBarGroup location="right">
+        <h:outputText value="signed in as: #{identity.username}" rendered="#{identity.loggedIn}"/>
+        <s:link view="/login.xhtml" value="登入" rendered="#{not identity.loggedIn}" propagation="none"/>
+        <s:link view="/home.xhtml" action="#{identity.logout}" value="登出" rendered="#{identity.loggedIn}" propagation="none"/>
+    </rich:toolBarGroup>
+</rich:toolBar>
