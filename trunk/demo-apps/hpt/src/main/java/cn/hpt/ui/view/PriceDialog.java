@@ -298,7 +298,14 @@ public class PriceDialog extends javax.swing.JDialog {
                                     JOptionPane.YES_NO_OPTION);
                             switch (option) {
                                 case JOptionPane.YES_OPTION: {
+
                                     try {
+                                        /*终止编辑状态*/
+                                        if (panel.hptTable.isEditing()) {
+                                            int row = panel.hptTable.getSelectedRow();
+                                            int col = panel.hptTable.getSelectedColumn();
+                                            panel.hptTable.getCellEditor(row, col).stopCellEditing();
+                                        }
                                         /*
                                         PrinterJob job = PrinterJob.getPrinterJob();
                                         PageFormat format = job.pageDialog(job.defaultPage());
@@ -402,7 +409,8 @@ public class PriceDialog extends javax.swing.JDialog {
         float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
         java.util.List<BillRecord> lbr = panel.tabelModel.getItem();
         for (BillRecord item : lbr) {
-            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine().getMname(), item.getMedicine().getPrice(), item.getBnumber()), itemx, itemy);
+            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine() != null ? item.getMedicine().getMname() : "",
+                    item.getMedicine() != null ? item.getMedicine().getPrice() : "", item.getBnumber()), itemx, itemy);
             itemy += g2.getFont().getSize() + 1;
         }
         try {

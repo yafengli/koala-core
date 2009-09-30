@@ -53,7 +53,8 @@ public class PrintPanel extends JPanel implements Printable {
         float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
         List<BillRecord> lbr = priceTabelModel.getItem();
         for (BillRecord item : lbr) {
-            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine().getMname(), item.getMedicine().getPrice(), item.getBnumber()), itemx, itemy);
+            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine()!=null?item.getMedicine().getMname():"",
+                    item.getMedicine()!=null?item.getMedicine().getPrice():"", item.getBnumber()), itemx, itemy);
             itemy += g2.getFont().getSize() + 1;
         }
 
