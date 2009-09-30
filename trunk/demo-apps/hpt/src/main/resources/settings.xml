@@ -44,4 +44,20 @@
 	<entry key="price.dialog.print.msg"><![CDATA[确认划价收费？]]></entry>
 	<entry key="price.dialo.print.err">
 	<![CDATA[收费打印失败：请检查打印机是否正常工作！]]></entry>
+    <!-- print location -->
+    <entry key="print.user.x">40</entry>
+    <entry key="print.user.y">40</entry>
+
+    <entry key="print.date.x">200</entry>
+    <entry key="print.date.y">40</entry>
+
+    <entry key="print.operator.x">200</entry>
+    <entry key="print.operator.y">200</entry>
+
+    <entry key="print.price.x">300</entry>
+    <entry key="print.price.y">200</entry>
+
+    <entry key="print.medicine.x">200</entry>
+    <entry key="print.medicine.y">80</entry>
+
 </properties>

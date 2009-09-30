@@ -1,30 +1,24 @@
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
+package test;
 
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintException;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.SimpleDoc;
+import javax.imageio.ImageIO;
+import javax.print.*;
 import javax.print.attribute.DocAttributeSet;
 import javax.print.attribute.HashDocAttributeSet;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.MediaSizeName;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.io.File;
 
 /**
  * java定位打印，把打印内容打到指定的地方。
  *
  * @author lyb
- *
  */
 public class LocatePrint implements Printable {
     private int PAGES = 0;
@@ -97,8 +91,21 @@ public class LocatePrint implements Printable {
     }
 
     public static void main(String[] args) {
-        LocatePrint lp = new LocatePrint();
-        lp.printContent();
-    }
+//        LocatePrint lp = new LocatePrint();
+//        lp.printContent();
+        BufferedImage bi = new BufferedImage(400, 300, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = (Graphics2D) bi.getGraphics();
 
+        g2.setBackground(Color.WHITE);
+        g2.setFont(new Font("隶书", 20, 20));
+        g2.drawString("一", 10, 10);
+        g2.drawString("二", 200, 200);
+        g2.drawString("三", 280, 280);
+        g2.drawString("四", 10, 280);
+        try {
+            ImageIO.write(bi, "gif", new File("f:/tmp/hello.gif"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

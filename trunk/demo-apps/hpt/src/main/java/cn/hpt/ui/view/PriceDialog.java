@@ -1,44 +1,30 @@
 package cn.hpt.ui.view;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Image;
+import cn.hpt.dao.IBillDao;
+import cn.hpt.dao.IBillRecordDao;
+import cn.hpt.model.Bill;
+import cn.hpt.model.BillRecord;
+import cn.hpt.ui.MainFrame;
+import cn.hpt.ui.component.PricePanel;
+import cn.hpt.ui.component.PrintPanel;
+import cn.hpt.ui.extend.HptFont;
+import cn.hpt.ui.model.PriceTabelModel;
+import cn.hpt.util.PropertiesLoader;
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.Timestamp;
-
-import javax.annotation.PostConstruct;
-import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang.time.DateFormatUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import cn.hpt.dao.IBillDao;
-import cn.hpt.dao.IBillRecordDao;
-import cn.hpt.extend.PrintableComponent;
-import cn.hpt.model.Bill;
-import cn.hpt.model.BillRecord;
-import cn.hpt.ui.MainFrame;
-import cn.hpt.ui.component.PricePanel;
-import cn.hpt.ui.extend.HptFont;
-import cn.hpt.ui.model.PriceTabelModel;
-import cn.hpt.util.PropertiesLoader;
-
-import com.jgoodies.forms.layout.CellConstraints;
-import com.jgoodies.forms.layout.FormLayout;
-import java.awt.Color;
 
 @Service
 public class PriceDialog extends javax.swing.JDialog {
@@ -47,7 +33,7 @@ public class PriceDialog extends javax.swing.JDialog {
     public JButton printButton;
     public JLabel priceLabel;
     public JPanel actionPanel;
-    public JPanel printPanel;
+    public PrintPanel printPanel;
     public JLabel itemnameLabel;
     public JPanel itemnamePanel;
     public JPanel itemPanel;
@@ -130,7 +116,7 @@ public class PriceDialog extends javax.swing.JDialog {
             BorderLayout frameLayout = new BorderLayout();
             getContentPane().setLayout(frameLayout);
             {
-                printPanel = new JPanel();
+                printPanel = new PrintPanel();
                 BorderLayout printPanelLayout = new BorderLayout();
                 getContentPane().add(printPanel, BorderLayout.CENTER);
                 printPanel.setLayout(printPanelLayout);
@@ -222,7 +208,7 @@ public class PriceDialog extends javax.swing.JDialog {
                         {
                             operatorField = new JLabel();
                             operatorField.setBackground(Color.WHITE);
-                            pricePanel.add(operatorField);                            
+                            pricePanel.add(operatorField);
                         }
                         {
                             priceLabel = new JLabel();
@@ -338,12 +324,17 @@ public class PriceDialog extends javax.swing.JDialog {
                                     JOptionPane.YES_NO_OPTION);
                             switch (option) {
                                 case JOptionPane.YES_OPTION: {
-
-                                    testImagePrint();
-                                    PrintableComponent pc = new PrintableComponent(
-                                            printPanel);
                                     try {
-                                        pc.print();
+                                        /*
+                                        PrinterJob job = PrinterJob.getPrinterJob();
+                                        PageFormat format = job.pageDialog(job.defaultPage());
+                                        job.setPrintable(printPanel, format);
+                                        if (job.printDialog())
+                                            job.print();
+                                        */
+                                        //TODO
+                                        testImagePrint();
+
                                         bill.setUsername(userField.getText());
                                         bill.setResult(Float.parseFloat(priceField.getText()));
                                         billDao.update(bill);
@@ -407,20 +398,30 @@ public class PriceDialog extends javax.swing.JDialog {
 
     /* test print image */
     private void testImagePrint() {
-        Image img = printPanel.createImage(printPanel.getWidth(), printPanel
-                .getHeight());
-        Graphics imgG = img.getGraphics();
-        printPanel.paint(imgG);
-        BufferedImage bi = new BufferedImage(pricePanel.getWidth(), printPanel
-                .getHeight(), BufferedImage.TYPE_INT_RGB);
-        Graphics g = bi.getGraphics();
-        g.drawImage(img, 0, 0, null);
+        BufferedImage image = new BufferedImage(400, 300, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = (Graphics2D) image.getGraphics();
+        g2.setFont(font.PRICE_LABEL);
+        //打印患者姓名
+        g2.drawString(userField.getText(), Float.parseFloat(pl.getString("print.user.x")), Float.parseFloat(pl.getString("print.user.y")));
+        //打印日期
+        g2.drawString(dateField.getText(), Float.parseFloat(pl.getString("print.date.x")), Float.parseFloat(pl.getString("print.date.y")));
+        //打印收款员
+        g2.drawString(operatorField.getText(), Float.parseFloat(pl.getString("print.operator.x")), Float.parseFloat(pl.getString("print.operator.y")));
+        //打印费用
+        g2.drawString(priceField.getText(), Float.parseFloat(pl.getString("print.price.x")), Float.parseFloat(pl.getString("print.price.y")));
+        //打印药物清单
+        float itemx = Float.parseFloat(pl.getString("print.medicine.x"));
+        float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
+        java.util.List<BillRecord> lbr = priceTabelModel.getItem();
+        for (BillRecord item : lbr) {
+            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine().getMname(), item.getMedicine().getPrice(), item.getBnumber()), itemx, itemy);
+            itemy += g2.getFont().getSize() + 1;
+        }
         try {
-            ImageIO.write(bi, "jpg", new File("f:/test.jpg"));
-            // PrintableComponent pc = new PrintableComponent(jcpc);
-            // pc.print();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            ImageIO.write(image, "gif", new File("f:/tmp/hello.gif"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
