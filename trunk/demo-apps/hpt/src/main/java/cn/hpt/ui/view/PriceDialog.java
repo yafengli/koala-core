@@ -22,6 +22,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.Timestamp;
@@ -88,7 +90,6 @@ public class PriceDialog extends javax.swing.JDialog {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new JFrame();
-
                 PriceDialog inst = new PriceDialog(frame);
                 inst.setVisible(true);
             }
@@ -342,7 +343,8 @@ public class PriceDialog extends javax.swing.JDialog {
                                                 .getItem()) {
                                             billRecordDao.save(br);
                                         }
-                                        bill = null;
+                                        //清除
+                                        clear();
                                         dialog.dispose();
                                     } catch (Exception ex) {
                                         ex.printStackTrace();
@@ -370,9 +372,7 @@ public class PriceDialog extends javax.swing.JDialog {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             int selectRow = panel.hptTable.getSelectedRow();
-                            if (panel.hptTable.isEditing()) {
-                                return;
-                            } else if (selectRow >= 0
+                            if (selectRow >= 0
                                     && selectRow < priceTabelModel.getItem()
                                     .size()) {
                                 priceTabelModel.getItem().remove(selectRow);
@@ -385,7 +385,7 @@ public class PriceDialog extends javax.swing.JDialog {
                     closeButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            priceTabelModel.getItem().clear();
+                            clear();
                             dialog.dispose();
                         }
                     });
@@ -394,6 +394,14 @@ public class PriceDialog extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void clear() {
+        userField.setText("");
+        socialField.setText("");
+        priceField.setText("0");
+        bill = null;
+        priceTabelModel.setItem(null);
     }
 
     /* test print image */
