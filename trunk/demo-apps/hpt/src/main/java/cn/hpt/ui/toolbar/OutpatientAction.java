@@ -16,7 +16,7 @@ public class OutpatientAction extends AbstractAction {
 
 	@Autowired
 	private PriceDialog priceDialog;
-
+    
 	public OutpatientAction() {
 		super("", new ImageIcon(OutpatientAction.class
 				.getResource("/logo/6.png")));
@@ -26,7 +26,6 @@ public class OutpatientAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// 划价收费
-		priceDialog.setLocationRelativeTo(null);
-		priceDialog.setVisible(true);
+		priceDialog.reload();
 	}
 }

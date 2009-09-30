@@ -8,7 +8,6 @@ import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.component.PricePanel;
 import cn.hpt.ui.component.PrintPanel;
 import cn.hpt.ui.extend.HptFont;
-import cn.hpt.ui.model.PriceTabelModel;
 import cn.hpt.util.PropertiesLoader;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -22,8 +21,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.Timestamp;
@@ -57,12 +54,10 @@ public class PriceDialog extends javax.swing.JDialog {
     public JLabel userLabel;
     public JPanel lablePanel;
     public JPanel contentPanel;
+    private JButton rmButton;
 
     @Autowired
     private PricePanel panel;
-    private JButton rmButton;
-    @Autowired
-    private PriceTabelModel priceTabelModel;
     @Autowired
     private HptFont font;
     @Autowired
@@ -73,28 +68,7 @@ public class PriceDialog extends javax.swing.JDialog {
     private IBillRecordDao billRecordDao;
     @Autowired
     private MainFrame mainFrame;
-
     private Bill bill;
-
-    /**
-     * Auto-generated main method to display this JDialog
-     */
-    public static void main(String[] args) {
-        // Set Look & Feel
-        try {
-            javax.swing.UIManager
-                    .setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new JFrame();
-                PriceDialog inst = new PriceDialog(frame);
-                inst.setVisible(true);
-            }
-        });
-    }
 
     public PriceDialog(JFrame frame) {
         super(frame);
@@ -110,7 +84,6 @@ public class PriceDialog extends javax.swing.JDialog {
     private void initGUI() {
         final JDialog dialog = this;
         {
-            setModal(true);
             setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         }
         try {
@@ -310,7 +283,7 @@ public class PriceDialog extends javax.swing.JDialog {
                             br.setBill(bill);
                             br.setMedicine(null);
                             br.setBnumber(1L);
-                            priceTabelModel.getItem().add(br);
+                            panel.tabelModel.getItem().add(br);
                             panel.hptTable.revalidate();
                         }
                     });
@@ -339,13 +312,10 @@ public class PriceDialog extends javax.swing.JDialog {
                                         bill.setUsername(userField.getText());
                                         bill.setResult(Float.parseFloat(priceField.getText()));
                                         billDao.update(bill);
-                                        for (BillRecord br : priceTabelModel
-                                                .getItem()) {
+                                        for (BillRecord br : panel.tabelModel.getItem()) {
                                             billRecordDao.save(br);
                                         }
-                                        //清除
-                                        clear();
-                                        dialog.dispose();
+                                        close();
                                     } catch (Exception ex) {
                                         ex.printStackTrace();
                                         JOptionPane
@@ -360,7 +330,6 @@ public class PriceDialog extends javax.swing.JDialog {
                                 break;
                                 default:
                                     billDao.remove(bill);
-                                    bill = null;
                                     break;
                             }
                         }
@@ -371,13 +340,17 @@ public class PriceDialog extends javax.swing.JDialog {
 
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            int selectRow = panel.hptTable.getSelectedRow();
-                            if (selectRow >= 0
-                                    && selectRow < priceTabelModel.getItem()
-                                    .size()) {
-                                priceTabelModel.getItem().remove(selectRow);
+                            if (panel.hptTable.isEditing()) {
+                                return;
+                            } else {
+                                int selectRow = panel.hptTable.getSelectedRow();
+                                if (selectRow >= 0
+                                        && selectRow < panel.tabelModel.getItem()
+                                        .size()) {
+                                    panel.tabelModel.getItem().remove(selectRow);
+                                }
+                                panel.hptTable.revalidate();
                             }
-                            panel.hptTable.revalidate();
                         }
                     });
                 }
@@ -385,8 +358,7 @@ public class PriceDialog extends javax.swing.JDialog {
                     closeButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            clear();
-                            dialog.dispose();
+                            close();
                         }
                     });
                 }
@@ -396,12 +368,19 @@ public class PriceDialog extends javax.swing.JDialog {
         }
     }
 
-    public void clear() {
+    public void reload() {
         userField.setText("");
         socialField.setText("");
         priceField.setText("0");
-        bill = null;
-        priceTabelModel.setItem(null);
+        panel.tabelModel.getItem().clear();
+        setModal(true);
+        setLocationRelativeTo(mainFrame);
+        setVisible(true);
+    }
+
+    public void close() {
+        bill=null;
+        this.setVisible(false);
     }
 
     /* test print image */
@@ -420,7 +399,7 @@ public class PriceDialog extends javax.swing.JDialog {
         //打印药物清单
         float itemx = Float.parseFloat(pl.getString("print.medicine.x"));
         float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
-        java.util.List<BillRecord> lbr = priceTabelModel.getItem();
+        java.util.List<BillRecord> lbr = panel.tabelModel.getItem();
         for (BillRecord item : lbr) {
             g2.drawString(String.format("[%s  %s  %s]", item.getMedicine().getMname(), item.getMedicine().getPrice(), item.getBnumber()), itemx, itemy);
             itemy += g2.getFont().getSize() + 1;

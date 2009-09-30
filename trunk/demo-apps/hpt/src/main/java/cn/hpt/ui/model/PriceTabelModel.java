@@ -16,7 +16,7 @@ public class PriceTabelModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -6945298295399270858L;
 
-    public static final String[] columnNames = new String[]{"药品简写", "药品名称",
+    public static final String[] columnNames = new String[]{"标号", "药品简写", "药品名称",
             "药品价格", "数量"};
 
     private List<BillRecord> item;
@@ -60,29 +60,29 @@ public class PriceTabelModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
-
-        BillRecord item = null;
         if (rowIndex >= 0 && rowIndex < getItem().size()) {
-            item = getItem().get(rowIndex);
+            BillRecord item = getItem().get(rowIndex);
+            switch (columnIndex) {
+                case 0:
+                    break;
+                case 1:
+                    cellEditor.reload(value.toString());
+                    break;
+                case 2:
+                    if (item != null && item.getMedicine() != null)
+                        item.getMedicine().getMname();
+                    break;
+                case 3:
+                    if (item != null && item.getMedicine() != null)
+                        item.getMedicine().getPrice();
+                    break;
+                case 4:
+                    if (item != null)
+                        item.setBnumber(Long.valueOf(value.toString()));
+                    break;
+            }
+            updatePrice();
         }
-        switch (columnIndex) {
-            case 0:
-                cellEditor.reload(value.toString());
-                break;
-            case 1:
-                if (item != null && item.getMedicine() != null)
-                    item.getMedicine().getMname();
-                break;
-            case 2:
-                if (item != null && item.getMedicine() != null)
-                    item.getMedicine().getPrice();
-                break;
-            case 3:
-                if (item != null)
-                    item.setBnumber(Long.valueOf(value.toString()));
-                break;
-        }
-        updatePrice();
     }
 
     @Override
@@ -92,26 +92,29 @@ public class PriceTabelModel extends AbstractTableModel {
             BillRecord item = getItem().get(rowIndex);
             switch (columnIndex) {
                 case 0:
+                    o = rowIndex;
+                    break;
+                case 1:
                     if (item.getMedicine() != null)
                         o = item.getMedicine().getMshortcut();
                     else {
                         o = "";
                     }
                     break;
-                case 1:
+                case 2:
                     if (item.getMedicine() != null)
                         o = item.getMedicine().getMname();
                     else {
                         o = "";
                     }
                     break;
-                case 2:
+                case 3:
                     if (item.getMedicine() != null)
                         o = item.getMedicine().getPrice();
                     else
                         o = 0.00;
                     break;
-                case 3:
+                case 4:
                     o = item.getBnumber();
                     break;
             }
@@ -120,7 +123,7 @@ public class PriceTabelModel extends AbstractTableModel {
     }
 
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex == 2)
+        if (columnIndex == 3 || columnIndex == 0)
             return false;
         else
             return true;

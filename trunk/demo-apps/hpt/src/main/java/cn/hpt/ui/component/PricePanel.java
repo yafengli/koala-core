@@ -28,7 +28,7 @@ public class PricePanel extends JPanel {
 	private static final long serialVersionUID = -1047279537436880394L;
 
 	@Autowired
-	private PriceTabelModel tabelModel;
+	public PriceTabelModel tabelModel;
 	@Autowired
 	private PriceTableCellEditor cellEditor;
 
@@ -53,7 +53,8 @@ public class PricePanel extends JPanel {
 				TableColumn tc = hptTable.getColumnModel().getColumn(i);
 				tc.setCellRenderer(cellRenderer);
 			}
-			hptTable.getColumnModel().getColumn(1).setCellEditor(cellEditor);
+            //药品选择
+			hptTable.getColumnModel().getColumn(2).setCellEditor(cellEditor);
 			cellEditor.addItemListener(new ItemListener() {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
@@ -65,9 +66,7 @@ public class PricePanel extends JPanel {
 									hptTable.getSelectedRow());
 							br.setMedicine(md);
 						}
-					} else {
-						cellEditor.setEnabled(true);
-					}
+					} 
 				}
 			});
 			contentbp.setViewportView(hptTable);

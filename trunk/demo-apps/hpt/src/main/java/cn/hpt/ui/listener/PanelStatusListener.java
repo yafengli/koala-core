@@ -54,9 +54,7 @@ public class PanelStatusListener implements ActionListener {
 
         } else {
             // 划价收费
-            priceDialog.setLocationRelativeTo(null);
-            priceDialog.repaint();
-            priceDialog.setVisible(true);
+            priceDialog.reload();
         }
     }
 }

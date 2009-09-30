@@ -71,14 +71,16 @@ public class ModifyInfoDialog extends JDialog {
             public void keyPressed(KeyEvent e) {
                 int k = e.getKeyCode();
                 if (k == KeyEvent.VK_ENTER) {
-                    f.setVisible(false);
+                    f.dispose();
+//                    f.setVisible(false);
                 }
             }
         });
         close.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                f.setVisible(false);
+                f.dispose();
+//                f.setVisible(false);
             }
         });
         actionp.add(submit);
