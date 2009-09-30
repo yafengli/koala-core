@@ -369,17 +369,18 @@ public class PriceDialog extends javax.swing.JDialog {
     }
 
     public void reload() {
-        userField.setText("");
-        socialField.setText("");
-        priceField.setText("0");
-        panel.tabelModel.getItem().clear();
         setModal(true);
         setLocationRelativeTo(mainFrame);
         setVisible(true);
     }
 
     public void close() {
-        bill=null;
+        bill = null;
+        userField.setText("");
+        socialField.setText("");
+        priceField.setText("0");
+        panel.tabelModel.getItem().clear();
+        panel.hptTable.revalidate();
         this.setVisible(false);
     }
 
