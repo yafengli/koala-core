@@ -1,6 +1,7 @@
 package test.test;
 
 import org.junit.Test;
+import org.koala.dao.IJDBCDao;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.ApplicationContext;
@@ -10,7 +11,11 @@ import org.springframework.beans.BeansException;
 import test.dao.AccountJDBCDao;
 import test.dao.impl.jdbc.AccountJDBCDaoImpl;
 import test.model.Account;
+import test.model.Bill;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,7 +30,7 @@ public class JDBCTest {
 
     public JDBCTest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
-                    "applicationContext-common.xml", "applicationContext-jdbc.xml"});
+                "applicationContext-common.xml", "applicationContext-jdbc.xml"});
         ctx.getBeanFactory().addBeanPostProcessor(new BeanPostProcessor() {
 
             public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
@@ -48,12 +53,12 @@ public class JDBCTest {
         }
     }
 
-    @Test
+    //    @Test
     public void sayHello() {
         System.out.println("[Hello Test!]");
     }
 
-	@Test
+    //	@Test
     public void add() {
         ResourceBundle rb = ResourceBundle.getBundle("sql");
         System.out.printf("[classname][%s]\n", adao.getClass().getName());
@@ -75,21 +80,40 @@ public class JDBCTest {
         acc.setAname("JDBCName");
         acc.setAdesc("JDBCDesc");
         adao.save(insql, acc);
-        List<Account> la = adao.find(sql,2,4);
+        List<Account> la = adao.find(sql, 2, 4);
         for (Account aca : la) {
             System.out.printf("[aid,aname][%d,%s]\n", aca.getAid(), aca.getAname());
         }
-		/*
-        Account sacc = adao.findForObject(ssql, aid);
-                Account tacc = new Account();
-        tacc.setAid(aid);
-        tacc = adao.findForObject(tsql, tacc);
-        System.out.println(buffer.toString());
-        System.out.printf("[aid,aname,address,adec,adddesc][%d,%s,%s,%s,%s]\n", sacc.getAid(),
-                sacc.getAname(), sacc.getAddress(), sacc.getAdesc(), sacc.getAdddesc());
-        System.out.println(buffer.toString());
-        System.out.printf("[aid,aname,address,adec,adddesc][%d,%s,%s,%s,%s]\n", tacc.getAid(),
-                tacc.getAname(), tacc.getAddress(), tacc.getAdesc(), tacc.getAdddesc());
-		*/
+        /*
+          Account sacc = adao.findForObject(ssql, aid);
+                  Account tacc = new Account();
+          tacc.setAid(aid);
+          tacc = adao.findForObject(tsql, tacc);
+          System.out.println(buffer.toString());
+          System.out.printf("[aid,aname,address,adec,adddesc][%d,%s,%s,%s,%s]\n", sacc.getAid(),
+                  sacc.getAname(), sacc.getAddress(), sacc.getAdesc(), sacc.getAdddesc());
+          System.out.println(buffer.toString());
+          System.out.printf("[aid,aname,address,adec,adddesc][%d,%s,%s,%s,%s]\n", tacc.getAid(),
+                  tacc.getAname(), tacc.getAddress(), tacc.getAdesc(), tacc.getAdddesc());
+          */
+    }
+
+    @Test
+    public void newtest() {
+        try {
+            BeanInfo info = Introspector.getBeanInfo(Bill.class);
+            for (PropertyDescriptor pd : info.getPropertyDescriptors()) {
+                System.out.printf("[%s]\n", pd.getName());
+            }
+            /*
+            IJDBCDao dao = (IJDBCDao) ctx.getBean("baseJDBCDao");
+            List<Bill> items = dao.find("select RID as rid,RCREATEDATE as rcreatedate,USERNAME as username from HT_BILL", Bill.class);
+            for (Bill item : items) {
+                System.out.printf("[%s,%s,%s]\n", item.getRid(), item.getUsername(), item.getRcreatedate());
+            }
+            */
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
