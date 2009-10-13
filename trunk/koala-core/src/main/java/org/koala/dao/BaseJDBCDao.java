@@ -11,9 +11,9 @@ import java.beans.Expression;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,7 +26,19 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 1.0
  */
 public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
-    public static final ConcurrentHashMap<String, Method> mdmap = new ConcurrentHashMap<String, Method>();
+
+    public static final ConcurrentHashMap<Class, Method> mdmap = new ConcurrentHashMap<Class, Method>();
+
+    static {
+        try {
+            mdmap.put(Integer.class, ResultSet.class.getMethod("getInt", String.class));
+            mdmap.put(Long.class, ResultSet.class.getMethod("getLong", String.class));
+            mdmap.put(String.class, ResultSet.class.getMethod("getString", String.class));
+            mdmap.put(Timestamp.class, ResultSet.class.getMethod("getTimestamp", String.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public <T> int save(String sql, T t) {
@@ -56,7 +68,6 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
         return new SimpleJdbcCall(getJdbcTemplate());
     }
 
-
     @Override
     public <T> List<T> find(String sql, T t) {
         SqlParameterSource sps = null;
@@ -74,7 +85,6 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
         this.execute(sqlToUse);
     }
 
-
     @Override
     public <T> Map<String, Object> executeProcedure(String procedureName, T t) {
         SqlParameterSource sps = new BeanPropertySqlParameterSource(t);
@@ -91,7 +101,6 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
     public <T> List<T> find(String sql, Class<T> c) {
         return find(sql, c, null);
     }
-
 
     @Override
     public void execute(String sql) {
@@ -111,26 +120,27 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
 
     public <T> ParameterizedRowMapper getRowMapper(final Class<T> c) {
         return new ParameterizedRowMapper() {
+
             public Object mapRow(ResultSet rs, int arg1) throws SQLException {
                 Object obj = null;
                 try {
                     obj = c.newInstance();
                     BeanInfo info = Introspector.getBeanInfo(c, Object.class);
-                    for (PropertyDescriptor pd : info.getPropertyDescriptors()) {
-                        try {
-                            Method wd = pd.getWriteMethod();
-                            String name = pd.getName();
-                            if (wd != null) {
-                                Method gm = mdmap.get(String.format("get%s", pd.getPropertyType().getSimpleName()).toLowerCase().trim());
-                                gm = gm != null ? gm : mdmap.get("getObjcet");
+                    PropertyDescriptor[] pds = info.getPropertyDescriptors();
+                    for (PropertyDescriptor pd : pds) {
+                        Method wd = pd.getWriteMethod();
+                        String name = pd.getName();
+                        if (wd != null) {
+                            try {
+                                Class ptype = pd.getPropertyType();
+                                Method gm = mdmap.get(ptype);
+                                gm = gm != null ? gm : ResultSet.class.getMethod("getObject", String.class);
                                 Expression exp = new Expression(rs, gm.getName(), new Object[]{name});
                                 exp.execute();
                                 wd.invoke(obj, exp.getValue());
-                                System.out.printf("[%s,%s]\n", name, exp.getValue());
+                            } catch (Exception e) {
+                                logger.debug(e.fillInStackTrace());
                             }
-                            System.out.printf("[%s]\n", name);
-                        } catch (Exception e) {
-                            logger.debug(e.fillInStackTrace());
                         }
                     }
                 } catch (Exception ee) {

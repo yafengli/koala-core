@@ -13,9 +13,9 @@ import test.dao.impl.jdbc.AccountJDBCDaoImpl;
 import test.model.Account;
 import test.model.Bill;
 
-import java.beans.BeanInfo;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,20 +30,20 @@ public class JDBCTest {
 
     public JDBCTest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
-                "applicationContext-common.xml", "applicationContext-jdbc.xml"});
+                    "applicationContext-common.xml", "applicationContext-jdbc.xml"});
         ctx.getBeanFactory().addBeanPostProcessor(new BeanPostProcessor() {
 
             public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
-                System.out.printf("[-------after------][%s,%s]", o.toString(), s);
+                System.out.printf("[-------after------][%s,%s]\n", o.toString(), s);
                 return o;
             }
 
             public Object postProcessBeforeInitialization(Object o, String s) throws BeansException {
-                System.out.printf("[-------before------][%s,%s]", o.toString(), s);
+                System.out.printf("[-------before------][%s,%s]\n", o.toString(), s);
                 return o;
             }
         });
-        System.out.printf("[----messageSource---][%s]", ((MessageSource) ctx).getMessage("tsql", null, null));
+        System.out.printf("[----messageSource---][%s]\n", ((MessageSource) ctx).getMessage("tsql", null, null));
         adao = (AccountJDBCDao) ctx.getBean(AccountJDBCDaoImpl.class.getName());
     }
 
@@ -85,33 +85,38 @@ public class JDBCTest {
             System.out.printf("[aid,aname][%d,%s]\n", aca.getAid(), aca.getAname());
         }
         /*
-          Account sacc = adao.findForObject(ssql, aid);
-                  Account tacc = new Account();
-          tacc.setAid(aid);
-          tacc = adao.findForObject(tsql, tacc);
-          System.out.println(buffer.toString());
-          System.out.printf("[aid,aname,address,adec,adddesc][%d,%s,%s,%s,%s]\n", sacc.getAid(),
-                  sacc.getAname(), sacc.getAddress(), sacc.getAdesc(), sacc.getAdddesc());
-          System.out.println(buffer.toString());
-          System.out.printf("[aid,aname,address,adec,adddesc][%d,%s,%s,%s,%s]\n", tacc.getAid(),
-                  tacc.getAname(), tacc.getAddress(), tacc.getAdesc(), tacc.getAdddesc());
-          */
+        Account sacc = adao.findForObject(ssql, aid);
+        Account tacc = new Account();
+        tacc.setAid(aid);
+        tacc = adao.findForObject(tsql, tacc);
+        System.out.println(buffer.toString());
+        System.out.printf("[aid,aname,address,adec,adddesc][%d,%s,%s,%s,%s]\n", sacc.getAid(),
+        sacc.getAname(), sacc.getAddress(), sacc.getAdesc(), sacc.getAdddesc());
+        System.out.println(buffer.toString());
+        System.out.printf("[aid,aname,address,adec,adddesc][%d,%s,%s,%s,%s]\n", tacc.getAid(),
+        tacc.getAname(), tacc.getAddress(), tacc.getAdesc(), tacc.getAdddesc());
+         */
     }
 
     @Test
     public void newtest() {
         try {
-            BeanInfo info = Introspector.getBeanInfo(Bill.class);
-            for (PropertyDescriptor pd : info.getPropertyDescriptors()) {
-                System.out.printf("[%s]\n", pd.getName());
-            }
-            /*
+            Calendar cal = Calendar.getInstance();
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             IJDBCDao dao = (IJDBCDao) ctx.getBean("baseJDBCDao");
-            List<Bill> items = dao.find("select RID as rid,RCREATEDATE as rcreatedate,USERNAME as username from HT_BILL", Bill.class);
-            for (Bill item : items) {
+
+            cal.setTimeInMillis(System.currentTimeMillis());
+            System.out.println(df.format(cal.getTime()));
+            for (int i = 0; i < 20; i++) {
+                List<Bill> items = dao.find("select RID as rid,RCREATEDATE as rcreatedate,USERNAME as username from HT_BILL", Bill.class);
+                /*
+                for (Bill item : items) {
                 System.out.printf("[%s,%s,%s]\n", item.getRid(), item.getUsername(), item.getRcreatedate());
+                }
+                 */
             }
-            */
+            cal.setTimeInMillis(System.currentTimeMillis());
+            System.out.println(df.format(cal.getTime()));
         } catch (Exception e) {
             e.printStackTrace();
         }
