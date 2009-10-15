@@ -10,7 +10,10 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 	<!--IBatis DAO -->
-	<bean id="accountDao" class="test.dao.impl.ibatis.AccountDaoImpl">
-		<property name="sqlMapClient" ref="sqlMapClient" />
-	</bean>
+    <bean id="accountDao" class="test.dao.impl.ibatis.AccountDaoImpl">
+        <property name="sqlMapClient" ref="sqlMapClient" />
+    </bean>
+    <bean id="baseIBatisDao" class="org.koala.dao.BaseIBatisDao">
+        <property name="sqlMapClient" ref="sqlMapClient" />
+    </bean>
 </beans>

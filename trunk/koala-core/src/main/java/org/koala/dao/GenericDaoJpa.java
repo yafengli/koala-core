@@ -6,18 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author liyafeng
  */
-@Transactional
 public abstract class GenericDaoJpa<T, ID extends Serializable> extends JpaDaoSupport
         implements IGenericDao<T, ID> {
 
