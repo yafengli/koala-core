@@ -414,7 +414,12 @@ public class PriceDialog extends javax.swing.JDialog {
             itemy += g2.getFont().getSize() + 1;
         }
         try {
-            ImageIO.write(image, "gif", new File("f:/tmp/hello.gif"));
+            File f=new File("D:/hello.gif");
+            if(!f.exists()){
+                f.createNewFile();
+            }
+
+            ImageIO.write(image, "gif", f);
         }
         catch (Exception e) {
             e.printStackTrace();

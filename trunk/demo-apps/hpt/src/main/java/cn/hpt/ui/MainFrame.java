@@ -4,18 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 
 import javax.annotation.PostConstruct;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JToolBar;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -223,12 +212,14 @@ public class MainFrame extends javax.swing.JFrame {
                         medicineCtMenuItem = new JMenuItem();
                         medicineCtMenuItem
                                 .addActionListener(panelStatusListener);
+                        medicineCtMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,KeyEvent.CTRL_MASK,true));
                         stockMenu.add(medicineCtMenuItem);
                         medicineCtMenuItem.setText("\u836f\u54c1\u7c7b\u522b");
                     }
                     {
                         medicineMenuItem = new JMenuItem();
                         medicineMenuItem.addActionListener(panelStatusListener);
+                        medicineMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,KeyEvent.CTRL_MASK,true));
                         stockMenu.add(medicineMenuItem);
                         medicineMenuItem.setText("\u836f\u54c1\u4fe1\u606f");
                     }
@@ -403,7 +394,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .getString("main.frame.ico"))).getImage());
             pack();
             setSize(600, 400);
-//			setExtendedState(JFrame.MAXIMIZED_BOTH);
+			setExtendedState(JFrame.MAXIMIZED_BOTH);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,19 +1,22 @@
 package test;
 
+import org.junit.Test;
+
 import java.awt.Color;
+import java.text.NumberFormat;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 
-public class TestBG {
+public class BgTest {
 	JFrame frame;
 	JScrollPane scroll;
 	JTable table;
 	JTableHeader tableH;
 
-	public TestBG() {
+	public BgTest() {
 		frame = new JFrame("JTableTest");
 		Object[][] content = { { "1", "2", "3", "4" }, { "a", "b", "c", "d" } };
 		String[] title = { "玩", "世", "不", "恭" };
@@ -37,8 +40,10 @@ public class TestBG {
 		frame.setSize(360, 120);
 		frame.setVisible(true);
 	}
-
-	public static void main(String[] args) {
-		new TestBG();
+     @Test
+    public  void test(String[] args) {
+        float f=0.343434f;
+        NumberFormat nf=NumberFormat.getInstance();
+        System.out.println(nf.format(f));
 	}
 }

@@ -2,6 +2,7 @@ package cn.hpt.ui.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.NumberFormat;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -137,6 +138,7 @@ public class PriceTabelModel extends AbstractTableModel {
                 result += br.getBnumber() * br.getMedicine().getPrice();
             }
         }
-        priceDialog.priceField.setText(String.valueOf(result));
+        NumberFormat nf=NumberFormat.getInstance();
+        priceDialog.priceField.setText(nf.format(result));
     }
 }

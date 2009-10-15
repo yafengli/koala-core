@@ -121,6 +121,7 @@
 	</dependencies>
 	<build>
 		<plugins>
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-scm-plugin</artifactId>
@@ -130,6 +131,7 @@
 					<password>yafengli</password>
 				</configuration>
 			</plugin>
+			-->
 		</plugins>
 	</build>
 	<scm>
@@ -154,6 +156,6 @@
 		<lucene-core.version>2.4.1</lucene-core.version>
 		<freemarker.version>2.3.15</freemarker.version>
 		<h2.version>1.1.107</h2.version>		
-		<postgresql.version>8.3-603.jdbc3</postgresql.version>
+		<postgresql.version>8.4-701.jdbc4</postgresql.version>
 	</properties>
 </project>

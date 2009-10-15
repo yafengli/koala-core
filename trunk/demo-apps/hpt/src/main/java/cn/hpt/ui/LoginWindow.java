@@ -306,6 +306,7 @@ public class LoginWindow extends javax.swing.JFrame {
 			setIconImage(frameIco.getImage());
 			focusTravel();
 			setResizable(false);
+            setAlwaysOnTop(true);
 			pack();
 
 			// setAlwaysOnTop(true);
