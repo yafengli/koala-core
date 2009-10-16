@@ -18,28 +18,23 @@ public class CreateModel
         extends AbstractMojo {
 
     /**
-     * Location of the file.
-     * @parameter
-     *  expression="${core.dir}"
-     * @required
-     */
-    private File outputDirectory;
-    /**
-     * @parameter
-     *  expression="${core.name}"
+     * @parameter expression="${model.name}"
      * @required
      */
     private String name;
 
     public void execute()
             throws MojoExecutionException {
-        File f = outputDirectory;
+        String currentDir = System.getProperty("user.dir");
+        String packageName = "cn.demo";
 
-        if (!f.exists()) {
-            f.mkdirs();
+        File srcDir = new File("");
+
+        if (!srcDir.exists()) {
+            srcDir.mkdirs();
         }
 
-        File touch = new File(f, "touch.txt");
+        File touch = new File(srcDir, "touch.txt");
 
         FileWriter w = null;
         try {
