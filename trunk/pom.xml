@@ -11,8 +11,8 @@
 	<modules>
 		<module>koala-core</module>
 		<module>maven-koala-plugin</module>
-		<!--test xml
 		<module>koala-spring</module>
+		<!--test xml
 		<module>koala-seam</module>
 		-->
 	</modules>

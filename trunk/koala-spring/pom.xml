@@ -10,9 +10,9 @@
     <parent>
         <groupId>org.koala</groupId>
         <artifactId>koala</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
-    <dependencies>        
+    <dependencies>
         <!-- Compile -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -24,11 +24,11 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>org.koala</groupId>
             <artifactId>koala-core</artifactId>
-			<version>${parent.version}</version>
+            <version>${parent.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>javassist</groupId>
@@ -117,8 +117,8 @@
         <dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
-            <version>1.3.1</version>
-        </dependency>        
+            <version>${commons-validator.version}</version>
+        </dependency>
         <!-- sitemesh -->
         <dependency>
             <groupId>opensymphony</groupId>
@@ -257,7 +257,7 @@
               <artifactId>cxf-rt-transports-http-jetty</artifactId>
               <version>${cxf.version}</version>
           </dependency>
-          -->
+          -->        
     </dependencies>
     <build>
         <defaultGoal>compile</defaultGoal>
@@ -338,8 +338,9 @@
     <properties>
         <spring-security-core.version>2.0.4</spring-security-core.version>
         <spring-webflow.version>2.0.8.RELEASE</spring-webflow.version>
-        <springmodules.validation.version>0.9</springmodules.validation.version>        
-        <sitemesh.version>2.3</sitemesh.version>                
+        <springmodules.validation.version>0.9</springmodules.validation.version>
+        <commons-validator.version>1.3.1</commons-validator.version>
+        <sitemesh.version>2.3</sitemesh.version>
         <ognl.version>2.7.3</ognl.version>
         <jmesa.version>2.4.3</jmesa.version>
         <displaytag.version>1.2</displaytag.version>

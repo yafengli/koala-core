@@ -44,7 +44,10 @@
             <div><span>JS+CSS</span></div>
             <a href="pages/js_demo.jsp">JQuery</a><br/>
             <hr/>
-            <a href="testdemo.ftl">Test Xml Demo</a><br/></td>
+            <a href="testdemo.ftl">Test Xml Demo</a><br/>
+            <hr/>
+            <a href="upload.ftl">上传文件</a>
+        </td>
         <td>
             <div><span>JFreeChart</span></div>
             <img src="jfreechart.ftl" alt="JFreeChart-图表"/></td>

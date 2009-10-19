@@ -146,7 +146,7 @@ public class DownloadUtil {
                     // 删除临时文件
                     long downloadFileSize = file.length();
                     if (downloadFileSize == contentLength) {
-                        tempFile.delete();
+                        tempFile.deleteOnExit();
                     }
 
                 } catch (InterruptedException e) {
@@ -175,10 +175,10 @@ public class DownloadUtil {
                     // 遍历目标文件的所有临时文件，设置断点的位置，即每个临时文件的长度
                     for (int i = 0; i < threadNum; i++) {
                         tempFileFos.seek(4 + 24 * i + 8);
-                        endPos[i] = tempFileFos.readLong();
+                        startPos[i] = tempFileFos.readLong();
 
                         tempFileFos.seek(4 + 24 * i + 16);
-                        startPos[i] = tempFileFos.readLong();
+                        endPos[i] = tempFileFos.readLong();
                     }
                 } else {
                     System.out.println("This file has download complete!");
@@ -197,19 +197,19 @@ public class DownloadUtil {
                     startPos[i] = threadLength * i;
                     tempFileFos.writeLong(startPos[i]);
 
-                    /*
-                          * 设置子线程的终止位置，非最后一个线程即为(threadLength * (i + 1) - 1)
-                          * 最后一个线程的终止位置即为下载内容的长度
-                          */
+                    /**
+                     * 设置子线程的终止位置，非最后一个线程即为(threadLength * (i + 1) - 1)
+                     * 最后一个线程的终止位置即为下载内容的长度
+                     */
                     if (i == threadNum - 1) {
                         endPos[i] = contentLength;
                     } else {
                         endPos[i] = threadLength * (i + 1) - 1;
                     }
-                    // end position
-                    tempFileFos.writeLong(endPos[i]);
                     // current position
                     tempFileFos.writeLong(startPos[i]);
+                    // end position
+                    tempFileFos.writeLong(endPos[i]);
                 }
             }
         } catch (IOException e1) {

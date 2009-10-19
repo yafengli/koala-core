@@ -70,7 +70,7 @@ public class DemoContorller {
     }
 
     @RequestMapping("/helloj.ftl")
-    public ModelAndView helloj(@RequestParam(required = false, value = "id") String id) {
+    public ModelAndView helloj(@RequestParam(required = false, value = "id") String id, HttpServletRequest request, HttpServletResponse resp) {
         ModelAndView mav = new ModelAndView("helloj");
         Map map = new HashMap();
         map.put("message", String.format("This is cn.neto message!The id is [%s]", id));
@@ -90,9 +90,9 @@ public class DemoContorller {
     @RequestMapping("/webservice.ftl")
     public ModelAndView webservice(@RequestParam(required = false, value = "name") String name, HttpServletRequest req, HttpServletResponse resp) {
 
-        for(Enumeration<String> enu=req.getParameterNames();enu.hasMoreElements();){
-            String param=enu.nextElement();
-            System.out.printf("[%s=%s]\n",param,req.getParameter(param));
+        for (Enumeration<String> enu = req.getParameterNames(); enu.hasMoreElements();) {
+            String param = enu.nextElement();
+            System.out.printf("[%s=%s]\n", param, req.getParameter(param));
         }
         ModelAndView mav = new ModelAndView("webservice");
         mav.addObject("message", String.format("[ds:%s][va:%s]", dataSource.toString(), validator.toString()));

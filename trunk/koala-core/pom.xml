@@ -72,6 +72,12 @@
 			<artifactId>commons-net</artifactId>
 			<version>${commons-net.version}</version>
 		</dependency>
+		<dependency>
+            <artifactId>commons-io</artifactId>
+            <groupId>commons-io</groupId>
+			<version>${commons-io.version}</version>
+        </dependency>
+		
 		<!--Regexp -->
 		<dependency>
 			<groupId>jakarta-regexp</groupId>
@@ -196,7 +202,8 @@
 		<jsf.version>1.2_10</jsf.version>
 		<commons-lang.version>2.4</commons-lang.version>
 		<commons-fileupload.version>1.2</commons-fileupload.version>
-		<commons-net.version>1.4.1</commons-net.version>
+		<commons-net.version>2.0</commons-net.version>
+		<commons-io.version>1.4</commons-io.version>
 		<c3p0.version>0.9.1.1</c3p0.version>
 		<cglib.version>2.1_3</cglib.version>
 		<dbcp.version>1.2.2</dbcp.version>

@@ -23,6 +23,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         </property>
     </bean>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    
     <bean id="jspviewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/pages/jsp/" p:suffix=".jsp" p:viewClass="org.springframework.web.servlet.view.JstlView"
