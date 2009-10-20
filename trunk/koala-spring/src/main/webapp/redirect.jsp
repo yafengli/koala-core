@@ -46,7 +46,8 @@
             <hr/>
             <a href="testdemo.ftl">Test Xml Demo</a><br/>
             <hr/>
-            <a href="upload.ftl">上传文件</a>
+            <a href="upload.ftl">上传文件</a><br/>
+            <a href="swfupload.ftl">上传文件-SWF</a>
         </td>
         <td>
             <div><span>JFreeChart</span></div>

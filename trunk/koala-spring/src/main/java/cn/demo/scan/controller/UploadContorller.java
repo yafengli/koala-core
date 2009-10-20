@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 /**
  * @author yafengli
@@ -109,5 +111,45 @@ public class UploadContorller {
         ModelAndView mav = new ModelAndView("upload");
         mav.addObject("type", new UploadForm());
         return mav;
+    }
+
+    @RequestMapping(value = "/swfupload.ftl", method = RequestMethod.GET)
+    public ModelAndView test(HttpServletRequest resp) {
+        ModelAndView mav = new ModelAndView("swfupload");
+        mav.addObject("user", "@FUVK GCD@");
+        return mav;
+    }
+
+    @RequestMapping(value = "/swfupload.ftl", method = RequestMethod.POST)
+    public void testp(HttpServletRequest resp) {
+        try {
+            System.out.println("@FUVK@");
+            MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
+
+            for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
+                String fileName = (String) it.next();
+                MultipartFile mf = mhsr.getFile(fileName);
+                System.out.println(mf);
+                if (mf != null) {
+                    mf.transferTo(new File("f:/", mf.getOriginalFilename()));
+                }
+            }
+
+            /*
+            System.out.println("#####Parameter######");
+            for (Iterator it = resp.getParameterMap().keySet().iterator(); it.hasNext();) {
+            String key = (String) it.next();
+            System.out.printf("[%s=%s]\n", key, resp.getParameter(key));
+            }
+
+            System.out.println("#####Attribute######");
+            for(Enumeration enu=resp.getAttributeNames();enu.hasMoreElements();){
+            String key=(String)enu.nextElement();
+            System.out.printf("[%s=%s][%s]\n", key,resp.getAttribute(key).toString(),resp.getAttribute(key).getClass().getName());
+            }
+             */
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
