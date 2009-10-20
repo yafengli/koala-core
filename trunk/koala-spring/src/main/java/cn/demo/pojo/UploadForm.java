@@ -9,7 +9,7 @@ package cn.demo.pojo;
  */
 public class UploadForm {
 
-    private boolean stop;
+    private boolean stop = true;
 
     public boolean isStop() {
         return stop;
