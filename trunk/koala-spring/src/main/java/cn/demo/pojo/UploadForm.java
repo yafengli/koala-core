@@ -8,13 +8,14 @@ package cn.demo.pojo;
  * To change this template use File | Settings | File Templates.
  */
 public class UploadForm {
-    private String name;
 
-    public String getName() {
-        return name;
+    private boolean stop;
+
+    public boolean isStop() {
+        return stop;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStop(boolean stop) {
+        this.stop = stop;
     }
 }

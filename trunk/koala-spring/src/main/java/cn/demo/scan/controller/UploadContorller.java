@@ -45,50 +45,61 @@ public class UploadContorller {
 
             long size = mf.getSize();
             long contentLength = contentFile.length();
+            long startPos = 0;
+            long endPos = 0;
             if (contentFile.exists() && size == contentLength) {
                 System.out.println("The file is ok.");
                 positonFile.deleteOnExit();
             } else {
-                
+
+                RandomAccessFile pcraf = new RandomAccessFile(positonFile, "rw");
                 if (!contentFile.exists()) {
-                    RandomAccessFile pcraf = new RandomAccessFile(positonFile, "rw");
                     // set tempFile new start position and end postion
                     pcraf.writeLong(0);
-                    pcraf.writeLong(contentLength);
-                    System.out.println("write start end.");
-                    pcraf.close();
+                    pcraf.writeLong(size);
                 }
-                RandomAccessFile pcraf = new RandomAccessFile(positonFile, "rw");
                 RandomAccessFile craf = new RandomAccessFile(contentFile, "rw");
 
                 InputStream in = mf.getInputStream();
-                long startPos = pcraf.readLong();
-                long endPos = pcraf.readLong();
-                craf.seek(startPos);
+                pcraf.seek(0);
+                startPos = pcraf.readLong();
+                endPos = pcraf.readLong();
+                System.out.printf("[start=%s,end=%s]\n", startPos, endPos);
                 byte[] b = new byte[1024];
                 int len = 0;
+                in.skip(startPos);
                 while ((len = in.read(b)) != -1) {
+                    /*Test */
+                    if (startPos >= endPos || (type.isStop() && startPos >= 3434)) {
+                        System.out.println("Stop...");
+                        break;
+                    }
+                    //*/
+                    craf.seek(startPos);
                     craf.write(b, 0, len);
                     startPos += len;
                     // set tempFile new start position and end postion
                     pcraf.seek(0);
                     pcraf.writeLong(startPos);
-                    pcraf.writeLong(contentLength);
                 }
                 pcraf.close();
                 craf.close();
-                //删除临时文件
-                positonFile.deleteOnExit();
+
+                System.out.printf("Current [start=%s,size=%s]\n", startPos, size);
+                if (startPos == size) {
+                    //删除临时文件
+                    if (positonFile.delete()) {
+                        System.out.println("Delete the tempfile ok.");
+                    } else {
+                        System.err.println("Delete the tempfile failed!");
+                    }
+                }
             }
-            System.out.printf("[%s,%s]\n", contentFile.length(), size);
+            System.out.printf("All completed.[%s,%s]\n", contentFile.length(), size);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
         return mav;
     }
 
@@ -97,9 +108,6 @@ public class UploadContorller {
         System.out.println("GET");
         ModelAndView mav = new ModelAndView("upload");
         mav.addObject("type", new UploadForm());
-
-
         return mav;
-
     }
 }

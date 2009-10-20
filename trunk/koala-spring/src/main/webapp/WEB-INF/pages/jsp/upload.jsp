@@ -1,24 +1,36 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglibs.jsp" %>
 <html>
-<head><title>Simple jsp page</title></head>
-<body>
-<sf:form action="upload.ftl" modelAttribute="type" method="POST" enctype="multipart/form-data">
-    <table>
-        <tr>
-            <td>First Name</td>
-            <td><sf:input path="name"/></td>
-        </tr>
-        <tr>
-            <td>Upload File:</td>
-            <td><input type="file" name="upfile" id="_upf_"/></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="上传"/>
-            </td>
-        </tr>
-    </table>
-</sf:form>
-</body>
+    <head>
+        <title>Simple jsp page</title>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#_hello_").click(function(){
+                    alert("HHHHH");
+                    $("#_test_").attr("style", "block");
+                });                
+            });
+        </script>
+    </head>
+    <body>
+        <div id="_test_">
+            <sf:form action="upload.ftl" modelAttribute="type" method="POST" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td>截断文件：</td>
+                        <td>是：<sf:radiobutton path="stop" value="true"/>否：<sf:radiobutton path="stop" value="false"/></td>
+                    </tr>
+                    <tr>
+                        <td>文件选择：</td>
+                        <td><input type="file" name="upfile" id="_upf_"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input id="_hello_" type="submit" value="上传"/>
+                        </td>
+                    </tr>
+                </table>
+            </sf:form>
+        </div>
+    </body>
 </html>
