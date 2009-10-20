@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Iterator;
 
@@ -116,24 +117,30 @@ public class UploadContorller {
     @RequestMapping(value = "/swfupload.ftl", method = RequestMethod.GET)
     public ModelAndView test(HttpServletRequest resp) {
         ModelAndView mav = new ModelAndView("swfupload");
+
+        File baseDir = new File("F:/Google/koala-core/koala-spring/src/main/webapp/_demo_");
         mav.addObject("user", "@FUVK GCD@");
+        Arrays.asList(baseDir.list());
+        mav.addObject("files",  Arrays.asList(baseDir.list()));
         return mav;
     }
 
     @RequestMapping(value = "/swfupload.ftl", method = RequestMethod.POST)
-    public void testp(HttpServletRequest resp) {
+    public void testp(HttpServletRequest resp, ModelMap model) {
         try {
             System.out.println("@FUVK@");
             MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
 
+            File baseDir = new File("F:/Google/koala-core/koala-spring/src/main/webapp/_demo_");
             for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
                 String fileName = (String) it.next();
                 MultipartFile mf = mhsr.getFile(fileName);
                 System.out.println(mf);
                 if (mf != null) {
-                    mf.transferTo(new File("f:/", mf.getOriginalFilename()));
+                    mf.transferTo(new File(baseDir, mf.getOriginalFilename()));
                 }
             }
+
 
             /*
             System.out.println("#####Parameter######");
