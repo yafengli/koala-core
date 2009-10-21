@@ -63,19 +63,11 @@
                 <div id="divStatus">0个文件被上传</div>
                 <div>
                     <span id="spanButtonPlaceHolder"></span>
-                    <input id="btnCancel" type="button" value="Cancel All Uploads" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+                    <input id="btnCancel" type="button" value="取消" onclick="swfu.cancelQueue();" disabled="disabled" style="margin-left: 2px; font-size: 8pt; height: 29px;" />
+                    <a href="swfupload/view.ftl" target="_blank">查看</a>
                 </div>
             </form>
         </div>
-        <div id="images">            
-            <%
-            java.util.List<String> ls = (java.util.List<String>) request.getAttribute("files");
-            for (String name : ls) {
-            %><img src="<%=request.getContextPath()%>/_demo_/<%=name%>" width="200" height="100"/><br/><%
-            }
-            %>
-            ${files}
-        </div>
-
+        
     </body>
 </html>

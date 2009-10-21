@@ -8,8 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Goal which touches a timestamp file.
- *
  * @goal create-model
  * @requiresProject true
  * @phase process-sources
@@ -18,7 +16,7 @@ public class CreateModel
         extends AbstractMojo {
 
     /**
-     * @parameter expression="${model.name}"
+     * @parameter expression="${cp.model.name}"
      * @required
      */
     private String name;

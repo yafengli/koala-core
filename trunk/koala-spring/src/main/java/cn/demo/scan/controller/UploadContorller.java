@@ -1,5 +1,6 @@
 package cn.demo.scan.controller;
 
+import cn.demo.annotation.LoadConfig;
 import cn.demo.pojo.UploadForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,14 +18,22 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.Iterator;
+import javax.servlet.http.HttpSession;
+import org.koala.spring.Properties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * @author yafengli
  */
 @Controller
+@SessionAttributes({UploadContorller.S_FILES})
 public class UploadContorller {
+
+    @Autowired
+    private LoadConfig loadConfig;
+    public static final String S_FILES = "files";
 
     @RequestMapping(value = "/upload.ftl", method = RequestMethod.POST)
     public ModelAndView index(@ModelAttribute("type") UploadForm type, BindingResult result, ModelMap model, HttpServletRequest request, HttpServletResponse resp) {
@@ -117,21 +126,17 @@ public class UploadContorller {
     @RequestMapping(value = "/swfupload.ftl", method = RequestMethod.GET)
     public ModelAndView test(HttpServletRequest resp) {
         ModelAndView mav = new ModelAndView("swfupload");
-
-        File baseDir = new File("F:/Google/koala-core/koala-spring/src/main/webapp/_demo_");
         mav.addObject("user", "@FUVK GCD@");
-        Arrays.asList(baseDir.list());
-        mav.addObject("files",  Arrays.asList(baseDir.list()));
         return mav;
     }
 
     @RequestMapping(value = "/swfupload.ftl", method = RequestMethod.POST)
-    public void testp(HttpServletRequest resp, ModelMap model) {
+    public void testp(HttpServletRequest resp, HttpSession session, ModelMap model) {
         try {
             System.out.println("@FUVK@");
             MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
 
-            File baseDir = new File("F:/Google/koala-core/koala-spring/src/main/webapp/_demo_");
+            File baseDir = new File(loadConfig.getBaseDir());
             for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
                 String fileName = (String) it.next();
                 MultipartFile mf = mhsr.getFile(fileName);
@@ -140,7 +145,6 @@ public class UploadContorller {
                     mf.transferTo(new File(baseDir, mf.getOriginalFilename()));
                 }
             }
-
 
             /*
             System.out.println("#####Parameter######");
@@ -158,5 +162,18 @@ public class UploadContorller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping(value = "/swfupload/view.ftl")
+    public ModelAndView view(HttpServletRequest resp) {
+        ModelAndView mav = new ModelAndView("view");
+        File baseDir = new File(loadConfig.getBaseDir());
+        if (!baseDir.exists()) {
+            baseDir.mkdirs();
+        }
+        mav.addObject("user", "@FUVK GCD@");
+        Arrays.asList(baseDir.list());
+        mav.addObject(UploadContorller.S_FILES, Arrays.asList(baseDir.list()));
+        return mav;
     }
 }

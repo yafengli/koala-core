@@ -1,25 +1,18 @@
 package org.apache.maven.plugins;
 
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Template;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Iterator;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 /**
+ *
  * @goal create-project
  * @requiresProject false
  * @phase process-sources
@@ -27,8 +20,13 @@ import org.dom4j.io.SAXReader;
 public class CreateProject extends AbstractMojo {
 
     public static final String PACKAGE_PATTERN = "^[a-zA-z][.0-9a-zA-Z]*[a-zA-Z]$";
-
-    private Properties ps;
+    /**
+     * @parameter
+     *  expression="${cp.name}"
+     * @required
+     */
+    private String projectName;
+    private Properties ps = new Properties();
     private File baseDir;
     private File srcDir;
     private File resDir;
@@ -52,10 +50,10 @@ public class CreateProject extends AbstractMojo {
                 Element version_e = root.element("version");
 
                 if (name_e != null) {
-                    name_e.setText(ps.getProperty(PropertiesDefination.PROJECT_NAME));
+                    name_e.setText(this.projectName);
                 }
                 if (artifactId_e != null) {
-                    artifactId_e.setText(ps.getProperty(PropertiesDefination.PROJECT_NAME));
+                    artifactId_e.setText(this.projectName);
                 }
                 if (groupId_e != null) {
                     groupId_e.setText(ps.getProperty(PropertiesDefination.PACKAGE_NAME));
@@ -80,7 +78,7 @@ public class CreateProject extends AbstractMojo {
     }
 
     private boolean createInit() {
-        ps = PropertiesDefination.load();
+        ps.putAll(PropertiesDefination.param());
         FileWriter config_w = null;
         try {
             /* read the put in param */
@@ -102,14 +100,16 @@ public class CreateProject extends AbstractMojo {
                     }
                 }
             }
+            /* init the default */
+            ps.putAll(PropertiesDefination.init());
             /* init all directoies */
-            baseDir = new File(System.getProperty("user.dir"), ps.getProperty(PropertiesDefination.PROJECT_NAME));
+            baseDir = new File(System.getProperty("user.dir"), projectName);
             srcDir = new File(baseDir, ps.getProperty(PropertiesDefination.SOURCE_DIR));
             resDir = new File(baseDir, ps.getProperty(PropertiesDefination.RESOURCE_DIR));
             tptDir = new File(baseDir, ps.getProperty(PropertiesDefination.TEMPLATE_DIR));
             envDir = new File(baseDir, ps.getProperty(PropertiesDefination.SETTING_DIR));
             if (baseDir.exists()) {
-                System.err.print("The directory is not null!");
+                System.err.print("The directory is not null!"+"["+baseDir.getAbsolutePath()+"]");
                 return false;
             }
             /* make the directories */
@@ -120,14 +120,15 @@ public class CreateProject extends AbstractMojo {
             envDir.mkdirs();
             /* store the config file */
             config_w = new FileWriter(new File(envDir, PropertiesDefination.INIT_CONFIG_FILE));
+
             ps.store(config_w, null);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
-                if (config_w != null)
+                if (config_w != null) {
                     config_w.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -148,17 +149,18 @@ public class CreateProject extends AbstractMojo {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
-                if (w != null)
+                if (w != null) {
                     w.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
-                if (reader != null)
+                if (reader != null) {
                     reader.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -172,11 +174,11 @@ public class CreateProject extends AbstractMojo {
             w.write(content);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
-                if (w != null)
+                if (w != null) {
                     w.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

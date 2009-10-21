@@ -26,6 +26,15 @@
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
     </bean>
+    <!-- 属性文件读取 -->
+    <bean id="loader" class="org.koala.spring.AnnotationBeanPostProcessor">
+        <property name="locations">
+            <list>
+                <value>classpath:settings.properties</value>
+            </list>
+        </property>
+    </bean>
     <!-- scan controller-->
     <context:annotation-config/>
+    <context:component-scan base-package="cn.demo.annotation" />
 </beans>

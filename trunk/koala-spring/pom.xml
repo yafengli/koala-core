@@ -288,8 +288,7 @@
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.19</version>
                 <configuration>
-                    <jettyEnvXml>jetty-env.xml</jettyEnvXml>
-                    <contextPath>/kp</contextPath>
+                    <jettyEnvXml>jetty-env.xml</jettyEnvXml>                    
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                             <port>8080</port>
