@@ -32,6 +32,7 @@ public class CreateProject extends AbstractMojo {
     private File resDir;
     private File tptDir;
     private File envDir;
+    private File webDir;
 
     public void execute()
             throws MojoExecutionException {
@@ -66,11 +67,13 @@ public class CreateProject extends AbstractMojo {
                 /* jetty env file */
                 Document doc_jetty = saxreader.read(getClass().getResourceAsStream(PropertiesDefination.INIT_CORE_DIR + PropertiesDefination.INIT_JETTY_ENV_FILE));
                 createFiles(doc_jetty.asXML(), new File(baseDir, PropertiesDefination.INIT_JETTY_ENV_FILE));
-                /* model and view ftl */
+                /* model/view/action ftl */
                 File view = new File(tptDir, "view.ftl");
                 createFiles(getClass().getResourceAsStream("/template/view.ftl"), view);
                 File model = new File(tptDir, "model.ftl");
                 createFiles(getClass().getResourceAsStream("/template/model.ftl"), model);
+                File action = new File(tptDir, "action.ftl");
+                createFiles(getClass().getResourceAsStream("/template/action.ftl"), action);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -108,8 +111,9 @@ public class CreateProject extends AbstractMojo {
             resDir = new File(baseDir, ps.getProperty(PropertiesDefination.RESOURCE_DIR));
             tptDir = new File(baseDir, ps.getProperty(PropertiesDefination.TEMPLATE_DIR));
             envDir = new File(baseDir, ps.getProperty(PropertiesDefination.SETTING_DIR));
+            webDir = new File(baseDir, ps.getProperty(PropertiesDefination.WEB_DIR));
             if (baseDir.exists()) {
-                System.err.print("The directory is not null!"+"["+baseDir.getAbsolutePath()+"]");
+                System.err.print("The directory is not null!" + "[" + baseDir.getAbsolutePath() + "]");
                 return false;
             }
             /* make the directories */
@@ -118,6 +122,7 @@ public class CreateProject extends AbstractMojo {
             resDir.mkdirs();
             tptDir.mkdirs();
             envDir.mkdirs();
+            webDir.mkdirs();
             /* store the config file */
             config_w = new FileWriter(new File(envDir, PropertiesDefination.INIT_CONFIG_FILE));
 
