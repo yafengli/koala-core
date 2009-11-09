@@ -82,7 +82,7 @@ public class OperatorPanel extends JPanel {
 				Operator item = new Operator();
 				item.setLoginname("");
 				item.setPassword("123456");
-				item.setDesc("员工");
+				item.setDescribe("员工");
 				item.setCreatedate(new Timestamp(System.currentTimeMillis()));
 				item.setRole(roleDao.findById(Role.OPERATOR_ID));
 

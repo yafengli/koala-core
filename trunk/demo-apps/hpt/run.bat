@@ -1,2 +1,1 @@
-@echo off
-javaw -jar target\hpt-1.0.jar
+javaw -jar hpt-1.0.jar

@@ -117,7 +117,7 @@
 		<dependency>
 			<groupId>org.koala</groupId>
 			<artifactId>koala-core</artifactId>
-			<version>${koala-core.ver}</version>
+			<version>1.0.2</version>
 		</dependency>
 	</dependencies>
 
@@ -187,6 +187,6 @@
         <datapicker.ver>0.99</datapicker.ver>
 		<h2.ver>1.1.107</h2.ver>
 		<postgresql.ver>8.4-701.jdbc4</postgresql.ver>
-		<koala-core.ver>1.0.1</koala-core.ver>
+		<koala-core.ver>1.0.2</koala-core.ver>
 	</properties>
 </project>

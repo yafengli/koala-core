@@ -18,7 +18,7 @@ public class Operator {// 操作员表
 	@Column(unique = true, nullable = false)
 	private String loginname;
 
-	private String desc;
+	private String describe;
 
 	@Column(nullable=false)
 	private String password;
@@ -35,7 +35,7 @@ public class Operator {// 操作员表
 	@ManyToOne
 	private Role role;
 
-	public String getLoginname() {
+    public String getLoginname() {
 		return loginname;
 	}
 
@@ -43,12 +43,12 @@ public class Operator {// 操作员表
 		this.loginname = loginname;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescribe() {
+		return describe;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescribe(String describe) {
+		this.describe = describe;
 	}
 
 	public String getPassword() {

@@ -58,7 +58,7 @@ public class OperatorTabelModel extends AbstractTableModel {
 			op.setLoginname(value.toString());
 			break;
 		case 2:
-			op.setDesc(value.toString());
+			op.setDescribe(value.toString());
 			break;
 		case 3:
 			op.setPassword(value.toString());
@@ -79,7 +79,7 @@ public class OperatorTabelModel extends AbstractTableModel {
 			o = op.getLoginname();
 			break;
 		case 2:
-			o = op.getDesc();
+			o = op.getDescribe();
 			break;
 		case 3:
 			o = op.getPassword();
