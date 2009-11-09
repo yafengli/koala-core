@@ -1,34 +1,21 @@
 package cn.hpt.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.FocusTraversalPolicy;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
-import javax.annotation.PostConstruct;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.SwingUtilities;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import cn.hpt.dao.IOperatorDao;
 import cn.hpt.model.Operator;
+import cn.hpt.ui.extend.HptInitData;
 import cn.hpt.ui.listener.CloseAppActionListener;
 import cn.hpt.ui.listener.LoginActionListener;
 import cn.hpt.util.PropertiesLoader;
+import org.koala.dao.IDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 @Component(LoginWindow.BEAN_NAME)
 public class LoginWindow extends javax.swing.JFrame {
@@ -50,13 +37,15 @@ public class LoginWindow extends javax.swing.JFrame {
     public static final String BEAN_NAME = "loginWindow";
 
     @Autowired
-    private IOperatorDao operatorDao;
+    private IDao baseDao;
     @Autowired
     private CloseAppActionListener closeAppActionListener;
     @Autowired
     private LoginActionListener loginActionListener;
     @Autowired
     private PropertiesLoader pl;
+    @Autowired
+    private HptInitData hptInitData;
 
     private JPanel loginPanel;
     private JPanel imagePanel;
@@ -248,7 +237,13 @@ public class LoginWindow extends javax.swing.JFrame {
                     }
                     {
                         Vector<String> names = new Vector<String>();
-                        for (Operator op : operatorDao.findAll()) {
+                        // init the operator
+                        List<Operator> items = baseDao.findAll(Operator.class);
+                        if (items == null || items.size() < 1) {
+                            hptInitData.init();
+                        }
+                        items = baseDao.findAll(Operator.class);
+                        for (Operator op : items) {
                             names.add(op.getLoginname());
                         }
                         nameComboBox = new JComboBox(names);
@@ -272,7 +267,7 @@ public class LoginWindow extends javax.swing.JFrame {
                     loginPanel.add(passwordPanel);
                     {
                         passwordPanel.add(passwordLabel);
-                        passwordLabel.setText(pl.getString("password")+pl.getString("colon"));
+                        passwordLabel.setText(pl.getString("password") + pl.getString("colon"));
                     }
                     {
                         passwordTextField = new JPasswordField();

@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.context.annotation.Scope;
+import org.koala.dao.IDao;
 
-import cn.hpt.dao.IMedicineDao;
 import cn.hpt.model.Medicine;
 import cn.hpt.ui.extend.HptFont;
 
@@ -30,7 +30,7 @@ public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
     protected ChangeEvent changeEvent = new ChangeEvent(this);
 
     @Autowired
-    private IMedicineDao medicineDao;
+    private IDao baseDao;
     @Autowired
     private HptFont font;
     private List<Medicine> lm;
@@ -40,7 +40,7 @@ public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
         if (lm != null)
             lm.clear();
         removeAllItems();
-        lm = medicineDao.findByQueryName("medicine.find.like.byshortcut",
+        lm = baseDao.find("medicine.find.like.byshortcut",
                 new String[]{"mshortcut"}, new Object[]{value + "%"});
         for (Medicine md : lm) {
             addItem(md.getMname());

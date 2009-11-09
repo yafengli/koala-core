@@ -142,7 +142,7 @@
 		<repository>
 			<id>nexus-deploy</id>
 			<name>Nexus Deploy</name>
-			<url>http://221.231.154.3:8081/nexus/content/repositories/releases</url>
+			<url>http://221.231.154.3/nexus/content/repositories/releases</url>
 		</repository>
 	</distributionManagement>
 	<properties>

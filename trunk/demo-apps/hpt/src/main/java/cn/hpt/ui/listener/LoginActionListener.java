@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.koala.dao.IDao;
 
-import cn.hpt.dao.IOperatorDao;
 import cn.hpt.model.Operator;
 import cn.hpt.ui.LoginWindow;
 import cn.hpt.ui.MainFrame;
@@ -30,7 +30,7 @@ public class LoginActionListener extends KeyAdapter implements ActionListener {
     @Autowired
     private MainFrame mainFrame;
     @Autowired
-    private IOperatorDao operatorDao;
+    private IDao baseDao;
     @Autowired
     private PropertiesLoader pl;
     @Autowired
@@ -43,14 +43,14 @@ public class LoginActionListener extends KeyAdapter implements ActionListener {
         String password = new String(loginWindow.getPasswordTextField()
                 .getPassword());
 
-        List<Operator> lo = operatorDao.findByQueryName("find.by.loginname",
+        List<Operator> lo = baseDao.find("find.by.loginname",
                 new String[]{"loginname"}, new Object[]{name});
         Operator op = null;
         if (lo != null && lo.size() == 1) {
             op = lo.get(0);
             if (op.getPassword().trim().equalsIgnoreCase(password)) {
                 op.setLastlogin(new Timestamp(System.currentTimeMillis()));
-                operatorDao.update(op);
+                baseDao.update(op);
                 flag = true;
             }
         }

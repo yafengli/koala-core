@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.koala.dao.IDao;
 
-import cn.hpt.dao.IMedicineDao;
 import cn.hpt.model.Category;
 import cn.hpt.model.Medicine;
 
@@ -27,13 +27,13 @@ public class MedicineTableModel extends AbstractTableModel {
     private List<Medicine> item;
 
     @Autowired
-    private IMedicineDao medicineDao;
+    private IDao baseDao;
     @Autowired
     private MedicineTableCellEditor cellEditor;
 
     public List<Medicine> getItem() {
         if (item == null) {
-            item = medicineDao.findAll();
+            item = baseDao.findAll(Medicine.class);
         }
         return item;
     }
@@ -83,7 +83,7 @@ public class MedicineTableModel extends AbstractTableModel {
                     }
                     break;
             }
-            medicineDao.update(item);
+            baseDao.update(item);
         }
     }
 

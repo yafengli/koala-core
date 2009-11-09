@@ -15,8 +15,8 @@ import javax.swing.JPasswordField;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.koala.dao.IDao;
 
-import cn.hpt.dao.IOperatorDao;
 import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.component.ModifyInfoPanel;
 import cn.hpt.util.PropertiesLoader;
@@ -30,7 +30,7 @@ public class ModifyInfoDialog extends JDialog {
     @Autowired
     private MainFrame mainFrame;
     @Autowired
-    private IOperatorDao operatorDao;
+    private IDao baseDao;
     @Autowired
     private PropertiesLoader pl;
     @Autowired
@@ -117,7 +117,7 @@ public class ModifyInfoDialog extends JDialog {
                         if (npw != null) {
                             mainFrame.getOperator().setPassword(npw);
                         }
-                        operatorDao.update(mainFrame.getOperator());
+                        baseDao.update(mainFrame.getOperator());
                         this.setVisible(false);
                         JOptionPane.showMessageDialog(mainFrame, pl
                                 .getString("useraction.listener.success"),

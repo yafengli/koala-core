@@ -1,7 +1,5 @@
 package cn.hpt.ui.view;
 
-import cn.hpt.dao.IBillDao;
-import cn.hpt.dao.IBillRecordDao;
 import cn.hpt.model.Bill;
 import cn.hpt.model.BillRecord;
 import cn.hpt.ui.MainFrame;
@@ -14,6 +12,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.koala.dao.IDao;
 
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
@@ -63,9 +62,7 @@ public class PriceDialog extends javax.swing.JDialog {
     @Autowired
     private PropertiesLoader pl;
     @Autowired
-    private IBillDao billDao;
-    @Autowired
-    private IBillRecordDao billRecordDao;
+    private IDao baseDao;
     @Autowired
     private MainFrame mainFrame;
     private Bill bill;
@@ -277,7 +274,7 @@ public class PriceDialog extends javax.swing.JDialog {
                                 bill = new Bill();
                                 bill.setRcreatedate(new Timestamp(System
                                         .currentTimeMillis()));
-                                billDao.save(bill);
+                                baseDao.save(bill);
                             }
                             BillRecord br = new BillRecord();
                             br.setBill(bill);
@@ -318,9 +315,9 @@ public class PriceDialog extends javax.swing.JDialog {
 
                                         bill.setUsername(userField.getText());
                                         bill.setResult(Float.parseFloat(priceField.getText()));
-                                        billDao.update(bill);
+                                        baseDao.update(bill);
                                         for (BillRecord br : panel.tabelModel.getItem()) {
-                                            billRecordDao.save(br);
+                                            baseDao.save(br);
                                         }
                                         close();
                                     } catch (Exception ex) {
@@ -336,7 +333,7 @@ public class PriceDialog extends javax.swing.JDialog {
                                 }
                                 break;
                                 default:
-                                    billDao.remove(bill);
+                                    baseDao.remove(bill);
                                     break;
                             }
                         }
@@ -414,8 +411,8 @@ public class PriceDialog extends javax.swing.JDialog {
             itemy += g2.getFont().getSize() + 1;
         }
         try {
-            File f=new File("D:/hello.gif");
-            if(!f.exists()){
+            File f = new File("D:/hello.gif");
+            if (!f.exists()) {
                 f.createNewFile();
             }
 

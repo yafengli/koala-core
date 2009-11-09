@@ -1,4 +1,4 @@
-<#import "/ftl/page.ftl" as p/>
+<#import "./page.ftl" as p/>
 <@p.page page=page action="getredo.action"/>
 <table>
 <tr>

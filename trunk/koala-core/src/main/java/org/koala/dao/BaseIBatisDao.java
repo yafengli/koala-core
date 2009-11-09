@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * User: liyafeng
@@ -15,6 +16,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
  * @version 1.0
  * @author YaFengLi
  */
+@Transactional
 public class BaseIBatisDao extends SqlMapClientDaoSupport implements IIBatisDao {
 
     public static final String findbyid = "_findbyid";

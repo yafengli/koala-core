@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.BeanInfo;
 import java.beans.Expression;
@@ -25,6 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author YaFengLi
  * @version 1.0
  */
+@Transactional
 public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
 
     public static final ConcurrentHashMap<Class, Method> mdmap = new ConcurrentHashMap<Class, Method>();

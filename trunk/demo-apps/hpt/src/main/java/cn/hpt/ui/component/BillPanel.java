@@ -1,7 +1,5 @@
 package cn.hpt.ui.component;
 
-import cn.hpt.dao.IBillDao;
-import cn.hpt.dao.IBillRecordDao;
 import cn.hpt.model.Bill;
 import cn.hpt.model.BillRecord;
 import cn.hpt.ui.MainFrame;
@@ -11,6 +9,7 @@ import cn.hpt.ui.view.BillRecordDialog;
 import cn.hpt.util.DateUtil;
 import cn.hpt.util.PropertiesLoader;
 import com.qt.datapicker.DatePicker;
+import org.koala.dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,9 +38,7 @@ public class BillPanel extends JPanel {
     @Autowired
     private SelectColorTableCellRenderer cellRenderer;
     @Autowired
-    private IBillDao billDao;
-    @Autowired
-    private IBillRecordDao billRecordDao;
+    private IDao baseDao;
     @Autowired
     private BillRecordDialog billRecordDialog;
 
@@ -152,7 +149,7 @@ public class BillPanel extends JPanel {
                                     startField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
                             Timestamp et = new Timestamp(DateUtil.parse(
                                     endField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
-                            List<Bill> lb = billDao.findByQueryName(
+                            List<Bill> lb = baseDao.find(
                                     "bill.find.by.time", new String[]{
                                             "stime", "etime"}, new Object[]{
                                             st, et});
@@ -196,14 +193,14 @@ public class BillPanel extends JPanel {
                         switch (option) {
                             case JOptionPane.YES_OPTION:
                                 Bill item = tabelModel.getItem().get(selectRow);
-                                List<BillRecord> lbr = billRecordDao
-                                        .findByQueryName("billrecord.find.by.bill",
+                                List<BillRecord> lbr = baseDao
+                                        .find("billrecord.find.by.bill",
                                                 new String[]{"bill"},
                                                 new Object[]{item});
                                 for (BillRecord bd : lbr) {
-                                    billRecordDao.remove(bd);
+                                    baseDao.remove(bd);
                                 }
-                                billDao.remove(item);
+                                baseDao.remove(item);
                                 tabelModel.getItem().remove(selectRow);
                                 hptTable.revalidate();
                                 break;

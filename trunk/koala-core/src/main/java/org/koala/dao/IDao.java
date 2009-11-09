@@ -44,7 +44,7 @@ public interface IDao {
      *
      * @return 查找全部对象
      */
-    public <T> List<T> findAll(Class<T> c);
+    public <T> List<T> findAll(Class c);
 
     /**
      * 根据命名查询查找返回条数
@@ -129,6 +129,32 @@ public interface IDao {
      */
     public <T> List<T> find(String queryName, Map<String, Object> paramMap, int startPosition, int maxResult);
 
+    /**
+     * 根据命名查询查找返回对象列表
+     *
+     * @param queryName
+     * @return 查询结果对象集合
+     */
+    public <T> T findSingle(String queryName);
+
+    /**
+     * 根据命名查询和输入参数查找返回的对象列表
+     *
+     * @param queryName   命名查询
+     * @param paramNames  参数名数组
+     * @param paramValues 参数值数组
+     * @return 查询结果对象集合
+     */
+    public <T> T findSingle(String queryName, String[] paramNames, Object[] paramValues);
+
+    /**
+     * 根据命名查询和输入参数查找返回的对象列表
+     *
+     * @param queryName 命名查询
+     * @param paramMap  参数名:参数值
+     * @return 查询结果对象集合
+     */
+    public <T> T findSingle(String queryName, Map<String, Object> paramMap);
 
     /**
      * 批量插入

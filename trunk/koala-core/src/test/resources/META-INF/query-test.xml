@@ -18,6 +18,13 @@
                      ]]>
 		</query>
 	</named-query>
+    <named-query name="find.test.id">
+		<query>
+			<![CDATA[
+         SELECT info FROM User info where info.id=:id 
+                     ]]>
+		</query>
+	</named-query>
 	<named-query name="find.count.test">
 		<query>
 			<![CDATA[

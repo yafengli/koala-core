@@ -2,6 +2,7 @@ package org.koala.dao;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
@@ -9,6 +10,7 @@ import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Date: 2009-9-24
@@ -17,6 +19,7 @@ import java.util.Map;
  * @version 1.0
  * @authtor YaFengLi
  */
+@Transactional
 public class BaseJPADao extends JpaDaoSupport implements IDao {
     public <T, ID extends Serializable> T findById(Class<T> c, ID id) {
         T entity;
@@ -41,8 +44,8 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
         getJpaTemplate().merge(t);
     }
 
-    public <T> List<T> findAll(Class<T> c) {
-        return getJpaTemplate().find(String.format("from ", c.getClass().getName()));
+    public <T> List<T> findAll(Class c) {
+        return getJpaTemplate().find(String.format("from %s", c.getName()));
     }
 
     public long findCount(final String queryName) {
@@ -151,6 +154,42 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
                     logger.error("[paramMap is null!]");
                 }
                 return query.getResultList();
+            }
+        });
+    }
+
+    @Override
+    public <T> T findSingle(String queryName) {
+        return (T) findSingle(queryName, null);
+    }
+
+    @Override
+    public <T> T findSingle(String queryName, String[] paramNames, Object[] paramValues) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (paramNames != null && paramValues != null && paramNames.length == paramValues.length) {
+            for (int i = 0; i < paramNames.length; i++) {
+                map.put(paramNames[i], paramValues[i]);
+            }
+        } else {
+            logger.error("[paramNames.length is not equal paramValues.length!]");
+        }
+        return (T) findSingle(queryName, map);
+    }
+
+    @Override
+    public <T> T findSingle(final String queryName, final Map<String, Object> paramMap) {
+        return (T) getJpaTemplate().execute(new JpaCallback() {
+            public Object doInJpa(EntityManager em) throws PersistenceException {
+                Query query = em.createNamedQuery(queryName);
+                if (paramMap != null && paramMap.size() >= 0) {
+                    for (String key : paramMap.keySet()) {
+                        Object val = paramMap.get(key);
+                        query.setParameter(key, val);
+                    }
+                } else {
+                    logger.error("[paramMap is null!]");
+                }
+                return query.getSingleResult();
             }
         });
     }

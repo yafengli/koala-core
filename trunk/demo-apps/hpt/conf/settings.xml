@@ -7,6 +7,10 @@
     <entry key="name">用户名</entry>
     <entry key="close">关闭</entry>
     <entry key="login">登陆</entry>
+    <!-- init -->
+    <entry key="init.user">李艳民</entry>
+    <entry key="init.password">lym123456</entry>
+    <entry key="init.desc">管理员</entry>
 
     <!--- LoginWindow -->
     <entry key="login.label.msg">

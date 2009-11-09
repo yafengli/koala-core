@@ -11,36 +11,37 @@ import javax.persistence.Table;
 @Table(name = "ht_category")
 public class Category {// 药物-分类表
 
-	public Long cid;
+    @Id()
+    @SequenceGenerator(name = "ht_category_seq", sequenceName = "ht_category_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ht_category_seq")
+    public Long cid;
 
-	public String cname;
+    public String cname;
 
-	public String cdesc;
+    public String cdesc;
 
-	@Id()
-	@SequenceGenerator(name = "ht_category_seq", sequenceName = "ht_category_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ht_category_seq")
-	public Long getCid() {
-		return cid;
-	}
 
-	public void setCid(Long cid) {
-		this.cid = cid;
-	}
+    public Long getCid() {
+        return cid;
+    }
 
-	public String getCname() {
-		return cname;
-	}
+    public void setCid(Long cid) {
+        this.cid = cid;
+    }
 
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
+    public String getCname() {
+        return cname;
+    }
 
-	public String getCdesc() {
-		return cdesc;
-	}
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
 
-	public void setCdesc(String cdesc) {
-		this.cdesc = cdesc;
-	}
+    public String getCdesc() {
+        return cdesc;
+    }
+
+    public void setCdesc(String cdesc) {
+        this.cdesc = cdesc;
+    }
 }

@@ -90,13 +90,13 @@
 			<artifactId>poi</artifactId>
 			<version>${poi.version}</version>
 		</dependency>
-		<!--
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.log.version}</version>
+			<version>${slf4j.version}</version>
 		</dependency>
-		-->
+
 		<!-- log4j -->
 		<dependency>
 			<groupId>log4j</groupId>

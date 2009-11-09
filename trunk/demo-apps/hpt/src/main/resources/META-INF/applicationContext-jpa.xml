@@ -25,6 +25,9 @@
     </bean>
     <!-- JPA -->
     <!-- JPA TransactionManager -->
-    <tx:annotation-driven transaction-manager="transactionManager"/>       
-    <context:component-scan base-package="cn.hpt.dao.impl"/>    
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- new base dao -->
+    <bean id="baseJPADao" class="org.koala.dao.BaseJPADao" scope="prototype">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
 </beans>
