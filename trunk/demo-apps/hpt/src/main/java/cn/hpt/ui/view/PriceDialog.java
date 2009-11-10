@@ -104,50 +104,37 @@ public class PriceDialog extends javax.swing.JDialog {
                         lablePanel.setLayout(lablePanelLayout);
                         {
                             socialLabel = new JLabel();
-                            lablePanel.add(socialLabel, new CellConstraints(
-                                    "3, 2, 1, 1, default, default"));
                             socialLabel.setText(pl.getString("pd.social"));
                         }
                         {
                             socialField = new JTextField();
-                            lablePanel.add(socialField, new CellConstraints(
-                                    "4, 2, 1, 1, default, default"));
+
                             socialField.setColumns(30);
                             socialField.setPreferredSize(new java.awt.Dimension(
                                     30, 22));
                         }
                         {
                             medicalLabel = new JLabel();
-                            lablePanel.add(medicalLabel, new CellConstraints(
-                                    "1, 2, 1, 1, default, default"));
                             medicalLabel.setText(pl.getString("pd.medical"));
                         }
                         {
                             medicalField = new JLabel();
                             medicalField.setText(pl.getString("pd.medical.name"));
-                            lablePanel.add(medicalField, new CellConstraints(
-                                    "2, 2, 1, 1, default, default"));
                             medicalField.setPreferredSize(new java.awt.Dimension(
                                     30, 22));
                         }
                         {
                             userLabel = new JLabel();
-                            lablePanel.add(userLabel, new CellConstraints(
-                                    "1, 1, 1, 1, default, default"));
                             userLabel.setText(pl.getString("pd.user"));
                         }
                         {
                             userField = new JTextField();
-                            lablePanel.add(userField, new CellConstraints(
-                                    "2, 1, 1, 1, default, default"));
                             userField.setColumns(30);
                             userField.setPreferredSize(new java.awt.Dimension(
                                     30, 22));
                         }
                         {
                             dateLabel = new JLabel();
-                            lablePanel.add(dateLabel, new CellConstraints(
-                                    "3, 1, 1, 1, default, default"));
                             dateLabel.setText(pl.getString("pd.date"));
                         }
                         {
@@ -155,10 +142,27 @@ public class PriceDialog extends javax.swing.JDialog {
                             dateField.setBackground(Color.WHITE);
                             dateField.setText(DateFormatUtils.format(System.currentTimeMillis(),
                                     "yyyy-MM-dd HH:mm"));
-                            lablePanel.add(dateField, new CellConstraints(
-                                    "4, 1, 1, 1, default, default"));
                             dateField.setPreferredSize(new java.awt.Dimension(
                                     30, 22));
+                        }
+                        {
+                            lablePanel.add(userLabel, new CellConstraints(
+                                    "1, 1, 1, 1, default, default"));
+                            lablePanel.add(userField, new CellConstraints(
+                                    "2, 1, 1, 1, default, default"));
+                            lablePanel.add(socialLabel, new CellConstraints(
+                                    "3, 1, 1, 1, default, default"));
+                            lablePanel.add(socialField, new CellConstraints(
+                                    "4, 1, 1, 1, default, default"));
+                            lablePanel.add(medicalLabel, new CellConstraints(
+                                    "1, 2, 1, 1, default, default"));
+                            lablePanel.add(medicalField, new CellConstraints(
+                                    "2, 2, 1, 1, default, default"));
+                            lablePanel.add(dateLabel, new CellConstraints(
+                                    "3, 2, 1, 1, default, default"));
+                            lablePanel.add(dateField, new CellConstraints(
+                                    "4, 2, 1, 1, default, default"));
+
                         }
                     }
                     {
