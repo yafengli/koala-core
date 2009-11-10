@@ -19,23 +19,7 @@ import java.util.Vector;
 
 @Component(LoginWindow.BEAN_NAME)
 public class LoginWindow extends javax.swing.JFrame {
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 8291320816086041316L;
-
-    {
-        // Set Look & Feel
-        try {
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static final String BEAN_NAME = "loginWindow";
-
     @Autowired
     private IDao baseDao;
     @Autowired
@@ -47,132 +31,29 @@ public class LoginWindow extends javax.swing.JFrame {
     @Autowired
     private HptInitData hptInitData;
 
-    private JPanel loginPanel;
-    private JPanel imagePanel;
+    private JPanel loginPanel = new JPanel();
+    private JPanel imagePanel = new JPanel();
     private ImageIcon imageIcon;
     private ImageIcon frameIco;
-    private JPanel namePanel;
-    private JLabel messageLabel;
-    private JPanel messagePanel;
-    private JComboBox nameComboBox;
-    private JPanel passwordPanel;
-    private JButton closeButton;
-    private JPasswordField passwordTextField;
-    private JLabel passwordLabel;
-    private JButton loginButton;
-    private JLabel nameLabel;
-
-    public JPanel getLoginPanel() {
-        return loginPanel;
-    }
-
-    public void setLoginPanel(JPanel loginPanel) {
-        this.loginPanel = loginPanel;
-    }
-
-    public JPanel getImagePanel() {
-        return imagePanel;
-    }
-
-    public void setImagePanel(JPanel imagePanel) {
-        this.imagePanel = imagePanel;
-    }
-
-    public ImageIcon getImageIcon() {
-        return imageIcon;
-    }
-
-    public void setImageIcon(ImageIcon imageIcon) {
-        this.imageIcon = imageIcon;
-    }
-
-    public ImageIcon getFrameIco() {
-        return frameIco;
-    }
-
-    public void setFrameIco(ImageIcon frameIco) {
-        this.frameIco = frameIco;
-    }
-
-    public JPanel getNamePanel() {
-        return namePanel;
-    }
-
-    public void setNamePanel(JPanel namePanel) {
-        this.namePanel = namePanel;
-    }
-
-    public JLabel getMessageLabel() {
-        return messageLabel;
-    }
-
-    public void setMessageLabel(JLabel messageLabel) {
-        this.messageLabel = messageLabel;
-    }
-
-    public JPanel getMessagePanel() {
-        return messagePanel;
-    }
-
-    public void setMessagePanel(JPanel messagePanel) {
-        this.messagePanel = messagePanel;
-    }
+    private JPanel namePanel = new JPanel();
+    private JLabel messageLabel = new JLabel();
+    private JPanel messagePanel = new JPanel();
+    private JPanel passwordPanel = new JPanel();
+    private JButton closeButton = new JButton();
+    private JPasswordField passwordTextField = new JPasswordField();
+    private JLabel passwordLabel = new JLabel();
+    private JButton loginButton = new JButton();
+    private JLabel nameLabel = new JLabel();
 
     public JComboBox getNameComboBox() {
         return nameComboBox;
-    }
-
-    public void setNameComboBox(JComboBox nameComboBox) {
-        this.nameComboBox = nameComboBox;
-    }
-
-    public JPanel getPasswordPanel() {
-        return passwordPanel;
-    }
-
-    public void setPasswordPanel(JPanel passwordPanel) {
-        this.passwordPanel = passwordPanel;
-    }
-
-    public JButton getCloseButton() {
-        return closeButton;
-    }
-
-    public void setCloseButton(JButton closeButton) {
-        this.closeButton = closeButton;
     }
 
     public JPasswordField getPasswordTextField() {
         return passwordTextField;
     }
 
-    public void setPasswordTextField(JPasswordField passwordTextField) {
-        this.passwordTextField = passwordTextField;
-    }
-
-    public JLabel getPasswordLabel() {
-        return passwordLabel;
-    }
-
-    public void setPasswordLabel(JLabel passwordLabel) {
-        this.passwordLabel = passwordLabel;
-    }
-
-    public JButton getLoginButton() {
-        return loginButton;
-    }
-
-    public void setLoginButton(JButton loginButton) {
-        this.loginButton = loginButton;
-    }
-
-    public JLabel getNameLabel() {
-        return nameLabel;
-    }
-
-    public void setNameLabel(JLabel nameLabel) {
-        this.nameLabel = nameLabel;
-    }
+    private JComboBox nameComboBox;
 
     /**
      * Auto-generated main method to display this JFrame
@@ -204,8 +85,6 @@ public class LoginWindow extends javax.swing.JFrame {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             getContentPane().setLayout(thisLayout);
             {
-                loginPanel = new JPanel();
-                imagePanel = new JPanel();
                 imageIcon = new ImageIcon(LoginWindow.class.getResource(pl
                         .getString("login.left.ico")));
                 frameIco = new ImageIcon(LoginWindow.class.getResource(pl
@@ -213,9 +92,6 @@ public class LoginWindow extends javax.swing.JFrame {
                 BorderLayout imagePanelLayout = new BorderLayout();
                 imagePanel.setLayout(imagePanelLayout);
                 imagePanel.add(new JLabel(imageIcon), BorderLayout.CENTER);
-                passwordPanel = new JPanel();
-                passwordLabel = new JLabel();
-                loginButton = new JButton();
                 getContentPane().add(loginPanel, BorderLayout.CENTER);
                 getContentPane().add(imagePanel, BorderLayout.WEST);
                 BoxLayout loginPanelLayout = new BoxLayout(loginPanel,
@@ -223,7 +99,6 @@ public class LoginWindow extends javax.swing.JFrame {
 
                 loginPanel.setLayout(loginPanelLayout);
                 {
-                    namePanel = new JPanel();
                     FlowLayout namePanelLayout = new FlowLayout();
                     namePanelLayout.setAlignment(FlowLayout.RIGHT);
                     namePanelLayout.setAlignOnBaseline(true);
@@ -231,7 +106,6 @@ public class LoginWindow extends javax.swing.JFrame {
                     loginPanel.add(namePanel);
                     namePanel.setPreferredSize(new java.awt.Dimension(216, 42));
                     {
-                        nameLabel = new JLabel();
                         namePanel.add(nameLabel);
                         nameLabel.setText(pl.getString("name"));
                     }
@@ -252,7 +126,6 @@ public class LoginWindow extends javax.swing.JFrame {
                         namePanel.add(nameComboBox);
                     }
                     {
-                        closeButton = new JButton();
                         namePanel.add(closeButton);
                         closeButton.setText(pl.getString("close"));
                         closeButton.addActionListener(closeAppActionListener);
@@ -270,7 +143,6 @@ public class LoginWindow extends javax.swing.JFrame {
                         passwordLabel.setText(pl.getString("password") + pl.getString("colon"));
                     }
                     {
-                        passwordTextField = new JPasswordField();
                         passwordTextField
                                 .setPreferredSize(new Dimension(80, 20));
                         passwordPanel.add(passwordTextField);
@@ -285,10 +157,8 @@ public class LoginWindow extends javax.swing.JFrame {
                 }
             }
             {
-                messagePanel = new JPanel();
                 getContentPane().add(messagePanel, BorderLayout.SOUTH);
                 {
-                    messageLabel = new JLabel();
                     messageLabel.setForeground(new Color(118, 61, 194));
                     messagePanel.add(messageLabel);
                     messageLabel.setText(pl.getString("login.label.msg"));
@@ -297,10 +167,9 @@ public class LoginWindow extends javax.swing.JFrame {
             setIconImage(frameIco.getImage());
             focusTravel();
             setResizable(false);
-            setAlwaysOnTop(true);
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
             pack();
-
-            // setAlwaysOnTop(true);
+//            setAlwaysOnTop(true);
         } catch (Exception e) {
             e.printStackTrace();
         }

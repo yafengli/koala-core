@@ -26,8 +26,8 @@ import java.sql.Timestamp;
 
 @Service
 public class PriceDialog extends javax.swing.JDialog {
-    private static final long serialVersionUID = -4932293243415672088L;
 
+    private static final long serialVersionUID = -4932293243415672088L;
     public JButton printButton;
     public JLabel priceLabel;
     public JPanel actionPanel;
@@ -54,7 +54,6 @@ public class PriceDialog extends javax.swing.JDialog {
     public JPanel lablePanel;
     public JPanel contentPanel;
     private JButton rmButton;
-
     @Autowired
     private PricePanel panel;
     @Autowired
@@ -107,61 +106,55 @@ public class PriceDialog extends javax.swing.JDialog {
                             socialLabel = new JLabel();
                             lablePanel.add(socialLabel, new CellConstraints(
                                     "3, 2, 1, 1, default, default"));
-                            socialLabel
-                                    .setText("\u793e\u4fdd\u8d26\u53f7\uff1a");
+                            socialLabel.setText(pl.getString("pd.social"));
                         }
                         {
                             socialField = new JTextField();
                             lablePanel.add(socialField, new CellConstraints(
                                     "4, 2, 1, 1, default, default"));
                             socialField.setColumns(30);
-                            socialField
-                                    .setPreferredSize(new java.awt.Dimension(
-                                            30, 22));
+                            socialField.setPreferredSize(new java.awt.Dimension(
+                                    30, 22));
                         }
                         {
                             medicalLabel = new JLabel();
                             lablePanel.add(medicalLabel, new CellConstraints(
                                     "1, 2, 1, 1, default, default"));
-                            medicalLabel
-                                    .setText("\u533b\u7597\u673a\u6784\uff1a");
+                            medicalLabel.setText(pl.getString("pd.medical"));
                         }
                         {
                             medicalField = new JLabel();
-                            medicalField.setText(pl
-                                    .getString("pricedialog.medical.name"));
+                            medicalField.setText(pl.getString("pd.medical.name"));
                             lablePanel.add(medicalField, new CellConstraints(
                                     "2, 2, 1, 1, default, default"));
-                            medicalField
-                                    .setPreferredSize(new java.awt.Dimension(
-                                            30, 22));
+                            medicalField.setPreferredSize(new java.awt.Dimension(
+                                    30, 22));
                         }
                         {
                             userLabel = new JLabel();
                             lablePanel.add(userLabel, new CellConstraints(
                                     "1, 1, 1, 1, default, default"));
-                            userLabel.setText("\u59d3\u540d\uff1a");
+                            userLabel.setText(pl.getString("pd.user"));
                         }
                         {
                             userField = new JTextField();
                             lablePanel.add(userField, new CellConstraints(
                                     "2, 1, 1, 1, default, default"));
-                            userField.setColumns(20);
+                            userField.setColumns(30);
                             userField.setPreferredSize(new java.awt.Dimension(
-                                    20, 22));
+                                    30, 22));
                         }
                         {
                             dateLabel = new JLabel();
                             lablePanel.add(dateLabel, new CellConstraints(
                                     "3, 1, 1, 1, default, default"));
-                            dateLabel.setText("\u65e5\u671f\uff1a");
+                            dateLabel.setText(pl.getString("pd.date"));
                         }
                         {
                             dateField = new JLabel();
                             dateField.setBackground(Color.WHITE);
-                            dateField.setText(DateFormatUtils
-                                    .format(System.currentTimeMillis(),
-                                    "yyyy-MM-dd HH:mm:ss"));
+                            dateField.setText(DateFormatUtils.format(System.currentTimeMillis(),
+                                    "yyyy-MM-dd HH:mm"));
                             lablePanel.add(dateField, new CellConstraints(
                                     "4, 1, 1, 1, default, default"));
                             dateField.setPreferredSize(new java.awt.Dimension(
@@ -174,7 +167,7 @@ public class PriceDialog extends javax.swing.JDialog {
                         {
                             operatorLabel = new JLabel();
                             pricePanel.add(operatorLabel);
-                            operatorLabel.setText("\u6536\u8d39\u5458\uff1a");
+                            operatorLabel.setText(pl.getString("pd.operator"));
                         }
                         {
                             operatorField = new JLabel();
@@ -184,8 +177,7 @@ public class PriceDialog extends javax.swing.JDialog {
                         {
                             priceLabel = new JLabel();
                             pricePanel.add(priceLabel);
-                            priceLabel
-                                    .setText("\u5408\u8ba1\u8d39\u7528\uff1a");
+                            priceLabel.setText(pl.getString("pd.price"));
                         }
                         {
                             priceField = new JLabel();
@@ -212,8 +204,7 @@ public class PriceDialog extends javax.swing.JDialog {
                                 itemnameLabel = new JLabel();
                                 itemnameLabel.setFont(font.PRICE_LABEL);
                                 itemnamePanel.add(itemnameLabel);
-                                itemnameLabel
-                                        .setText("\u6536\u8d39\u9879\u76ee\u6e05\u5355");
+                                itemnameLabel.setText(pl.getString("pd.item.name"));
                             }
                         }
                     }
@@ -228,8 +219,7 @@ public class PriceDialog extends javax.swing.JDialog {
                         nameLabel = new JLabel();
                         nameLabel.setFont(font.PRICE_NAME);
                         namePanel.add(nameLabel);
-                        nameLabel
-                                .setText("\u95e8\uff08\u6025\uff09\u8bca\u4e13\u7528\u6536\u8d39\u5355\u636e");
+                        nameLabel.setText(pl.getString("pd.name"));
                     }
                 }
             }
@@ -240,23 +230,23 @@ public class PriceDialog extends javax.swing.JDialog {
                     addButton = new JButton();
                     actionPanel.add(addButton);
 
-                    addButton.setText("\u589e\u52a0");
+                    addButton.setText(pl.getString("add"));
                 }
                 {
                     rmButton = new JButton();
 
                     actionPanel.add(rmButton);
-                    rmButton.setText("\u5220\u9664");
+                    rmButton.setText(pl.getString("remove"));
                 }
                 {
                     closeButton = new JButton();
                     actionPanel.add(closeButton);
-                    closeButton.setText("\u53d6\u6d88");
+                    closeButton.setText(pl.getString("close"));
                 }
                 {
                     printButton = new JButton();
                     actionPanel.add(printButton);
-                    printButton.setText("\u6253\u5370");
+                    printButton.setText(pl.getString("print"));
                 }
             }
             pack();
@@ -272,8 +262,7 @@ public class PriceDialog extends javax.swing.JDialog {
                             /* create new bill */
                             if (bill == null) {
                                 bill = new Bill();
-                                bill.setRcreatedate(new Timestamp(System
-                                        .currentTimeMillis()));
+                                bill.setRcreatedate(new Timestamp(System.currentTimeMillis()));
                                 baseDao.save(bill);
                             }
                             BillRecord br = new BillRecord();
@@ -287,10 +276,10 @@ public class PriceDialog extends javax.swing.JDialog {
                 }
                 {
                     printButton.addActionListener(new ActionListener() {
+
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            int option = JOptionPane.showConfirmDialog(null, pl
-                                    .getString("price.dialog.print.msg"),
+                            int option = JOptionPane.showConfirmDialog(null, pl.getString("price.dialog.print.msg"),
                                     printButton.getText(),
                                     JOptionPane.YES_NO_OPTION);
                             switch (option) {
@@ -308,8 +297,8 @@ public class PriceDialog extends javax.swing.JDialog {
                                         PageFormat format = job.pageDialog(job.defaultPage());
                                         job.setPrintable(printPanel, format);
                                         if (job.printDialog())
-                                            job.print();
-                                        */
+                                        job.print();
+                                         */
                                         //TODO
                                         testImagePrint();
 
@@ -322,13 +311,11 @@ public class PriceDialog extends javax.swing.JDialog {
                                         close();
                                     } catch (Exception ex) {
                                         ex.printStackTrace();
-                                        JOptionPane
-                                                .showMessageDialog(
-                                                        dialog,
-                                                        pl
-                                                                .getString("price.dialo.print.err"),
-                                                        dialog.getTitle(),
-                                                        JOptionPane.CLOSED_OPTION);
+                                        JOptionPane.showMessageDialog(
+                                                dialog,
+                                                pl.getString("price.dialo.print.err"),
+                                                dialog.getTitle(),
+                                                JOptionPane.CLOSED_OPTION);
                                     }
                                 }
                                 break;
@@ -349,8 +336,7 @@ public class PriceDialog extends javax.swing.JDialog {
                             } else {
                                 int selectRow = panel.hptTable.getSelectedRow();
                                 if (selectRow >= 0
-                                        && selectRow < panel.tabelModel.getItem()
-                                        .size()) {
+                                        && selectRow < panel.tabelModel.getItem().size()) {
                                     panel.tabelModel.getItem().remove(selectRow);
                                 }
                                 panel.hptTable.revalidate();
@@ -360,6 +346,7 @@ public class PriceDialog extends javax.swing.JDialog {
                 }
                 {
                     closeButton.addActionListener(new ActionListener() {
+
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             close();
@@ -417,8 +404,7 @@ public class PriceDialog extends javax.swing.JDialog {
             }
 
             ImageIO.write(image, "gif", f);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

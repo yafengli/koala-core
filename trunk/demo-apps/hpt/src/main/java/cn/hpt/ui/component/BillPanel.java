@@ -12,6 +12,8 @@ import com.qt.datapicker.DatePicker;
 import org.koala.dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
@@ -29,6 +31,7 @@ import java.util.List;
 @Service
 public class BillPanel extends JPanel {
     private static final long serialVersionUID = 4591912718436452499L;
+    public static final Logger logger = LoggerFactory.getLogger(BillPanel.class);
     @Autowired
     private MainFrame mainFrame;
     @Autowired
@@ -107,6 +110,11 @@ public class BillPanel extends JPanel {
                 ImageIcon imageIcon = new ImageIcon(BillPanel.class.getResource("/logo/datePicker.gif"));
                 startButton.setIcon(imageIcon);
                 endButton.setIcon(imageIcon);
+                /* set size */
+                startButton.setMargin(new Insets(0, 0, 0, 0));
+                endButton.setMargin(new Insets(0, 0, 0, 0));
+                startButton.setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight());
+                endButton.setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight());
             }
             {
                 startButton.addActionListener(new ActionListener() {

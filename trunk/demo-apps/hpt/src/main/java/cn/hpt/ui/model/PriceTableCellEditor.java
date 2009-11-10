@@ -1,34 +1,27 @@
 package cn.hpt.ui.model;
 
-import java.awt.Component;
-import java.util.EventObject;
-import java.util.List;
-
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.EventListenerList;
-import javax.swing.table.TableCellEditor;
-
+import cn.hpt.model.Medicine;
+import cn.hpt.ui.extend.HptFont;
+import org.koala.dao.IDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.context.annotation.Scope;
-import org.koala.dao.IDao;
 
-import cn.hpt.model.Medicine;
-import cn.hpt.ui.extend.HptFont;
+import javax.swing.*;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.table.TableCellEditor;
+import java.awt.*;
+import java.util.EventObject;
+import java.util.List;
 
 @Service
 public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
-    public static final Logger logger = LoggerFactory
-            .getLogger(PriceTableCellEditor.class);
-    private static final long serialVersionUID = 3568927884211864044L;
-    protected EventListenerList listenerList = new EventListenerList();
-    protected ChangeEvent changeEvent = new ChangeEvent(this);
 
+    public static final Logger logger = LoggerFactory.getLogger(PriceTableCellEditor.class);
+    private static final long serialVersionUID = 3568927884211864044L;
+    protected ChangeEvent changeEvent = new ChangeEvent(this);
     @Autowired
     private IDao baseDao;
     @Autowired
@@ -36,9 +29,7 @@ public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
     private List<Medicine> lm;
 
     /* 收 mshortcut影响 重新读取药品名 */
-    public void reload(String value) {
-        if (lm != null)
-            lm.clear();
+    public void reload(String value) {        
         removeAllItems();
         lm = baseDao.find("medicine.find.like.byshortcut",
                 new String[]{"mshortcut"}, new Object[]{value + "%"});
@@ -50,7 +41,7 @@ public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
     protected void fireEditingStopped() {
         CellEditorListener listener;
         Object[] listeners = listenerList.getListenerList();
-        for (int i = 0; i < listeners.length; i++) {
+        for (int i = 0; i < listeners.length - 1; i++) {
             if (listeners[i] == CellEditorListener.class) {
                 listener = (CellEditorListener) listeners[i + 1];
                 listener.editingStopped(changeEvent);
@@ -61,7 +52,7 @@ public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
     protected void fireEditingCanceled() {
         CellEditorListener listener;
         Object[] listeners = listenerList.getListenerList();
-        for (int i = 0; i < listeners.length; i++) {
+        for (int i = 0; i < listeners.length - 1; i++) {
             if (listeners[i] == CellEditorListener.class) {
                 listener = (CellEditorListener) listeners[i + 1];
                 listener.editingCanceled(changeEvent);
@@ -71,7 +62,7 @@ public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
-                                                 boolean isSelected, int row, int column) {
+            boolean isSelected, int row, int column) {
         this.setFont(font.OPTION_SONTI);
         return this;
     }
@@ -90,8 +81,9 @@ public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
     public Object getCellEditorValue() {
         Object obj = null;
         try {
-            if (lm != null && getSelectedIndex() >= 0 && getSelectedIndex() < lm.size())
+            if (lm != null && getSelectedIndex() >= 0 && getSelectedIndex() < lm.size()) {
                 obj = lm.get(getSelectedIndex());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
