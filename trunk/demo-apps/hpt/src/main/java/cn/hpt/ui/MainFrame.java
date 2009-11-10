@@ -23,6 +23,7 @@ import cn.hpt.ui.listener.PanelStatusListener;
 import cn.hpt.ui.listener.ShowInfoActionListener;
 import cn.hpt.ui.listener.UserActinListener;
 import cn.hpt.ui.toolbar.OutpatientAction;
+import cn.hpt.ui.toolbar.StatAction;
 import cn.hpt.util.PropertiesLoader;
 
 @Component
@@ -71,6 +72,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     @Autowired
     public OutpatientAction outpatientAction;
+    @Autowired
+    public StatAction statAction;
     @Autowired
     public CloseAppActionListener closeAppActionListener;
     @Autowired
@@ -132,6 +135,7 @@ public class MainFrame extends javax.swing.JFrame {
             {
                 mainToolBar = new JToolBar();
                 mainToolBar.add(outpatientAction);
+                mainToolBar.add(statAction);
                 getContentPane().add(mainToolBar, BorderLayout.NORTH);
                 this.addWindowListener(authorityWindowAdapter);
             }
