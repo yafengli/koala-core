@@ -36,7 +36,7 @@ public class MedicineTableCellEditor extends JComboBox implements
 	@PostConstruct
 	public void init() {
 		for (Category cg : tabelModel.getItem()) {
-			this.addItem(cg.getCname());
+			this.addItem(cg.getName());
 		}
 	}
 

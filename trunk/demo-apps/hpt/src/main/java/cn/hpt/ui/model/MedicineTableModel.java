@@ -109,7 +109,7 @@ public class MedicineTableModel extends AbstractTableModel {
                 break;
             case 5:
                 if (item.getCategory() != null) {
-                    o = item.getCategory().getCname();
+                    o = item.getCategory().getName();
                 }
         }
         return o;

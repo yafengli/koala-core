@@ -75,8 +75,8 @@ public class CategoryPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Category item = new Category();
-                item.setCname("");
-                item.setCdesc("");
+                item.setName("");
+                item.setDescribe("");
                 baseDao.save(item);
                 ((CategoryTabelModel) hptTable.getModel()).getItem().add(item);
                 hptTable.revalidate();

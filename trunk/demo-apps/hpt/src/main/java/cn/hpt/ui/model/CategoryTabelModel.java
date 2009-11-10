@@ -55,10 +55,10 @@ public class CategoryTabelModel extends AbstractTableModel {
         Category item = getItem().get(rowIndex);
         switch (columnIndex) {
             case 1:
-                item.setCname(value.toString());
+                item.setName(value.toString());
                 break;
             case 2:
-                item.setCdesc(value.toString());
+                item.setDescribe(value.toString());
                 break;
         }
         baseDao.update(item);
@@ -73,10 +73,10 @@ public class CategoryTabelModel extends AbstractTableModel {
                 o = item.getCid();
                 break;
             case 1:
-                o = item.getCname();
+                o = item.getName();
                 break;
             case 2:
-                o = item.getCdesc();
+                o = item.getDescribe();
                 break;
         }
         return o;

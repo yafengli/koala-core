@@ -14,12 +14,11 @@ public class Category {// 药物-分类表
     @Id()
     @SequenceGenerator(name = "ht_category_seq", sequenceName = "ht_category_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ht_category_seq")
-    public Long cid;
+    private Long cid;
 
-    public String cname;
+    private String name;
 
-    public String cdesc;
-
+    private String describe;
 
     public Long getCid() {
         return cid;
@@ -29,19 +28,19 @@ public class Category {// 药物-分类表
         this.cid = cid;
     }
 
-    public String getCname() {
-        return cname;
+    public String getName() {
+        return name;
     }
 
-    public void setCname(String cname) {
-        this.cname = cname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCdesc() {
-        return cdesc;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setCdesc(String cdesc) {
-        this.cdesc = cdesc;
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 }
