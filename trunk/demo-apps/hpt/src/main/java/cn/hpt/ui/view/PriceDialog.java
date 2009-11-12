@@ -2,6 +2,7 @@ package cn.hpt.ui.view;
 
 import cn.hpt.model.Bill;
 import cn.hpt.model.BillRecord;
+import cn.hpt.ui.LoginWindow;
 import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.component.PricePanel;
 import cn.hpt.ui.component.PrintPanel;
@@ -64,6 +65,8 @@ public class PriceDialog extends javax.swing.JDialog {
     private IDao baseDao;
     @Autowired
     private MainFrame mainFrame;
+    @Autowired
+    private LoginWindow loginWindow;
     private Bill bill;
 
     public PriceDialog(JFrame frame) {
@@ -176,6 +179,7 @@ public class PriceDialog extends javax.swing.JDialog {
                         {
                             operatorField = new JLabel();
                             operatorField.setBackground(Color.WHITE);
+                            operatorField.setText(loginWindow.getOperator() != null ? loginWindow.getOperator().getLoginname() : "");
                             pricePanel.add(operatorField);
                         }
                         {

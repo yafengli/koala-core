@@ -9,23 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.hpt.ui.view.PriceDialog;
+import cn.hpt.ui.view.PriceIIDialog;
 
 @Component
 public class OutpatientAction extends AbstractAction {
-	private static final long serialVersionUID = 6493919264600175500L;
 
-	@Autowired
-	private PriceDialog priceDialog;
-    
-	public OutpatientAction() {
-		super("", new ImageIcon(OutpatientAction.class
-				.getResource("/logo/6.png")));
+    private static final long serialVersionUID = 6493919264600175500L;
+    @Autowired
+    private PriceDialog priceDialog;
+    @Autowired
+    private PriceIIDialog priceIIDialog;
 
-	}
+    public OutpatientAction() {
+        super("", new ImageIcon(OutpatientAction.class.getResource("/logo/6.png")));
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// 划价收费
-		priceDialog.reload();
-	}
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // 划价收费
+        // priceDialog.reload();
+        priceIIDialog.initData();
+        priceIIDialog.setVisible(true);
+    }
 }

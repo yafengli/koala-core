@@ -61,7 +61,7 @@ public class LoginActionListener extends KeyAdapter implements ActionListener {
             mainFrame.setRole(op.getRole());
             mainFrame.actionTabbedPane.removeAll();
             mainFrame.setVisible(true);
-            priceDialog.operatorField.setText(op.getLoginname());
+            loginWindow.setOperator(op);
         } else {
             JOptionPane.showMessageDialog(null, String.format(pl.getString("login.error"), op.getLoginname()), pl.getString("login.msg"), JOptionPane.CLOSED_OPTION);
         }

@@ -45,6 +45,16 @@ public class LoginWindow extends javax.swing.JFrame {
     private JButton loginButton = new JButton();
     private JLabel nameLabel = new JLabel();
 
+    //#############33
+    private Operator operator;
+
+    public Operator getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Operator operator) {
+        this.operator = operator;
+    }
     public JComboBox getNameComboBox() {
         return nameComboBox;
     }
