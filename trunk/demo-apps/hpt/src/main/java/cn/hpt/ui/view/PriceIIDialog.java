@@ -1,18 +1,23 @@
 package cn.hpt.ui.view;
 
+import cn.hpt.model.Medicine;
 import cn.hpt.ui.LoginWindow;
 import cn.hpt.ui.MainFrame;
+import cn.hpt.ui.model.ItemsListModel;
 import cn.hpt.util.DateUtil;
 import cn.hpt.util.HelperUtil;
 import cn.hpt.util.PropertiesLoader;
+import cn.hpt.util.WindowUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
-import javax.swing.AbstractListModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -79,13 +84,12 @@ public class PriceIIDialog extends javax.swing.JDialog {
         headerTitleLabel = new javax.swing.JLabel();
         idDateLabel = new javax.swing.JLabel();
         idDateField = new javax.swing.JTextField();
+        headerSeparator = new javax.swing.JSeparator();
         listPanel = new javax.swing.JScrollPane();
         itemsList = new javax.swing.JList();
         itemsPanel = new javax.swing.JScrollPane();
         itemsTable = new javax.swing.JTable();
         toolPanel = new javax.swing.JPanel();
-        footToolBar = new javax.swing.JToolBar();
-        footToolBarPanel = new javax.swing.JPanel();
         cancelTool = new javax.swing.JButton();
         printTool = new javax.swing.JButton();
         oughtaccLabel = new javax.swing.JLabel();
@@ -108,47 +112,51 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         infoPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        operatorLabel.setFont(new java.awt.Font("YaHei Consolas Hybrid", 0, 12));
+        operatorLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         operatorLabel.setText("收费员：");
 
-        operatorField.setColumns(20);
+        operatorField.setColumns(10);
         operatorField.setEditable(false);
+        operatorField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
-        itemNameLabel.setFont(new java.awt.Font("YaHei Consolas Hybrid", 0, 12));
+        itemNameLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         itemNameLabel.setText("项目名称：");
 
-        itemNameField.setColumns(20);
+        itemNameField.setColumns(10);
+        itemNameField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
-        itemPriceLabel.setFont(new java.awt.Font("YaHei Consolas Hybrid", 0, 12));
+        itemPriceLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         itemPriceLabel.setText("项目单价：");
 
-        itemPriceField.setColumns(20);
+        itemPriceField.setColumns(10);
         itemPriceField.setEditable(false);
+        itemPriceField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
-        itemSizeField.setColumns(20);
+        itemSizeField.setColumns(10);
+        itemSizeField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
-        itemSizeLabel.setFont(new java.awt.Font("YaHei Consolas Hybrid", 0, 12));
+        itemSizeLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         itemSizeLabel.setText("项目次数：");
 
-        addButton.setFont(new java.awt.Font("YaHei Consolas Hybrid", 0, 12));
+        addButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         addButton.setText("增加");
 
-        removeButton.setFont(new java.awt.Font("YaHei Consolas Hybrid", 0, 12));
+        removeButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         removeButton.setText("删除");
 
         javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
         infoPanel.setLayout(infoPanelLayout);
         infoPanelLayout.setHorizontalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(infoPanelLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, infoPanelLayout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(itemNameLabel)
                     .addComponent(itemSizeLabel))
                 .addGap(4, 4, 4)
                 .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(itemSizeField)
-                    .addComponent(itemNameField))
+                    .addComponent(itemNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addButton)
@@ -158,10 +166,10 @@ public class PriceIIDialog extends javax.swing.JDialog {
                     .addComponent(operatorLabel)
                     .addComponent(itemPriceLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(itemPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(itemPriceField)
                     .addComponent(operatorField, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(148, 148, 148))
         );
         infoPanelLayout.setVerticalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,59 +199,77 @@ public class PriceIIDialog extends javax.swing.JDialog {
                             .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(itemSizeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(itemSizeLabel)))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         headerPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        userNameLabel.setFont(new java.awt.Font("YaHei Consolas Hybrid", 0, 12));
+        userNameLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         userNameLabel.setText("患者姓名：");
 
-        userNameField.setColumns(10);
+        userNameField.setColumns(6);
+        userNameField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
+        userNameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNameFieldActionPerformed(evt);
+            }
+        });
 
-        idNumLabel.setFont(new java.awt.Font("YaHei Consolas Hybrid", 0, 12));
+        idNumLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         idNumLabel.setText("收费单号：");
 
-        idNumField.setColumns(16);
+        idNumField.setColumns(10);
         idNumField.setEditable(false);
+        idNumField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        idNumField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idNumFieldActionPerformed(evt);
+            }
+        });
 
-        headerTitleLabel.setFont(new java.awt.Font("YaHei Consolas Hybrid", 0, 18));
+        headerTitleLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 18)); // NOI18N
         headerTitleLabel.setText("门（急）诊划价、收费专用单据");
 
+        idDateLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         idDateLabel.setText("收费日期：");
 
-        idDateField.setColumns(16);
+        idDateField.setColumns(10);
         idDateField.setEditable(false);
+        idDateField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         idDateField.setText("200911050607-001");
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
         headerPanelLayout.setHorizontalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPanelLayout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(headerTitleLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
-                        .addComponent(userNameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(idNumLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(idNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(headerSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(userNameLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(idNumLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(idNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(idDateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(idDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(171, 171, 171))
+            .addGroup(headerPanelLayout.createSequentialGroup()
+                .addGap(205, 205, 205)
+                .addComponent(headerTitleLabel)
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(headerTitleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(headerSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userNameLabel)
                     .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,87 +300,80 @@ public class PriceIIDialog extends javax.swing.JDialog {
         ));
         itemsPanel.setViewportView(itemsTable);
 
-        footToolBar.setRollover(true);
-
+        cancelTool.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         cancelTool.setText("取消收费");
         cancelTool.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        printTool.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         printTool.setText("收费打印");
         printTool.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        javax.swing.GroupLayout footToolBarPanelLayout = new javax.swing.GroupLayout(footToolBarPanel);
-        footToolBarPanel.setLayout(footToolBarPanelLayout);
-        footToolBarPanelLayout.setHorizontalGroup(
-            footToolBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, footToolBarPanelLayout.createSequentialGroup()
-                .addContainerGap(495, Short.MAX_VALUE)
-                .addComponent(cancelTool, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(printTool, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        footToolBarPanelLayout.setVerticalGroup(
-            footToolBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(footToolBarPanelLayout.createSequentialGroup()
-                .addGroup(footToolBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelTool, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(printTool, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        footToolBar.add(footToolBarPanel);
-
+        oughtaccLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         oughtaccLabel.setText("应收金额：");
 
+        discountaccLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         discountaccLabel.setText("优惠金额：");
 
+        realaccLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         realaccLabel.setText("实收金额：");
 
+        payLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         payLabel.setText("支付金额：");
 
-        oughtaccField.setColumns(8);
+        oughtaccField.setColumns(6);
         oughtaccField.setEditable(false);
+        oughtaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
-        discountaccField.setColumns(8);
+        discountaccField.setColumns(6);
+        discountaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
-        realaccField.setColumns(8);
+        realaccField.setColumns(6);
         realaccField.setEditable(false);
+        realaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
-        payField.setColumns(8);
+        payField.setColumns(6);
+        payField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
+        changeLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
         changeLabel.setText("找零：");
 
-        changeField.setColumns(8);
+        changeField.setColumns(6);
         changeField.setEditable(false);
+        changeField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
         javax.swing.GroupLayout toolPanelLayout = new javax.swing.GroupLayout(toolPanel);
         toolPanel.setLayout(toolPanelLayout);
         toolPanelLayout.setHorizontalGroup(
             toolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(toolPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(oughtaccLabel)
                 .addGroup(toolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(toolPanelLayout.createSequentialGroup()
-                        .addComponent(oughtaccLabel)
+                        .addGap(317, 317, 317)
+                        .addComponent(cancelTool, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(printTool, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(toolPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(oughtaccField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(26, 26, 26)
                         .addComponent(discountaccLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(4, 4, 4)
                         .addComponent(discountaccField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(28, 28, 28)
                         .addComponent(realaccLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(realaccField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(30, 30, 30)
                         .addComponent(payLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(payField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(changeLabel)
-                        .addGap(28, 28, 28)
-                        .addComponent(changeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(footToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(changeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         toolPanelLayout.setVerticalGroup(
             toolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,8 +389,10 @@ public class PriceIIDialog extends javax.swing.JDialog {
                     .addComponent(payField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(changeLabel)
                     .addComponent(changeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(footToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(toolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelTool, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(printTool, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -379,15 +400,14 @@ public class PriceIIDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(toolPanel, 0, 715, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(headerPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                    .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(itemsPanel)
-                        .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(toolPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(itemsPanel)
+                    .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,11 +417,12 @@ public class PriceIIDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(itemsPanel, 0, 0, Short.MAX_VALUE))
-                    .addComponent(listPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(itemsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(toolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(toolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -414,19 +435,26 @@ public class PriceIIDialog extends javax.swing.JDialog {
         //clean somethings
     }//GEN-LAST:event_dialogClose
 
+    private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userNameFieldActionPerformed
+
+    private void idNumFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idNumFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idNumFieldActionPerformed
+
     /**
      *
      */
     @PostConstruct
     public void initSettings() {
-        String fontName = propertiesLoader.getString("font.dialog");
+        String fontName = propertiesLoader != null ? propertiesLoader.getString("font.dialog") : "YouYuan";
         addButton.setFont(new java.awt.Font(fontName, 0, 12));
         cancelTool.setFont(new java.awt.Font(fontName, 0, 12));
         changeField.setFont(new java.awt.Font(fontName, 0, 12));
         changeLabel.setFont(new java.awt.Font(fontName, 0, 12));
         discountaccField.setFont(new java.awt.Font(fontName, 0, 12));
         discountaccLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        footToolBar.setFont(new java.awt.Font(fontName, 0, 12));
         headerPanel.setFont(new java.awt.Font(fontName, 0, 12));
         headerTitleLabel.setFont(new java.awt.Font(fontName, 0, 18));
         idNumField.setFont(new java.awt.Font(fontName, 0, 12));
@@ -458,9 +486,10 @@ public class PriceIIDialog extends javax.swing.JDialog {
         userNameLabel.setFont(new java.awt.Font(fontName, 0, 12));
 
         this.setModal(true);
+        this.pack();
         this.setResizable(false);
         setLocationRelativeTo(mainFrame != null ? mainFrame : new JFrame());
-        this.pack();
+        setLocation(WindowUtil.center(this));
     }
 
     /**
@@ -471,19 +500,57 @@ public class PriceIIDialog extends javax.swing.JDialog {
         itemNameField.addKeyListener(new KeyAdapter() {
 
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyTyped(KeyEvent e) {
                 String text = itemNameField.getText();
                 int length = text.length();
-                System.out.printf("[%s,%s]\n", text, length);
                 if (length >= 1) {
                     String actionChar = text.substring(length - 1, length);
+                    //remove the action char in [0-9]
                     if (HelperUtil.isMatch(actionChar, "[0-9]")) {
                         itemNameField.setText(text.substring(0, length - 1));
-                        System.out.printf("[Change! *%s*]", itemNameField.getText());
-                    } else {
-                        System.out.println("[No change!]");
+                        int index = Integer.valueOf(actionChar);
+                        if (index >= 0 && index < itemsList.getModel().getSize()) {
+                            ItemsListModel ilModel = (ItemsListModel) itemsList.getModel();
+                            Medicine item = (Medicine) ilModel.getItems().get(index);
+                            itemsList.setSelectedIndex(index);
+                            itemSizeField.grabFocus();
+                            itemPriceField.setText(String.valueOf(item.getPrice()));
+                        }
                     }
                 }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                keyTyped(e);
+            }
+        });
+        itemSizeField.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                int code = e.getKeyCode();
+                if (code == KeyEvent.VK_ENTER) {
+                    itemNameField.grabFocus();
+                    System.out.println("[##TODO ADD]");
+                } else {
+                    String str = itemSizeField.getText();
+                    if (str.length() >= 1) {
+                        if (!HelperUtil.isMatch(str, "[0-9]*")) {
+                            getToolkit().beep();
+                            e.consume();
+                            JOptionPane.showMessageDialog(null, propertiesLoader.getString("price.dialog.only.number"));
+                            str = str.substring(0, str.length() - 1);
+                            itemSizeField.setText(str);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.println("Release");
+                keyTyped(e);
             }
         });
         itemNameField.getDocument().addDocumentListener(new DocumentListener() {
@@ -508,23 +575,25 @@ public class PriceIIDialog extends javax.swing.JDialog {
                 Document source = documentEvent.getDocument();
                 int length = source.getLength();
                 System.out.printf("[type=%s]", type.toString());
-                if (type.equals(DocumentEvent.EventType.CHANGE)) {
-                    System.out.println("Change");
-                } else if (type.equals(DocumentEvent.EventType.INSERT)) {
-                    try {
-                        String text = source.getText(0, length);
-                        String actionChar = text.substring(length - 1, length);
-                        if (HelperUtil.isMatch(actionChar, "[0-9]")) {
-                            int index = Integer.valueOf(actionChar);
-                            System.out.printf("[val=%s]\n", itemsList.getModel().getElementAt(index));
-                        } else {
-                            System.out.printf("nosub#[val=%s]\n", text);
+                if (type.equals(DocumentEvent.EventType.INSERT)) {
+                    if (length >= 1) {
+                        try {
+                            String text = source.getText(0, length);
+                            String actionChar = text.substring(length - 1, length);
+                            if (!HelperUtil.isMatch(actionChar, "[0-9]")) {
+                                //更新收费项目选择
+                                List<Medicine> items = baseDao.find("medicine.find.like.byshortcut",
+                                        new String[]{"mshortcut"}, new Object[]{text + "%"});
+                                ItemsListModel itemsListModel = new ItemsListModel();
+                                itemsListModel.setItems(items);
+                                itemsList.setModel(itemsListModel);
+                            }
+                        } catch (BadLocationException ex) {
+                            ex.printStackTrace();
+                            System.out.println("Contents: Unknown");
                         }
-                    } catch (BadLocationException badLocationException) {
-                        badLocationException.printStackTrace();
-                        System.out.println("Contents: Unknown");
                     }
-                } else if (type.equals(DocumentEvent.EventType.REMOVE)) {
+                } else {
                     System.out.println("Remove");
                 }
             }
@@ -542,7 +611,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
         idDateField.setText(DateUtil.format(date, DateUtil.yyyy_MM_dd_HH_mm));
         idNumField.setText(String.format("%s-%s", DateUtil.format(date, DateUtil.yyyyMMddHHmm), HelperUtil.createRandomString(3)));
         itemSizeField.setText("1");
-        operatorField.setText(loginWindow.getOperator() != null ? loginWindow.getOperator().getLoginname() : "");
+        operatorField.setText(loginWindow != null && loginWindow.getOperator() != null ? loginWindow.getOperator().getLoginname() : "");
         oughtaccField.setText("0.00");
         payField.setText("0.00");
         realaccField.setText("0.00");
@@ -592,9 +661,8 @@ public class PriceIIDialog extends javax.swing.JDialog {
     private javax.swing.JLabel changeLabel;
     private javax.swing.JTextField discountaccField;
     private javax.swing.JLabel discountaccLabel;
-    private javax.swing.JToolBar footToolBar;
-    private javax.swing.JPanel footToolBarPanel;
     private javax.swing.JPanel headerPanel;
+    private javax.swing.JSeparator headerSeparator;
     private javax.swing.JLabel headerTitleLabel;
     private javax.swing.JTextField idDateField;
     private javax.swing.JLabel idDateLabel;

@@ -6,7 +6,7 @@
     <entry key="init.password">lym123456</entry>
     <entry key="init.desc">管理员</entry>
     <entry key="pd.medical.name"><![CDATA[长春市协和医院]]></entry>
-    <entry key="font.dialog">微软雅黑</entry>
+    <entry key="font.dialog">Ya Hei Consolas Hybrid</entry>
     <!--- LoginWindow -->
     <entry key="login.label.msg">
         <![CDATA[注意：请选择用户名并输入密码登陆！]]>
@@ -57,6 +57,8 @@
 
     <entry key="price.dialog.width">600</entry>
     <entry key="price.dialog.height">450</entry>
+    <entry key="price.dialog.item.index.error"><![CDATA[不存在选择的收费项目！]]></entry>
+    <entry key="price.dialog.only.number"><![CDATA[只能输入数字！]]></entry>
     <entry key="price.dialog.print.msg"><![CDATA[确认划价收费？]]>
     </entry>
     <entry key="price.dialo.print.err">

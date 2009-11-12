@@ -17,85 +17,88 @@ import javax.persistence.Table;
 @Table(name = "ht_medicine")
 public class Medicine {// 药品表
 
-	@Id()
-	@SequenceGenerator(name = "ht_medicine_seq", sequenceName = "ht_medicine_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ht_medicine_seq")
-	public Long mid;
-	@Column(unique = true)
-	public String mname;// 药品名称
-	public String mnumber;// 药品编号
-	public String mshortcut;// 药品简称
-	public Float price;// 药品价格
+    @Id()
+    @SequenceGenerator(name = "ht_medicine_seq", sequenceName = "ht_medicine_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ht_medicine_seq")
+    public Long mid;
+    @Column(unique = true)
+    public String mname;// 药品名称
+    public String mnumber;// 药品编号
+    public String mshortcut;// 药品简称
+    public Float price;// 药品价格
+    @ManyToOne
+    public Category category;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "medicine")
+    private Set<PurchaseRecord> purchaseRecords;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "medicine")
+    private Set<Repository> repositories;
 
-	@ManyToOne
-	public Category category;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "medicine")
-	private Set<PurchaseRecord> purchaseRecords;
+    public Long getMid() {
+        return mid;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "medicine")
-	private Set<Repository> repositories;
+    public void setMid(Long mid) {
+        this.mid = mid;
+    }
 
-	public Long getMid() {
-		return mid;
-	}
+    public String getMname() {
+        return mname;
+    }
 
-	public void setMid(Long mid) {
-		this.mid = mid;
-	}
+    public void setMname(String mname) {
+        this.mname = mname;
+    }
 
-	public String getMname() {
-		return mname;
-	}
+    public String getMnumber() {
+        return mnumber;
+    }
 
-	public void setMname(String mname) {
-		this.mname = mname;
-	}
+    public void setMnumber(String mnumber) {
+        this.mnumber = mnumber;
+    }
 
-	public String getMnumber() {
-		return mnumber;
-	}
+    public String getMshortcut() {
+        return mshortcut;
+    }
 
-	public void setMnumber(String mnumber) {
-		this.mnumber = mnumber;
-	}
+    public void setMshortcut(String mshortcut) {
+        this.mshortcut = mshortcut;
+    }
 
-	public String getMshortcut() {
-		return mshortcut;
-	}
+    public Category getCategory() {
+        return category;
+    }
 
-	public void setMshortcut(String mshortcut) {
-		this.mshortcut = mshortcut;
-	}
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
-	public Category getCategory() {
-		return category;
-	}
+    public Float getPrice() {
+        return price;
+    }
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+    public void setPrice(Float price) {
+        this.price = price;
+    }
 
-	public Float getPrice() {
-		return price;
-	}
+    public Set<PurchaseRecord> getPurchaseRecords() {
+        return purchaseRecords;
+    }
 
-	public void setPrice(Float price) {
-		this.price = price;
-	}
+    public void setPurchaseRecords(Set<PurchaseRecord> purchaseRecords) {
+        this.purchaseRecords = purchaseRecords;
+    }
 
-	public Set<PurchaseRecord> getPurchaseRecords() {
-		return purchaseRecords;
-	}
+    public Set<Repository> getRepositories() {
+        return repositories;
+    }
 
-	public void setPurchaseRecords(Set<PurchaseRecord> purchaseRecords) {
-		this.purchaseRecords = purchaseRecords;
-	}
+    public void setRepositories(Set<Repository> repositories) {
+        this.repositories = repositories;
+    }
 
-	public Set<Repository> getRepositories() {
-		return repositories;
-	}
-
-	public void setRepositories(Set<Repository> repositories) {
-		this.repositories = repositories;
-	}
+    @Override
+    public String toString() {
+        return this.getMname();
+    }
 }
