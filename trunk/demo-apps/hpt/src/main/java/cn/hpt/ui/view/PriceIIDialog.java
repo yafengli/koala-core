@@ -5,6 +5,7 @@ import cn.hpt.model.BillRecord;
 import cn.hpt.model.Medicine;
 import cn.hpt.ui.LoginWindow;
 import cn.hpt.ui.MainFrame;
+import cn.hpt.ui.component.PrintPanel;
 import cn.hpt.ui.model.ItemsListModel;
 import cn.hpt.ui.model.PriceIITabelModel;
 import cn.hpt.util.DateUtil;
@@ -57,6 +58,8 @@ public class PriceIIDialog extends javax.swing.JDialog {
     private PriceIITabelModel tabelModel;
     @Autowired
     private ItemsListModel itemsListModel;
+    @Autowired
+    private PrintPanel printPanel;
     //
     private Bill bill;
 
@@ -623,7 +626,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
                             if (job.printDialog())
                             job.print();
                              */
-                            //TODO
+                            //Test
                             testImagePrint();
                             //仅更新账单
                             bill.setUsername(userNameField.getText());
@@ -704,6 +707,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
             if (bill == null) {
                 bill = new Bill();
                 bill.setRcreatedate(new Timestamp(System.currentTimeMillis()));
+                bill.setOperator(mainFrame.getOperator());
                 bill.setIdnumber(idNumField.getText());
                 baseDao.save(bill);
             }

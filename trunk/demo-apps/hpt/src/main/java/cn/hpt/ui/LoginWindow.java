@@ -45,6 +45,7 @@ public class LoginWindow extends javax.swing.JFrame {
     private JLabel passwordLabel = new JLabel();
     private JButton loginButton = new JButton();
     private JLabel nameLabel = new JLabel();
+    private JComboBox nameComboBox;
     //#############33
     private Operator operator;
 
@@ -63,7 +64,6 @@ public class LoginWindow extends javax.swing.JFrame {
     public JPasswordField getPasswordTextField() {
         return passwordTextField;
     }
-    private JComboBox nameComboBox;
 
     /**
      * Auto-generated main method to display this JFrame
@@ -130,6 +130,7 @@ public class LoginWindow extends javax.swing.JFrame {
                             names.add(op.getLoginname());
                         }
                         nameComboBox = new JComboBox(names);
+                        nameComboBox.setSelectedIndex(Integer.valueOf(pl.getString("login.index")));
                         nameComboBox.setPreferredSize(new Dimension(80, 20));
 
                         namePanel.add(nameComboBox);
@@ -173,12 +174,12 @@ public class LoginWindow extends javax.swing.JFrame {
                     messageLabel.setText(pl.getString("login.label.msg"));
                 }
             }
-            passwordTextField.grabFocus();
             setIconImage(frameIco.getImage());
             focusTravel();
+            passwordTextField.grabFocus();
             setResizable(false);
             setExtendedState(JFrame.MAXIMIZED_BOTH);
-            pack();            
+            pack();
 //            setAlwaysOnTop(true);
         } catch (Exception e) {
             e.printStackTrace();

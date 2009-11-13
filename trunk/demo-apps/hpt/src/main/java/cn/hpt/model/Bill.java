@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -23,6 +24,8 @@ public class Bill {// 划价收费-账单-流水号表
     private Long rid;
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "bill")
     private Set<BillRecord> billrecords;
+    @ManyToOne(fetch = FetchType.EAGER)
+    public Operator operator;
     private Timestamp rcreatedate;
     private String idnumber;
     private String username;
@@ -58,6 +61,14 @@ public class Bill {// 划价收费-账单-流水号表
 
     public void setBillrecords(Set<BillRecord> billrecords) {
         this.billrecords = billrecords;
+    }
+
+    public Operator getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Operator operator) {
+        this.operator = operator;
     }
 
     public Timestamp getRcreatedate() {

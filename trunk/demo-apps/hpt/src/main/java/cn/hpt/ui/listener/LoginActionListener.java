@@ -40,8 +40,7 @@ public class LoginActionListener extends KeyAdapter implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         boolean flag = false;
         String name = (String) loginWindow.getNameComboBox().getSelectedItem();
-        String password = new String(loginWindow.getPasswordTextField()
-                .getPassword());
+        String password = new String(loginWindow.getPasswordTextField().getPassword());
 
         List<Operator> lo = baseDao.find("find.by.loginname",
                 new String[]{"loginname"}, new Object[]{name});
@@ -62,6 +61,8 @@ public class LoginActionListener extends KeyAdapter implements ActionListener {
             mainFrame.actionTabbedPane.removeAll();
             mainFrame.setVisible(true);
             loginWindow.setOperator(op);
+            //记住历史登录人
+            pl.setKey("login.index", String.valueOf(loginWindow.getNameComboBox().getSelectedIndex()));
         } else {
             JOptionPane.showMessageDialog(null, String.format(pl.getString("login.error"), op.getLoginname()), pl.getString("login.msg"), JOptionPane.CLOSED_OPTION);
         }
@@ -74,5 +75,4 @@ public class LoginActionListener extends KeyAdapter implements ActionListener {
             actionPerformed(null);
         }
     }
-
 }
