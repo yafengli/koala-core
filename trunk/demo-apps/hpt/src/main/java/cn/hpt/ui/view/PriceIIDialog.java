@@ -11,12 +11,21 @@ import cn.hpt.util.DateUtil;
 import cn.hpt.util.HelperUtil;
 import cn.hpt.util.PropertiesLoader;
 import cn.hpt.util.WindowUtil;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -28,8 +37,6 @@ import javax.swing.text.Document;
 import org.koala.dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.swing.DefaultListModel;
 
 /**
  *
@@ -114,11 +121,6 @@ public class PriceIIDialog extends javax.swing.JDialog {
         changeField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                dialogClose(evt);
-            }
-        });
 
         infoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -127,7 +129,8 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         operatorField.setColumns(10);
         operatorField.setEditable(false);
-        operatorField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        operatorField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        operatorField.setFocusable(false);
 
         itemNameLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
         itemNameLabel.setText("项目名称：");
@@ -141,6 +144,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
         itemPriceField.setColumns(10);
         itemPriceField.setEditable(false);
         itemPriceField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        itemPriceField.setFocusable(false);
 
         itemSizeField.setColumns(10);
         itemSizeField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
@@ -218,16 +222,17 @@ public class PriceIIDialog extends javax.swing.JDialog {
         userNameLabel.setText("患者姓名：");
 
         userNameField.setColumns(6);
-        userNameField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
+        userNameField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
 
-        idNumLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
+        idNumLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
         idNumLabel.setText("收费单号：");
 
         idNumField.setColumns(10);
         idNumField.setEditable(false);
         idNumField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        idNumField.setFocusable(false);
 
-        headerTitleLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 18)); // NOI18N
+        headerTitleLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 18));
         headerTitleLabel.setText("门（急）诊划价、收费专用单据");
 
         idDateLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
@@ -235,8 +240,9 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         idDateField.setColumns(10);
         idDateField.setEditable(false);
-        idDateField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
+        idDateField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
         idDateField.setText("200911050607-001");
+        idDateField.setFocusable(false);
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -327,14 +333,16 @@ public class PriceIIDialog extends javax.swing.JDialog {
         oughtaccField.setColumns(6);
         oughtaccField.setEditable(false);
         oughtaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        oughtaccField.setFocusable(false);
 
         discountaccField.setColumns(6);
         discountaccField.setEditable(false);
-        discountaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        discountaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
 
         realaccField.setColumns(6);
         realaccField.setEditable(false);
-        realaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        realaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        realaccField.setFocusable(false);
 
         payField.setColumns(6);
         payField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
@@ -345,6 +353,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
         changeField.setColumns(6);
         changeField.setEditable(false);
         changeField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        changeField.setFocusable(false);
 
         javax.swing.GroupLayout toolPanelLayout = new javax.swing.GroupLayout(toolPanel);
         toolPanel.setLayout(toolPanelLayout);
@@ -433,13 +442,6 @@ public class PriceIIDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dialogClose(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogClose
-        JDialog dia = (JDialog) evt.getComponent();
-        dia.setVisible(false);
-        //TODO
-        //clean somethings
-    }//GEN-LAST:event_dialogClose
-
     /**
      *
      */
@@ -457,6 +459,14 @@ public class PriceIIDialog extends javax.swing.JDialog {
      */
     @PostConstruct
     public void initEvent() {
+        final JDialog dialog = this;
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                closeAndClear();
+            }
+        });
         itemNameField.addKeyListener(new KeyAdapter() {
 
             @Override
@@ -482,39 +492,6 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                keyTyped(e);
-            }
-        });
-        itemSizeField.addKeyListener(new KeyAdapter() {
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-                int code = e.getKeyCode();
-                if (code == KeyEvent.VK_ENTER) {
-                    itemNameField.grabFocus();
-                    int index = itemsList.getSelectedIndex();
-                    if (index >= 0) {
-                        List<Medicine> items = ((ItemsListModel) itemsList.getModel()).getItems();
-                        createNewBill(items.get(index));
-                    } else {
-                    }
-                } else {
-                    String str = itemSizeField.getText();
-                    if (str.length() >= 1) {
-                        if (!HelperUtil.isMatch(str, "[0-9]*")) {
-                            getToolkit().beep();
-                            e.consume();
-                            JOptionPane.showMessageDialog(null, propertiesLoader.getString("price.dialog.only.number"));
-                            str = str.substring(0, str.length() - 1);
-                            itemSizeField.setText(str);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                System.out.println("Release");
                 keyTyped(e);
             }
         });
@@ -562,6 +539,125 @@ public class PriceIIDialog extends javax.swing.JDialog {
                 }
             }
         });
+        itemSizeField.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                int code = e.getKeyCode();
+                if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_TAB) {
+                    createNewBill();
+                } else {
+                    String str = itemSizeField.getText();
+                    if (str.length() >= 1) {
+                        if (!HelperUtil.isMatch(str, "[0-9]*")) {
+                            getToolkit().beep();
+                            e.consume();
+                            JOptionPane.showMessageDialog(null, propertiesLoader.getString("price.dialog.only.number"));
+                            str = str.substring(0, str.length() - 1);
+                            itemSizeField.setText(str);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.println("Release");
+                keyTyped(e);
+            }
+        });
+        payField.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                int code = e.getKeyCode();
+                if (code == KeyEvent.VK_ENTER) {
+                    priceChange();
+                }
+            }
+        });
+        addButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createNewBill();
+            }
+        });
+        removeButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeBillRecord();
+            }
+        });
+        userNameField.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                int code = e.getKeyCode();
+                if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_TAB) {
+                    itemNameField.grabFocus();
+                }
+            }
+        });
+        cancelTool.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeAndClear();
+            }
+        });
+        printTool.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(null, propertiesLoader.getString("price.dialog.print.msg"),
+                        printTool.getText(),
+                        JOptionPane.YES_NO_OPTION);
+                switch (option) {
+                    case JOptionPane.YES_OPTION: {
+                        try {
+                            /*
+                            PrinterJob job = PrinterJob.getPrinterJob();
+                            PageFormat format = job.pageDialog(job.defaultPage());
+                            job.setPrintable(printPanel, format);
+                            if (job.printDialog())
+                            job.print();
+                             */
+                            //TODO
+                            testImagePrint();
+                            //仅更新账单
+                            bill.setUsername(userNameField.getText());
+                            bill.setPricenum(Float.parseFloat(realaccField.getText()));
+                            baseDao.update(bill);
+                            setVisible(false);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(
+                                    dialog,
+                                    propertiesLoader.getString("price.dialo.print.err"),
+                                    dialog.getTitle(),
+                                    JOptionPane.CLOSED_OPTION);
+                        }
+                    }
+                    break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+
+    /**
+     *
+     */
+    private void closeAndClear() {
+        for (BillRecord item : tabelModel.getItems()) {
+            baseDao.remove(item);
+        }
+        if (bill != null) {
+            baseDao.remove(bill);
+        }
+        setVisible(false);
     }
 
     /**
@@ -571,38 +667,75 @@ public class PriceIIDialog extends javax.swing.JDialog {
     public void initData() {
         String initvalu = "0.00";
         Date date = new Date();
-        changeField.setText(initvalu);
-        discountaccField.setText(initvalu);
+        userNameField.setText(null);
+
         idDateField.setText(DateUtil.format(date, DateUtil.yyyy_MM_dd_HH_mm));
         idNumField.setText(String.format("%s-%s", DateUtil.format(date, DateUtil.yyyyMMddHHmm), HelperUtil.createRandomString(3)));
-        itemSizeField.setText("1");
-        operatorField.setText(loginWindow != null && loginWindow.getOperator() != null ? loginWindow.getOperator().getLoginname() : "");
-        oughtaccField.setText(initvalu);
-        payField.setText(initvalu);
-        realaccField.setText(initvalu);
 
-        //TODO
+        operatorField.setText(loginWindow != null && loginWindow.getOperator() != null ? loginWindow.getOperator().getLoginname() : "");
+
+        oughtaccField.setText(initvalu);
+        discountaccField.setText(initvalu);
+        realaccField.setText(initvalu);
+        payField.setText(initvalu);
+        changeField.setText(initvalu);
+
+        itemSizeField.setText("1");
+        itemNameField.setText(null);
+        itemPriceField.setText(initvalu);
+        //clear the items
+        tabelModel.getItems().clear();
+        itemsListModel.removeAll();
+        bill = null;
         itemsTable.setModel(tabelModel);
         itemsList.setModel(itemsListModel);
+
     }
 
     /**
      * 增加收费项目
      */
-    private void createNewBill(Medicine medicine) {
-        /* create new bill */
-        if (bill == null) {
-            bill = new Bill();
-            bill.setRcreatedate(new Timestamp(System.currentTimeMillis()));
-            bill.setIdnumber(idNumField.getText());
-            baseDao.save(bill);
+    private void createNewBill() {
+
+        int index = itemsList.getSelectedIndex();
+        if (index >= 0) {
+            List<Medicine> items = ((ItemsListModel) itemsList.getModel()).getItems();
+            /* create new bill */
+            if (bill == null) {
+                bill = new Bill();
+                bill.setRcreatedate(new Timestamp(System.currentTimeMillis()));
+                bill.setIdnumber(idNumField.getText());
+                baseDao.save(bill);
+            }
+            BillRecord br = new BillRecord();
+            br.setBill(bill);
+            br.setMedicine(items.get(index));
+            br.setBnumber(Long.valueOf(itemSizeField.getText()));
+            baseDao.save(br);
+
+            tabelModel.getItems().add(br);
+            itemsTable.revalidate();
+            itemNameField.grabFocus();
+            itemSizeField.setText("1");
+            //价格变更
+            priceChange();
         }
-        BillRecord br = new BillRecord();
-        br.setBill(bill);
-        br.setMedicine(medicine);
-        br.setBnumber(Long.valueOf(itemSizeField.getText()));
-        tabelModel.getItems().add(br);
-        itemsTable.revalidate();
+    }
+
+    /**
+     *
+     */
+    private void removeBillRecord() {
+        int index = itemsTable.getSelectedColumn();
+        if (index > 0 && index < tabelModel.getItems().size()) {
+            //删除收费项目
+            BillRecord item = tabelModel.getItems().get(index);
+            baseDao.remove(item);
+            tabelModel.getItems().remove(item);
+            itemsTable.revalidate();
+            //价格变更
+            priceChange();
+        }
     }
 
     /**
@@ -618,6 +751,40 @@ public class PriceIIDialog extends javax.swing.JDialog {
         oughtaccField.setText(HelperUtil.format(oughtaccn, "0.##"));
         realaccField.setText(HelperUtil.format(realaccn, "0.##"));
         changeField.setText(HelperUtil.format(changen, "0.##"));
+    }
+
+    /* test print image */
+    private void testImagePrint() {
+        BufferedImage image = new BufferedImage(400, 300, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = (Graphics2D) image.getGraphics();
+        g2.setFont(new Font("宋体", 0, 12));
+        //打印患者姓名
+        g2.drawString(userNameField.getText(), Float.parseFloat(propertiesLoader.getString("print.user.x")), Float.parseFloat(propertiesLoader.getString("print.user.y")));
+        //打印日期
+        g2.drawString(idDateField.getText(), Float.parseFloat(propertiesLoader.getString("print.date.x")), Float.parseFloat(propertiesLoader.getString("print.date.y")));
+        //打印收款员
+        g2.drawString(operatorField.getText(), Float.parseFloat(propertiesLoader.getString("print.operator.x")), Float.parseFloat(propertiesLoader.getString("print.operator.y")));
+        //打印费用
+        g2.drawString(realaccField.getText(), Float.parseFloat(propertiesLoader.getString("print.price.x")), Float.parseFloat(propertiesLoader.getString("print.price.y")));
+        //打印药物清单
+        float itemx = Float.parseFloat(propertiesLoader.getString("print.medicine.x"));
+        float itemy = Float.parseFloat(propertiesLoader.getString("print.medicine.y"));
+        java.util.List<BillRecord> lbr = tabelModel.getItems();
+        for (BillRecord item : lbr) {
+            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine() != null ? item.getMedicine().getMname() : "",
+                    item.getMedicine() != null ? item.getMedicine().getPrice() : "", item.getBnumber()), itemx, itemy);
+            itemy += g2.getFont().getSize() + 1;
+        }
+        try {
+            File f = new File("D:/hello.gif");
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+
+            ImageIO.write(image, "gif", f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -1,11 +1,11 @@
 package cn.hpt.ui;
 
-
 import cn.hpt.model.Operator;
 import cn.hpt.ui.extend.HptInitData;
 import cn.hpt.ui.listener.CloseAppActionListener;
 import cn.hpt.ui.listener.LoginActionListener;
 import cn.hpt.util.PropertiesLoader;
+import java.awt.event.KeyEvent;
 import org.koala.dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,12 +13,14 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 @Component(LoginWindow.BEAN_NAME)
 public class LoginWindow extends javax.swing.JFrame {
+
     public static final String BEAN_NAME = "loginWindow";
     @Autowired
     private IDao baseDao;
@@ -30,7 +32,6 @@ public class LoginWindow extends javax.swing.JFrame {
     private PropertiesLoader pl;
     @Autowired
     private HptInitData hptInitData;
-
     private JPanel loginPanel = new JPanel();
     private JPanel imagePanel = new JPanel();
     private ImageIcon imageIcon;
@@ -44,7 +45,6 @@ public class LoginWindow extends javax.swing.JFrame {
     private JLabel passwordLabel = new JLabel();
     private JButton loginButton = new JButton();
     private JLabel nameLabel = new JLabel();
-
     //#############33
     private Operator operator;
 
@@ -55,6 +55,7 @@ public class LoginWindow extends javax.swing.JFrame {
     public void setOperator(Operator operator) {
         this.operator = operator;
     }
+
     public JComboBox getNameComboBox() {
         return nameComboBox;
     }
@@ -62,7 +63,6 @@ public class LoginWindow extends javax.swing.JFrame {
     public JPasswordField getPasswordTextField() {
         return passwordTextField;
     }
-
     private JComboBox nameComboBox;
 
     /**
@@ -70,6 +70,7 @@ public class LoginWindow extends javax.swing.JFrame {
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
+
             public void run() {
                 LoginWindow inst = new LoginWindow(true);
                 inst.setLocationRelativeTo(null);
@@ -95,10 +96,8 @@ public class LoginWindow extends javax.swing.JFrame {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             getContentPane().setLayout(thisLayout);
             {
-                imageIcon = new ImageIcon(LoginWindow.class.getResource(pl
-                        .getString("login.left.ico")));
-                frameIco = new ImageIcon(LoginWindow.class.getResource(pl
-                        .getString("login.frame.ico")));
+                imageIcon = new ImageIcon(LoginWindow.class.getResource(pl.getString("login.left.ico")));
+                frameIco = new ImageIcon(LoginWindow.class.getResource(pl.getString("login.frame.ico")));
                 BorderLayout imagePanelLayout = new BorderLayout();
                 imagePanel.setLayout(imagePanelLayout);
                 imagePanel.add(new JLabel(imageIcon), BorderLayout.CENTER);
@@ -153,8 +152,8 @@ public class LoginWindow extends javax.swing.JFrame {
                         passwordLabel.setText(pl.getString("password") + pl.getString("colon"));
                     }
                     {
-                        passwordTextField
-                                .setPreferredSize(new Dimension(80, 20));
+                        passwordTextField.setPreferredSize(new Dimension(80, 20));
+                        passwordTextField.addKeyListener(loginActionListener);
                         passwordPanel.add(passwordTextField);
                     }
                     {
@@ -174,11 +173,12 @@ public class LoginWindow extends javax.swing.JFrame {
                     messageLabel.setText(pl.getString("login.label.msg"));
                 }
             }
+            passwordTextField.grabFocus();
             setIconImage(frameIco.getImage());
             focusTravel();
             setResizable(false);
             setExtendedState(JFrame.MAXIMIZED_BOTH);
-            pack();
+            pack();            
 //            setAlwaysOnTop(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -193,6 +193,7 @@ public class LoginWindow extends javax.swing.JFrame {
         list.add(closeButton);
         final List<java.awt.Component> comList = list;
         FocusTraversalPolicy policy = new FocusTraversalPolicy() {
+
             public java.awt.Component getFirstComponent(Container focusCycleRoot) {
                 return (java.awt.Component) comList.get(0);
             }
@@ -212,8 +213,7 @@ public class LoginWindow extends javax.swing.JFrame {
             public java.awt.Component getComponentBefore(
                     Container focusCycleRoot, java.awt.Component aComponent) {
                 int index = comList.indexOf(aComponent);
-                return (java.awt.Component) comList.get((index - 1 + comList
-                        .size())
+                return (java.awt.Component) comList.get((index - 1 + comList.size())
                         % comList.size());
             }
 

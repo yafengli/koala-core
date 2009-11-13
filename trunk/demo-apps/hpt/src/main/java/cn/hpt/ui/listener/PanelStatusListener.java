@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.view.PriceDialog;
+import cn.hpt.ui.view.PriceIIDialog;
 
 @Component
 public class PanelStatusListener implements ActionListener {
@@ -16,6 +17,8 @@ public class PanelStatusListener implements ActionListener {
     private MainFrame mainFrame;
     @Autowired
     private PriceDialog priceDialog;
+    @Autowired
+    private PriceIIDialog priceIIDialog;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -43,7 +46,8 @@ public class PanelStatusListener implements ActionListener {
         } else if (actionCommand != null
                 && actionCommand.equalsIgnoreCase(mainFrame.priceMenuItem.getActionCommand())) {
             // 划价收费
-            priceDialog.reload();
+            priceIIDialog.initData();
+            priceIIDialog.setVisible(true);
         } else {
             //TODO
         }
