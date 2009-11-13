@@ -21,13 +21,20 @@ public class Bill {// 划价收费-账单-流水号表
     @SequenceGenerator(name = "ht_rid_seq", sequenceName = "ht_bill_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ht_rid_seq")
     private Long rid;
-
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "bill")
     private Set<BillRecord> billrecords;
-
     private Timestamp rcreatedate;
+    private String idnumber;
     private String username;
-    private Float result;
+    private Float pricenum;
+
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
+    }
 
     public String getUsername() {
         return username;
@@ -61,11 +68,11 @@ public class Bill {// 划价收费-账单-流水号表
         this.rcreatedate = rcreatedate;
     }
 
-    public Float getResult() {
-        return result;
+    public Float getPricenum() {
+        return pricenum;
     }
 
-    public void setResult(Float result) {
-        this.result = result;
+    public void setPricenum(Float pricenum) {
+        this.pricenum = pricenum;
     }
 }

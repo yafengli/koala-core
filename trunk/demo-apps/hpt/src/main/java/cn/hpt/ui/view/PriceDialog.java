@@ -311,7 +311,7 @@ public class PriceDialog extends javax.swing.JDialog {
                                         testImagePrint();
 
                                         bill.setUsername(userField.getText());
-                                        bill.setResult(Float.parseFloat(priceField.getText()));
+                                        bill.setPricenum(Float.parseFloat(priceField.getText()));
                                         baseDao.update(bill);
                                         for (BillRecord br : panel.tabelModel.getItem()) {
                                             baseDao.save(br);

@@ -1,15 +1,19 @@
 package cn.hpt.ui.view;
 
+import cn.hpt.model.Bill;
+import cn.hpt.model.BillRecord;
 import cn.hpt.model.Medicine;
 import cn.hpt.ui.LoginWindow;
 import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.model.ItemsListModel;
+import cn.hpt.ui.model.PriceIITabelModel;
 import cn.hpt.util.DateUtil;
 import cn.hpt.util.HelperUtil;
 import cn.hpt.util.PropertiesLoader;
 import cn.hpt.util.WindowUtil;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -24,6 +28,8 @@ import javax.swing.text.Document;
 import org.koala.dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -40,6 +46,12 @@ public class PriceIIDialog extends javax.swing.JDialog {
     private IDao baseDao;
     @Autowired
     private PropertiesLoader propertiesLoader;
+    @Autowired
+    private PriceIITabelModel tabelModel;
+    @Autowired
+    private ItemsListModel itemsListModel;
+    //
+    private Bill bill;
 
     public PriceIIDialog() {
         super();
@@ -108,7 +120,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
             }
         });
 
-        infoPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        infoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         operatorLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
         operatorLabel.setText("收费员：");
@@ -200,32 +212,22 @@ public class PriceIIDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        headerPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        headerPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         userNameLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
         userNameLabel.setText("患者姓名：");
 
         userNameField.setColumns(6);
-        userNameField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
-        userNameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameFieldActionPerformed(evt);
-            }
-        });
+        userNameField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
 
-        idNumLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        idNumLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         idNumLabel.setText("收费单号：");
 
         idNumField.setColumns(10);
         idNumField.setEditable(false);
-        idNumField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
-        idNumField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idNumFieldActionPerformed(evt);
-            }
-        });
+        idNumField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
-        headerTitleLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 18));
+        headerTitleLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 18)); // NOI18N
         headerTitleLabel.setText("门（急）诊划价、收费专用单据");
 
         idDateLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
@@ -233,32 +235,32 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         idDateField.setColumns(10);
         idDateField.setEditable(false);
-        idDateField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        idDateField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
         idDateField.setText("200911050607-001");
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
         headerPanelLayout.setHorizontalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(headerSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+            .addComponent(headerSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(119, Short.MAX_VALUE)
                 .addComponent(userNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(idNumLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(idNumField, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(idDateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(idDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(171, 171, 171))
-            .addGroup(headerPanelLayout.createSequentialGroup()
-                .addGap(205, 205, 205)
+                .addGap(30, 30, 30))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
+                .addContainerGap(254, Short.MAX_VALUE)
                 .addComponent(headerTitleLabel)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addGap(226, 226, 226))
         );
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,15 +271,16 @@ public class PriceIIDialog extends javax.swing.JDialog {
                 .addComponent(headerSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userNameLabel)
-                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idDateLabel)
+                    .addComponent(idDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idNumLabel)
                     .addComponent(idNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idDateLabel)
-                    .addComponent(idDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userNameLabel)
+                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
+        itemsList.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         itemsList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -285,7 +288,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
         });
         listPanel.setViewportView(itemsList);
 
-        itemsTable.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        itemsTable.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         itemsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -299,7 +302,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
         ));
         itemsPanel.setViewportView(itemsTable);
 
-        toolPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        toolPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         cancelTool.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
         cancelTool.setText("取消收费");
@@ -403,13 +406,13 @@ public class PriceIIDialog extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(toolPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(itemsPanel)
-                    .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(itemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
+                    .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(toolPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,11 +423,10 @@ public class PriceIIDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(itemsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                        .addComponent(itemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                    .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(toolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(toolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -437,56 +439,11 @@ public class PriceIIDialog extends javax.swing.JDialog {
         //clean somethings
     }//GEN-LAST:event_dialogClose
 
-    private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userNameFieldActionPerformed
-
-    private void idNumFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idNumFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idNumFieldActionPerformed
-
     /**
      *
      */
     @PostConstruct
     public void initSettings() {
-        String fontName = propertiesLoader != null ? propertiesLoader.getString("font.dialog") : "YouYuan";
-        addButton.setFont(new java.awt.Font(fontName, 0, 12));
-        cancelTool.setFont(new java.awt.Font(fontName, 0, 12));
-        changeField.setFont(new java.awt.Font(fontName, 0, 12));
-        changeLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        discountaccField.setFont(new java.awt.Font(fontName, 0, 12));
-        discountaccLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        headerPanel.setFont(new java.awt.Font(fontName, 0, 12));
-        headerTitleLabel.setFont(new java.awt.Font(fontName, 0, 18));
-        idNumField.setFont(new java.awt.Font(fontName, 0, 12));
-        idNumLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        idDateLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        idDateField.setFont(new java.awt.Font(fontName, 0, 12));
-        infoPanel.setFont(new java.awt.Font(fontName, 0, 12));
-        itemNameField.setFont(new java.awt.Font(fontName, 0, 12));
-        itemNameLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        itemPriceField.setFont(new java.awt.Font(fontName, 0, 12));
-        itemPriceLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        itemSizeField.setFont(new java.awt.Font(fontName, 0, 12));
-        itemSizeLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        itemsList.setFont(new java.awt.Font(fontName, 0, 12));
-        itemsPanel.setFont(new java.awt.Font(fontName, 0, 12));
-        itemsTable.setFont(new java.awt.Font(fontName, 0, 12));
-        listPanel.setFont(new java.awt.Font(fontName, 0, 12));
-        operatorField.setFont(new java.awt.Font(fontName, 0, 12));
-        operatorLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        oughtaccField.setFont(new java.awt.Font(fontName, 0, 12));
-        oughtaccLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        payField.setFont(new java.awt.Font(fontName, 0, 12));
-        payLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        printTool.setFont(new java.awt.Font(fontName, 0, 12));
-        realaccField.setFont(new java.awt.Font(fontName, 0, 12));
-        realaccLabel.setFont(new java.awt.Font(fontName, 0, 12));
-        removeButton.setFont(new java.awt.Font(fontName, 0, 12));
-        userNameField.setFont(new java.awt.Font(fontName, 0, 12));
-        userNameLabel.setFont(new java.awt.Font(fontName, 0, 12));
-
         this.setModal(true);
         this.pack();
         this.setResizable(false);
@@ -534,7 +491,12 @@ public class PriceIIDialog extends javax.swing.JDialog {
                 int code = e.getKeyCode();
                 if (code == KeyEvent.VK_ENTER) {
                     itemNameField.grabFocus();
-                    System.out.println("[##TODO ADD]");
+                    int index = itemsList.getSelectedIndex();
+                    if (index >= 0) {
+                        List<Medicine> items = ((ItemsListModel) itemsList.getModel()).getItems();
+                        createNewBill(items.get(index));
+                    } else {
+                    }
                 } else {
                     String str = itemSizeField.getText();
                     if (str.length() >= 1) {
@@ -586,9 +548,8 @@ public class PriceIIDialog extends javax.swing.JDialog {
                                 //更新收费项目选择
                                 List<Medicine> items = baseDao.find("medicine.find.like.byshortcut",
                                         new String[]{"mshortcut"}, new Object[]{text + "%"});
-                                ItemsListModel itemsListModel = new ItemsListModel();
-                                itemsListModel.setItems(items);
-                                itemsList.setModel(itemsListModel);
+                                itemsListModel.removeAll();
+                                itemsListModel.addAll(items.toArray());
                             }
                         } catch (BadLocationException ex) {
                             ex.printStackTrace();
@@ -608,7 +569,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
     @PostConstruct
     public void initData() {
         Date date = new Date();
-        changeField.setText(null);
+        changeField.setText("0.00");
         discountaccField.setText("0.00");
         idDateField.setText(DateUtil.format(date, DateUtil.yyyy_MM_dd_HH_mm));
         idNumField.setText(String.format("%s-%s", DateUtil.format(date, DateUtil.yyyyMMddHHmm), HelperUtil.createRandomString(3)));
@@ -619,22 +580,27 @@ public class PriceIIDialog extends javax.swing.JDialog {
         realaccField.setText("0.00");
 
         //TODO
-//        itemsTable.setColumnModel(null);
-//        itemsTable.setCellEditor(null);
-        itemsList.setModel(new javax.swing.AbstractListModel() {
+        itemsTable.setModel(tabelModel);
+        itemsList.setModel(itemsListModel);
+    }
 
-            String[] strings = {"一", "二", "三", "四", "五"};
-
-            @Override
-            public Object getElementAt(int index) {
-                return strings[index];
-            }
-
-            @Override
-            public int getSize() {
-                return strings.length;
-            }
-        });
+    /**
+     * 增加收费项目
+     */
+    private void createNewBill(Medicine medicine) {
+        /* create new bill */
+        if (bill == null) {
+            bill = new Bill();
+            bill.setRcreatedate(new Timestamp(System.currentTimeMillis()));
+            bill.setIdnumber(idNumField.getText());
+            baseDao.save(bill);
+        }
+        BillRecord br = new BillRecord();
+        br.setBill(bill);
+        br.setMedicine(medicine);
+        br.setBnumber(Long.valueOf(itemSizeField.getText()));
+        tabelModel.getItems().add(br);
+        itemsTable.revalidate();
     }
 
     /**

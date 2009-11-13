@@ -70,7 +70,7 @@ public class BillTabelModel extends AbstractTableModel {
                     o = item.getUsername();
                     break;
                 case 2:
-                    o = item.getResult();
+                    o = item.getPricenum();
                     break;
                 case 3:
                     if (item.getRcreatedate() != null) {

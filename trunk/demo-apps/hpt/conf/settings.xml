@@ -6,7 +6,7 @@
     <entry key="init.password">lym123456</entry>
     <entry key="init.desc">管理员</entry>
     <entry key="pd.medical.name"><![CDATA[长春市协和医院]]></entry>
-    <entry key="font.dialog">Ya Hei Consolas Hybrid</entry>
+    <entry key="font.dialog">微软雅黑</entry>
     <!--- LoginWindow -->
     <entry key="login.label.msg">
         <![CDATA[注意：请选择用户名并输入密码登陆！]]>
