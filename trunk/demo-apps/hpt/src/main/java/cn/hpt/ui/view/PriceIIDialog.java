@@ -329,7 +329,8 @@ public class PriceIIDialog extends javax.swing.JDialog {
         oughtaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
 
         discountaccField.setColumns(6);
-        discountaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        discountaccField.setEditable(false);
+        discountaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
 
         realaccField.setColumns(6);
         realaccField.setEditable(false);
@@ -568,16 +569,17 @@ public class PriceIIDialog extends javax.swing.JDialog {
      */
     @PostConstruct
     public void initData() {
+        String initvalu = "0.00";
         Date date = new Date();
-        changeField.setText("0.00");
-        discountaccField.setText("0.00");
+        changeField.setText(initvalu);
+        discountaccField.setText(initvalu);
         idDateField.setText(DateUtil.format(date, DateUtil.yyyy_MM_dd_HH_mm));
         idNumField.setText(String.format("%s-%s", DateUtil.format(date, DateUtil.yyyyMMddHHmm), HelperUtil.createRandomString(3)));
         itemSizeField.setText("1");
         operatorField.setText(loginWindow != null && loginWindow.getOperator() != null ? loginWindow.getOperator().getLoginname() : "");
-        oughtaccField.setText("0.00");
-        payField.setText("0.00");
-        realaccField.setText("0.00");
+        oughtaccField.setText(initvalu);
+        payField.setText(initvalu);
+        realaccField.setText(initvalu);
 
         //TODO
         itemsTable.setModel(tabelModel);
@@ -601,6 +603,21 @@ public class PriceIIDialog extends javax.swing.JDialog {
         br.setBnumber(Long.valueOf(itemSizeField.getText()));
         tabelModel.getItems().add(br);
         itemsTable.revalidate();
+    }
+
+    /**
+     *
+     */
+    private void priceChange() {
+        float oughtaccn = 0;
+        for (BillRecord item : tabelModel.getItems()) {
+            oughtaccn += item.getBnumber() * item.getMedicine().getPrice();
+        }
+        float realaccn = oughtaccn - Float.valueOf(discountaccField.getText());
+        float changen = Float.valueOf(payField.getText()) - realaccn;
+        oughtaccField.setText(HelperUtil.format(oughtaccn, "0.##"));
+        realaccField.setText(HelperUtil.format(realaccn, "0.##"));
+        changeField.setText(HelperUtil.format(changen, "0.##"));
     }
 
     /**

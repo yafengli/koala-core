@@ -1,5 +1,7 @@
 package cn.hpt.util;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -22,5 +24,10 @@ public class HelperUtil {
     public static synchronized boolean isMatch(String str, String regEx) {
         Pattern ep = Pattern.compile(regEx);
         return ep.matcher(str).matches();
+    }
+
+    public static synchronized String format(Object result, String regEx) {
+        NumberFormat format = new DecimalFormat(regEx);
+        return format.format(result);
     }
 }
