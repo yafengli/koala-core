@@ -23,8 +23,11 @@ import cn.hpt.model.BillRecord;
 import cn.hpt.ui.model.BillRecordTabelModel;
 import cn.hpt.ui.model.SelectColorTableCellRenderer;
 import cn.hpt.util.WindowUtil;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 
 @Component
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class BillRecordDialog extends JDialog {
 
     private static final long serialVersionUID = -1547042069151210354L;

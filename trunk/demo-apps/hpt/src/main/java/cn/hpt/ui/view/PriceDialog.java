@@ -311,7 +311,7 @@ public class PriceDialog extends javax.swing.JDialog {
                                         testImagePrint();
 
                                         bill.setUsername(userField.getText());
-                                        bill.setPricenum(Float.parseFloat(priceField.getText()));
+                                        bill.setPricenum(Double.parseDouble(priceField.getText()));
                                         baseDao.update(bill);
                                         for (BillRecord br : panel.tabelModel.getItem()) {
                                             baseDao.save(br);
@@ -397,8 +397,8 @@ public class PriceDialog extends javax.swing.JDialog {
         //打印费用
         g2.drawString(priceField.getText(), Float.parseFloat(pl.getString("print.price.x")), Float.parseFloat(pl.getString("print.price.y")));
         //打印药物清单
-        float itemx = Float.parseFloat(pl.getString("print.medicine.x"));
-        float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
+        Float itemx = Float.parseFloat(pl.getString("print.medicine.x"));
+        Float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
         java.util.List<BillRecord> lbr = panel.tabelModel.getItem();
         for (BillRecord item : lbr) {
             g2.drawString(String.format("[%s  %s  %s]", item.getMedicine() != null ? item.getMedicine().getMname() : "",

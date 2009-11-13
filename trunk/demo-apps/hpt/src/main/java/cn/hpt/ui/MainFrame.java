@@ -16,6 +16,7 @@ import cn.hpt.ui.component.CategoryPanel;
 import cn.hpt.ui.component.MedicinePanel;
 import cn.hpt.ui.component.OperatorPanel;
 import cn.hpt.ui.component.BillPanel;
+import cn.hpt.ui.component.StatPanel;
 import cn.hpt.ui.listener.AuthorityWindowAdapter;
 import cn.hpt.ui.listener.ChangeLoginActionListener;
 import cn.hpt.ui.listener.CloseAppActionListener;
@@ -49,11 +50,13 @@ public class MainFrame extends javax.swing.JFrame {
     public JMenuItem purchCtMenuItem;
     public JMenu stockMenu;
     public JMenu systemMenu;
+    public JMenu statMenu;
     public JMenuItem cancelMenuItem;
     public JMenuItem warehouseMenuItem;
     public JMenuItem medicineMenuItem;
     public JMenuItem medicineCtMenuItem;
     public JMenuItem priceMenuItem;
+    public JMenuItem statMenuItem;
     public JMenu helpMenu;
     public JMenu quitMenu;
     public JMenu personMenu;
@@ -96,6 +99,8 @@ public class MainFrame extends javax.swing.JFrame {
     public MedicinePanel medicinePanel;
     @Autowired
     public BillPanel billPanel;
+    @Autowired
+    public StatPanel statPanel;
     /**
      * **** 华丽的分割线 *****
      */
@@ -172,6 +177,19 @@ public class MainFrame extends javax.swing.JFrame {
                         outpatientSearchMenuItem.addActionListener(panelStatusListener);
                         outpatientMenu.add(outpatientSearchMenuItem);
                         outpatientSearchMenuItem.setText(pl.getString("m.outpatient.search"));
+                    }
+                }
+                {
+                    statMenu = new JMenu();
+                    mainMenuBar.add(statMenu);
+                    statMenu.setMnemonic(KeyEvent.VK_A);
+                    statMenu.setText("统计分析(A)");
+                    {
+                        statMenuItem = new JMenuItem();
+                        statMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK, true));
+                        statMenuItem.setText("报表查询");
+                        statMenuItem.addActionListener(panelStatusListener);
+                        statMenu.add(statMenuItem);
                     }
                 }
                 {
@@ -288,6 +306,7 @@ public class MainFrame extends javax.swing.JFrame {
                         configMenuItem.setText(pl.getString("m.config"));
                     }
                 }
+
                 {
                     personMenu = new JMenu();
                     personMenu.setMnemonic(KeyEvent.VK_R);

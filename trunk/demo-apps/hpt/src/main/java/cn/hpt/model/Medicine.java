@@ -20,14 +20,14 @@ public class Medicine {// 药品表
     @Id()
     @SequenceGenerator(name = "ht_medicine_seq", sequenceName = "ht_medicine_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ht_medicine_seq")
-    public Long mid;
+    private Long mid;
     @Column(unique = true)
-    public String mname;// 药品名称
-    public String mnumber;// 药品编号
-    public String mshortcut;// 药品简称
-    public Float price;// 药品价格
+    private String mname;// 药品名称
+    private String mnumber;// 药品编号
+    private String mshortcut;// 药品简称
+    private Double price;// 药品价格
     @ManyToOne
-    public Category category;
+    private Category category;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "medicine")
     private Set<PurchaseRecord> purchaseRecords;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "medicine")
@@ -73,14 +73,13 @@ public class Medicine {// 药品表
         this.category = category;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
-
     public Set<PurchaseRecord> getPurchaseRecords() {
         return purchaseRecords;
     }

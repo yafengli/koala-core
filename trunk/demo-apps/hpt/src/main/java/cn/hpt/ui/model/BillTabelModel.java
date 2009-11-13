@@ -8,8 +8,11 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 
 @Component
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class BillTabelModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -6945298295399270858L;

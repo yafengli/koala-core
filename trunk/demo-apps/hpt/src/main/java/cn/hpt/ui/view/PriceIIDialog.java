@@ -132,7 +132,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         operatorField.setColumns(10);
         operatorField.setEditable(false);
-        operatorField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        operatorField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
         operatorField.setFocusable(false);
 
         itemNameLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
@@ -232,11 +232,12 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         idNumField.setColumns(10);
         idNumField.setEditable(false);
-        idNumField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        idNumField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        idNumField.setText("200911011100-321");
         idNumField.setFocusable(false);
 
         headerTitleLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 18));
-        headerTitleLabel.setText("门（急）诊划价、收费专用单据");
+        headerTitleLabel.setText("门（急）诊开药、划价、收费");
 
         idDateLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
         idDateLabel.setText("收费日期：");
@@ -244,7 +245,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
         idDateField.setColumns(10);
         idDateField.setEditable(false);
         idDateField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
-        idDateField.setText("200911050607-001");
+        idDateField.setText("2009-11-01 11：00");
         idDateField.setFocusable(false);
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
@@ -267,7 +268,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
                 .addComponent(idDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
-                .addContainerGap(254, Short.MAX_VALUE)
+                .addContainerGap(272, Short.MAX_VALUE)
                 .addComponent(headerTitleLabel)
                 .addGap(226, 226, 226))
         );
@@ -344,7 +345,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         realaccField.setColumns(6);
         realaccField.setEditable(false);
-        realaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        realaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
         realaccField.setFocusable(false);
 
         payField.setColumns(6);
@@ -630,7 +631,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
                             testImagePrint();
                             //仅更新账单
                             bill.setUsername(userNameField.getText());
-                            bill.setPricenum(Float.parseFloat(realaccField.getText()));
+                            bill.setPricenum(Double.parseDouble(realaccField.getText()));
                             baseDao.update(bill);
                             setVisible(false);
                         } catch (Exception ex) {
@@ -746,12 +747,12 @@ public class PriceIIDialog extends javax.swing.JDialog {
      *
      */
     private void priceChange() {
-        float oughtaccn = 0;
+        Double oughtaccn = 0.0;
         for (BillRecord item : tabelModel.getItems()) {
             oughtaccn += item.getBnumber() * item.getMedicine().getPrice();
         }
-        float realaccn = oughtaccn - Float.valueOf(discountaccField.getText());
-        float changen = Float.valueOf(payField.getText()) - realaccn;
+        Double realaccn = oughtaccn - Double.valueOf(discountaccField.getText());
+        Double changen = Double.valueOf(payField.getText()) - realaccn;
         oughtaccField.setText(HelperUtil.format(oughtaccn, "0.##"));
         realaccField.setText(HelperUtil.format(realaccn, "0.##"));
         changeField.setText(HelperUtil.format(changen, "0.##"));
@@ -771,8 +772,8 @@ public class PriceIIDialog extends javax.swing.JDialog {
         //打印费用
         g2.drawString(realaccField.getText(), Float.parseFloat(propertiesLoader.getString("print.price.x")), Float.parseFloat(propertiesLoader.getString("print.price.y")));
         //打印药物清单
-        float itemx = Float.parseFloat(propertiesLoader.getString("print.medicine.x"));
-        float itemy = Float.parseFloat(propertiesLoader.getString("print.medicine.y"));
+        Float itemx = Float.parseFloat(propertiesLoader.getString("print.medicine.x"));
+        Float itemy = Float.parseFloat(propertiesLoader.getString("print.medicine.y"));
         java.util.List<BillRecord> lbr = tabelModel.getItems();
         for (BillRecord item : lbr) {
             g2.drawString(String.format("[%s  %s  %s]", item.getMedicine() != null ? item.getMedicine().getMname() : "",

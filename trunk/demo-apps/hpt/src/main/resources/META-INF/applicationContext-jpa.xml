@@ -14,9 +14,8 @@
         <property name="persistenceUnitName" value="punit"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect"/>
-                <property name="database" value="H2"/>
-                <property name="showSql" value="false"/>
+                <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect"/>                
+                <property name="showSql" value="true"/>
                 <property name="generateDdl" value="true"/>
             </bean>
         </property>

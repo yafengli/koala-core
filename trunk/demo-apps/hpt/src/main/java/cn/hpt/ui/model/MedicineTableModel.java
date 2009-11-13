@@ -71,7 +71,7 @@ public class MedicineTableModel extends AbstractTableModel {
                     item.setMshortcut(value != null ? value.toString() : "");
                     break;
                 case 3:
-                    item.setPrice(value instanceof Float ? Float.valueOf(value.toString()) : 0.00f);
+                    item.setPrice(value instanceof Double ? Double.valueOf(value.toString()) : 0.00f);
                     break;
                 case 4:
                     item.setMnumber(value != null ? value.toString() : "");

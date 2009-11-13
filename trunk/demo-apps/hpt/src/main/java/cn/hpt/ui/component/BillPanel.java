@@ -1,8 +1,8 @@
 package cn.hpt.ui.component;
 
 import cn.hpt.model.Bill;
-import cn.hpt.model.BillRecord;
 import cn.hpt.ui.MainFrame;
+import cn.hpt.ui.extend.ObservingTextField;
 import cn.hpt.ui.model.BillTabelModel;
 import cn.hpt.ui.model.SelectColorTableCellRenderer;
 import cn.hpt.ui.view.BillRecordDialog;
@@ -30,6 +30,7 @@ import java.util.List;
 
 @Service
 public class BillPanel extends JPanel {
+
     private static final long serialVersionUID = 4591912718436452499L;
     public static final Logger logger = LoggerFactory.getLogger(BillPanel.class);
     @Autowired
@@ -44,17 +45,14 @@ public class BillPanel extends JPanel {
     private IDao baseDao;
     @Autowired
     private BillRecordDialog billRecordDialog;
-
     private JScrollPane contentbp = new JScrollPane();
     private JPanel buttonbp = new JPanel();
     private JTable hptTable = new JTable();
     private JButton view = new JButton("查看");
-    private JButton delete = new JButton("删除");
-    private JButton excel = new JButton("导出");
+//    private JButton delete = new JButton("删除");
+//    private JButton excel = new JButton("导出");
     private JButton print = new JButton("打印");
-
     private JPanel searchp = new JPanel();
-
     private JLabel startLabel = new JLabel("开始时间");
     private ObservingTextField startField = new ObservingTextField();
     private JButton startButton = new JButton();
@@ -71,8 +69,7 @@ public class BillPanel extends JPanel {
         add(buttonbp, BorderLayout.SOUTH);
         {
             hptTable.setModel(tabelModel);
-            hptTable
-                    .setRowSorter(new TableRowSorter<BillTabelModel>(tabelModel));
+            hptTable.setRowSorter(new TableRowSorter<BillTabelModel>(tabelModel));
             int columnIndex = hptTable.getColumnModel().getColumnCount();
             for (int i = 0; i < columnIndex; i++) {
                 TableColumn tc = hptTable.getColumnModel().getColumn(i);
@@ -81,6 +78,7 @@ public class BillPanel extends JPanel {
             contentbp.setViewportView(hptTable);
             {
                 hptTable.addMouseListener(new MouseAdapter() {
+
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         if (e.getClickCount() >= 2) {
@@ -97,8 +95,8 @@ public class BillPanel extends JPanel {
         {
             buttonbp.setLayout(new FlowLayout());
             buttonbp.add(view);
-            buttonbp.add(delete);
-            buttonbp.add(excel);
+//            buttonbp.add(delete);
+//            buttonbp.add(excel);
             buttonbp.add(print);
         }
         {
@@ -118,6 +116,7 @@ public class BillPanel extends JPanel {
             }
             {
                 startButton.addActionListener(new ActionListener() {
+
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // instantiate the DatePicker
@@ -129,6 +128,7 @@ public class BillPanel extends JPanel {
                     }
                 });
                 endButton.addActionListener(new ActionListener() {
+
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         DatePicker dp = new DatePicker(endField, Locale.CHINESE);
@@ -159,8 +159,8 @@ public class BillPanel extends JPanel {
                                     endField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
                             List<Bill> lb = baseDao.find(
                                     "bill.find.by.time", new String[]{
-                                            "stime", "etime"}, new Object[]{
-                                            st, et});
+                                        "stime", "etime"}, new Object[]{
+                                        st, et});
                             System.out.printf("[%s,%s][%s,%s,%s]\n", startField.getText(), endField.getText(), st, et, lb.size());
                             tabelModel.setItem(lb);
                             hptTable.revalidate();
@@ -185,51 +185,56 @@ public class BillPanel extends JPanel {
             });
         }
         {
+            /*
             delete.addActionListener(new ActionListener() {
 
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println("del");
-                    int selectRow = hptTable.getSelectedRow();
-                    if (hptTable.isEditing()) {
-                        return;
-                    } else if (selectRow >= 0
-                            && selectRow <= tabelModel.getItem().size()) {
-                        int option = JOptionPane.showConfirmDialog(mainFrame,
-                                pl.getString("del.operator.msg"), null,
-                                JOptionPane.YES_NO_OPTION);
-                        switch (option) {
-                            case JOptionPane.YES_OPTION:
-                                Bill item = tabelModel.getItem().get(selectRow);
-                                List<BillRecord> lbr = baseDao
-                                        .find("billrecord.find.by.bill",
-                                                new String[]{"bill"},
-                                                new Object[]{item});
-                                for (BillRecord bd : lbr) {
-                                    baseDao.remove(bd);
-                                }
-                                baseDao.remove(item);
-                                tabelModel.getItem().remove(selectRow);
-                                hptTable.revalidate();
-                                break;
-                            case JOptionPane.NO_OPTION:
-                                break;
-                        }
-                    }
-                }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            System.out.println("del");
+            int selectRow = hptTable.getSelectedRow();
+            if (hptTable.isEditing()) {
+            return;
+            } else if (selectRow >= 0
+            && selectRow <= tabelModel.getItem().size()) {
+            int option = JOptionPane.showConfirmDialog(mainFrame,
+            pl.getString("del.operator.msg"), null,
+            JOptionPane.YES_NO_OPTION);
+            switch (option) {
+            case JOptionPane.YES_OPTION:
+            Bill item = tabelModel.getItem().get(selectRow);
+            List<BillRecord> lbr = baseDao
+            .find("billrecord.find.by.bill",
+            new String[]{"bill"},
+            new Object[]{item});
+            for (BillRecord bd : lbr) {
+            baseDao.remove(bd);
+            }
+            baseDao.remove(item);
+            tabelModel.getItem().remove(selectRow);
+            hptTable.revalidate();
+            break;
+            case JOptionPane.NO_OPTION:
+            break;
+            }
+            }
+            }
             });
+             */
         }
         {
+            /*
             excel.addActionListener(new ActionListener() {
 
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JOptionPane.showMessageDialog(null, "未完成！");
-                }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(null, "未完成！");
+            }
             });
+             */
         }
         {
             print.addActionListener(new ActionListener() {
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     boolean flag = false;
@@ -255,15 +260,5 @@ public class BillPanel extends JPanel {
                 }
             });
         }
-    }
-}
-
-class ObservingTextField extends JTextField implements Observer {
-    public void update(Observable o, Object arg) {
-        Calendar calendar = (Calendar) arg;
-        DatePicker dp = (DatePicker) o;
-        String val = dp.formatDate(calendar, "yyyy-MM-dd HH:mm:ss");
-        System.out.println("picked=" + val);
-        setText(val);
     }
 }

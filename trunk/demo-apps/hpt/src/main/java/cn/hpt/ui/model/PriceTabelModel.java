@@ -16,14 +16,11 @@ import cn.hpt.ui.view.PriceDialog;
 public class PriceTabelModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -6945298295399270858L;
-
     public static final String[] columnNames = new String[]{"标号", "药品简写", "药品名称",
-            "药品价格", "数量"};
-
+        "药品价格", "数量"};
     private List<BillRecord> item;
     @Autowired
     private PriceDialog priceDialog;
-
     @Autowired
     private PriceTableCellEditor cellEditor;
 
@@ -37,7 +34,6 @@ public class PriceTabelModel extends AbstractTableModel {
     public void setItem(List<BillRecord> item) {
         this.item = item;
     }
-
 
     @Override
     public int getColumnCount() {
@@ -70,16 +66,19 @@ public class PriceTabelModel extends AbstractTableModel {
                     cellEditor.reload(value.toString());
                     break;
                 case 2:
-                    if (item != null && item.getMedicine() != null)
+                    if (item != null && item.getMedicine() != null) {
                         item.getMedicine().getMname();
+                    }
                     break;
                 case 3:
-                    if (item != null && item.getMedicine() != null)
+                    if (item != null && item.getMedicine() != null) {
                         item.getMedicine().getPrice();
+                    }
                     break;
                 case 4:
-                    if (item != null)
+                    if (item != null) {
                         item.setBnumber(Long.valueOf(value.toString()));
+                    }
                     break;
             }
             updatePrice();
@@ -96,24 +95,25 @@ public class PriceTabelModel extends AbstractTableModel {
                     o = rowIndex;
                     break;
                 case 1:
-                    if (item.getMedicine() != null)
+                    if (item.getMedicine() != null) {
                         o = item.getMedicine().getMshortcut();
-                    else {
+                    } else {
                         o = "";
                     }
                     break;
                 case 2:
-                    if (item.getMedicine() != null)
+                    if (item.getMedicine() != null) {
                         o = item.getMedicine().getMname();
-                    else {
+                    } else {
                         o = "";
                     }
                     break;
                 case 3:
-                    if (item.getMedicine() != null)
+                    if (item.getMedicine() != null) {
                         o = item.getMedicine().getPrice();
-                    else
+                    } else {
                         o = 0.00;
+                    }
                     break;
                 case 4:
                     o = item.getBnumber();
@@ -124,21 +124,22 @@ public class PriceTabelModel extends AbstractTableModel {
     }
 
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex == 3 || columnIndex == 0)
+        if (columnIndex == 3 || columnIndex == 0) {
             return false;
-        else
+        } else {
             return true;
+        }
     }
 
     /* 跟新价格 */
     private void updatePrice() {
-        float result = 0;
+        Double result = 0.0;
         for (BillRecord br : getItem()) {
             if (br != null && br.getMedicine() != null) {
                 result += br.getBnumber() * br.getMedicine().getPrice();
             }
         }
-        NumberFormat nf=NumberFormat.getInstance();
+        NumberFormat nf = NumberFormat.getInstance();
         priceDialog.priceField.setText(nf.format(result));
     }
 }

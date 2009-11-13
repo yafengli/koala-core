@@ -48,6 +48,10 @@ public class PanelStatusListener implements ActionListener {
             // 划价收费
             priceIIDialog.initData();
             priceIIDialog.setVisible(true);
+        } else if (actionCommand != null
+                && actionCommand.equalsIgnoreCase(mainFrame.statMenuItem.getActionCommand())) {
+            mainFrame.actionTabbedPane.addTab(mainFrame.statMenuItem.getText(), mainFrame.statPanel);// 统计分析
+            mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.statPanel);
         } else {
             //TODO
         }

@@ -49,8 +49,8 @@ public class PrintPanel extends JPanel implements Printable {
         //打印费用
         g2.drawString(priceDialog.priceField.getText(), Float.parseFloat(pl.getString("print.price.x")), Float.parseFloat(pl.getString("print.price.y")));
         //打印药物清单
-        float itemx = Float.parseFloat(pl.getString("print.medicine.x"));
-        float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
+        Float itemx = Float.parseFloat(pl.getString("print.medicine.x"));
+        Float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
         List<BillRecord> lbr = priceTabelModel.getItem();
         for (BillRecord item : lbr) {
             g2.drawString(String.format("[%s  %s  %s]", item.getMedicine()!=null?item.getMedicine().getMname():"",

@@ -29,7 +29,7 @@ public class Bill {// 划价收费-账单-流水号表
     private Timestamp rcreatedate;
     private String idnumber;
     private String username;
-    private Float pricenum;
+    private Double pricenum;
 
     public String getIdnumber() {
         return idnumber;
@@ -79,11 +79,11 @@ public class Bill {// 划价收费-账单-流水号表
         this.rcreatedate = rcreatedate;
     }
 
-    public Float getPricenum() {
+    public Double getPricenum() {
         return pricenum;
     }
 
-    public void setPricenum(Float pricenum) {
+    public void setPricenum(Double pricenum) {
         this.pricenum = pricenum;
     }
 }
