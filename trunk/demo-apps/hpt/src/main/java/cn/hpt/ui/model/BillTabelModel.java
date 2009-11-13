@@ -2,6 +2,7 @@ package cn.hpt.ui.model;
 
 import cn.hpt.model.Bill;
 import cn.hpt.util.DateUtil;
+import cn.hpt.util.HelperUtil;
 import org.springframework.stereotype.Component;
 
 import javax.swing.table.AbstractTableModel;
@@ -74,7 +75,7 @@ public class BillTabelModel extends AbstractTableModel {
                     o = item.getUsername();
                     break;
                 case 3:
-                    o = item.getPricenum();
+                    o = HelperUtil.format(item.getPricenum(), "0.##");
                     break;
                 case 4:
                     if (item.getRcreatedate() != null) {
