@@ -48,6 +48,8 @@
             <hr/>
             <a href="upload.ftl">上传文件-断点续传</a><br/>
             <a href="swfupload.ftl">上传文件-Flash(多文件)</a>
+			<hr/>
+			<a href="auto/test.jsp">自动完成</a>
         </td>
         <td>
             <div><span>JFreeChart</span></div>
