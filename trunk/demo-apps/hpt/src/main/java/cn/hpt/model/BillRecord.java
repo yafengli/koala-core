@@ -14,16 +14,16 @@ import javax.persistence.Table;
 public class BillRecord {// 划价收费-账单-详单表
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	public Medicine medicine;
+	private Medicine medicine;
 	@ManyToOne(fetch = FetchType.EAGER)
-	public Bill bill;
+	private Bill bill;
 
-	public Long bnumber;// 药品数量
+	private Long bnumber;// 药品数量
 
 	@Id()
 	@SequenceGenerator(name = "ht_bill_record_seq", sequenceName = "ht_bill_record_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ht_bill_record_seq")
-	public Long bid;
+	private Long bid;
 
 	public Medicine getMedicine() {
 		return medicine;

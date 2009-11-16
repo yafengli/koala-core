@@ -17,7 +17,7 @@
     </named-query>
     <named-query name="bill.find.group.operator.time">
         <query><![CDATA[
-		SELECT max(bill.operator),sum(bill.pricenum) FROM Bill bill where bill.rcreatedate >=:stime and bill.rcreatedate <=:etime
+		SELECT max(bill.operator.loginname),sum(bill.pricenum) FROM Bill bill where bill.rcreatedate >=:stime and bill.rcreatedate <=:etime
                 group by bill.operator.pid order by sum(bill.pricenum) desc
 		]]>
         </query>
@@ -31,7 +31,7 @@
     </named-query>
     <named-query name="bill.find.group.item.time">
         <query><![CDATA[
-		SELECT max(br.medicine),sum(br.bnumber) FROM BillRecord as br,Bill as bl where br.bill=bl and bl.rcreatedate >=:stime and bl.rcreatedate <=:etime
+		SELECT max(br.medicine.mname),sum(br.bnumber)*max(br.medicine.price) FROM BillRecord as br,Bill as bl where br.bill=bl and bl.rcreatedate >=:stime and bl.rcreatedate <=:etime
                 group by br.medicine.mid order by sum(br.bnumber) desc
 		]]>
         </query>

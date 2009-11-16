@@ -187,9 +187,9 @@ public class StatPanel extends JPanel {
                         for (Object[] item : items) {
                             int size = item.length;
                             if (size == 2) {
-                                Operator op = (Operator) item[0];
+                                String loginname = (String) item[0];
                                 Double price = (Double) item[1];
-                                System.out.printf("[%s,%s]\n", op.getLoginname(), price);
+                                System.out.printf("[%s,%s]\n", loginname, price);
                             }
                         }
                     } catch (Exception ex) {
@@ -215,9 +215,9 @@ public class StatPanel extends JPanel {
                         for (Object[] item : items) {
 
                             if (item.length == 2) {
-                                Medicine obj = (Medicine) item[0];
-                                Long num = (Long) item[1];
-                                System.out.printf("[%s,%s,%s,%s]\n", obj.getMname(), obj.getPrice(), num, num * obj.getPrice());
+                                String mname = (String) item[0];
+                                Double price = (Double) item[1];
+                                System.out.printf("[%s,%s]\n", mname, price);
                             }
                         }
 
@@ -229,6 +229,7 @@ public class StatPanel extends JPanel {
         }
         {
             byuser.addActionListener(new ActionListener() {
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
