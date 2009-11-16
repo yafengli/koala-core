@@ -1,16 +1,16 @@
 package cn.hpt.ui.component;
 
 import cn.hpt.model.Bill;
-import cn.hpt.model.Medicine;
-import cn.hpt.model.Operator;
 import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.extend.ObservingTextField;
 import cn.hpt.ui.model.BillTabelModel;
 import cn.hpt.ui.model.SelectColorTableCellRenderer;
 import cn.hpt.ui.view.BillRecordDialog;
 import cn.hpt.util.DateUtil;
+import cn.hpt.util.HelperUtil;
 import cn.hpt.util.PropertiesLoader;
 import com.qt.datapicker.DatePicker;
+import java.io.File;
 import org.koala.dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +29,7 @@ import java.awt.event.MouseEvent;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.List;
+import javax.swing.filechooser.FileFilter;
 
 @Service
 public class StatPanel extends JPanel {
@@ -61,6 +62,8 @@ public class StatPanel extends JPanel {
     private JButton endButton = new JButton();
     private ObservingTextField endField = new ObservingTextField();
     private JButton search = new JButton("查询");
+    private JFileChooser chooser = new JFileChooser();//导出文件
+    private FileFilter xlsFilter = new XlsFilter();
 
     @PostConstruct
     public void init() {
@@ -68,6 +71,9 @@ public class StatPanel extends JPanel {
         add(searchp, BorderLayout.NORTH);
         add(contentbp, BorderLayout.CENTER);
         add(buttonbp, BorderLayout.SOUTH);
+        {
+            chooser.setFileFilter(xlsFilter);
+        }
         {
             hptTable.setModel(tabelModel);
             hptTable.setRowSorter(new TableRowSorter<BillTabelModel>(tabelModel));
@@ -183,15 +189,8 @@ public class StatPanel extends JPanel {
                         List<Object[]> items = baseDao.find("bill.find.group.operator.time", new String[]{
                                     "stime", "etime"}, new Object[]{
                                     st, et});
-                        //Export
-                        for (Object[] item : items) {
-                            int size = item.length;
-                            if (size == 2) {
-                                String loginname = (String) item[0];
-                                Double price = (Double) item[1];
-                                System.out.printf("[%s,%s]\n", loginname, price);
-                            }
-                        }
+                        //导出
+                        export(items);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -211,16 +210,8 @@ public class StatPanel extends JPanel {
                         List<Object[]> items = baseDao.find("bill.find.group.item.time", new String[]{
                                     "stime", "etime"}, new Object[]{
                                     st, et});
-                        //Export
-                        for (Object[] item : items) {
-
-                            if (item.length == 2) {
-                                String mname = (String) item[0];
-                                Double price = (Double) item[1];
-                                System.out.printf("[%s,%s]\n", mname, price);
-                            }
-                        }
-
+                        //导出
+                        export(items);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -240,19 +231,39 @@ public class StatPanel extends JPanel {
                         List<Object[]> items = baseDao.find("bill.find.group.user.time", new String[]{
                                     "stime", "etime"}, new Object[]{
                                     st, et});
-                        //Export
-                        for (Object[] item : items) {
-                            if (item.length == 2) {
-                                String username = (String) item[0];
-                                Double price = (Double) item[1];
-                                System.out.printf("[%s,%s]\n", username, price);
-                            }
-                        }
+                        //导出
+                        export(items);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 }
             });
         }
+    }
+
+    private void export(List<Object[]> items) {
+        //Export                        
+        int opencode = chooser.showSaveDialog(getRootPane());
+        if (opencode == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            HelperUtil.exportExcel(file, items);
+        }
+    }
+}
+
+class XlsFilter extends FileFilter {
+
+    @Override
+    public boolean accept(File f) {
+        if (f.getName() != null && f.getName().toLowerCase().endsWith(".xls")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public String getDescription() {
+        return "Excel文件";
     }
 }

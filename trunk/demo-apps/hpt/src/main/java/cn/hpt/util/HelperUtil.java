@@ -1,5 +1,6 @@
 package cn.hpt.util;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -38,11 +39,11 @@ public class HelperUtil {
         return format.format(result);
     }
 
-    public static synchronized void exportExcel(String outputFileName, List<Object[]> items) {
+    public static synchronized void exportExcel(File outFile, List<Object[]> items) {
         FileOutputStream fOut = null;
         try {
             // 新建一输出文件流
-            fOut = new FileOutputStream(outputFileName);
+            fOut = new FileOutputStream(outFile);
             // 创建新的Excel 工作簿
             HSSFWorkbook workbook = new HSSFWorkbook();
             // 在Excel工作簿中建一工作表，其名为缺省值
