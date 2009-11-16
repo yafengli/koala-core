@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment>2009-11-13 17:49:01</comment>
+<comment>2009-11-16 16:19:20</comment>
 <entry key="m.stock">库存管理(S)</entry>
 <entry key="useraction.listener.error">
         修改失败：

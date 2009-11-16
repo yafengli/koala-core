@@ -1,7 +1,7 @@
 package cn.hpt.ui.component;
 
 import cn.hpt.model.Bill;
-import cn.hpt.model.BillRecord;
+import cn.hpt.model.Medicine;
 import cn.hpt.model.Operator;
 import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.extend.ObservingTextField;
@@ -186,12 +186,11 @@ public class StatPanel extends JPanel {
                         //Export
                         for (Object[] item : items) {
                             int size = item.length;
-                            if (size != 2) {
-                                throw new Exception();
+                            if (size == 2) {
+                                Operator op = (Operator) item[0];
+                                Double price = (Double) item[1];
+                                System.out.printf("[%s,%s]\n", op.getLoginname(), price);
                             }
-                            Operator op = (Operator) item[0];
-                            Double price = (Double) item[1];
-                            System.out.printf("[%s,%s]\n", op.getLoginname(), price);
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -209,12 +208,17 @@ public class StatPanel extends JPanel {
                                 startField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
                         Timestamp et = new Timestamp(DateUtil.parse(
                                 endField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
-                        List<BillRecord> items = baseDao.find("bill.find.group.item.time", new String[]{
+                        List<Object[]> items = baseDao.find("bill.find.group.item.time", new String[]{
                                     "stime", "etime"}, new Object[]{
                                     st, et});
                         //Export
-                        for (BillRecord item : items) {
-                            System.out.printf("[%s,%s]\n", item.getMedicine().getMname(), item.getBnumber() * item.getMedicine().getPrice());
+                        for (Object[] item : items) {
+
+                            if (item.length == 2) {
+                                Medicine obj = (Medicine) item[0];
+                                Long num = (Long) item[1];
+                                System.out.printf("[%s,%s,%s,%s]\n", obj.getMname(), obj.getPrice(), num, num * obj.getPrice());
+                            }
                         }
 
                     } catch (Exception ex) {
@@ -225,7 +229,6 @@ public class StatPanel extends JPanel {
         }
         {
             byuser.addActionListener(new ActionListener() {
-
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
@@ -233,14 +236,17 @@ public class StatPanel extends JPanel {
                                 startField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
                         Timestamp et = new Timestamp(DateUtil.parse(
                                 endField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
-                        List<Bill> items = baseDao.find("bill.find.group.user.time", new String[]{
+                        List<Object[]> items = baseDao.find("bill.find.group.user.time", new String[]{
                                     "stime", "etime"}, new Object[]{
                                     st, et});
                         //Export
-                        for (Bill item : items) {
-                            System.out.printf("[%s,%s]\n", item.getUsername(), item.getPricenum());
+                        for (Object[] item : items) {
+                            if (item.length == 2) {
+                                String username = (String) item[0];
+                                Double price = (Double) item[1];
+                                System.out.printf("[%s,%s]\n", username, price);
+                            }
                         }
-
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
