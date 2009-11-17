@@ -154,8 +154,7 @@ public class MainFrame extends javax.swing.JFrame {
                 mainToolBar = new JToolBar();
                 mainToolBar.add(outpatientAction);
                 mainToolBar.add(billSearchAction);
-                mainToolBar.add(billCancelAction);
-                mainToolBar.add(outpatientAction);
+                mainToolBar.add(billCancelAction);                
                 mainToolBar.add(medicineCtAction);
                 mainToolBar.add(medicineAction);
                 mainToolBar.add(statAction);

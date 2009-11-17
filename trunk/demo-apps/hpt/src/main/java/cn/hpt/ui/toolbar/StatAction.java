@@ -1,7 +1,6 @@
 package cn.hpt.ui.toolbar;
 
 import cn.hpt.ui.MainFrame;
-import cn.hpt.ui.listener.PanelStatusListener;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -19,7 +18,7 @@ public class StatAction extends AbstractAction {
     private MainFrame mainFrame;
 
     public StatAction() {
-        super("报表分析", new ImageIcon(OutpatientAction.class.getResource("/logo/7.png")));
+        super("报表分析", new ImageIcon(OutpatientAction.class.getResource("/logo/stat.png")));
     }
 
     @Override

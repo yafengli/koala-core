@@ -18,7 +18,7 @@ public class BillCancelAction extends AbstractAction {
     private MainFrame mainFrame;
 
     public BillCancelAction() {
-        super("划价收费", new ImageIcon(BillCancelAction.class.getResource("/logo/6.png")));
+        super("划价收费", new ImageIcon(BillCancelAction.class.getResource("/logo/blce.png")));
 
     }
 

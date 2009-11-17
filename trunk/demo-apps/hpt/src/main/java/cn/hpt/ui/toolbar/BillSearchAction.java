@@ -17,7 +17,7 @@ public class BillSearchAction extends AbstractAction {
     private MainFrame mainFrame;
 
     public BillSearchAction() {
-        super("划价收费", new ImageIcon(BillSearchAction.class.getResource("/logo/6.png")));
+        super("划价收费", new ImageIcon(BillSearchAction.class.getResource("/logo/bisr.png")));
 
     }
 

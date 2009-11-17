@@ -23,6 +23,6 @@ public class MedicineCtAction extends AbstractAction {
     }
 
     public MedicineCtAction() {
-        super("收费类别", new ImageIcon(OutpatientAction.class.getResource("/logo/2.png")));
+        super("收费类别", new ImageIcon(OutpatientAction.class.getResource("/logo/mdct.png")));
     }
 }
