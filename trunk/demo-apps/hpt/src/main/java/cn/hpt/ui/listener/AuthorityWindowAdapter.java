@@ -70,11 +70,16 @@ public class AuthorityWindowAdapter extends WindowAdapter {
                 c.setEnabled(true);
             }
         }
+        //toolbar
+        int tidex = mainFrame.mainToolBar.getComponentCount();
+        for (int i = 0; i < tidex; i++) {
+            mainFrame.mainToolBar.getComponentAtIndex(i).setEnabled(true);
+        }
         int i = mainFrame.actionTabbedPane.getTabCount();
         for (int j = 0; j < i; j++) {
             mainFrame.actionTabbedPane.setEnabledAt(j, true);
         }
-        /* 为完成的功能 */
+        /* 未完成的功能 */
         {
             mainFrame.warehouseMenuItem.setEnabled(false);
             mainFrame.dataRstMenuItem.setEnabled(false);
@@ -86,6 +91,8 @@ public class AuthorityWindowAdapter extends WindowAdapter {
             mainFrame.purchaseMenuItem.setEnabled(false);
             mainFrame.configMenuItem.setEnabled(false);
             mainFrame.caseTmMenuItem.setEnabled(false);
+            mainFrame.billMenuItem.setEnabled(false);
+            mainFrame.medicineSearcheMenuItem.setEnabled(false);
         }
     }
 }
