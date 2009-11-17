@@ -137,24 +137,26 @@ public class DemoContorller {
     public void json(HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setHeader("Cache-Control", "no-cache");
-        double compa = 1000.0;
-        double compb = 900.0;
+
         JSONObject data = new JSONObject();
         JSONArray bss = new JSONArray();
-
-        for (int i = 0; i <= 30; i++) {
+        for (int i = 0; i <= 5; i++) {
             try {
-                compa += (Math.random() * 100) - 50;
-                compb += (Math.random() * 100) - 50;
                 if (i > 0) {
                     JSONObject item = new JSONObject();
-                    item.put(String.valueOf(i), compa);
+                    item.put("longitude", Math.random() + 31.0);
+                    item.put("latitude", Math.random() + 119.0);
+                    item.put("msg","欢迎使用，<a href='http://www.baidu.com' target='_blank'>链接百度</a>，这是第"+i+"坐标点！");
                     bss.put(item);
                 }
-                data.put("items", bss);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        try {
+            data.put("items", bss);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         resp.getWriter().write(data.toString());
     }

@@ -3,7 +3,6 @@
 <html>
 <head>
     <title>list.ftl</title>
-    <script src="${p.context}/resources/js/demo.js"></script>
 </head>
 <body>
 <div id="listable">

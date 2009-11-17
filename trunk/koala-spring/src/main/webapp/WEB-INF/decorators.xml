@@ -5,7 +5,8 @@
         <pattern>*.shtml</pattern>
     </decorator>
     <decorator name="two" page="/WEB-INF/pages/layout/template-ftl.jsp">
-        <pattern>*.ftl</pattern>
+        <pattern>/hello.ftl</pattern>
+        <exclude>/json.ftl</exclude>        
         <exclude>/displaytag.ftl</exclude>
         <exclude>/jmesa/ajax.ftl</exclude>
     </decorator>
