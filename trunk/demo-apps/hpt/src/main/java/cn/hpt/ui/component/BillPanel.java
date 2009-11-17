@@ -2,9 +2,11 @@ package cn.hpt.ui.component;
 
 import cn.hpt.model.Bill;
 import cn.hpt.ui.MainFrame;
+import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.extend.ObservingTextField;
 import cn.hpt.ui.model.BillTabelModel;
 import cn.hpt.ui.model.SelectColorTableCellRenderer;
+import cn.hpt.ui.model.TableHeaderRenderer;
 import cn.hpt.ui.view.BillRecordDialog;
 import cn.hpt.util.DateUtil;
 import cn.hpt.util.PropertiesLoader;
@@ -44,13 +46,15 @@ public class BillPanel extends JPanel {
     @Autowired
     private IDao baseDao;
     @Autowired
+    private HptFont font;
+    @Autowired
+    private TableHeaderRenderer tableHeaderRenderer;
+    @Autowired
     private BillRecordDialog billRecordDialog;
     private JScrollPane contentbp = new JScrollPane();
     private JPanel buttonbp = new JPanel();
     private JTable hptTable = new JTable();
     private JButton view = new JButton("查看");
-//    private JButton delete = new JButton("删除");
-//    private JButton excel = new JButton("导出");
     private JButton print = new JButton("打印");
     private JPanel searchp = new JPanel();
     private JLabel startLabel = new JLabel("开始时间");
@@ -68,11 +72,14 @@ public class BillPanel extends JPanel {
         add(contentbp, BorderLayout.CENTER);
         add(buttonbp, BorderLayout.SOUTH);
         {
+
             hptTable.setModel(tabelModel);
-            hptTable.setRowSorter(new TableRowSorter<BillTabelModel>(tabelModel));
+            hptTable.setRowSorter(
+                    new TableRowSorter<BillTabelModel>(tabelModel));
             int columnIndex = hptTable.getColumnModel().getColumnCount();
             for (int i = 0; i < columnIndex; i++) {
                 TableColumn tc = hptTable.getColumnModel().getColumn(i);
+                tc.setHeaderRenderer(tableHeaderRenderer);
                 tc.setCellRenderer(cellRenderer);
             }
             contentbp.setViewportView(hptTable);
@@ -146,6 +153,20 @@ public class BillPanel extends JPanel {
             searchp.add(endField);
             searchp.add(endButton);
             searchp.add(search);
+            //FONT
+            {
+                hptTable.setFont(font.getSize_12());
+                view.setFont(font.getSize_12());
+                print.setFont(font.getSize_12());
+                searchp.setFont(font.getSize_12());
+                startLabel.setFont(font.getSize_12());
+                startField.setFont(font.getSize_12());
+                startButton.setFont(font.getSize_12());
+                endLabel.setFont(font.getSize_12());
+                endButton.setFont(font.getSize_12());
+                endField.setFont(font.getSize_12());
+                search.setFont(font.getSize_12());
+            }
             {
                 search.addActionListener(new ActionListener() {
 

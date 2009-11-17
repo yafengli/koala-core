@@ -24,6 +24,7 @@ import java.util.List;
  */
 @Service
 public class PrintPanel extends JPanel implements Printable {
+
     @Autowired
     private PriceDialog priceDialog;
     @Autowired
@@ -38,8 +39,10 @@ public class PrintPanel extends JPanel implements Printable {
         Graphics2D g2 = (Graphics2D) graphics;
         g2.setPaint(Color.black); // 设置打印颜色为黑色
         if (pageIndex >= 1) // 当打印页号大于需要打印的总页数时，打印工作结束
+        {
             return Printable.NO_SUCH_PAGE;
-        g2.setFont(font.PRICE_LABEL);
+        }
+        g2.setFont(font.getSize_12());
         //打印患者姓名
         g2.drawString(priceDialog.userField.getText(), Float.parseFloat(pl.getString("print.user.x")), Float.parseFloat(pl.getString("print.user.y")));
         //打印日期
@@ -53,8 +56,8 @@ public class PrintPanel extends JPanel implements Printable {
         Float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
         List<BillRecord> lbr = priceTabelModel.getItem();
         for (BillRecord item : lbr) {
-            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine()!=null?item.getMedicine().getMname():"",
-                    item.getMedicine()!=null?item.getMedicine().getPrice():"", item.getBnumber()), itemx, itemy);
+            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine() != null ? item.getMedicine().getMname() : "",
+                    item.getMedicine() != null ? item.getMedicine().getPrice() : "", item.getBnumber()), itemx, itemy);
             itemy += g2.getFont().getSize() + 1;
         }
 

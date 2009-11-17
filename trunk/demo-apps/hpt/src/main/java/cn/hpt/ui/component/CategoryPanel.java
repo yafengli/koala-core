@@ -20,15 +20,16 @@ import org.koala.dao.IDao;
 
 import cn.hpt.model.Category;
 import cn.hpt.ui.MainFrame;
+import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.model.CategoryTabelModel;
 import cn.hpt.ui.model.SelectColorTableCellRenderer;
+import cn.hpt.ui.model.TableHeaderRenderer;
 import cn.hpt.util.PropertiesLoader;
 
 @Service
 public class CategoryPanel extends JPanel {
 
     private static final long serialVersionUID = -1047279537436880394L;
-
     @Autowired
     private MainFrame mainFrame;
     @Autowired
@@ -38,8 +39,11 @@ public class CategoryPanel extends JPanel {
     @Autowired
     private PropertiesLoader pl;
     @Autowired
+    private HptFont font;
+    @Autowired
+    private TableHeaderRenderer tableHeaderRenderer;
+    @Autowired
     private SelectColorTableCellRenderer cellRenderer;
-
     private JScrollPane contentbp = new JScrollPane();
     private JPanel buttonbp = new JPanel();
     private JTable hptTable = new JTable();
@@ -60,6 +64,7 @@ public class CategoryPanel extends JPanel {
             int columnIndex = hptTable.getColumnModel().getColumnCount();
             for (int i = 0; i < columnIndex; i++) {
                 TableColumn tc = hptTable.getColumnModel().getColumn(i);
+                tc.setHeaderRenderer(tableHeaderRenderer);
                 tc.setCellRenderer(cellRenderer);
             }
             contentbp.setViewportView(hptTable);
@@ -71,7 +76,16 @@ public class CategoryPanel extends JPanel {
             buttonbp.add(excel);
             buttonbp.add(print);
         }
+        //font
+        {
+            hptTable.setFont(font.getSize_12());
+            add.setFont(font.getSize_12());
+            delete.setFont(font.getSize_12());
+            excel.setFont(font.getSize_12());
+            print.setFont(font.getSize_12());
+        }
         add.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 Category item = new Category();
@@ -92,8 +106,7 @@ public class CategoryPanel extends JPanel {
                     return;
                 } else if (selectRow >= 0
                         && selectRow <= categoryTabelModel.getItem().size()) {
-                    int option = JOptionPane.showConfirmDialog(mainFrame, pl
-                            .getString("del.operator.msg"), null,
+                    int option = JOptionPane.showConfirmDialog(mainFrame, pl.getString("del.operator.msg"), null,
                             JOptionPane.YES_NO_OPTION);
                     switch (option) {
                         case JOptionPane.YES_OPTION:
@@ -110,6 +123,7 @@ public class CategoryPanel extends JPanel {
             }
         });
         print.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean flag = false;

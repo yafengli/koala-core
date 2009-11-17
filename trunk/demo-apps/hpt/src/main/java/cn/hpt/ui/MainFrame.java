@@ -17,12 +17,15 @@ import cn.hpt.ui.component.MedicinePanel;
 import cn.hpt.ui.component.OperatorPanel;
 import cn.hpt.ui.component.BillPanel;
 import cn.hpt.ui.component.StatPanel;
+import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.listener.AuthorityWindowAdapter;
 import cn.hpt.ui.listener.ChangeLoginActionListener;
 import cn.hpt.ui.listener.CloseAppActionListener;
 import cn.hpt.ui.listener.PanelStatusListener;
 import cn.hpt.ui.listener.ShowInfoActionListener;
 import cn.hpt.ui.listener.UserActinListener;
+import cn.hpt.ui.toolbar.MedicineAction;
+import cn.hpt.ui.toolbar.MedicineCtAction;
 import cn.hpt.ui.toolbar.OutpatientAction;
 import cn.hpt.ui.toolbar.StatAction;
 import cn.hpt.util.PropertiesLoader;
@@ -62,19 +65,18 @@ public class MainFrame extends javax.swing.JFrame {
     public JMenu personMenu;
     public JMenu outpatientMenu;
     public JToolBar mainToolBar;
-    public JPanel buttonPanel;
-    public JButton printButton;
-    public JButton addButton;
     public JScrollPane editPane;
     public JMenuItem outpatientSearchMenuItem;
-    public JButton delButton;
-    public JButton excelButton;
     public JClosableTabbedPane actionTabbedPane;
     /**
      * **** 华丽的分割线 *****
      */
     @Autowired
     public OutpatientAction outpatientAction;
+    @Autowired
+    public MedicineCtAction medicineCtAction;
+    @Autowired
+    public MedicineAction medicineAction;
     @Autowired
     public StatAction statAction;
     @Autowired
@@ -101,6 +103,8 @@ public class MainFrame extends javax.swing.JFrame {
     public BillPanel billPanel;
     @Autowired
     public StatPanel statPanel;
+    @Autowired
+    public HptFont font;
     /**
      * **** 华丽的分割线 *****
      */
@@ -140,6 +144,8 @@ public class MainFrame extends javax.swing.JFrame {
             {
                 mainToolBar = new JToolBar();
                 mainToolBar.add(outpatientAction);
+                mainToolBar.add(medicineCtAction);
+                mainToolBar.add(medicineAction);
                 mainToolBar.add(statAction);
                 getContentPane().add(mainToolBar, BorderLayout.NORTH);
                 this.addWindowListener(authorityWindowAdapter);
@@ -366,6 +372,42 @@ public class MainFrame extends javax.swing.JFrame {
                     actionTabbedPane = new JClosableTabbedPane();
                     getContentPane().add(actionTabbedPane, BorderLayout.CENTER);
                 }
+            }
+            //font set
+            {
+                mainMenuBar.setFont(font.getSize_14());
+                medicineSearcheMenuItem.setFont(font.getSize_12());//药品入库查询
+                infoMenuItem.setFont(font.getSize_12());//信息
+                quitMenuItem.setFont(font.getSize_12());
+                changeloginMenuItem.setFont(font.getSize_12());
+                userMenuItem.setFont(font.getSize_12());
+                configMenuItem.setFont(font.getSize_12());
+                caseTmMenuItem.setFont(font.getSize_12());
+                billMenuItem.setFont(font.getSize_12());
+                roleMenuItem.setFont(font.getSize_12());
+                purchaseMenuItem.setFont(font.getSize_12());
+                operatorMenuItem.setFont(font.getSize_12());
+                dataRstMenuItem.setFont(font.getSize_12());
+                dataBkMenuItem.setFont(font.getSize_12());
+                purchaseSearcheMenuItem.setFont(font.getSize_12());
+                purchaseStMenuItem.setFont(font.getSize_12());
+                purchCtMenuItem.setFont(font.getSize_12());
+                stockMenu.setFont(font.getSize_12());
+                systemMenu.setFont(font.getSize_12());
+                statMenu.setFont(font.getSize_12());
+                cancelMenuItem.setFont(font.getSize_12());
+                warehouseMenuItem.setFont(font.getSize_12());
+                medicineMenuItem.setFont(font.getSize_12());
+                medicineCtMenuItem.setFont(font.getSize_12());
+                priceMenuItem.setFont(font.getSize_12());
+                statMenuItem.setFont(font.getSize_12());
+                helpMenu.setFont(font.getSize_12());
+                quitMenu.setFont(font.getSize_12());
+                personMenu.setFont(font.getSize_12());
+                outpatientMenu.setFont(font.getSize_12());
+                mainToolBar.setFont(font.getSize_12());
+                outpatientSearchMenuItem.setFont(font.getSize_12());
+                actionTabbedPane.setFont(font.getSize_12());
             }
             setIconImage(new ImageIcon(MainFrame.class.getResource(pl.getString("main.frame.ico"))).getImage());
             pack();

@@ -210,7 +210,7 @@ public class PriceDialog extends javax.swing.JDialog {
                             itemPanel.add(itemnamePanel, BorderLayout.NORTH);
                             {
                                 itemnameLabel = new JLabel();
-                                itemnameLabel.setFont(font.PRICE_LABEL);
+                                itemnameLabel.setFont(font.getSize_12());
                                 itemnamePanel.add(itemnameLabel);
                                 itemnameLabel.setText(pl.getString("pd.item.name"));
                             }
@@ -225,7 +225,7 @@ public class PriceDialog extends javax.swing.JDialog {
                     printPanel.add(namePanel, BorderLayout.NORTH);
                     {
                         nameLabel = new JLabel();
-                        nameLabel.setFont(font.PRICE_NAME);
+                        nameLabel.setFont(font.getSize_18_b());
                         namePanel.add(nameLabel);
                         nameLabel.setText(pl.getString("pd.name"));
                     }
@@ -387,7 +387,7 @@ public class PriceDialog extends javax.swing.JDialog {
     private void testImagePrint() {
         BufferedImage image = new BufferedImage(400, 300, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = (Graphics2D) image.getGraphics();
-        g2.setFont(font.PRICE_LABEL);
+        g2.setFont(font.getSize_12());
         //打印患者姓名
         g2.drawString(userField.getText(), Float.parseFloat(pl.getString("print.user.x")), Float.parseFloat(pl.getString("print.user.y")));
         //打印日期

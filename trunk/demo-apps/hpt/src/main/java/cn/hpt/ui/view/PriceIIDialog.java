@@ -6,6 +6,7 @@ import cn.hpt.model.Medicine;
 import cn.hpt.ui.LoginWindow;
 import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.component.PrintPanel;
+import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.model.ItemsListModel;
 import cn.hpt.ui.model.PriceIITabelModel;
 import cn.hpt.util.DateUtil;
@@ -60,6 +61,8 @@ public class PriceIIDialog extends javax.swing.JDialog {
     private ItemsListModel itemsListModel;
     @Autowired
     private PrintPanel printPanel;
+    @Autowired
+    private HptFont font;
     //
     private Bill bill;
 
@@ -127,38 +130,38 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         infoPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        operatorLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        operatorLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         operatorLabel.setText("收费员：");
 
         operatorField.setColumns(10);
         operatorField.setEditable(false);
-        operatorField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        operatorField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         operatorField.setFocusable(false);
 
-        itemNameLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        itemNameLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         itemNameLabel.setText("项目名称：");
 
         itemNameField.setColumns(10);
-        itemNameField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        itemNameField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
 
-        itemPriceLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        itemPriceLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         itemPriceLabel.setText("项目单价：");
 
         itemPriceField.setColumns(10);
         itemPriceField.setEditable(false);
-        itemPriceField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        itemPriceField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         itemPriceField.setFocusable(false);
 
         itemSizeField.setColumns(10);
-        itemSizeField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        itemSizeField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
 
-        itemSizeLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        itemSizeLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         itemSizeLabel.setText("项目次数：");
 
-        addButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        addButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         addButton.setText("增加");
 
-        removeButton.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        removeButton.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         removeButton.setText("删除");
 
         javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
@@ -221,30 +224,30 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         headerPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        userNameLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        userNameLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         userNameLabel.setText("患者姓名：");
 
-        userNameField.setColumns(6);
-        userNameField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        userNameField.setColumns(8);
+        userNameField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
 
-        idNumLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        idNumLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         idNumLabel.setText("收费单号：");
 
         idNumField.setColumns(10);
         idNumField.setEditable(false);
-        idNumField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        idNumField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         idNumField.setText("200911011100-321");
         idNumField.setFocusable(false);
 
-        headerTitleLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 18));
+        headerTitleLabel.setFont(new java.awt.Font("SimSun", 1, 18)); // NOI18N
         headerTitleLabel.setText("门（急）诊开药、划价、收费");
 
-        idDateLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        idDateLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         idDateLabel.setText("收费日期：");
 
         idDateField.setColumns(10);
         idDateField.setEditable(false);
-        idDateField.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        idDateField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         idDateField.setText("2009-11-01 11：00");
         idDateField.setFocusable(false);
 
@@ -254,7 +257,7 @@ public class PriceIIDialog extends javax.swing.JDialog {
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(headerSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
+                .addContainerGap(125, Short.MAX_VALUE)
                 .addComponent(userNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,13 +265,13 @@ public class PriceIIDialog extends javax.swing.JDialog {
                 .addComponent(idNumLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(idNumField, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(idDateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addComponent(idDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
-                .addContainerGap(272, Short.MAX_VALUE)
+                .addContainerGap(259, Short.MAX_VALUE)
                 .addComponent(headerTitleLabel)
                 .addGap(226, 226, 226))
         );
@@ -281,12 +284,12 @@ public class PriceIIDialog extends javax.swing.JDialog {
                 .addComponent(headerSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idDateLabel)
-                    .addComponent(idDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(idNumLabel)
                     .addComponent(idNumField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(userNameLabel)
-                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idDateLabel)
+                    .addComponent(idDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -314,49 +317,49 @@ public class PriceIIDialog extends javax.swing.JDialog {
 
         toolPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        cancelTool.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        cancelTool.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         cancelTool.setText("取消收费");
         cancelTool.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        printTool.setFont(new java.awt.Font("Microsoft YaHei", 0, 12));
+        printTool.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         printTool.setText("收费打印");
         printTool.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        oughtaccLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        oughtaccLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         oughtaccLabel.setText("应收金额：");
 
-        discountaccLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        discountaccLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         discountaccLabel.setText("优惠金额：");
 
-        realaccLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        realaccLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         realaccLabel.setText("实收金额：");
 
-        payLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        payLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         payLabel.setText("支付金额：");
 
         oughtaccField.setColumns(6);
         oughtaccField.setEditable(false);
-        oughtaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        oughtaccField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         oughtaccField.setFocusable(false);
 
         discountaccField.setColumns(6);
         discountaccField.setEditable(false);
-        discountaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        discountaccField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
 
         realaccField.setColumns(6);
         realaccField.setEditable(false);
-        realaccField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        realaccField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         realaccField.setFocusable(false);
 
         payField.setColumns(6);
-        payField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        payField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
 
-        changeLabel.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        changeLabel.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         changeLabel.setText("找零：");
 
         changeField.setColumns(6);
         changeField.setEditable(false);
-        changeField.setFont(new java.awt.Font("Microsoft YaHei", 0, 10));
+        changeField.setFont(new java.awt.Font("SimSun", 0, 12)); // NOI18N
         changeField.setFocusable(false);
 
         javax.swing.GroupLayout toolPanelLayout = new javax.swing.GroupLayout(toolPanel);
@@ -369,30 +372,30 @@ public class PriceIIDialog extends javax.swing.JDialog {
                     .addGroup(toolPanelLayout.createSequentialGroup()
                         .addComponent(oughtaccLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(oughtaccField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addComponent(oughtaccField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(discountaccLabel)
                         .addGap(4, 4, 4)
-                        .addComponent(discountaccField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
+                        .addComponent(discountaccField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(realaccLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(realaccField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addComponent(realaccField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(payLabel)
-                        .addGap(12, 12, 12)
-                        .addComponent(payField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(payField, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cancelTool, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(toolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(toolPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(changeLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(changeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(changeField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolPanelLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(printTool, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         toolPanelLayout.setVerticalGroup(
             toolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,8 +440,8 @@ public class PriceIIDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(itemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
-                    .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
+                        .addComponent(itemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                    .addComponent(listPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(toolPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -451,6 +454,46 @@ public class PriceIIDialog extends javax.swing.JDialog {
      */
     @PostConstruct
     public void initSettings() {
+        //font
+        {
+            addButton.setFont(font.getSize_12());
+            cancelTool.setFont(font.getSize_12());
+            changeField.setFont(font.getSize_12());
+            changeLabel.setFont(font.getSize_12());
+            discountaccField.setFont(font.getSize_12());
+            discountaccLabel.setFont(font.getSize_12());
+            headerPanel.setFont(font.getSize_12());
+            headerSeparator.setFont(font.getSize_12());
+            headerTitleLabel.setFont(font.getSize_18_b());
+            idDateField.setFont(font.getSize_12());
+            idDateLabel.setFont(font.getSize_12());
+            idNumField.setFont(font.getSize_12());
+            idNumLabel.setFont(font.getSize_12());
+            infoPanel.setFont(font.getSize_12());
+            itemNameField.setFont(font.getSize_12());
+            itemNameLabel.setFont(font.getSize_12());
+            itemPriceField.setFont(font.getSize_12());
+            itemPriceLabel.setFont(font.getSize_12());
+            itemSizeField.setFont(font.getSize_12());
+            itemSizeLabel.setFont(font.getSize_12());
+            itemsList.setFont(font.getSize_12());
+            itemsPanel.setFont(font.getSize_12());
+            itemsTable.setFont(font.getSize_12());
+            listPanel.setFont(font.getSize_12());
+            operatorField.setFont(font.getSize_12());
+            operatorLabel.setFont(font.getSize_12());
+            oughtaccField.setFont(font.getSize_12());
+            oughtaccLabel.setFont(font.getSize_12());
+            payField.setFont(font.getSize_12());
+            payLabel.setFont(font.getSize_12());
+            printTool.setFont(font.getSize_12());
+            realaccField.setFont(font.getSize_12());
+            realaccLabel.setFont(font.getSize_12());
+            removeButton.setFont(font.getSize_12());
+            toolPanel.setFont(font.getSize_12());
+            userNameField.setFont(font.getSize_12());
+            userNameLabel.setFont(font.getSize_12());
+        }
         this.setModal(true);
         this.pack();
         this.setResizable(false);

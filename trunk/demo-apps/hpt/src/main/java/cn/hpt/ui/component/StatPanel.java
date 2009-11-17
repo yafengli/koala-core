@@ -2,9 +2,11 @@ package cn.hpt.ui.component;
 
 import cn.hpt.model.Bill;
 import cn.hpt.ui.MainFrame;
+import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.extend.ObservingTextField;
 import cn.hpt.ui.model.BillTabelModel;
 import cn.hpt.ui.model.SelectColorTableCellRenderer;
+import cn.hpt.ui.model.TableHeaderRenderer;
 import cn.hpt.ui.view.BillRecordDialog;
 import cn.hpt.util.DateUtil;
 import cn.hpt.util.HelperUtil;
@@ -47,6 +49,10 @@ public class StatPanel extends JPanel {
     @Autowired
     private IDao baseDao;
     @Autowired
+    private HptFont font;
+    @Autowired
+    private TableHeaderRenderer tableHeaderRenderer;
+    @Autowired
     private BillRecordDialog billRecordDialog;
     private JScrollPane contentbp = new JScrollPane();
     private JPanel buttonbp = new JPanel();
@@ -80,6 +86,7 @@ public class StatPanel extends JPanel {
             int columnIndex = hptTable.getColumnModel().getColumnCount();
             for (int i = 0; i < columnIndex; i++) {
                 TableColumn tc = hptTable.getColumnModel().getColumn(i);
+                tc.setHeaderRenderer(tableHeaderRenderer);
                 tc.setCellRenderer(cellRenderer);
             }
             contentbp.setViewportView(hptTable);
@@ -152,6 +159,19 @@ public class StatPanel extends JPanel {
             searchp.add(endField);
             searchp.add(endButton);
             searchp.add(search);
+            {
+                hptTable.setFont(font.getSize_12());
+                bydoctor.setFont(font.getSize_12());
+                byitem.setFont(font.getSize_12());
+                byuser.setFont(font.getSize_12());
+                startLabel.setFont(font.getSize_12());
+                startField.setFont(font.getSize_12());
+                startButton.setFont(font.getSize_12());
+                endLabel.setFont(font.getSize_12());
+                endButton.setFont(font.getSize_12());
+                endField.setFont(font.getSize_12());
+                search.setFont(font.getSize_12());
+            }
             {
                 search.addActionListener(new ActionListener() {
 

@@ -22,12 +22,11 @@ import cn.hpt.ui.extend.HptFont;
 @Service
 public class MedicineTableCellEditor extends JComboBox implements
         TableCellEditor {
-    public static final Logger logger = LoggerFactory
-            .getLogger(MedicineTableCellEditor.class);
+
+    public static final Logger logger = LoggerFactory.getLogger(MedicineTableCellEditor.class);
     private static final long serialVersionUID = 3568927884211864044L;
     protected EventListenerList listenerList = new EventListenerList();
     protected ChangeEvent changeEvent = new ChangeEvent(this);
-
     @Autowired
     private CategoryTabelModel tabelModel;
     @Autowired
@@ -54,7 +53,7 @@ public class MedicineTableCellEditor extends JComboBox implements
     protected void fireEditingCanceled() {
         CellEditorListener listener;
         Object[] listeners = listenerList.getListenerList();
-        for (int i = 0; i < listeners.length-1; i++) {
+        for (int i = 0; i < listeners.length - 1; i++) {
             if (listeners[i] == CellEditorListener.class) {
                 listener = (CellEditorListener) listeners[i + 1];
                 listener.editingCanceled(changeEvent);
@@ -64,8 +63,8 @@ public class MedicineTableCellEditor extends JComboBox implements
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
-                                                 boolean isSelected, int row, int column) {
-        this.setFont(font.OPTION_SONTI);
+            boolean isSelected, int row, int column) {
+        this.setFont(font.getSize_12());
         return this;
     }
 

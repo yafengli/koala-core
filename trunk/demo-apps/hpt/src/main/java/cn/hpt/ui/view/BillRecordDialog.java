@@ -20,8 +20,10 @@ import org.koala.dao.IDao;
 
 import cn.hpt.model.Bill;
 import cn.hpt.model.BillRecord;
+import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.model.BillRecordTabelModel;
 import cn.hpt.ui.model.SelectColorTableCellRenderer;
+import cn.hpt.ui.model.TableHeaderRenderer;
 import cn.hpt.util.WindowUtil;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -31,14 +33,16 @@ import org.springframework.context.annotation.Scope;
 public class BillRecordDialog extends JDialog {
 
     private static final long serialVersionUID = -1547042069151210354L;
-
     @Autowired
     private BillRecordTabelModel tabelModel;
     @Autowired
     private SelectColorTableCellRenderer cellRenderer;
     @Autowired
     private IDao baseDao;
-
+    @Autowired
+    private HptFont font;
+    @Autowired
+    private TableHeaderRenderer tableHeaderRenderer;
     private JScrollPane contentbp = new JScrollPane();
     private JTable hptTable = new JTable();
     private JPanel buttonp = new JPanel();
@@ -46,6 +50,7 @@ public class BillRecordDialog extends JDialog {
 
     @PostConstruct
     public void init() {
+
         this.setModal(true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -57,6 +62,7 @@ public class BillRecordDialog extends JDialog {
             int columnIndex = hptTable.getColumnModel().getColumnCount();
             for (int i = 0; i < columnIndex; i++) {
                 TableColumn tc = hptTable.getColumnModel().getColumn(i);
+                tc.setHeaderRenderer(tableHeaderRenderer);
                 tc.setCellRenderer(cellRenderer);
             }
             contentbp.setViewportView(hptTable);
@@ -64,6 +70,7 @@ public class BillRecordDialog extends JDialog {
         {
             final JDialog dialog = this;
             close.addActionListener(new ActionListener() {
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dialog.dispose();
@@ -72,6 +79,11 @@ public class BillRecordDialog extends JDialog {
         }
         buttonp.add(close);
         add(buttonp, BorderLayout.SOUTH);
+        //font
+        {
+            hptTable.setFont(font.getSize_12());
+            close.setFont(font.getSize_12());
+        }
     }
 
     public void view(Bill bill) {

@@ -1,6 +1,7 @@
 package cn.hpt.ui;
 
 import cn.hpt.model.Operator;
+import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.extend.HptInitData;
 import cn.hpt.ui.listener.CloseAppActionListener;
 import cn.hpt.ui.listener.LoginActionListener;
@@ -30,6 +31,8 @@ public class LoginWindow extends javax.swing.JFrame {
     private LoginActionListener loginActionListener;
     @Autowired
     private PropertiesLoader pl;
+    @Autowired
+    private HptFont font;
     @Autowired
     private HptInitData hptInitData;
     private JPanel loginPanel = new JPanel();
@@ -173,6 +176,21 @@ public class LoginWindow extends javax.swing.JFrame {
                     messagePanel.add(messageLabel);
                     messageLabel.setText(pl.getString("login.label.msg"));
                 }
+            }
+            //font init
+            {
+                loginPanel.setFont(font.getSize_12());
+                imagePanel.setFont(font.getSize_12());
+                namePanel = new JPanel();
+                messageLabel = new JLabel();
+                messagePanel = new JPanel();
+                passwordPanel = new JPanel();
+                closeButton.setFont(font.getSize_12());
+
+                passwordLabel.setFont(font.getSize_12());
+                loginButton.setFont(font.getSize_12());
+                nameLabel.setFont(font.getSize_12());
+                nameComboBox.setFont(font.getSize_12());
             }
             setIconImage(frameIco.getImage());
             focusTravel();

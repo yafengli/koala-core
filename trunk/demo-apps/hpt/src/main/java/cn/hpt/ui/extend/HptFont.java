@@ -1,25 +1,47 @@
 package cn.hpt.ui.extend;
 
+import cn.hpt.util.PropertiesLoader;
 import java.awt.Font;
 
+import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class HptFont {
 
-	public final Font LABLE_SONTI;
-	public final Font OPTION_SONTI;
-	// public final Font Y_CONSOLE;
-	public final Font PRICE_NAME;
-	public final Font PRICE_LABEL;
+    @Autowired
+    private PropertiesLoader pl;
+    private Font size_14;
+    private Font size_12;
+    private Font size_12_b;
+    private Font size_18_b;
+    private static final long serialVersionUID = -3230435859900844074L;
 
-	private static final long serialVersionUID = -3230435859900844074L;
+    public HptFont() {
+    }
 
-	public HptFont() {
-		LABLE_SONTI = new Font("宋体", Font.PLAIN, 14);
-		OPTION_SONTI = new Font("宋体", Font.PLAIN, 12);
-		PRICE_NAME = new Font("宋体", Font.BOLD, 18);
-		PRICE_LABEL = new Font("宋体", Font.BOLD, 12);
-		// Y_CONSOLE = new Font("YaHei Consolas Hybrid", Font.PLAIN, 14);
-	}
+    @PostConstruct
+    private void init() {
+        size_14 = new Font(pl.getString("font.dialog"), Font.PLAIN, 14);
+        size_12 = new Font(pl.getString("font.dialog"), Font.PLAIN, 12);
+        size_12_b = new Font(pl.getString("font.dialog"), Font.BOLD, 12);
+        size_18_b = new Font(pl.getString("font.dialog"), Font.BOLD, 18);
+    }
+
+    public Font getSize_14() {
+        return size_14;
+    }
+
+    public Font getSize_12() {
+        return size_12;
+    }
+
+    public Font getSize_18_b() {
+        return size_18_b;
+    }
+
+    public Font getSize_12_b() {
+        return size_12_b;
+    }
 }

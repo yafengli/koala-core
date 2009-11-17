@@ -2,6 +2,7 @@ package cn.hpt.ui.component;
 
 import cn.hpt.bean.ParamStruct;
 import cn.hpt.model.Operator;
+import cn.hpt.ui.extend.HptFont;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 import org.springframework.stereotype.Component;
@@ -21,9 +22,13 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Component
 public class ModifyInfoPanel extends JPanel {
+
+    @Autowired
+    private HptFont font;
     private static final long serialVersionUID = 8104192395718635289L;
     public static List<ParamStruct> psl = new ArrayList<ParamStruct>();
 
@@ -39,7 +44,6 @@ public class ModifyInfoPanel extends JPanel {
         psl.add(new ParamStruct("mpassword", "确认密码：", "确认密码", 'M', 15,
                 new JPasswordField()));
     }
-
 
     @PostConstruct
     public void init() {
@@ -57,31 +61,33 @@ public class ModifyInfoPanel extends JPanel {
         for (int i = 1; i < psl.size(); i++) {
             builder.appendRow("top:pref");
             builder.nextLine();
-            builder.addLabel(psl.get(i).getLabel());
+            JLabel label = new JLabel(psl.get(i).getLabel());
+            label.setFont(font.getSize_12());
+            builder.add(label);
             builder.nextColumn();
             builder.add(psl.get(i).getField());
         }
 
         /*
         FormLayout layout = new FormLayout(
-                "right:max(40dlu;pref), 3dlu, 50dlu, 7dlu, "
-                        + "right:max(40dlu;pref), 3dlu, 50dlu",
-                "p, 3dlu, p, 3dlu, p, 3dlu, p, 9dlu, "
-                        + "p, 3dlu, p, 3dlu, p, 3dlu, p, 9dlu, "
-                        + "p, 3dlu, p, 3dlu, p, 3dlu, p");
+        "right:max(40dlu;pref), 3dlu, 50dlu, 7dlu, "
+        + "right:max(40dlu;pref), 3dlu, 50dlu",
+        "p, 3dlu, p, 3dlu, p, 3dlu, p, 9dlu, "
+        + "p, 3dlu, p, 3dlu, p, 3dlu, p, 9dlu, "
+        + "p, 3dlu, p, 3dlu, p, 3dlu, p");
 
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
 
         
         for (final ParamStruct ps : psl) {
-            builder.appendRow("top:pref");
-            builder.addLabel(ps.getLabel());
-            builder.nextColumn(2);
-            builder.add(ps.getField());
-            builder.nextLine(2);
+        builder.appendRow("top:pref");
+        builder.addLabel(ps.getLabel());
+        builder.nextColumn(2);
+        builder.add(ps.getField());
+        builder.nextLine(2);
         }
-        */
+         */
         add(builder.getPanel(), BorderLayout.CENTER);
     }
 
@@ -142,12 +148,13 @@ public class ModifyInfoPanel extends JPanel {
 
     class OperatorInoAdapter extends KeyAdapter implements FocusListener,
             DocumentListener {
+
         private Operator operator;
         private ParamStruct ps;
         private JTextField field;
 
         public OperatorInoAdapter(Operator operator, ParamStruct ps,
-                                  JTextField field) {
+                JTextField field) {
             this.operator = operator;
             this.ps = ps;
             this.field = field;
@@ -192,5 +199,4 @@ public class ModifyInfoPanel extends JPanel {
             writeField(operator, ps.getLabelName(), field.getText());
         }
     }
-
 }

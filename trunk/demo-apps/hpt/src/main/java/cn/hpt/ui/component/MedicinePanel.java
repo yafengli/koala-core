@@ -29,15 +29,14 @@ import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.model.MedicineTableCellEditor;
 import cn.hpt.ui.model.MedicineTableModel;
 import cn.hpt.ui.model.SelectColorTableCellRenderer;
+import cn.hpt.ui.model.TableHeaderRenderer;
 import cn.hpt.util.PropertiesLoader;
 
 @Service
 public class MedicinePanel extends JPanel {
 
     private static final long serialVersionUID = -1047279537436880394L;
-    public static final Logger logger = LoggerFactory
-            .getLogger(MedicinePanel.class);
-
+    public static final Logger logger = LoggerFactory.getLogger(MedicinePanel.class);
     @Autowired
     private MainFrame mainFrame;
     @Autowired
@@ -52,7 +51,9 @@ public class MedicinePanel extends JPanel {
     private MedicineTableCellEditor cellEditor;
     @Autowired
     private HptFont font;
-
+    @Autowired
+    private TableHeaderRenderer tableHeaderRenderer;
+    
     public JScrollPane contentbp = new JScrollPane();
     public JPanel buttonbp = new JPanel();
     public JTable hptTable = new JTable();
@@ -74,9 +75,11 @@ public class MedicinePanel extends JPanel {
             for (int i = 0; i < columnIndex; i++) {
                 TableColumn tc = hptTable.getColumnModel().getColumn(i);
                 tc.setCellRenderer(cellRenderer);
+                tc.setHeaderRenderer(tableHeaderRenderer);
             }
-            hptTable.setRowHeight(font.LABLE_SONTI.getSize() + 5);
+            hptTable.setRowHeight(font.getSize_14().getSize() + 5);
             cellEditor.addItemListener(new ItemListener() {
+
                 @Override
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -102,7 +105,16 @@ public class MedicinePanel extends JPanel {
             buttonbp.add(excel);
             buttonbp.add(print);
         }
+        //font
+        {
+            hptTable.setFont(font.getSize_12());
+            add.setFont(font.getSize_12());
+            delete.setFont(font.getSize_12());
+            excel.setFont(font.getSize_12());
+            print.setFont(font.getSize_12());
+        }
         add.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 Medicine item = new Medicine();
@@ -122,8 +134,7 @@ public class MedicinePanel extends JPanel {
                     return;
                 } else if (selectRow >= 0
                         && selectRow < medicineTabelModel.getItem().size()) {
-                    int option = JOptionPane.showConfirmDialog(mainFrame, pl
-                            .getString("del.operator.msg"), null,
+                    int option = JOptionPane.showConfirmDialog(mainFrame, pl.getString("del.operator.msg"), null,
                             JOptionPane.YES_NO_OPTION);
                     switch (option) {
                         case JOptionPane.YES_OPTION:
@@ -140,6 +151,7 @@ public class MedicinePanel extends JPanel {
             }
         });
         print.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean flag = false;

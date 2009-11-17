@@ -19,6 +19,7 @@ import org.koala.dao.IDao;
 
 import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.component.ModifyInfoPanel;
+import cn.hpt.ui.extend.HptFont;
 import cn.hpt.util.PropertiesLoader;
 import cn.hpt.util.WindowUtil;
 
@@ -26,7 +27,6 @@ import cn.hpt.util.WindowUtil;
 public class ModifyInfoDialog extends JDialog {
 
     private static final long serialVersionUID = -1547042069151210354L;
-
     @Autowired
     private MainFrame mainFrame;
     @Autowired
@@ -34,9 +34,12 @@ public class ModifyInfoDialog extends JDialog {
     @Autowired
     private PropertiesLoader pl;
     @Autowired
+    private HptFont font;
+    @Autowired
     private ModifyInfoPanel operatorForm;
-
     private JPanel actionp = new JPanel();
+    private JButton submit = new JButton("修改");
+    private JButton close = new JButton("关闭");
 
     @PostConstruct
     public void init() {
@@ -44,8 +47,8 @@ public class ModifyInfoDialog extends JDialog {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         getContentPane().add(operatorForm, BorderLayout.CENTER);
 
-        JButton submit = new JButton("修改");
-        JButton close = new JButton("关闭");
+
+
         submit.setFocusable(true);
         close.setFocusable(true);
         final JDialog f = this;
@@ -60,6 +63,7 @@ public class ModifyInfoDialog extends JDialog {
             }
         });
         submit.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 submit();
@@ -77,6 +81,7 @@ public class ModifyInfoDialog extends JDialog {
             }
         });
         close.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.dispose();
@@ -85,6 +90,11 @@ public class ModifyInfoDialog extends JDialog {
         });
         actionp.add(submit);
         actionp.add(close);
+        //font
+        {
+            submit.setFont(font.getSize_12());
+            close.setFont(font.getSize_12());
+        }
         pack();
         getContentPane().add(actionp, BorderLayout.SOUTH);
     }
@@ -97,8 +107,7 @@ public class ModifyInfoDialog extends JDialog {
     }
 
     private void submit() {
-        int option = JOptionPane.showConfirmDialog(mainFrame, pl
-                .getString("useraction.listener.confirm"),
+        int option = JOptionPane.showConfirmDialog(mainFrame, pl.getString("useraction.listener.confirm"),
                 mainFrame.userMenuItem.getText(), JOptionPane.YES_NO_OPTION);
         switch (option) {
             case JOptionPane.YES_OPTION:
@@ -111,21 +120,18 @@ public class ModifyInfoDialog extends JDialog {
                     String mpw = new String(((JPasswordField) ModifyInfoPanel.psl.get(
                             4).getField()).getPassword());
                     if (mainFrame.getOperator().getPassword().equalsIgnoreCase(cpw)
-                            && ((mpw == null && npw == null) || (npw
-                            .equalsIgnoreCase(mpw)
+                            && ((mpw == null && npw == null) || (npw.equalsIgnoreCase(mpw)
                             && npw.length() >= 5 && npw.length() <= 10))) {
                         if (npw != null) {
                             mainFrame.getOperator().setPassword(npw);
                         }
                         baseDao.update(mainFrame.getOperator());
                         this.setVisible(false);
-                        JOptionPane.showMessageDialog(mainFrame, pl
-                                .getString("useraction.listener.success"),
+                        JOptionPane.showMessageDialog(mainFrame, pl.getString("useraction.listener.success"),
                                 mainFrame.userMenuItem.getText(),
                                 JOptionPane.CLOSED_OPTION);
                     } else {
-                        JOptionPane.showMessageDialog(mainFrame, pl
-                                .getString("useraction.listener.error"),
+                        JOptionPane.showMessageDialog(mainFrame, pl.getString("useraction.listener.error"),
                                 mainFrame.userMenuItem.getText(),
                                 JOptionPane.CLOSED_OPTION);
                     }

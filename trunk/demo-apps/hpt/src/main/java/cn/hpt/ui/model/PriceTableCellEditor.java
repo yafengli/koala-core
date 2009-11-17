@@ -29,7 +29,7 @@ public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
     private List<Medicine> lm;
 
     /* 收 mshortcut影响 重新读取药品名 */
-    public void reload(String value) {        
+    public void reload(String value) {
         removeAllItems();
         lm = baseDao.find("medicine.find.like.byshortcut",
                 new String[]{"mshortcut"}, new Object[]{value + "%"});
@@ -63,7 +63,7 @@ public class PriceTableCellEditor extends JComboBox implements TableCellEditor {
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
             boolean isSelected, int row, int column) {
-        this.setFont(font.OPTION_SONTI);
+        this.setFont(font.getSize_12());
         return this;
     }
 
