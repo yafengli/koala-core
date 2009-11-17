@@ -17,13 +17,13 @@ public class BillSearchAction extends AbstractAction {
     private MainFrame mainFrame;
 
     public BillSearchAction() {
-        super("划价收费", new ImageIcon(BillSearchAction.class.getResource("/logo/bisr.png")));
+        super("划价收费", new ImageIcon(BillSearchAction.class.getResource("/logo/blsr.png")));
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        mainFrame.actionTabbedPane.addTab(mainFrame.outpatientSearchMenuItem.getText(), mainFrame.billSearchPanel);// 收费查询
+        mainFrame.actionTabbedPane.addTab(mainFrame.billSearchMenuItem.getText(), mainFrame.billSearchPanel);// 收费查询
         mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.billSearchPanel);
     }
 }

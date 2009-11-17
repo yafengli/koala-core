@@ -39,8 +39,8 @@ public class PanelStatusListener implements ActionListener {
             mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.medicinePanel);
 
         } else if (actionCommand != null
-                && actionCommand.equalsIgnoreCase(mainFrame.outpatientSearchMenuItem.getActionCommand())) {
-            mainFrame.actionTabbedPane.addTab(mainFrame.outpatientSearchMenuItem.getText(), mainFrame.billSearchPanel);// 收费查询
+                && actionCommand.equalsIgnoreCase(mainFrame.billSearchMenuItem.getActionCommand())) {
+            mainFrame.actionTabbedPane.addTab(mainFrame.billSearchMenuItem.getText(), mainFrame.billSearchPanel);// 收费查询
             mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.billSearchPanel);
 
         } else if (actionCommand != null

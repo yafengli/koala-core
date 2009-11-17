@@ -54,22 +54,23 @@ public class MainFrame extends javax.swing.JFrame {
     public JMenuItem purchaseSearcheMenuItem;
     public JMenuItem purchaseStMenuItem;
     public JMenuItem purchCtMenuItem;
-    public JMenu stockMenu;
-    public JMenu systemMenu;
-    public JMenu statMenu;
     public JMenuItem cancelMenuItem;
     public JMenuItem warehouseMenuItem;
     public JMenuItem medicineMenuItem;
     public JMenuItem medicineCtMenuItem;
     public JMenuItem priceMenuItem;
     public JMenuItem statMenuItem;
-    public JMenu helpMenu;
-    public JMenu quitMenu;
-    public JMenu personMenu;
     public JMenu outpatientMenu;
+    public JMenu statMenu;
+    public JMenu stockMenu;
+    public JMenu systemMenu;
+    public JMenu personMenu;
+    public JMenu quitMenu;
+    public JMenu helpMenu;
+    
     public JToolBar mainToolBar;
     public JScrollPane editPane;
-    public JMenuItem outpatientSearchMenuItem;
+    public JMenuItem billSearchMenuItem;
     public JClosableTabbedPane actionTabbedPane;
     /**
      * **** 华丽的分割线 *****
@@ -154,7 +155,7 @@ public class MainFrame extends javax.swing.JFrame {
                 mainToolBar = new JToolBar();
                 mainToolBar.add(outpatientAction);
                 mainToolBar.add(billSearchAction);
-                mainToolBar.add(billCancelAction);                
+                mainToolBar.add(billCancelAction);
                 mainToolBar.add(medicineCtAction);
                 mainToolBar.add(medicineAction);
                 mainToolBar.add(statAction);
@@ -181,20 +182,20 @@ public class MainFrame extends javax.swing.JFrame {
                         outpatientMenu.add(new JSeparator());
                     }
                     {
-                        cancelMenuItem = new JMenuItem();
-                        outpatientMenu.add(cancelMenuItem);
-                        cancelMenuItem.setText(pl.getString("m.cancel"));
-                        cancelMenuItem.addActionListener(panelStatusListener);
+                        billSearchMenuItem = new JMenuItem();
+                        billSearchMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK, true));
+                        billSearchMenuItem.addActionListener(panelStatusListener);
+                        outpatientMenu.add(billSearchMenuItem);
+                        billSearchMenuItem.setText(pl.getString("m.outpatient.search"));
                     }
                     {
                         outpatientMenu.add(new JSeparator());
                     }
                     {
-                        outpatientSearchMenuItem = new JMenuItem();
-                        outpatientSearchMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK, true));
-                        outpatientSearchMenuItem.addActionListener(panelStatusListener);
-                        outpatientMenu.add(outpatientSearchMenuItem);
-                        outpatientSearchMenuItem.setText(pl.getString("m.outpatient.search"));
+                        cancelMenuItem = new JMenuItem();
+                        outpatientMenu.add(cancelMenuItem);
+                        cancelMenuItem.setText(pl.getString("m.cancel"));
+                        cancelMenuItem.addActionListener(panelStatusListener);
                     }
                 }
                 {
