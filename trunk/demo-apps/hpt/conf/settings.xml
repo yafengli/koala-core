@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment>2009-11-17 14:42:26</comment>
+<comment>2009-11-17 14:49:44</comment>
 <entry key="m.stock">库存管理(S)</entry>
 <entry key="useraction.listener.error">
         修改失败：
@@ -101,10 +101,10 @@
 <entry key="print.date.x">200</entry>
 <entry key="m.data.rt">数据恢复</entry>
 <entry key="init.password">lym123456</entry>
-<entry key="pd.social">社保账号：</entry>
-<entry key="m.medicine.ct">药品类别</entry>
 <entry key="login.frame.ico">/logo/8.png</entry>
-<entry key="m.outpatient.search">票据查询</entry>
+<entry key="m.medicine.ct">药品类别</entry>
+<entry key="pd.social">社保账号：</entry>
 <entry key="m.quit">退出(Q)</entry>
+<entry key="m.outpatient.search">票据查询</entry>
 <entry key="pd.operator">操作员：</entry>
 </properties>
