@@ -75,15 +75,7 @@ public class CategoryPanel extends JPanel {
             buttonbp.add(delete);
             buttonbp.add(excel);
             buttonbp.add(print);
-        }
-        //font
-        {
-            hptTable.setFont(font.getSize_12());
-            add.setFont(font.getSize_12());
-            delete.setFont(font.getSize_12());
-            excel.setFont(font.getSize_12());
-            print.setFont(font.getSize_12());
-        }
+        }        
         add.addActionListener(new ActionListener() {
 
             @Override

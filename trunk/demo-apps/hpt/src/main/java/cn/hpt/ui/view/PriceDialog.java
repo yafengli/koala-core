@@ -210,7 +210,6 @@ public class PriceDialog extends javax.swing.JDialog {
                             itemPanel.add(itemnamePanel, BorderLayout.NORTH);
                             {
                                 itemnameLabel = new JLabel();
-                                itemnameLabel.setFont(font.getSize_12());
                                 itemnamePanel.add(itemnameLabel);
                                 itemnameLabel.setText(pl.getString("pd.item.name"));
                             }
@@ -225,7 +224,6 @@ public class PriceDialog extends javax.swing.JDialog {
                     printPanel.add(namePanel, BorderLayout.NORTH);
                     {
                         nameLabel = new JLabel();
-                        nameLabel.setFont(font.getSize_18_b());
                         namePanel.add(nameLabel);
                         nameLabel.setText(pl.getString("pd.name"));
                     }

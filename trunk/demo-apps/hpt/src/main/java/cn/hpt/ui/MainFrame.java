@@ -12,10 +12,11 @@ import org.springframework.stereotype.Component;
 import cn.hpt.extend.JClosableTabbedPane;
 import cn.hpt.model.Operator;
 import cn.hpt.model.Role;
+import cn.hpt.ui.component.BillCancelPanel;
 import cn.hpt.ui.component.CategoryPanel;
 import cn.hpt.ui.component.MedicinePanel;
 import cn.hpt.ui.component.OperatorPanel;
-import cn.hpt.ui.component.BillPanel;
+import cn.hpt.ui.component.BillSearchPanel;
 import cn.hpt.ui.component.StatPanel;
 import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.listener.AuthorityWindowAdapter;
@@ -24,6 +25,8 @@ import cn.hpt.ui.listener.CloseAppActionListener;
 import cn.hpt.ui.listener.PanelStatusListener;
 import cn.hpt.ui.listener.ShowInfoActionListener;
 import cn.hpt.ui.listener.UserActinListener;
+import cn.hpt.ui.toolbar.BillCancelAction;
+import cn.hpt.ui.toolbar.BillSearchAction;
 import cn.hpt.ui.toolbar.MedicineAction;
 import cn.hpt.ui.toolbar.MedicineCtAction;
 import cn.hpt.ui.toolbar.OutpatientAction;
@@ -74,6 +77,10 @@ public class MainFrame extends javax.swing.JFrame {
     @Autowired
     public OutpatientAction outpatientAction;
     @Autowired
+    public BillSearchAction billSearchAction;
+    @Autowired
+    public BillCancelAction billCancelAction;
+    @Autowired
     public MedicineCtAction medicineCtAction;
     @Autowired
     public MedicineAction medicineAction;
@@ -100,7 +107,9 @@ public class MainFrame extends javax.swing.JFrame {
     @Autowired
     public MedicinePanel medicinePanel;
     @Autowired
-    public BillPanel billPanel;
+    public BillSearchPanel billSearchPanel;
+    @Autowired
+    public BillCancelPanel billCancelPanel;
     @Autowired
     public StatPanel statPanel;
     @Autowired
@@ -144,6 +153,9 @@ public class MainFrame extends javax.swing.JFrame {
             {
                 mainToolBar = new JToolBar();
                 mainToolBar.add(outpatientAction);
+                mainToolBar.add(billSearchAction);
+                mainToolBar.add(billCancelAction);
+                mainToolBar.add(outpatientAction);
                 mainToolBar.add(medicineCtAction);
                 mainToolBar.add(medicineAction);
                 mainToolBar.add(statAction);
@@ -173,6 +185,7 @@ public class MainFrame extends javax.swing.JFrame {
                         cancelMenuItem = new JMenuItem();
                         outpatientMenu.add(cancelMenuItem);
                         cancelMenuItem.setText(pl.getString("m.cancel"));
+                        cancelMenuItem.addActionListener(panelStatusListener);
                     }
                     {
                         outpatientMenu.add(new JSeparator());
@@ -372,42 +385,6 @@ public class MainFrame extends javax.swing.JFrame {
                     actionTabbedPane = new JClosableTabbedPane();
                     getContentPane().add(actionTabbedPane, BorderLayout.CENTER);
                 }
-            }
-            //font set
-            {
-                mainMenuBar.setFont(font.getSize_14());
-                medicineSearcheMenuItem.setFont(font.getSize_12());//药品入库查询
-                infoMenuItem.setFont(font.getSize_12());//信息
-                quitMenuItem.setFont(font.getSize_12());
-                changeloginMenuItem.setFont(font.getSize_12());
-                userMenuItem.setFont(font.getSize_12());
-                configMenuItem.setFont(font.getSize_12());
-                caseTmMenuItem.setFont(font.getSize_12());
-                billMenuItem.setFont(font.getSize_12());
-                roleMenuItem.setFont(font.getSize_12());
-                purchaseMenuItem.setFont(font.getSize_12());
-                operatorMenuItem.setFont(font.getSize_12());
-                dataRstMenuItem.setFont(font.getSize_12());
-                dataBkMenuItem.setFont(font.getSize_12());
-                purchaseSearcheMenuItem.setFont(font.getSize_12());
-                purchaseStMenuItem.setFont(font.getSize_12());
-                purchCtMenuItem.setFont(font.getSize_12());
-                stockMenu.setFont(font.getSize_12());
-                systemMenu.setFont(font.getSize_12());
-                statMenu.setFont(font.getSize_12());
-                cancelMenuItem.setFont(font.getSize_12());
-                warehouseMenuItem.setFont(font.getSize_12());
-                medicineMenuItem.setFont(font.getSize_12());
-                medicineCtMenuItem.setFont(font.getSize_12());
-                priceMenuItem.setFont(font.getSize_12());
-                statMenuItem.setFont(font.getSize_12());
-                helpMenu.setFont(font.getSize_12());
-                quitMenu.setFont(font.getSize_12());
-                personMenu.setFont(font.getSize_12());
-                outpatientMenu.setFont(font.getSize_12());
-                mainToolBar.setFont(font.getSize_12());
-                outpatientSearchMenuItem.setFont(font.getSize_12());
-                actionTabbedPane.setFont(font.getSize_12());
             }
             setIconImage(new ImageIcon(MainFrame.class.getResource(pl.getString("main.frame.ico"))).getImage());
             pack();

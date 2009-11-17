@@ -89,12 +89,7 @@ public class ModifyInfoDialog extends JDialog {
             }
         });
         actionp.add(submit);
-        actionp.add(close);
-        //font
-        {
-            submit.setFont(font.getSize_12());
-            close.setFont(font.getSize_12());
-        }
+        actionp.add(close);       
         pack();
         getContentPane().add(actionp, BorderLayout.SOUTH);
     }

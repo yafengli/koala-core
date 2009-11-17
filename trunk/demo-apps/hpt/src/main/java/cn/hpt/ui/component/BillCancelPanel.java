@@ -1,6 +1,8 @@
 package cn.hpt.ui.component;
 
 import cn.hpt.model.Bill;
+import cn.hpt.model.BillRecord;
+import cn.hpt.ui.LoginWindow;
 import cn.hpt.ui.MainFrame;
 import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.extend.ObservingTextField;
@@ -9,10 +11,8 @@ import cn.hpt.ui.model.SelectColorTableCellRenderer;
 import cn.hpt.ui.model.TableHeaderRenderer;
 import cn.hpt.ui.view.BillRecordDialog;
 import cn.hpt.util.DateUtil;
-import cn.hpt.util.HelperUtil;
 import cn.hpt.util.PropertiesLoader;
 import com.qt.datapicker.DatePicker;
-import java.io.File;
 import org.koala.dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +31,12 @@ import java.awt.event.MouseEvent;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.List;
-import javax.swing.filechooser.FileFilter;
 
 @Service
-public class StatPanel extends JPanel {
+public class BillCancelPanel extends JPanel {
 
     private static final long serialVersionUID = 4591912718436452499L;
-    public static final Logger logger = LoggerFactory.getLogger(StatPanel.class);
+    public static final Logger logger = LoggerFactory.getLogger(BillCancelPanel.class);
     @Autowired
     private MainFrame mainFrame;
     @Autowired
@@ -53,13 +52,15 @@ public class StatPanel extends JPanel {
     @Autowired
     private TableHeaderRenderer tableHeaderRenderer;
     @Autowired
+    private LoginWindow loginWindow;
+    @Autowired
     private BillRecordDialog billRecordDialog;
     private JScrollPane contentbp = new JScrollPane();
     private JPanel buttonbp = new JPanel();
     private JTable hptTable = new JTable();
-    private JButton bydoctor = new JButton("按医生统计");
-    private JButton byitem = new JButton("按项目统计");
-    private JButton byuser = new JButton("按患者统计");
+    private JButton view = new JButton("查看");
+    private JButton delete = new JButton("删除");
+    private JButton print = new JButton("打印");
     private JPanel searchp = new JPanel();
     private JLabel startLabel = new JLabel("开始时间");
     private ObservingTextField startField = new ObservingTextField();
@@ -68,8 +69,6 @@ public class StatPanel extends JPanel {
     private JButton endButton = new JButton();
     private ObservingTextField endField = new ObservingTextField();
     private JButton search = new JButton("查询");
-    private JFileChooser chooser = new JFileChooser();//导出文件
-    private FileFilter xlsFilter = new XlsFilter();
 
     @PostConstruct
     public void init() {
@@ -78,11 +77,10 @@ public class StatPanel extends JPanel {
         add(contentbp, BorderLayout.CENTER);
         add(buttonbp, BorderLayout.SOUTH);
         {
-            chooser.setFileFilter(xlsFilter);
-        }
-        {
+
             hptTable.setModel(tabelModel);
-            hptTable.setRowSorter(new TableRowSorter<BillTabelModel>(tabelModel));
+            hptTable.setRowSorter(
+                    new TableRowSorter<BillTabelModel>(tabelModel));
             int columnIndex = hptTable.getColumnModel().getColumnCount();
             for (int i = 0; i < columnIndex; i++) {
                 TableColumn tc = hptTable.getColumnModel().getColumn(i);
@@ -108,9 +106,9 @@ public class StatPanel extends JPanel {
         }
         {
             buttonbp.setLayout(new FlowLayout());
-            buttonbp.add(bydoctor);
-            buttonbp.add(byitem);
-            buttonbp.add(byuser);
+            buttonbp.add(view);
+            buttonbp.add(delete);
+            buttonbp.add(print);
         }
         {
             {
@@ -118,7 +116,7 @@ public class StatPanel extends JPanel {
                 startField.setColumns(20);
                 endField.setEditable(false);
                 endField.setColumns(20);
-                ImageIcon imageIcon = new ImageIcon(StatPanel.class.getResource("/logo/datePicker.gif"));
+                ImageIcon imageIcon = new ImageIcon(BillCancelPanel.class.getResource("/logo/datePicker.gif"));
                 startButton.setIcon(imageIcon);
                 endButton.setIcon(imageIcon);
                 /* set size */
@@ -158,7 +156,8 @@ public class StatPanel extends JPanel {
             searchp.add(endLabel);
             searchp.add(endField);
             searchp.add(endButton);
-            searchp.add(search);            
+            searchp.add(search);
+
             {
                 search.addActionListener(new ActionListener() {
 
@@ -168,6 +167,7 @@ public class StatPanel extends JPanel {
                         try {
                             if (startField.getText() == null || endField.getText() == null
                                     || startField.getText().length() < 1 || endField.getText().length() < 1) {
+
                                 JOptionPane.showMessageDialog(mainFrame, "必须选择开始时间与结束时间！");
                             } else {
                                 Timestamp st = new Timestamp(DateUtil.parse(
@@ -175,9 +175,10 @@ public class StatPanel extends JPanel {
                                 Timestamp et = new Timestamp(DateUtil.parse(
                                         endField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
                                 List<Bill> lb = baseDao.find(
-                                        "bill.find.by.time", new String[]{
-                                            "stime", "etime"}, new Object[]{
-                                            st, et});
+                                        "bill.find.by.time.operator", new String[]{
+                                            "stime", "etime", "operator"}, new Object[]{
+                                            st, et, loginWindow.getOperator()});
+                                System.out.printf("[%s,%s][%s,%s,%s]\n", startField.getText(), endField.getText(), st, et, lb.size());
                                 tabelModel.setItem(lb);
                                 hptTable.revalidate();
                             }
@@ -189,108 +190,78 @@ public class StatPanel extends JPanel {
             }
         }
         {
-            bydoctor.addActionListener(new ActionListener() {
+            view.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    try {
-                        if (startField.getText() == null || endField.getText() == null
-                                || startField.getText().length() < 1 || endField.getText().length() < 1) {
-                            JOptionPane.showMessageDialog(mainFrame, "必须选择开始时间与结束时间！");
-                        } else {
-                            Timestamp st = new Timestamp(DateUtil.parse(
-                                    startField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
-                            Timestamp et = new Timestamp(DateUtil.parse(
-                                    endField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
-                            List<Object[]> items = baseDao.find("bill.find.group.operator.time", new String[]{
-                                        "stime", "etime"}, new Object[]{
-                                        st, et});
-                            //导出
-                            export(items);
-                        }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                    int viewid = hptTable.getSelectedRow();
+                    if (viewid >= 0 & viewid < tabelModel.getItem().size()) {
+                        Bill bill = tabelModel.getItem().get(viewid);
+                        billRecordDialog.view(bill);
                     }
                 }
             });
         }
         {
-            byitem.addActionListener(new ActionListener() {
+            delete.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    try {
-                        if (startField.getText() == null || endField.getText() == null
-                                || startField.getText().length() < 1 || endField.getText().length() < 1) {
-                            JOptionPane.showMessageDialog(mainFrame, "必须选择开始时间与结束时间！");
-                        } else {
-                            Timestamp st = new Timestamp(DateUtil.parse(
-                                    startField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
-                            Timestamp et = new Timestamp(DateUtil.parse(
-                                    endField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
-                            List<Object[]> items = baseDao.find("bill.find.group.item.time", new String[]{
-                                        "stime", "etime"}, new Object[]{
-                                        st, et});
-                            //导出
-                            export(items);
+                    int selectRow = hptTable.getSelectedRow();
+                    if (hptTable.isEditing()) {
+                        return;
+                    } else if (selectRow >= 0
+                            && selectRow <= tabelModel.getItem().size()) {
+                        int option = JOptionPane.showConfirmDialog(mainFrame,
+                                pl.getString("del.operator.msg"), null,
+                                JOptionPane.YES_NO_OPTION);
+                        switch (option) {
+                            case JOptionPane.YES_OPTION:
+                                Bill item = tabelModel.getItem().get(selectRow);
+                                List<BillRecord> lbr = baseDao.find("billrecord.find.by.bill",
+                                        new String[]{"bill"},
+                                        new Object[]{item});
+                                for (BillRecord bd : lbr) {
+                                    baseDao.remove(bd);
+                                }
+                                baseDao.remove(item);
+                                tabelModel.getItem().remove(selectRow);
+                                hptTable.revalidate();
+                                break;
+                            case JOptionPane.NO_OPTION:
+                                break;
                         }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
                     }
                 }
             });
         }
         {
-            byuser.addActionListener(new ActionListener() {
+            print.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    boolean flag = false;
                     try {
-                        if (startField.getText() == null || endField.getText() == null
-                                || startField.getText().length() < 1 || endField.getText().length() < 1) {
-                            JOptionPane.showMessageDialog(mainFrame, "必须选择开始时间与结束时间！");
-                        } else {
-                            Timestamp st = new Timestamp(DateUtil.parse(
-                                    startField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
-                            Timestamp et = new Timestamp(DateUtil.parse(
-                                    endField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
-                            List<Object[]> items = baseDao.find("bill.find.group.user.time", new String[]{
-                                        "stime", "etime"}, new Object[]{
-                                        st, et});
-                            //导出
-                            export(items);
+                        int op = JOptionPane.showConfirmDialog(null, "您确认打印吗？",
+                                "打印", JOptionPane.YES_NO_OPTION);
+                        switch (op) {
+                            case 0:
+                                flag = hptTable.print();
+                                if (!flag) {
+                                    JOptionPane.showMessageDialog(null,
+                                            "打印失败，请检查打印机是否正常工作！");
+                                }
+                                break;
+                            case 1:
+                                break;
                         }
+
                     } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "请检查打印机，可能没有正常工作！");
                         ex.printStackTrace();
                     }
                 }
             });
         }
-    }
-
-    private void export(List<Object[]> items) {
-        //Export                        
-        int opencode = chooser.showSaveDialog(getRootPane());
-        if (opencode == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
-            HelperUtil.exportExcel(file, items);
-        }
-    }
-}
-
-class XlsFilter extends FileFilter {
-
-    @Override
-    public boolean accept(File f) {
-        if (f.getName() != null && f.getName().toLowerCase().endsWith(".xls")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public String getDescription() {
-        return "Excel文件";
     }
 }

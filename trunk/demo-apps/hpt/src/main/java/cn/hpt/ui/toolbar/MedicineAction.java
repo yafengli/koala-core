@@ -24,6 +24,6 @@ public class MedicineAction extends AbstractAction {
     }
 
     public MedicineAction() {
-        super("", new ImageIcon(OutpatientAction.class.getResource("/logo/3.png")));
+        super("收费项目", new ImageIcon(OutpatientAction.class.getResource("/logo/3.png")));
     }
 }

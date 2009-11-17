@@ -62,7 +62,6 @@ public class ModifyInfoPanel extends JPanel {
             builder.appendRow("top:pref");
             builder.nextLine();
             JLabel label = new JLabel(psl.get(i).getLabel());
-            label.setFont(font.getSize_12());
             builder.add(label);
             builder.nextColumn();
             builder.add(psl.get(i).getField());

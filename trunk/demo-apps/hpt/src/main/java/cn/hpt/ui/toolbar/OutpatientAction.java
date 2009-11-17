@@ -21,7 +21,7 @@ public class OutpatientAction extends AbstractAction {
     private PriceIIDialog priceIIDialog;
 
     public OutpatientAction() {
-        super("", new ImageIcon(OutpatientAction.class.getResource("/logo/6.png")));
+        super("划价收费", new ImageIcon(OutpatientAction.class.getResource("/logo/6.png")));
 
     }
 

@@ -40,18 +40,21 @@ public class PanelStatusListener implements ActionListener {
 
         } else if (actionCommand != null
                 && actionCommand.equalsIgnoreCase(mainFrame.outpatientSearchMenuItem.getActionCommand())) {
-            mainFrame.actionTabbedPane.addTab(mainFrame.outpatientSearchMenuItem.getText(), mainFrame.billPanel);// 收费查询
-            mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.billPanel);
+            mainFrame.actionTabbedPane.addTab(mainFrame.outpatientSearchMenuItem.getText(), mainFrame.billSearchPanel);// 收费查询
+            mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.billSearchPanel);
 
         } else if (actionCommand != null
-                && actionCommand.equalsIgnoreCase(mainFrame.priceMenuItem.getActionCommand())) {
-            // 划价收费
+                && actionCommand.equalsIgnoreCase(mainFrame.priceMenuItem.getActionCommand())) {// 划价收费
             priceIIDialog.initData();
             priceIIDialog.setVisible(true);
         } else if (actionCommand != null
                 && actionCommand.equalsIgnoreCase(mainFrame.statMenuItem.getActionCommand())) {
             mainFrame.actionTabbedPane.addTab(mainFrame.statMenuItem.getText(), mainFrame.statPanel);// 统计分析
             mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.statPanel);
+        } else if (actionCommand != null
+                && actionCommand.equalsIgnoreCase(mainFrame.cancelMenuItem.getActionCommand())) {
+            mainFrame.actionTabbedPane.addTab(mainFrame.cancelMenuItem.getText(), mainFrame.billCancelPanel);// 票据作废
+            mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.billCancelPanel);
         } else {
             //TODO
         }

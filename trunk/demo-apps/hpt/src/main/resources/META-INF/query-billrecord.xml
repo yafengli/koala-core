@@ -15,6 +15,13 @@
 		]]>
         </query>
     </named-query>
+    <named-query name="bill.find.by.time.operator">
+        <query><![CDATA[
+		SELECT bill FROM Bill as bill 
+                WHERE bill.rcreatedate >=:stime and bill.rcreatedate <=:etime and bill.operator=:operator order by bill.rcreatedate
+		]]>
+        </query>
+    </named-query>
     <named-query name="bill.find.group.operator.time">
         <query><![CDATA[
 		SELECT max(bill.operator.loginname),sum(bill.pricenum) FROM Bill bill where bill.rcreatedate >=:stime and bill.rcreatedate <=:etime

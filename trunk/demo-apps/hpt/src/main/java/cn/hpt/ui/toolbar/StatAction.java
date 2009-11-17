@@ -19,7 +19,7 @@ public class StatAction extends AbstractAction {
     private MainFrame mainFrame;
 
     public StatAction() {
-        super("", new ImageIcon(OutpatientAction.class.getResource("/logo/7.png")));
+        super("报表分析", new ImageIcon(OutpatientAction.class.getResource("/logo/7.png")));
     }
 
     @Override

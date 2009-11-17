@@ -48,7 +48,6 @@ public class PricePanel extends JPanel {
         add(contentbp, BorderLayout.CENTER);
         {
             hptTable.setModel(tabelModel);
-            hptTable.setFont(font.getSize_12());
             hptTable.setBackground(Color.WHITE);
             hptTable.setRowSorter(new TableRowSorter<PriceTabelModel>(
                     tabelModel));

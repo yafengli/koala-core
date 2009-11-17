@@ -78,12 +78,7 @@ public class BillRecordDialog extends JDialog {
             });
         }
         buttonp.add(close);
-        add(buttonp, BorderLayout.SOUTH);
-        //font
-        {
-            hptTable.setFont(font.getSize_12());
-            close.setFont(font.getSize_12());
-        }
+        add(buttonp, BorderLayout.SOUTH);        
     }
 
     public void view(Bill bill) {

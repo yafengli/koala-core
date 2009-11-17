@@ -6,7 +6,6 @@ import cn.hpt.ui.extend.HptInitData;
 import cn.hpt.ui.listener.CloseAppActionListener;
 import cn.hpt.ui.listener.LoginActionListener;
 import cn.hpt.util.PropertiesLoader;
-import java.awt.event.KeyEvent;
 import org.koala.dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -119,7 +117,7 @@ public class LoginWindow extends javax.swing.JFrame {
                     namePanel.setPreferredSize(new java.awt.Dimension(216, 42));
                     {
                         namePanel.add(nameLabel);
-                        nameLabel.setText(pl.getString("name"));
+                        nameLabel.setText(pl.getString("name") + pl.getString("colon"));
                     }
                     {
                         Vector<String> names = new Vector<String>();
@@ -176,22 +174,7 @@ public class LoginWindow extends javax.swing.JFrame {
                     messagePanel.add(messageLabel);
                     messageLabel.setText(pl.getString("login.label.msg"));
                 }
-            }
-            //font init
-            {
-                loginPanel.setFont(font.getSize_12());
-                imagePanel.setFont(font.getSize_12());
-                namePanel = new JPanel();
-                messageLabel = new JLabel();
-                messagePanel = new JPanel();
-                passwordPanel = new JPanel();
-                closeButton.setFont(font.getSize_12());
-
-                passwordLabel.setFont(font.getSize_12());
-                loginButton.setFont(font.getSize_12());
-                nameLabel.setFont(font.getSize_12());
-                nameComboBox.setFont(font.getSize_12());
-            }
+            }            
             setIconImage(frameIco.getImage());
             focusTravel();
             passwordTextField.grabFocus();
