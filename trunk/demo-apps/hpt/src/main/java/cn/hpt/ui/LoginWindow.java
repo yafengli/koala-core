@@ -130,8 +130,9 @@ public class LoginWindow extends javax.swing.JFrame {
                         for (Operator op : items) {
                             names.add(op.getLoginname());
                         }
+                        int longindex = Integer.valueOf(pl.getString("login.index")) >= names.size() ? 0 : Integer.valueOf(pl.getString("login.index"));
                         nameComboBox = new JComboBox(names);
-                        nameComboBox.setSelectedIndex(Integer.valueOf(pl.getString("login.index")));
+                        nameComboBox.setSelectedIndex(longindex);
                         nameComboBox.setPreferredSize(new Dimension(80, 20));
 
                         namePanel.add(nameComboBox);
@@ -174,7 +175,7 @@ public class LoginWindow extends javax.swing.JFrame {
                     messagePanel.add(messageLabel);
                     messageLabel.setText(pl.getString("login.label.msg"));
                 }
-            }            
+            }
             setIconImage(frameIco.getImage());
             focusTravel();
             passwordTextField.grabFocus();

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.hpt.ui.MainFrame;
+import cn.hpt.ui.model.MedicineTableCellEditor;
 import cn.hpt.ui.view.PriceDialog;
 import cn.hpt.ui.view.PriceIIDialog;
 
@@ -19,6 +20,8 @@ public class PanelStatusListener implements ActionListener {
     private PriceDialog priceDialog;
     @Autowired
     private PriceIIDialog priceIIDialog;
+    @Autowired
+    private MedicineTableCellEditor cellEditor;
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -30,12 +33,14 @@ public class PanelStatusListener implements ActionListener {
 
         } else if (actionCommand != null
                 && actionCommand.equalsIgnoreCase(mainFrame.medicineCtMenuItem.getActionCommand())) {
-            mainFrame.actionTabbedPane.addTab(mainFrame.medicineCtMenuItem.getText(), mainFrame.categoryPanel);// 药品类别
+            mainFrame.actionTabbedPane.addTab(mainFrame.medicineCtMenuItem.getText(), mainFrame.categoryPanel);// 收费类别
             mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.categoryPanel);
 
         } else if (actionCommand != null
                 && actionCommand.equalsIgnoreCase(mainFrame.medicineMenuItem.getActionCommand())) {
-            mainFrame.actionTabbedPane.addTab(mainFrame.medicineMenuItem.getText(), mainFrame.medicinePanel);// 药品信息
+            cellEditor.removeAllItems();
+            cellEditor.init();
+            mainFrame.actionTabbedPane.addTab(mainFrame.medicineMenuItem.getText(), mainFrame.medicinePanel);// 收费项目信息
             mainFrame.actionTabbedPane.setSelectedComponent(mainFrame.medicinePanel);
 
         } else if (actionCommand != null

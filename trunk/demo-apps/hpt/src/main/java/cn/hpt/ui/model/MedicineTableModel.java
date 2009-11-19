@@ -16,16 +16,11 @@ import cn.hpt.model.Medicine;
 @Component
 public class MedicineTableModel extends AbstractTableModel {
 
-    public static final Logger logger = LoggerFactory
-            .getLogger(MedicineTableModel.class);
-
+    public static final Logger logger = LoggerFactory.getLogger(MedicineTableModel.class);
     private static final long serialVersionUID = -6945298295399270858L;
-
     public static final String[] columnNames = new String[]{"编号", "药品名称",
-            "快捷简写", "药品价格", "药品编号", "药品类别"};
-
+        "快捷简写", "药品价格", "药品编号", "药品类别"};
     private List<Medicine> item;
-
     @Autowired
     private IDao baseDao;
     @Autowired
@@ -71,12 +66,12 @@ public class MedicineTableModel extends AbstractTableModel {
                     item.setMshortcut(value != null ? value.toString() : "");
                     break;
                 case 3:
-                    item.setPrice(value instanceof Double ? Double.valueOf(value.toString()) : 0.00f);
+                    item.setPrice(Double.valueOf(value.toString()));
                     break;
                 case 4:
                     item.setMnumber(value != null ? value.toString() : "");
                     break;
-                case 5:
+                case 5:                    
                     Object obj = cellEditor.getCellEditorValue();
                     if (obj != null && obj instanceof Category) {
                         item.setCategory((Category) obj);
@@ -116,10 +111,10 @@ public class MedicineTableModel extends AbstractTableModel {
     }
 
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex == 0)
+        if (columnIndex == 0) {
             return false;
-        else
+        } else {
             return true;
+        }
     }
-
 }
