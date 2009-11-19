@@ -43,14 +43,20 @@ public class HelperUtil {
         FileOutputStream fOut = null;
         try {
             // 新建一输出文件流
-            fOut = new FileOutputStream(outFile);
+            if (outFile.getName().toLowerCase().endsWith(".xls")) {
+                fOut = new FileOutputStream(outFile);
+            } else {
+                fOut = new FileOutputStream(outFile.getAbsolutePath() + ".xls");
+            }
             // 创建新的Excel 工作簿
             HSSFWorkbook workbook = new HSSFWorkbook();
             // 在Excel工作簿中建一工作表，其名为缺省值
             // 如要新建一名为"效益指标"的工作表，其语句为：
             // HSSFSheet sheet = workbook.createSheet("效益指标");
             HSSFSheet sheet = workbook.createSheet("报表分析");
-            for (int i = 0; i < items.size(); i++) {
+            for (int i = 0;
+                    i < items.size();
+                    i++) {
                 Object[] values = items.get(i);
                 // 在索引0的位置创建行（最顶端的行）
                 HSSFRow row = sheet.createRow(i);
@@ -70,19 +76,25 @@ public class HelperUtil {
 
             // 把相应的Excel 工作簿存盘
             workbook.write(fOut);
+
             fOut.flush();
 
             System.out.println("文件生成...");
         } catch (Exception e) {
             System.out.println("已运行 xlCreate() : " + e);
+
+
         } finally {
             // 操作结束，关闭文件
             try {
                 if (null != fOut) {
                     fOut.close();
+
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+
             }
         }
     }

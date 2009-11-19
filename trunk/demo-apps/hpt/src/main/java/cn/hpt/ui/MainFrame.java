@@ -193,9 +193,10 @@ public class MainFrame extends javax.swing.JFrame {
                     }
                     {
                         cancelMenuItem = new JMenuItem();
-                        outpatientMenu.add(cancelMenuItem);
+                        cancelMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_MASK, true));
                         cancelMenuItem.setText(pl.getString("m.cancel"));
                         cancelMenuItem.addActionListener(panelStatusListener);
+                        outpatientMenu.add(cancelMenuItem);
                     }
                 }
                 {

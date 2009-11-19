@@ -47,7 +47,8 @@ public class LoginRun {
         try {
             HptFont font = (HptFont) ctx.getBean("hptFont");
             font.getSize_12();
-            UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
+//            UIManager.setLookAndFeel("com.jgoodies.looks.plastic.Plastic3DLookAndFeel");
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             UIManager.put("ToolTip.font", font.getSize_12());
             UIManager.put("Table.font", font.getSize_12());
             UIManager.put("TableHeader.font", font.getSize_12());

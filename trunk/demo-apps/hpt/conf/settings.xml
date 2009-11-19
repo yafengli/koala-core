@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment>2009-11-17 14:49:44</comment>
+<comment>2009-11-19 10:50:01</comment>
 <entry key="m.stock">库存管理(S)</entry>
 <entry key="useraction.listener.error">
         修改失败：
@@ -13,7 +13,7 @@
 <entry key="m.i.quit">退出</entry>
 <entry key="price.dialog.item.index.error">不存在选择的收费项目！
     </entry>
-<entry key="login.index">1</entry>
+<entry key="login.index">3</entry>
 <entry key="price.dialog.print.msg">确认划价收费？
     </entry>
 <entry key="price.dialog.height">450</entry>
@@ -87,7 +87,7 @@
 <entry key="m.role">权限管理</entry>
 <entry key="m.user">修改信息</entry>
 <entry key="m.person">个人信息(R)</entry>
-<entry key="m.medicine">药品信息</entry>
+<entry key="m.medicine">收费项目信息</entry>
 <entry key="password">密码</entry>
 <entry key="print.operator.y">200</entry>
 <entry key="print.operator.x">200</entry>
@@ -101,10 +101,10 @@
 <entry key="print.date.x">200</entry>
 <entry key="m.data.rt">数据恢复</entry>
 <entry key="init.password">lym123456</entry>
-<entry key="login.frame.ico">/logo/8.png</entry>
-<entry key="m.medicine.ct">药品类别</entry>
 <entry key="pd.social">社保账号：</entry>
-<entry key="m.quit">退出(Q)</entry>
+<entry key="m.medicine.ct">收费项目类别</entry>
+<entry key="login.frame.ico">/logo/8.png</entry>
 <entry key="m.outpatient.search">票据查询</entry>
+<entry key="m.quit">退出(Q)</entry>
 <entry key="pd.operator">操作员：</entry>
 </properties>
