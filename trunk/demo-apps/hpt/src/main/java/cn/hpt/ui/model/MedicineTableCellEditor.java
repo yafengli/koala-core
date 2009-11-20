@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.hpt.model.Category;
+import cn.hpt.ui.component.MedicinePanel;
 import cn.hpt.ui.extend.HptFont;
 
 @Service
@@ -30,6 +31,10 @@ public class MedicineTableCellEditor extends JComboBox implements
     @Autowired
     private CategoryTabelModel tabelModel;
     @Autowired
+    public MedicinePanel medicinePanel;
+    @Autowired
+    public MedicineTableModel mtableModel;
+    @Autowired
     private HptFont font;
 
     @PostConstruct
@@ -42,6 +47,7 @@ public class MedicineTableCellEditor extends JComboBox implements
     protected void fireEditingStopped() {
         CellEditorListener listener;
         Object[] listeners = listenerList.getListenerList();
+        this.setSelectedIndex(-1);
         for (int i = 0; i < listeners.length - 1; i++) {
             if (listeners[i] == CellEditorListener.class) {
                 listener = (CellEditorListener) listeners[i + 1];
@@ -80,8 +86,13 @@ public class MedicineTableCellEditor extends JComboBox implements
 
     @Override
     public Object getCellEditorValue() {
-        Category cg = tabelModel.getItem().get(getSelectedIndex());
-        return cg;
+        int index = getSelectedIndex();
+        if (index >= 0) {
+            Category cg = tabelModel.getItem().get(index);
+            return cg;
+        } else {
+            return null;
+        }
     }
 
     @Override

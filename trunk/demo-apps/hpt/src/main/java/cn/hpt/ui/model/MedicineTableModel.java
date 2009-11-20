@@ -19,7 +19,7 @@ public class MedicineTableModel extends AbstractTableModel {
     public static final Logger logger = LoggerFactory.getLogger(MedicineTableModel.class);
     private static final long serialVersionUID = -6945298295399270858L;
     public static final String[] columnNames = new String[]{"编号", "项目名称",
-        "快捷简写", "项目价格", "项目编号", "类别"};
+        "快捷简写", "项目价格", "类别", "项目编号"};
     private List<Medicine> item;
     @Autowired
     private IDao baseDao;
@@ -69,14 +69,15 @@ public class MedicineTableModel extends AbstractTableModel {
                     item.setPrice(Double.valueOf(value.toString()));
                     break;
                 case 4:
-                    item.setMnumber(value != null ? value.toString() : "");
-                    break;
-                case 5:                    
                     Object obj = cellEditor.getCellEditorValue();
                     if (obj != null && obj instanceof Category) {
                         item.setCategory((Category) obj);
                     }
                     break;
+                case 5:
+                    item.setMnumber(value != null ? value.toString() : "");
+                    break;
+
             }
             baseDao.update(item);
         }
@@ -100,12 +101,14 @@ public class MedicineTableModel extends AbstractTableModel {
                 o = item.getPrice();
                 break;
             case 4:
-                o = item.getMnumber();
-                break;
-            case 5:
                 if (item.getCategory() != null) {
                     o = item.getCategory().getName();
                 }
+                break;
+            case 5:
+                o = item.getMnumber();
+                break;
+
         }
         return o;
     }

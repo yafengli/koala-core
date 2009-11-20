@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment>2009-11-20 10:55:24</comment>
+<comment>2009-11-20 17:36:12</comment>
 <entry key="m.stock">库存管理(S)</entry>
 <entry key="useraction.listener.error">
         修改失败：
@@ -13,7 +13,7 @@
 <entry key="m.i.quit">退出</entry>
 <entry key="price.dialog.item.index.error">不存在选择的收费项目！
     </entry>
-<entry key="login.index">0</entry>
+<entry key="login.index">2</entry>
 <entry key="price.dialog.print.msg">确认划价收费？
     </entry>
 <entry key="price.dialog.height">450</entry>

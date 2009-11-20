@@ -95,7 +95,7 @@ public class MedicinePanel extends JPanel {
                     }
                 }
             });
-            hptTable.getColumnModel().getColumn(5).setCellEditor(cellEditor);
+            hptTable.getColumnModel().getColumn(4).setCellEditor(cellEditor);
             contentbp.setViewportView(hptTable);
         }
         {

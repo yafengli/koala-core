@@ -69,8 +69,9 @@ public class PrintPanel extends JPanel implements Printable {
         return PAGE_EXISTS;
     }
 
+
     /* test print image */
-    private void testImagePrint() {
+    public void testImage(){
         BufferedImage image = new BufferedImage(400, 300, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = (Graphics2D) image.getGraphics();
         g2.setFont(new Font("宋体", 0, 12));
