@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import cn.hpt.ui.view.PriceDialog;
 import cn.hpt.ui.view.PriceIIDialog;
+import java.io.File;
+import javax.swing.Action;
 
 @Component
 public class OutpatientAction extends AbstractAction {
@@ -21,8 +23,13 @@ public class OutpatientAction extends AbstractAction {
     private PriceIIDialog priceIIDialog;
 
     public OutpatientAction() {
-        super("划价收费", new ImageIcon(OutpatientAction.class.getResource("/logo/outp.png")));
-
+        try {
+            putValue(Action.NAME, "划价收费");
+            File f = new File(System.getProperty("user.dir"), "img/price.png");
+            putValue(Action.SMALL_ICON, new ImageIcon(f.toURI().toURL()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

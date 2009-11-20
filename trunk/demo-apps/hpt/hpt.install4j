@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="4.0.6" transformSequenceNumber="1">
-  <directoryPresets config="F:/Google/koala-core/demo-apps/hpt" />
-  <application name="hpt" distributionSourceDir="" applicationId="6806-3467-7961-5524" mediaDir="F:/Google/koala-core/koala-core/target" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" shortName="hpt" publisher="" publisherWeb="" version="1.0" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" javaMinVersion="1.5" javaMaxVersion="" allowBetaVM="false">
+  <directoryPresets config="F:/Google/koala-core/demo-apps/hpt/img" />
+  <application name="hpt" distributionSourceDir="" applicationId="6806-3467-7961-5524" mediaDir="F:/" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" shortName="hpt" publisher="Great Bit" publisherWeb="http://blog.sina.com.cn/yafengli" version="1.0" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" javaMinVersion="1.5" javaMaxVersion="" allowBetaVM="false">
     <languages skipLanguageSelection="false">
       <principalLanguage id="zh_CN" customLocalizationFile="" />
       <additionalLanguages />
@@ -24,21 +24,27 @@
           <entry location="loading.png" launcher="false" />
         </exclude>
       </dirEntry>
+      <dirEntry mountPoint="17" file="F:/Google/koala-core/demo-apps/hpt/img" overwrite="4" shared="false" mode="644" uninstallMode="0" excludeSuffixes="" dirMode="755">
+        <exclude>
+          <entry location="16.gif" launcher="false" />
+          <entry location="32.png" launcher="false" />
+        </exclude>
+      </dirEntry>
     </entries>
     <components />
   </files>
   <launchers>
-    <launcher name="run" id="18" external="false" excludeFromMenu="false" menuName="" icnsFile="" pngIcon16File="" pngIcon32File="" macServiceDependencies="" swtApp="false">
-      <executable name="run" type="1" iconSet="false" iconFile="" executableDir="" redirectStderr="true" stderrFile="error.log" redirectStdout="false" stdoutFile="output.log" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker">
+    <launcher name="run" id="18" external="false" excludeFromMenu="false" menuName="" icnsFile="" pngIcon16File="F:/Google/koala-core/demo-apps/hpt/img/16.PNG" pngIcon32File="F:/Google/koala-core/demo-apps/hpt/img/32.png" macServiceDependencies="" swtApp="false">
+      <executable name="hpt-start" type="1" iconSet="true" iconFile="" executableDir="" redirectStderr="true" stderrFile="error.log" redirectStdout="false" stdoutFile="output.log" failOnStderrOutput="true" executableMode="1" changeWorkingDirectory="true" workingDirectory="." singleInstance="false" serviceStartType="2" serviceDependencies="" serviceDescription="" jreLocation="" executionLevel="asInvoker">
         <versionInfo include="false" fileVersion="" fileDescription="" legalCopyright="" internalName="" />
       </executable>
-      <splashScreen show="false" autoOff="true" alwaysOnTop="true" width="256" height="256" bitmapFile="">
+      <splashScreen show="true" autoOff="true" alwaysOnTop="true" width="256" height="256" bitmapFile="F:/Google/koala-core/demo-apps/hpt/img/loading.GIF">
         <text>
           <statusLine x="20" y="20" text="" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
           <versionLine x="20" y="40" text="version ${compiler:sys.version}" font="Arial" fontSize="8" fontColor="0,0,0" fontWeight="500" />
         </text>
       </splashScreen>
-      <java mainClass="cn.hpt.main.LoginRun" vmParameters="" arguments="" allowVMPassthroughParameters="true" preferredVM="">
+      <java mainClass="cn.hpt.main.LoginRun" vmParameters="-Xms128m -Xmx256m" arguments="" allowVMPassthroughParameters="true" preferredVM="">
         <classPath>
           <archive location="hpt-1.0.jar" failOnError="false" />
           <scanDirectory location="lib" failOnError="false" />

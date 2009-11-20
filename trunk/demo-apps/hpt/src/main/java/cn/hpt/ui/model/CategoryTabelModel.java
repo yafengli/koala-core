@@ -15,7 +15,7 @@ public class CategoryTabelModel extends AbstractTableModel {
 
     private static final long serialVersionUID = -6945298295399270858L;
 
-    public static final String[] columnNames = new String[]{"编号", "药品类别",
+    public static final String[] columnNames = new String[]{"编号", "类别",
             "类别描述"};
 
     private List<Category> item;

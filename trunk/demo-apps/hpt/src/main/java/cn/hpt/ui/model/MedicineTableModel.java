@@ -18,8 +18,8 @@ public class MedicineTableModel extends AbstractTableModel {
 
     public static final Logger logger = LoggerFactory.getLogger(MedicineTableModel.class);
     private static final long serialVersionUID = -6945298295399270858L;
-    public static final String[] columnNames = new String[]{"编号", "药品名称",
-        "快捷简写", "药品价格", "药品编号", "药品类别"};
+    public static final String[] columnNames = new String[]{"编号", "项目名称",
+        "快捷简写", "项目价格", "项目编号", "类别"};
     private List<Medicine> item;
     @Autowired
     private IDao baseDao;

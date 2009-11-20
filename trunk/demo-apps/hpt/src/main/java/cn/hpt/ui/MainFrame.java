@@ -67,7 +67,6 @@ public class MainFrame extends javax.swing.JFrame {
     public JMenu personMenu;
     public JMenu quitMenu;
     public JMenu helpMenu;
-    
     public JToolBar mainToolBar;
     public JScrollPane editPane;
     public JMenuItem billSearchMenuItem;
@@ -153,12 +152,12 @@ public class MainFrame extends javax.swing.JFrame {
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             {
                 mainToolBar = new JToolBar();
-                mainToolBar.add(outpatientAction);
-                mainToolBar.add(billSearchAction);
-                mainToolBar.add(billCancelAction);
-                mainToolBar.add(medicineCtAction);
-                mainToolBar.add(medicineAction);
-                mainToolBar.add(statAction);
+                mainToolBar.add(new JButton(outpatientAction));
+                mainToolBar.add(new JButton(billSearchAction));
+                mainToolBar.add(new JButton(billCancelAction));
+                mainToolBar.add(new JButton(medicineCtAction));
+                mainToolBar.add(new JButton(medicineAction));
+                mainToolBar.add(new JButton(statAction));
                 getContentPane().add(mainToolBar, BorderLayout.NORTH);
                 this.addWindowListener(authorityWindowAdapter);
             }

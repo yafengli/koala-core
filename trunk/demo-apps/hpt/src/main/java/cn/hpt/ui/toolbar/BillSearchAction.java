@@ -3,7 +3,9 @@ package cn.hpt.ui.toolbar;
 import cn.hpt.ui.MainFrame;
 import java.awt.event.ActionEvent;
 
+import java.io.File;
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,14 @@ public class BillSearchAction extends AbstractAction {
     private MainFrame mainFrame;
 
     public BillSearchAction() {
-        super("划价收费", new ImageIcon(BillSearchAction.class.getResource("/logo/blsr.png")));
+        try {
+            putValue(Action.NAME, "票据查询");
+            File f = new File(System.getProperty("user.dir"), "img/search.png");
+            putValue(Action.SMALL_ICON, new ImageIcon(f.toURI().toURL()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 

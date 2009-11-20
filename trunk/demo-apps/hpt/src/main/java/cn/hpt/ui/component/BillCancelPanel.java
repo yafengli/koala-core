@@ -62,10 +62,10 @@ public class BillCancelPanel extends JPanel {
     private JButton delete = new JButton("删除");
     private JButton print = new JButton("打印");
     private JPanel searchp = new JPanel();
-    private JLabel startLabel = new JLabel("开始时间");
+    private JLabel startLabel = new JLabel("开始时间：");
     private ObservingTextField startField = new ObservingTextField();
     private JButton startButton = new JButton();
-    private JLabel endLabel = new JLabel("开始时间");
+    private JLabel endLabel = new JLabel("结束时间：");
     private JButton endButton = new JButton();
     private ObservingTextField endField = new ObservingTextField();
     private JButton search = new JButton("查询");
