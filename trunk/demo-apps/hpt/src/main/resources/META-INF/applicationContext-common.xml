@@ -22,4 +22,10 @@
 			<value>conf/settings.xml</value>
 		</property>
 	</bean>
+        <bean id="printConfig" class="cn.hpt.util.PrintConfig"
+		init-method="init">
+		<property name="resource">
+			<value>conf/print.xml</value>
+		</property>
+	</bean>
 </beans>

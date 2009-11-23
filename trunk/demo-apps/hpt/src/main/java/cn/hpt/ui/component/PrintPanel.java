@@ -4,7 +4,7 @@ import cn.hpt.model.BillRecord;
 import cn.hpt.ui.extend.HptFont;
 import cn.hpt.ui.model.PriceIITabelModel;
 import cn.hpt.ui.view.PriceIIDialog;
-import cn.hpt.util.PropertiesLoader;
+import cn.hpt.util.PrintConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,67 +31,24 @@ public class PrintPanel extends JPanel implements Printable {
     @Autowired
     private PriceIIDialog dialog;
     @Autowired
-    private PropertiesLoader pl;
-    @Autowired
     private HptFont font;
     @Autowired
     private PriceIITabelModel tabelModel;
     @Autowired
-    private PropertiesLoader propertiesLoader;
+    private PrintConfig printConfig;
 
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
         Graphics2D g2 = (Graphics2D) graphics;
-        g2.setPaint(Color.black); // 设置打印颜色为黑色
-        if (pageIndex >= 1) // 当打印页号大于需要打印的总页数时，打印工作结束
-        {
-            return Printable.NO_SUCH_PAGE;
-        }
-        g2.setFont(font.getSize_12());
-        //打印患者姓名
-        g2.drawString(dialog.getUserNameField().getText(), Float.parseFloat(pl.getString("print.user.x")), Float.parseFloat(pl.getString("print.user.y")));
-        //打印日期
-        g2.drawString(dialog.getIdDateField().getText(), Float.parseFloat(pl.getString("print.date.x")), Float.parseFloat(pl.getString("print.date.y")));
-        //打印收款员
-        g2.drawString(dialog.getOperatorField().getText(), Float.parseFloat(pl.getString("print.operator.x")), Float.parseFloat(pl.getString("print.operator.y")));
-        //打印费用
-        g2.drawString(dialog.getRealaccField().getText(), Float.parseFloat(pl.getString("print.price.x")), Float.parseFloat(pl.getString("print.price.y")));
-        //打印药物清单
-        Float itemx = Float.parseFloat(pl.getString("print.medicine.x"));
-        Float itemy = Float.parseFloat(pl.getString("print.medicine.y"));
-        List<BillRecord> lbr = tabelModel.getItems();
-        for (BillRecord item : lbr) {
-            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine() != null ? item.getMedicine().getMname() : "",
-                    item.getMedicine() != null ? item.getMedicine().getPrice() : "", item.getBnumber()), itemx, itemy);
-            itemy += g2.getFont().getSize() + 1;
-        }
-
+        makeGraphics(graphics);
         return PAGE_EXISTS;
     }
 
 
     /* test print image */
-    public void testImage(){
-        BufferedImage image = new BufferedImage(400, 300, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2 = (Graphics2D) image.getGraphics();
-        g2.setFont(new Font("宋体", 0, 12));
-        //打印患者姓名
-        g2.drawString(dialog.getUserNameField().getText(), Float.parseFloat(propertiesLoader.getString("print.user.x")), Float.parseFloat(propertiesLoader.getString("print.user.y")));
-        //打印日期
-        g2.drawString(dialog.getIdDateField().getText(), Float.parseFloat(propertiesLoader.getString("print.date.x")), Float.parseFloat(propertiesLoader.getString("print.date.y")));
-        //打印收款员
-        g2.drawString(dialog.getOperatorField().getText(), Float.parseFloat(propertiesLoader.getString("print.operator.x")), Float.parseFloat(propertiesLoader.getString("print.operator.y")));
-        //打印费用
-        g2.drawString(dialog.getRealaccField().getText(), Float.parseFloat(propertiesLoader.getString("print.price.x")), Float.parseFloat(propertiesLoader.getString("print.price.y")));
-        //打印药物清单
-        Float itemx = Float.parseFloat(propertiesLoader.getString("print.medicine.x"));
-        Float itemy = Float.parseFloat(propertiesLoader.getString("print.medicine.y"));
-        java.util.List<BillRecord> lbr = tabelModel.getItems();
-        for (BillRecord item : lbr) {
-            g2.drawString(String.format("[%s  %s  %s]", item.getMedicine() != null ? item.getMedicine().getMname() : "",
-                    item.getMedicine() != null ? item.getMedicine().getPrice() : "", item.getBnumber()), itemx, itemy);
-            itemy += g2.getFont().getSize() + 1;
-        }
+    public void testImage() {
+        BufferedImage image = new BufferedImage(480, 320, BufferedImage.TYPE_INT_RGB);
+        makeGraphics(image.getGraphics());
         try {
             File f = new File("D:/hello.gif");
             if (!f.exists()) {
@@ -100,6 +57,40 @@ public class PrintPanel extends JPanel implements Printable {
             ImageIO.write(image, "gif", f);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void makeGraphics(Graphics graphics) {
+        Graphics2D g2 = (Graphics2D) graphics;
+        g2.setFont(font.getSize_12());
+        //打印患者姓名
+        g2.drawString("患者姓名：" + dialog.getUserNameField().getText(), Float.parseFloat(printConfig.getString("print.user.x")),
+                Float.parseFloat(printConfig.getString("print.user.y")));
+        //打印票据单号
+        g2.drawString("单据编号：" + dialog.getIdNumField().getText(), Float.parseFloat(printConfig.getString("print.id.x")),
+                Float.parseFloat(printConfig.getString("print.id.y")));
+        //打印日期
+        g2.drawString("收费日期：" + dialog.getIdDateField().getText(), Float.parseFloat(printConfig.getString("print.date.x")),
+                Float.parseFloat(printConfig.getString("print.date.y")));
+        //打印收款员
+        g2.drawString("收款员：" + dialog.getOperatorField().getText(), Float.parseFloat(printConfig.getString("print.operator.x")),
+                Float.parseFloat(printConfig.getString("print.operator.y")));
+        //打印费用
+        g2.drawString("费用：" + dialog.getRealaccField().getText(), Float.parseFloat(printConfig.getString("print.price.x")),
+                Float.parseFloat(printConfig.getString("print.price.y")));
+        //打印药物清单
+        Float itemx = Float.parseFloat(printConfig.getString("print.medicine.x"));
+        Float itemy = Float.parseFloat(printConfig.getString("print.medicine.y"));
+        Float items = Float.parseFloat(printConfig.getString("print.medicine.space"));
+        java.util.List<BillRecord> lbr = tabelModel.getItems();
+        g2.drawString("项目名称", itemx, itemy);
+        g2.drawString("项目单价", itemx + items, itemy);
+        g2.drawString("项目次数", itemx + items + items, itemy);
+        for (BillRecord item : lbr) {
+            itemy += g2.getFont().getSize() + 1;
+            g2.drawString(String.valueOf(item.getMedicine().getMname()), itemx, itemy);
+            g2.drawString(String.valueOf(item.getMedicine().getPrice()), itemx + items, itemy);
+            g2.drawString(String.valueOf(item.getBnumber()), itemx + items + items, itemy);
         }
     }
 }
