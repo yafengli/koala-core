@@ -13,7 +13,7 @@
         $(document).ready(function() {
             $.ajax({
                 type:"GET",
-                url: "<%=request.getContextPath()%>/json.ftl",
+                url: "<%=request.getContextPath()%>/mapjson.ftl",
 //                dataType:"json",
                 data:"name=",
                 success: function(data) {

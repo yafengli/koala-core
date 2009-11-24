@@ -133,7 +133,7 @@ public class DemoContorller {
         }
     }
 
-    @RequestMapping("/json.ftl")
+    @RequestMapping("/mapjson.ftl")
     public void json(HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setHeader("Cache-Control", "no-cache");
@@ -146,7 +146,7 @@ public class DemoContorller {
                     JSONObject item = new JSONObject();
                     item.put("longitude", Math.random() + 31.0);
                     item.put("latitude", Math.random() + 119.0);
-                    item.put("msg","欢迎使用，<a href='http://www.baidu.com' target='_blank'>链接百度</a>，这是第"+i+"坐标点！");
+                    item.put("msg", "欢迎使用，<a href='http://www.baidu.com' target='_blank'>链接百度</a>，这是第" + i + "坐标点！");
                     bss.put(item);
                 }
             } catch (Exception e) {
@@ -159,6 +159,57 @@ public class DemoContorller {
             e.printStackTrace();
         }
         resp.getWriter().write(data.toString());
+    }
+
+    @RequestMapping("/autojson.ftl")
+    public void autojson(HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+        resp.setHeader("Cache-Control", "no-cache");
+        JSONArray bss = new JSONArray();
+        try {
+
+            JSONObject one = new JSONObject();
+            JSONObject two = new JSONObject();
+            JSONObject three = new JSONObject();
+            JSONObject four = new JSONObject();
+            JSONObject five = new JSONObject();
+            JSONObject six = new JSONObject();
+            JSONObject seveen = new JSONObject();
+            JSONObject eight = new JSONObject();
+            JSONObject nine = new JSONObject();
+            one.put("name", "Peter Pan");
+            one.put("to", "peter@pan.de");
+            two.put("name", "Forneria Marconi");
+            two.put("to", "live@japan.jp");
+            three.put("name", "Master <em>Sync</em>");
+            three.put("to", "205bw@samsung.com");
+            four.put("name", "Dr. <strong>Tech</strong> de Log");
+            four.put("to", "g15@logitech.com");
+            five.put("name", "Don Corleone");
+            five.put("to", "don@vegas.com");
+            six.put("name", "Mc Chick");
+            six.put("to", "info@donalds.org");
+            seveen.put("name", "Donnie Darko");
+            seveen.put("to", "dd@timeshift.info");
+            eight.put("name", "Quake The Net");
+            eight.put("to", "webmaster@quakenet.org");
+            nine.put("name", "Dr. Write");
+            nine.put("to", "write@writable.com");
+            bss.put(one);
+            bss.put(two);
+            bss.put(three);
+            bss.put(four);
+            bss.put(five);
+            bss.put(six);
+            bss.put(seveen);
+            bss.put(eight);
+            bss.put(nine);
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        resp.getWriter().write(bss.toString());
     }
 }
 

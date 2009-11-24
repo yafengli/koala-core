@@ -39,7 +39,8 @@
             <a href="index.jsp">Spring Security</a><br/>
             <hr/>
             <div><span>JSON</span></div>
-            <a href="json.ftl">Json String</a>
+            <a href="mapjson.ftl">Map Json String</a><br/>
+            <a href="autojson.ftl">Auto Json String</a>
             <hr/>
             <div><span>JS+CSS</span></div>
             <a href="pages/js_demo.jsp">JQuery</a><br/>
