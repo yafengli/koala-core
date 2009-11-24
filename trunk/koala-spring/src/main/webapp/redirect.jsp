@@ -41,6 +41,7 @@
             <div><span>JSON</span></div>
             <a href="mapjson.ftl">Map Json String</a><br/>
             <a href="autojson.ftl">Auto Json String</a>
+            <a href="pages/json.jsp">JQuery Ajax Json</a>
             <hr/>
             <div><span>JS+CSS</span></div>
             <a href="pages/js_demo.jsp">JQuery</a><br/>
@@ -52,7 +53,7 @@
 			<hr/>
 			<a href="auto/test.jsp">自动完成</a>
 			<hr/>
-			<a href="map/index.jsp">Google Map</a>
+			<a href="map/index.jsp">Google Map</a><br/>            
         </td>
         <td>
             <div><span>JFreeChart</span></div>

@@ -6,8 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>Control Initialization</title>
     <script src="<%=request.getContextPath()%>/resources/js/jquery/jquery.min.js" type="text/javascript"></script>
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAzr2EBOXUKnm_jVnk0OJI7xSosDVG8KKPE1-m51RBrvYughuyMxQ-i1QfUnH94QxWIa6N4U6MouMmBA"
-            type="text/javascript"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true_or_false&amp;key=ABQIAAAAp-dWSeKyIx1T5fUUpUsJIhRR56aN24vpfXkrPw8JXcyA4e9JxBSWegw2RLpfLvK0VJjVwOG5MLUxMA" type="text/javascript"></script>
     <script type="text/javascript">
         //<![CDATA[
         var map ;
@@ -50,14 +49,14 @@
             initialize();
             $.ajax({
                 type:"GET",
-                url: "<%=request.getContextPath()%>/json.ftl",
+                url: "<%=request.getContextPath()%>/mapjson.ftl",
                 dataType:'json',
                 success: function(data) {
                     $("#results").append(data);
                     $.each(data.items, function(i, item) {
-                        alert(item.longitude + "|" + item.latitude + "|" + item.msg);
-                        // 在地图的随机位置添加 10 个标注
+                        // 在地图的位置添加标注
                         map.addOverlay(createMarker(item, i));
+                        //alert(item.longitude + "|" + item.latitude + "|" + item.msg);
                     });
                 },
                 error:function (data) {
@@ -67,11 +66,9 @@
         //]]>
     </script>
 </head>
-
 <body onunload="GUnload()">
 <div id="map_canvas" style="width: 640px; height: 320px"></div>
 <p/>
-
 <div id="results">
 </div>
 </body>
