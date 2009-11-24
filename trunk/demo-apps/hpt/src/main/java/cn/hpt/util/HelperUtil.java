@@ -35,8 +35,12 @@ public class HelperUtil {
     }
 
     public static synchronized String format(Object result, String regEx) {
-        NumberFormat format = new DecimalFormat(regEx);
-        return format.format(result);
+        if (result != null && (result instanceof Double || result instanceof Float)) {
+            NumberFormat format = new DecimalFormat(regEx);
+            return format.format(result);
+        } else {
+            return "0";
+        }
     }
 
     public static synchronized void exportExcel(File outFile, List<Object[]> items) {

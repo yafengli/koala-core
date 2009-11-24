@@ -165,8 +165,7 @@ public class BillCancelPanel extends JPanel {
                     public void actionPerformed(ActionEvent e) {
 
                         try {
-                            if (startField.getText() == null || endField.getText() == null
-                                    || startField.getText().length() < 1 || endField.getText().length() < 1) {
+                            if (startField.getText() == null || endField.getText() == null || startField.getText().length() < 1 || endField.getText().length() < 1) {
 
                                 JOptionPane.showMessageDialog(mainFrame, "必须选择开始时间与结束时间！");
                             } else {
@@ -175,9 +174,9 @@ public class BillCancelPanel extends JPanel {
                                 Timestamp et = new Timestamp(DateUtil.parse(
                                         endField.getText(), DateUtil.yyyy_MM_dd_HH_mm_ss).getTime());
                                 List<Bill> lb = baseDao.find(
-                                        "bill.find.by.time.operator", new String[]{
-                                            "stime", "etime", "operator"}, new Object[]{
-                                            st, et, loginWindow.getOperator()});
+                                        "bill.find.by.time", new String[]{
+                                            "stime", "etime"}, new Object[]{
+                                            st, et});
                                 System.out.printf("[%s,%s][%s,%s,%s]\n", startField.getText(), endField.getText(), st, et, lb.size());
                                 tabelModel.setItem(lb);
                                 hptTable.revalidate();
@@ -210,8 +209,7 @@ public class BillCancelPanel extends JPanel {
                     int selectRow = hptTable.getSelectedRow();
                     if (hptTable.isEditing()) {
                         return;
-                    } else if (selectRow >= 0
-                            && selectRow <= tabelModel.getItem().size()) {
+                    } else if (selectRow >= 0 && selectRow <= tabelModel.getItem().size()) {
                         int option = JOptionPane.showConfirmDialog(mainFrame,
                                 pl.getString("del.operator.msg"), null,
                                 JOptionPane.YES_NO_OPTION);

@@ -132,8 +132,8 @@ public class MedicinePanel extends JPanel {
                         case JOptionPane.YES_OPTION:
                             Medicine item = medicineTabelModel.getItem().get(
                                     selectRow);
-                            medicineTabelModel.getItem().remove(selectRow);
                             baseDao.remove(item);
+                            medicineTabelModel.getItem().remove(selectRow);
                             hptTable.revalidate();
                             break;
                         case JOptionPane.NO_OPTION:

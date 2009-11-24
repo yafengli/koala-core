@@ -12,6 +12,7 @@
 		<module>koala-core</module>
 		<module>maven-koala-plugin</module>
 		<module>koala-spring</module>
+		<module>ui-datepicker</module>
 		<!--test xml
 		<module>koala-seam</module>
 		-->

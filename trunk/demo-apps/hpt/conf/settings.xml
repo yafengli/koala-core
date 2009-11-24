@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment>2009-11-23 15:56:31</comment>
+<comment>2009-11-23 17:54:55</comment>
 <entry key="m.quit">退出(Q)</entry>
 <entry key="init.password">lym123456</entry>
 <entry key="useraction.listener.confirm">
@@ -95,6 +95,6 @@
 <entry key="m.purchase">物资信息</entry>
 <entry key="m.person">个人信息(R)</entry>
 <entry key="m.purchase.st">物资入库</entry>
-<entry key="login.index">2</entry>
+<entry key="login.index">0</entry>
 <entry key="m.data.bk">数据备份</entry>
 </properties>
