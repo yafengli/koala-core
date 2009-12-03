@@ -136,7 +136,7 @@ public class UploadContorller {
             System.out.println("@FUVK@");
             MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
 
-            File baseDir = new File(loadConfig.getBaseDir());
+            File baseDir = loadStorgePath();
             for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
                 String fileName = (String) it.next();
                 MultipartFile mf = mhsr.getFile(fileName);
@@ -145,20 +145,6 @@ public class UploadContorller {
                     mf.transferTo(new File(baseDir, mf.getOriginalFilename()));
                 }
             }
-
-            /*
-            System.out.println("#####Parameter######");
-            for (Iterator it = resp.getParameterMap().keySet().iterator(); it.hasNext();) {
-            String key = (String) it.next();
-            System.out.printf("[%s=%s]\n", key, resp.getParameter(key));
-            }
-
-            System.out.println("#####Attribute######");
-            for(Enumeration enu=resp.getAttributeNames();enu.hasMoreElements();){
-            String key=(String)enu.nextElement();
-            System.out.printf("[%s=%s][%s]\n", key,resp.getAttribute(key).toString(),resp.getAttribute(key).getClass().getName());
-            }
-             */
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -167,7 +153,7 @@ public class UploadContorller {
     @RequestMapping(value = "/swfupload/view.ftl")
     public ModelAndView view(HttpServletRequest resp) {
         ModelAndView mav = new ModelAndView("view");
-        File baseDir = new File(loadConfig.getBaseDir());
+        File baseDir = loadStorgePath();
         if (!baseDir.exists()) {
             baseDir.mkdirs();
         }
@@ -175,5 +161,45 @@ public class UploadContorller {
         Arrays.asList(baseDir.list());
         mav.addObject(UploadContorller.S_FILES, Arrays.asList(baseDir.list()));
         return mav;
+    }
+
+    @RequestMapping(value = "/uploadify.ftl", method = RequestMethod.GET)
+    public ModelAndView uploadify(HttpServletRequest resp) {
+        ModelAndView mav = new ModelAndView("uploadify");
+        mav.addObject("user", "@FUVK GCD@");
+        return mav;
+    }
+
+    @RequestMapping(value = "/uploadify.ftl", method = RequestMethod.POST)
+    public void uploadify(HttpServletRequest resp, HttpSession session, ModelMap model) {
+        try {
+            System.out.println("@FUVK@");
+            MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
+
+            File baseDir = loadStorgePath();
+            for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
+                String fileName = (String) it.next();
+                MultipartFile mf = mhsr.getFile(fileName);
+                System.out.println(mf);
+                if (mf != null) {
+                    mf.transferTo(new File(baseDir, mf.getOriginalFilename()));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private File loadStorgePath() {
+        String dirName = null;
+        String osName = System.getProperty("os.name");
+
+        if (osName.toLowerCase().startsWith("window")) {
+            dirName = loadConfig.getBaseXpDir();
+        } else if (osName.toLowerCase().startsWith("linux")) {
+            dirName = loadConfig.getBaseLinuxDir();
+        }
+        File baseDir = new File(dirName);
+        return baseDir;
     }
 }

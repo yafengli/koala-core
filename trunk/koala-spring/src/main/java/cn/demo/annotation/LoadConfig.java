@@ -14,14 +14,24 @@ import org.springframework.stereotype.Component;
 @Component("loadConfig")
 public class LoadConfig {
 
-    @Properties(name = "base.dir")
-    private String baseDir;
+    @Properties(name = "base.xp.dir")
+    private String baseXpDir;
+    @Properties(name = "base.linux.dir")
+    private String baseLinuxDir;
 
-    public String getBaseDir() {
-        return baseDir;
+    public String getBaseXpDir() {
+        return baseXpDir;
     }
 
-    public void setBaseDir(String baseDir) {
-        this.baseDir = baseDir;
+    public void setBaseXpDir(String baseXpDir) {
+        this.baseXpDir = baseXpDir;
+    }
+
+    public String getBaseLinuxDir() {
+        return baseLinuxDir;
+    }
+
+    public void setBaseLinuxDir(String baseLinuxDir) {
+        this.baseLinuxDir = baseLinuxDir;
     }
 }

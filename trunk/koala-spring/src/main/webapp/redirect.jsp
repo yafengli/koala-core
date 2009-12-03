@@ -11,9 +11,9 @@
             <a href="registroy.htm">SimpleFormController演示</a><br/>
             <hr/>
             <div>
-    <span style="font-size:15;color:red">
-        使用@Annotation注解的Spring	MVC演示
-    </span>
+                <span style="font-size:15;color:red">
+                    使用@Annotation注解的Spring	MVC演示
+                </span>
             </div>
             <a href="aindex.ftl?id=id">返回ModelAndView演示</a><br/>
             <a href="hellof.ftl?id=id">返回空-1使用FreeMarkerView</a><br/>
@@ -48,12 +48,13 @@
             <hr/>
             <a href="testdemo.ftl">Test Xml Demo</a><br/>
             <hr/>
-            <a href="upload.ftl">上传文件-断点续传</a><br/>
-            <a href="swfupload.ftl">上传文件-Flash(多文件)</a>
-			<hr/>
-			<a href="auto/test.jsp">自动完成</a>
-			<hr/>
-			<a href="map/index.jsp">Google Map</a><br/>            
+            <a href="upload.ftl">上传文件-大文件断点续传</a><br/>
+            <a href="swfupload.ftl">上传文件-Flash</a><br/>
+            <a href="uploadify.ftl">上传文件-JQuery</a>
+            <hr/>
+            <a href="auto/test.jsp">自动完成</a>
+            <hr/>
+            <a href="map/index.jsp">Google Map</a><br/>
         </td>
         <td>
             <div><span>JFreeChart</span></div>

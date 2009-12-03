@@ -6,7 +6,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 /**
- * @author Administrator
+ * @author YaFengLi
  */
 @WebService(endpointInterface = "cn.demo.webservice.HelloWorld", serviceName = "HelloWorldService")
 public class HelloWorldImpl implements HelloWorld {
