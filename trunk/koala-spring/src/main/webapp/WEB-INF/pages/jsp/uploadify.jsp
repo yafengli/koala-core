@@ -15,6 +15,7 @@
                     'uploader'       : '<%=request.getContextPath()%>/resources/uploadify/scripts/uploadify.swf',
                     'script'         : '<%=request.getContextPath()%>/uploadify.ftl',
                     'cancelImg'      : '<%=request.getContextPath()%>/resources/uploadify/cancel.png',
+                    //'buttonImg'      : '<%=request.getContextPath()%>/resources/uploadify/cancel.png',
                     'folder'         : 'uploads',
                     'queueID'        : 'fileQueue',
                     'auto'           : false,
