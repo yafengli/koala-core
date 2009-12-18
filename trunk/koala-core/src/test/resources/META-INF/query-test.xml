@@ -32,4 +32,11 @@
 			]]>
 		</query>
 	</named-query>
+        <named-query name="find.test.username">
+		<query>
+			<![CDATA[
+			SELECT user FROM User user where user.username=:username
+			]]>
+		</query>
+	</named-query>
 </entity-mappings>

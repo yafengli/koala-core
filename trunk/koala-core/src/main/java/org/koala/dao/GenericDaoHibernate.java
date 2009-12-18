@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -132,5 +132,20 @@ public class GenericDaoHibernate<T, ID extends Serializable> extends HibernateDa
 
     public void update(T t) {
         getHibernateTemplate().update(t);
+    }
+
+    @Override
+    public T findSingle(String queryName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public T findSingle(String queryName, String[] paramNames, Object[] paramValues) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public T findSingle(String queryName, Map<String, Object> paramMap) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

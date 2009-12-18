@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,6 +16,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
  * Time: 10:13:04
  * To change this template use File | Settings | File Templates.
  */
+@Transactional
 public class GenericDaoIBatis<T, Id extends Serializable> extends SqlMapClientDaoSupport
         implements IGenericIBatisDao<T, Id> {
 

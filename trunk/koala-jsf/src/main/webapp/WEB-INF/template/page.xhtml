@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <html>
+    <head>
+        <ui:insert name="head"/>
+        <style type="text/css">
+            .x-panel-body p {
+                margin: 10px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            em.cfg {
+                font-style: italic;
+                font-weight: bold;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="/resources/extjs/css/ext-all.css"/>
+        <script type="text/javascript" src="/resources/extjs/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="/resources/extjs/ext-all.js"></script>
+    </head>
+    <body>
+    <table border="2">
+        <tr>
+            <td>
+                <ui:insert name="c-head"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <ui:insert name="body"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <ui:insert name="c-foot"/>
+            </td>
+        </tr>
+    </table>
+    </body>
+    </html>
+</ui:composition>

@@ -21,6 +21,7 @@ import java.util.HashMap;
  */
 @Transactional
 public class BaseJPADao extends JpaDaoSupport implements IDao {
+
     public <T, ID extends Serializable> T findById(Class<T> c, ID id) {
         T entity;
         if (id != null) {
@@ -78,7 +79,7 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
     }
 
     public <T> List<T> find(final String queryName, final String[] paramNames, final Object[] paramValues,
-                            final int startPosition, final int maxResult) {
+            final int startPosition, final int maxResult) {
         return getJpaTemplate().executeFind(new JpaCallback() {
 
             public Object doInJpa(EntityManager em) throws PersistenceException {
@@ -101,6 +102,7 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
 
     public <T> void saveBatch(final List<T> objs) {
         getJpaTemplate().execute(new JpaCallback() {
+
             public Object doInJpa(EntityManager em) throws PersistenceException {
                 try {
                     int i = 1;
@@ -139,6 +141,7 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
 
     public <T> List<T> find(final String queryName, final Map<String, Object> paramMap, final int startPosition, final int maxResult) {
         return getJpaTemplate().executeFind(new JpaCallback() {
+
             public Object doInJpa(EntityManager em) throws PersistenceException {
                 Query query = em.createNamedQuery(queryName);
                 if (startPosition >= 0 && maxResult >= startPosition) {
@@ -178,19 +181,24 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
 
     @Override
     public <T> T findSingle(final String queryName, final Map<String, Object> paramMap) {
-        return (T) getJpaTemplate().execute(new JpaCallback() {
-            public Object doInJpa(EntityManager em) throws PersistenceException {
-                Query query = em.createNamedQuery(queryName);
-                if (paramMap != null && paramMap.size() >= 0) {
-                    for (String key : paramMap.keySet()) {
-                        Object val = paramMap.get(key);
-                        query.setParameter(key, val);
+        try {
+            return (T) getJpaTemplate().execute(new JpaCallback() {
+
+                public Object doInJpa(EntityManager em) throws PersistenceException {
+                    Query query = em.createNamedQuery(queryName);
+                    if (paramMap != null && paramMap.size() >= 0) {
+                        for (String key : paramMap.keySet()) {
+                            Object val = paramMap.get(key);
+                            query.setParameter(key, val);
+                        }
+                    } else {
+                        logger.error("[paramMap is null!]");
                     }
-                } else {
-                    logger.error("[paramMap is null!]");
+                    return query.getSingleResult();
                 }
-                return query.getSingleResult();
-            }
-        });
+            });
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

@@ -1,0 +1,14 @@
+<!DOCTYPE facelet-taglib PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+        "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+<facelet-taglib>
+    <namespace>http://demo.cn</namespace>
+    <tag>
+        <tag-name>demo</tag-name>
+        <source>../compenet/button.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>panel</tag-name>        
+        <source>../compenet/panel.xhtml</source>
+    </tag>
+</facelet-taglib>

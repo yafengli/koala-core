@@ -29,15 +29,14 @@ public class JPATest {
 
     public JPATest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
-                "applicationContext-common.xml", "applicationContext-jpa.xml"});
+                    "applicationContext-common.xml", "applicationContext-jpa.xml"});
         judao = UserDaoImpl.getInstance(ctx);
         jeudao = ExUserDaoImpl.getInstance(ctx);
         dao = (IDao) ctx.getBean("baseJPADao");
-        System.out.println("[dao]" + dao);
     }
 
     @Test
-    public void add() {
+    public void findall() {
         logger.info("########add");
         List<User> items = dao.findAll(User.class);
         logger.info("[items:]" + items);
@@ -48,7 +47,7 @@ public class JPATest {
         System.out.println("****" + item);
     }
 
-    //    @Test
+//    @Test
     public void find() {
         List<User> lus = judao.findAll();
         for (User u : lus) {
@@ -75,7 +74,7 @@ public class JPATest {
         }
     }
 
-    //    @Test
+//    @Test
     public void finaCount() {
         String queryName = "find.count.test";
         Long count = judao.findCountByQueryName(queryName);
@@ -84,7 +83,31 @@ public class JPATest {
         System.out.println("[c2=]" + c2);
     }
 
-    //    @Test
+    @Test
+    public void saveorupdate() {
+        System.out.println("[update]");
+        User u = new User();
+        u.setPassword("1111");
+        u.setAge("1111");
+        u.setUsername("hello");
+        judao.update(u);
+        System.out.println("[save]");
+        User u2 = new User();
+        u2.setPassword("2222");
+        u2.setAge("2222");
+        u2.setUsername("world");
+        judao.save(u2);
+        User world = judao.findSingle("find.test.username", new String[]{"username"}, new Object[]{"world"});
+        User kong = judao.findSingle("find.test.username", new String[]{"username"}, new Object[]{"null"});
+        if(world!=null){
+            world.setAge("3333");
+            world.setPassword("3333");
+            judao.update(world);
+        }
+        System.out.println(world + "+" + kong);
+    }
+//    @Test
+
     public void save() {
         List<User> lusf = judao.findByQueryName("find.test");
         List<User> adl = new ArrayList<User>();

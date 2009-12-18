@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:d="http://demo.cn"
+                xmlns:a="http://demo.cn/helloajax"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/template/page.xhtml">
+    <ui:define name="head">
+        <meta content="text/html;charset=utf-8"></meta>
+        <title>hello</title>
+    </ui:define>
+    <ui:define name="c-head">
+        NB NB NB!
+        头问价
+    </ui:define>
+    <ui:define name="body">
+        <H3>Hello MSG:</H3>
+        <h:outputLabel value="#{helloWorld.name}"/>
+        <d:demo id="策划" label="策划"/>
+        <d:panel title="老汉你真牛B~~~"/>
+        <h:form id="_test">
+            <h:commandButton actionListener="${helloWorld.action}" value="测试1"/>
+        </h:form>
+        <a:ajax id="fuck_1" dname="#{helloWorld.name}"/>        
+    </ui:define>
+    <ui:define name="c-foot">
+        脚文件啊
+    </ui:define>
+</ui:composition>
+        

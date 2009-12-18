@@ -2,6 +2,7 @@ package org.koala.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author liyafeng
@@ -91,10 +92,36 @@ public interface IGenericDao<T, ID extends Serializable> {
     public List<T> findByQueryName(String queryName, String[] paramNames, Object[] paramValues, int startPosition, int maxResult);
 
     /**
+     * 根据命名查询查找返回对象列表
+     *
+     * @param queryName
+     * @return 查询结果对象集合
+     */
+    public T findSingle(String queryName);
+
+    /**
+     * 根据命名查询和输入参数查找返回的对象列表
+     *
+     * @param queryName   命名查询
+     * @param paramNames  参数名数组
+     * @param paramValues 参数值数组
+     * @return 查询结果对象集合
+     */
+    public T findSingle(String queryName, String[] paramNames, Object[] paramValues);
+
+    /**
+     * 根据命名查询和输入参数查找返回的对象列表
+     *
+     * @param queryName 命名查询
+     * @param paramMap  参数名:参数值
+     * @return 查询结果对象集合
+     */
+    public T findSingle(String queryName, Map<String, Object> paramMap);
+
+    /**
      * 批量插入
      * @param objs 对象列表
-     */
-    
+     */    
     public void saveBatch(List<T> objs);
     
 }

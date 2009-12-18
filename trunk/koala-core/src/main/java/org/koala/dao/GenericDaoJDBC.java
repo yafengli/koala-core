@@ -10,10 +10,12 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author YaFengLi
  */
+@Transactional
 public abstract class GenericDaoJDBC<T, ID extends Serializable> extends SimpleJdbcDaoSupport implements IGenericJDBCDao<T, ID> {
 
     private SimpleJdbcCall sjc;

@@ -14,14 +14,15 @@ import java.io.Serializable;
 @Table(name = "TEST_IUSER")
 public class IUser implements Serializable {
 
+    @Id
+    @SequenceGenerator(name = "userSeq", sequenceName = "TEST_IUSER_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeq")
     private Integer id;
+    @Column(unique = true)
     protected String username;
     protected String password;
     protected String age;
 
-    @Id
-    @SequenceGenerator(name = "userSeq", sequenceName = "TEST_IUSER_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeq")
     public Integer getId() {
         return id;
     }
@@ -53,5 +54,4 @@ public class IUser implements Serializable {
     public void setAge(String age) {
         this.age = age;
     }
-
 }

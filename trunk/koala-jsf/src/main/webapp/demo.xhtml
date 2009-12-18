@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html>
+    <head>        
+        <link rel="stylesheet" type="text/css" href="/resources/extjs/css/ext-all.css"/>
+        <script type="text/javascript" src="/resources/extjs/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="/resources/extjs/ext-all.js"></script>
+        <script type="text/javascript">
+            Ext.onReady(function() {
+                var p = new Ext.Panel({
+                    title: 'My Panel',
+                    collapsible:true,
+                    renderTo: 'panel-basic',
+                    width:400,
+                    html:'WAHAHAHAA'
+                });
+            });
+        </script>
+        <style type="text/css">
+            .x-panel-body p {
+                margin: 10px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            em.cfg {
+                font-style: italic;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="panel-basic" class="container">
+    </div>
+    </body>
+    </html>
+</ui:composition>
