@@ -20,6 +20,7 @@ import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.Iterator;
 import javax.servlet.http.HttpSession;
+
 import org.koala.spring.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -45,14 +46,15 @@ public class UploadContorller {
             MultipartFile mf = req.getFile("upfile");
 
             /**
-            File tmpFile = new File("f:/", mf.getOriginalFilename());
-            if (!tmpFile.exists()) {
-            tmpFile.getParentFile().mkdirs();
-            }
-            mf.transferTo(tmpFile);
+             File tmpFile = new File("f:/", mf.getOriginalFilename());
+             if (!tmpFile.exists()) {
+             tmpFile.getParentFile().mkdirs();
+             }
+             mf.transferTo(tmpFile);
              */
-            File contentFile = new File("f:/", mf.getOriginalFilename());
-            File positonFile = new File("f:/", mf.getOriginalFilename() + ".part");
+            File baseDir = loadStorgePath();
+            File contentFile = new File(baseDir, mf.getOriginalFilename());
+            File positonFile = new File(baseDir, mf.getOriginalFilename() + ".part");
 
 
             long size = mf.getSize();
@@ -82,8 +84,7 @@ public class UploadContorller {
                 in.skip(startPos);
                 while ((len = in.read(b)) != -1) {
                     /*Test */
-                    if (startPos >= endPos || (type.isStop() && startPos >= 3434)) {
-                        System.out.println("Stop...");
+                    if (startPos >= endPos) {
                         break;
                     }
                     //*/

@@ -27,7 +27,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" exported="" name="Maven: javax.servlet:jstl:1.2" level="project" />
-    <orderEntry type="module" module-name="koala-core" exported="" />
+    <orderEntry type="library" exported="" name="Maven: org.koala:koala-core:1.0.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: commons-dbcp:commons-dbcp:1.2.2" level="project" />
     <orderEntry type="library" exported="" name="Maven: commons-pool:commons-pool:1.3" level="project" />
     <orderEntry type="library" exported="" name="Maven: commons-fileupload:commons-fileupload:1.2" level="project" />
