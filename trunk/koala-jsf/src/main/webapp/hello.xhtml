@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:d="http://demo.cn"
-                xmlns:a="http://demo.cn/helloajax"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/WEB-INF/template/page.xhtml">
-    <ui:define name="head">
-        <meta content="text/html;charset=utf-8"></meta>
-        <title>hello</title>
-    </ui:define>
-    <ui:define name="c-head">
-        NB NB NB!
-        头问价
-    </ui:define>
-    <ui:define name="body">
-        <H3>Hello MSG:</H3>
-        <h:outputLabel value="#{helloWorld.name}"/>
-        <d:demo id="策划" label="策划"/>
-        <d:panel title="老汉你真牛B~~~"/>
-        <h:form id="_test">
-            <h:commandButton actionListener="${helloWorld.action}" value="测试1"/>
-        </h:form>
-        <a:ajax id="fuck_1" dname="#{helloWorld.name}"/>        
-    </ui:define>
-    <ui:define name="c-foot">
-        脚文件啊
-    </ui:define>
-</ui:composition>
-        
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:d="http://demo.cn"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://java.sun.com/jsf/composite/rich">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    </h:head>
+
+    <ui:composition 
+                    template="/WEB-INF/template/page.xhtml">
+        <ui:define name="head">
+            <link rel="stylesheet" type="text/css" href="http://221.231.154.7:800/extjs/buttons/buttons.css"/>
+            <title>hello</title>
+        </ui:define>
+        <ui:define name="c-head">
+            Test
+        </ui:define>
+        <ui:define name="body">
+            <rich:panel>
+                <f:facet name="head">
+                    <h:outputText value="test"/>
+                </f:facet>
+                <h:panelGrid columns="1">
+                    <h:outputText value="Username:"/>
+                    <h:outputText value="Adress:"/>
+                </h:panelGrid>
+            </rich:panel>
+
+            <d:demo id="demo" label="demo-label"/>
+            <d:panel title="ceshi ceshi" renderTo="_rt" contentEl="_ct"/>
+
+            <div id="_rt">
+                <div id="_ct">
+                    <span style="color:red;font-size:12px">wahahahahah</span>
+                    <div id="docbody"></div>
+                </div>
+            </div>
+            <d:ajax id="fuck_1" dname="#{helloWorld.name}"/>
+            <d:buttons/>
+            <h:form id="_test">
+                <h:commandButton actionListener="${helloWorld.action}" value="Command"/>
+            </h:form>
+        </ui:define>
+        <ui:define name="c-foot">
+            footera
+        </ui:define>
+    </ui:composition>
+</html>

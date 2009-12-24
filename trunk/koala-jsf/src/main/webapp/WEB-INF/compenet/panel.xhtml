@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/WEB-INF/template/extjs.xhtml">
-    <ui:define name="script">
-        <script type="text/javascript">
-            Ext.onReady(function() {
-                var p = new Ext.Panel({
-                    title: '#{title}',
-                    collapsible:true,
-                    renderTo: 'panel-basic',
-                    width:400,
-                    contentEl:'_content'                    
-                });
+<ui:composition 
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <script type="text/javascript">
+        Ext.onReady(function() {
+            var p = new Ext.Panel({
+                title: '#{title}',
+                collapsible:true,
+                renderTo: '#{renderTo}',
+                width:400,
+                contentEl:'#{contentEl}'
             });
-        </script>
-    </ui:define>
-    <ui:define name="panel">
-        <div id="panel-basic" class="container"></div>
-        <div id="_content"><h3>AJLJLJLJljlasdfs[#{title}]</h3></div>
-    </ui:define>
+        });
+    </script>
 </ui:composition>

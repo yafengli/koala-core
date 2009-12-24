@@ -7,7 +7,7 @@
     <display-name>HelloAjax Demo</display-name>
     <tlib-version>1.2</tlib-version>
     <short-name>a</short-name>
-    <uri>http://demo.cn/helloajax</uri>
+    <uri>http://demo.cn</uri>
     <tag>
         <name>ajax</name>
         <tag-class>cn.demo.ui.HelloAjaxTag</tag-class>

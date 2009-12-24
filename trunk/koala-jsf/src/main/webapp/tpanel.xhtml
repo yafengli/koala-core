@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition 
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:d="http://demo.cn"
-                xmlns:a="http://demo.cn/helloajax"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/WEB-INF/template/page.xhtml">
     <ui:define name="head">
-        <meta content="text/html;charset=utf-8"></meta>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"></meta>
         <title>hello</title>
     </ui:define>
     <ui:define name="c-head">头文件</ui:define>
     <ui:define name="body">
         <d:panel id="_p"/>
+        <d:ajax id="Fuck" dname="#{helloWorld.name}"/>
     </ui:define>
     <ui:define name="c-foot">脚文件</ui:define>
 </ui:composition>

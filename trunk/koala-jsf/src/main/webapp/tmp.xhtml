@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html  xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:h="http://java.sun.com/jsf/html"
-       xmlns:f="http://java.sun.com/jsf/core"
-       xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     </h:head>
     <h:body>
-        <ui:composition
-            template="/WEB-INF/template/main.xhtml">
+        <ui:composition template="/WEB-INF/template/main.xhtml">
             <ui:define name="body">
+                <h:outputStylesheet library="echo/css" name="t.css"/>
                 <p>
                     Log component allows you to inspect client side activities
                     during an Ajax request. It shows reuqest data, response data, DOM
@@ -19,10 +17,7 @@
                     <legend>log Sample</legend>
                     <ui:include src="/log/usage.xhtml"/>
                 </fieldset>
-                <ui:include src="/include/nav.xhtml"/>
             </ui:define>
         </ui:composition>
     </h:body>
 </html>
-
-

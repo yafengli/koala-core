@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"      
+      xmlns:composite="http://java.sun.com/jsf/composite">
+    <composite:interface>
+        <composite:attribute name="title"/>
+        <composite:attribute name="items"/>
+        <composite:attribute name="layoutEl"/>
+    </composite:interface>
+    <composite:implementation>
+        <h:head>
+            <script type="text/javascript">
+                Ext.onReady(function() {                    
+                    var layout=new Ext.Panel({
+                        title: '#{cc.attrs.title}',
+                        height:400,
+                        layout:'accordion',
+                        defaults: {
+                            // applied to each contained panel
+                            bodyStyle: 'padding:15px'
+                        },
+                        layoutConfig: {
+                        // layout-specific configs go here
+                        //titleCollapse: true,
+                        animate: true,
+                        //activeOnTop: false
+                        },                        
+                        items: #{cc.attrs.items}
+                    });
+                    layout.render('#{cc.attrs.layoutEl}');
+                });
+            </script>
+        </h:head>        
+    </composite:implementation>
+</html>

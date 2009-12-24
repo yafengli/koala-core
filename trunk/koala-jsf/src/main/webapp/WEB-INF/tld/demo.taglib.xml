@@ -8,7 +8,17 @@
         <source>../compenet/button.xhtml</source>
     </tag>
     <tag>
-        <tag-name>panel</tag-name>        
+        <tag-name>panel</tag-name>
         <source>../compenet/panel.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>buttons</tag-name>
+        <source>../compenet/buttons.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>ajax</tag-name>
+        <component>
+            <component-type>cn.demo.ui.HelloAjax</component-type>
+        </component>
     </tag>
 </facelet-taglib>

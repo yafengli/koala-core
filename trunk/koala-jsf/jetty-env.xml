@@ -7,7 +7,7 @@
         <New class="org.mortbay.resource.ResourceCollection">
             <Arg>
                 <Array type="java.lang.String">
-                    <Item>src/main/webapp</Item>
+                    <Item>src/main/webapp</Item>                    
                 </Array>
             </Arg>
         </New>
@@ -23,5 +23,5 @@
                 <Set name="maxActive">2</Set>
             </New>
         </Arg>
-    </New>
+    </New>	
 </Configure>
