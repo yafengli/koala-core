@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a="http://richfaces.org/a4j"
+                template="/layout/template.xhtml">
+    <ui:define name="head">
+        <title>长尾-广告：计数（旧）</title>
+        <style type="text/css" media="all">
+            @import url( "#{facesContext.externalContext.requestContextPath}/resources/css/gt_grid.css" );
+        </style>
+        <script type="text/javascript"
+                src="#{facesContext.externalContext.requestContextPath}/resources/js/gt_grid/gt_msg_cn.js"></script>
+        <script type="text/javascript"
+                src="#{facesContext.externalContext.requestContextPath}/resources/js/gt_grid/gt_grid_all.js"></script>
+        <script type="text/javascript"
+                src="#{facesContext.externalContext.requestContextPath}/resources/js/config/list.js"></script>
+    </ui:define>
+    <ui:define name="body">
+        <h:messages globalOnly="true" styleClass="message"/>
+        <rich:panel>
+            <f:facet name="header">【计数（旧）】</f:facet>
+            <div id="grid1_container" style=" width:800px;height:700px">
+                <span style="font-size:13px; color: blue;">:分类显示:</span>
+            </div>
+        </rich:panel>
+    </ui:define>
+</ui:composition>

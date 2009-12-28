@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"      
+      xmlns:composite="http://java.sun.com/jsf/composite">
+    <composite:interface>
+        <composite:attribute name="title"/>
+        <composite:attribute name="contentEl"/>
+        <composite:attribute name="renderTo"/>
+    </composite:interface>
+    <composite:implementation>
+        <h:head>
+            <script type="text/javascript">
+                Ext.onReady(function() {
+                    new Ext.Panel({
+                        title: '#{cc.attrs.title}',
+                        collapsible:true,
+                        renderTo: '#{cc.attrs.renderTo}',
+                        width:400,
+                        contentEl:'#{cc.attrs.contentEl}'
+                    });                    
+                });
+            </script>
+        </h:head>
+    </composite:implementation>
+</html>
