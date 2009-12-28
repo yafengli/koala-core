@@ -1,9 +1,0 @@
-<Context path="/adv" docBase="adv"
-         debug="5" reloadable="true" crossContext="true">
-    <Resource driverClassName="org.postgresql.Driver"
-              maxActive="5" maxIdle="5" maxWait="5000"
-              name="jdbc/advdb" password="adv"
-              type="javax.sql.DataSource"
-              url="jdbc:postgresql://127.0.0.1/xinfeng_adv_db"
-              username="adv"/>
-</Context>
