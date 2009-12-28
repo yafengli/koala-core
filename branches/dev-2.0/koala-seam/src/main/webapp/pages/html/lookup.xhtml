@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a="http://richfaces.org/a4j"
+                template="/layout/template.xhtml">
+    <ui:define name="head">
+        <title>长尾-广告：查询结果</title>
+        <style type="text/css">
+            @import url( "#{facesContext.externalContext.requestContextPath}/resources/css/jmesa.css" );
+        </style>
+        <script type="text/javascript"
+                src="#{facesContext.externalContext.requestContextPath}/resources/js/jmesa/jmesa.js"></script>
+        <script type="text/javascript"
+                src="#{facesContext.externalContext.requestContextPath}/resources/js/jquery/jquery.js"></script>
+    </ui:define>
+    <ui:define name="body">
+        <h:messages globalOnly="true" styleClass="message"/>
+        <rich:panel>
+            <f:facet name="header">【查询结果】</f:facet>
+
+            <form name="presidentsForm" action="#{facesContext.externalContext.requestContextPath}/demo.lookup">
+                <h:outputText value="${presidents}" escape="false"/>
+            </form>
+            <script type="text/javascript">
+                function onInvokeAction(id) {
+                    setExportToLimit(id, '');
+                    createHiddenInputFieldsForLimitAndSubmit(id);
+                }
+                function onInvokeExportAction(id) {
+                    var parameterString = createParameterStringForLimit(id);
+                    location.href = '#{facesContext.externalContext.requestContextPath}/demo.lookup?' + parameterString;
+                }
+            </script>
+        </rich:panel>
+    </ui:define>
+</ui:composition>
+
