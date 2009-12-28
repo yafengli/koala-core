@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import javax.servlet.http.HttpSession;
 
-import org.koala.spring.Properties;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.SessionAttributes;
 

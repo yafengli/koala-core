@@ -2,7 +2,7 @@ package test.annotation.config;
 
 import java.io.Serializable;
 
-import org.koala.spring.Properties;
+import org.koala.spring.annotation.Properties;
 import org.springframework.stereotype.Service;
 
 /**

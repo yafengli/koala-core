@@ -1,23 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cn.demo.annotation;
 
-import org.koala.spring.Properties;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  *
  * @author Administrator
  */
-@Component("loadConfig")
+@Configuration
+@ImportResource("classpath:/applicationContext.xml")
 public class LoadConfig {
 
-    @Properties(name = "base.xp.dir")
-    private String baseXpDir;
-    @Properties(name = "base.linux.dir")
-    private String baseLinuxDir;
+    private
+    @Value("#{cp.xp}")
+    String baseXpDir;
+    private
+    @Value("#{cp.linux}")
+    String baseLinuxDir;
 
     public String getBaseXpDir() {
         return baseXpDir;

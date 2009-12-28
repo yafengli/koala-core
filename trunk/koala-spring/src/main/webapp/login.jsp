@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@include file="/common/taglibs.jsp" %>
 <%@ page import="org.springframework.security.AuthenticationException" %>
 <%@ page import="org.springframework.security.ui.AbstractProcessingFilter"%>
 <%@ page import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter"%>
