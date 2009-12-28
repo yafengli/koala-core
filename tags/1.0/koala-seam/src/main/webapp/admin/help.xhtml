@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a="http://richfaces.org/a4j"
+                template="/layout/template.xhtml">
+    <ui:define name="body">
+        <h:messages globalOnly="true" styleClass="message"/>
+        <rich:panel>
+            <f:facet name="header">【帮助】</f:facet>
+
+            <div id="help">
+                计数规范:http://[hostname]/adv/count/?$params<br/>
+                参数说明：<br/>
+                <ul>
+                    <li><b>typename</b>:自定义的分类关键字，只能使用字母和下划线,长度不超过20个字符。</li>
+                    <li><b>action</b>:服务器指令，目前支持<i>clear</i>和<i>remove(必须指定type)</i>。</li>
+
+                </ul>
+                <hr/>
+                <ul>
+                    <li><a href="#{facesContext.externalContext.requestContextPath}/count/?type=search"
+                           target="_blank">对search关键字的计数加1</a></li>
+                    <li><a href="#{facesContext.externalContext.requestContextPath}/count/?action=clear"
+                           target="_blank">清除所有计数</a></li>
+                    <li>
+                        <a href="#{facesContext.externalContext.requestContextPath}/count/?type=search&amp;action=remove"
+                           target="_blank">清除search关键字计数</a></li>
+                </ul>
+                <hr/>
+                <ul>
+                    <li>
+                        <a href="#{facesContext.externalContext.requestContextPath}/count/?action=refresh" target="_blank">
+                            刷新计数类型描述 </a>
+                    </li>
+                    <li><a href="#{facesContext.externalContext.requestContextPath}/basic.run">浏览[新]</a></li>
+                    <li><s:link view="/pages/html/form.xhtml" value="查询[新]"/></li>
+                    <li><s:link view="/pages/html/list.xhtml" value="浏览[旧]"/></li>
+                </ul>
+            </div>
+        </rich:panel>
+    </ui:define>
+</ui:composition>

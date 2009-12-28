@@ -1,0 +1,50 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="/layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Account Details</f:facet>
+
+
+        <s:decorate id="desc" template="/layout/display.xhtml">
+            <ui:define name="label">Desc</ui:define>
+            <h:outputText value="#{accountHome.instance.desc}"/>
+        </s:decorate>
+
+        <s:decorate id="loginname" template="/layout/display.xhtml">
+            <ui:define name="label">Loginname</ui:define>
+            <h:outputText value="#{accountHome.instance.loginname}"/>
+        </s:decorate>
+
+        <s:decorate id="password" template="/layout/display.xhtml">
+            <ui:define name="label">Password</ui:define>
+            <h:outputText value="#{accountHome.instance.password}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/admin/AccountEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/admin/#{empty accountFrom ? 'AccountList' : accountFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>
