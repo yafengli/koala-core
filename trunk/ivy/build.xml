@@ -1,0 +1,30 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="hello-ivy" default="dpd">
+	<!-- ================================= 
+          target: resolve              
+         ================================= -->
+	<property file="./ivy.properties"/>
+    <target name="init" description="--> init settings.">
+		<ivy:settings file="${ivy.settings.dir}/ivysettings.xml" />
+		<mkdir dir="${bin.dir}" />
+	</target>
+	<target name="dpd" description="--> retrieve dependencies with ivy" depends="init">
+		<ivy:retrieve/>
+		<ivy:buildlist reference="build-path">
+			<fileset dir="." includes="build.xml"/>
+		</ivy:buildlist>
+		<ivy:report todir="${ivy.report.dir}" />
+	</target>
+	<target name="clean" description="--> clean cache." depends="init">
+		<ivy:cleancache />
+        <delete includeemptydirs="true">
+            <fileset dir="${ivy.lib.dir}" includes="*.jar"/>
+        </delete>
+		<!--
+		<delete dir="${bin.dir}"/>	
+		<delete dir="${ivy.report.dir}"/>	
+		-->
+	</target>
+	<target name="maven" description="--> create the the pom file of maven2." depends="init">
+		<ivy:makepom ivyfile="./ivy.xml" pomfile="./${bin.dir}/pom.xml" />
+	</target>	
+</project>

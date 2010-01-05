@@ -10,6 +10,7 @@
 	<url>http://maven.apache.org</url>
 	<modules>
 		<module>koala-core</module>
+		<module>extend-jpa-ejb</module>
 		<module>maven-koala-plugin</module>
 		<module>koala-spring</module>
 		<module>koala-jsf</module>
@@ -127,7 +128,7 @@
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
 			<optional>true</optional>
-		</dependency>
+		</dependency>		
 	</dependencies>
 	<build>
 		<plugins>
@@ -143,8 +144,8 @@
 		</plugins>
 	</build>
 	<scm>
-		<connection>scm:svn:https://koala-core.googlecode.com/svn/branches/dev-2.0</connection>
-		<developerConnection>scm:svn:https://koala-core.googlecode.com/svn/branches/dev-2.0</developerConnection>
+		<connection>scm:svn:https://koala-core.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://koala-core.googlecode.com/svn/trunk</developerConnection>
 	</scm>
 	<distributionManagement>
 		<repository>
@@ -162,7 +163,7 @@
 		<hibernate-entitymanager.version>3.4.0.GA</hibernate-entitymanager.version>
 		<ibatis.version>2.3.4.726</ibatis.version>
 		<log4j.version>1.2.14</log4j.version>
-		<lucene-core.version>2.4.1</lucene-core.version>
+		<lucene-core.version>3.0.0</lucene-core.version>
 		<freemarker.version>2.3.15</freemarker.version>
 		<h2.version>1.1.107</h2.version>
 		<postgresql.version>8.4-701.jdbc4</postgresql.version>
