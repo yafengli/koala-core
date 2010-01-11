@@ -1,6 +1,6 @@
 package test.dao.impl.jpa;
 
-import org.koala.dao.GenericDaoJpa;
+import org.koala.dao.jpa.GenericDaoJpa;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

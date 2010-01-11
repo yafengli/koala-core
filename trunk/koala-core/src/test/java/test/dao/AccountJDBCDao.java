@@ -1,6 +1,6 @@
 package test.dao;
 
-import org.koala.dao.IGenericJDBCDao;
+import org.koala.dao.jdbc.IGenericJDBCDao;
 import test.model.Account;
 
 public interface AccountJDBCDao extends IGenericJDBCDao<Account, Long> {
