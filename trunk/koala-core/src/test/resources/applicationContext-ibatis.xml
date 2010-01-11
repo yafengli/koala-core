@@ -20,7 +20,7 @@
     <bean id="accountDao" class="test.dao.impl.ibatis.AccountDaoImpl">
         <property name="sqlMapClient" ref="sqlMapClient" />
     </bean>
-    <bean id="baseIBatisDao" class="org.koala.dao.BaseIBatisDao">
+    <bean id="baseIBatisDao" class="org.koala.dao.ibatis.BaseIBatisDao">
         <property name="sqlMapClient" ref="sqlMapClient" />
     </bean>
 </beans>

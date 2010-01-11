@@ -37,7 +37,7 @@
         <property
             name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <bean id="baseJPADao" class="org.koala.dao.BaseJPADao" scope="prototype"/>
+    <bean id="baseJPADao" class="org.koala.dao.jpa.BaseJPADao" scope="prototype"/>
 
 
 </beans>
