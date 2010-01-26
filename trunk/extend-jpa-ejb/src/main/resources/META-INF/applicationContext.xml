@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- and this is the message listener container -->
+    <bean name="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://221.231.148.247:8976"/>
+    </bean>
+    <bean id="messageListener" class="hellojms.queue.TextListener"/>
+
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="concurrentConsumers" value="5"/>
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destinationName" value="helloq"/>
+        <property name="messageListener" ref="messageListener"/>
+    </bean>
+</beans>

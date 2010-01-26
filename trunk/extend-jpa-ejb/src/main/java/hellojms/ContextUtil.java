@@ -6,7 +6,8 @@ import java.util.Properties;
 
 public class ContextUtil {
 
-    public static final String qName = new String("dynamicQueues/hello");
+    public static final String qName = new String("dynamicQueues/helloq");
+    public static final String tName = new String("dynamicTopics/hellot");
     private static Properties p = new Properties();
     private static InitialContext jc;
 

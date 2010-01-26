@@ -11,7 +11,7 @@ public class SendToQueue {
 
         QueueConnection qc = null;
         try {
-            QueueConnectionFactory qcf = (QueueConnectionFactory) ContextUtil.lookContext().lookup("ConnectionFactory");
+            QueueConnectionFactory qcf = (QueueConnectionFactory) ContextUtil.lookContext().lookup("QueueConnectionFactory");
             Queue q = (Queue) ContextUtil.lookContext().lookup(ContextUtil.qName);
             qc = qcf.createQueueConnection();
             QueueSession qs = qc.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);

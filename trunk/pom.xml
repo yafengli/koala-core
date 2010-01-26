@@ -71,6 +71,11 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -155,7 +160,6 @@
 		</repository>
 	</distributionManagement>
 	<properties>
-		<spring.version>2.5.6.SEC01</spring.version>
 		<spring.version>3.0.0.RELEASE</spring.version>
 		<hibernate-core.version>3.3.2.GA</hibernate-core.version>
 		<hibernate-validator.version>4.0.2.GA</hibernate-validator.version>
