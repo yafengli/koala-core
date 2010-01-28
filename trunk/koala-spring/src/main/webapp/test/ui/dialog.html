@@ -1,0 +1,30 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+<link type="text/css" href="jquery-ui.custom.css" rel="stylesheet" />	
+<script src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	google.load("jquery","1.4.1");
+	google.load("jqueryui","1.7.2");
+	google.setOnLoadCallback(		
+		function() {		
+			$("#ct1").dialog({autoOpen: false,modal:true,bgiframe:true,height: 400,width:600,maxHeight: 500,maxWidth:800});
+			$("#ct2").dialog({autoOpen: false,modal:true,maxHeight: 400,maxWidth:600,minHeight:300,minWidth:300 });
+			$("#ck1").click(function(){
+				$("#ct1").load("dialog-content.html");
+				$("#ct1").dialog("open");
+			});
+			$("#ck2").click(function(){
+				$("#ct2").dialog("open");
+			});
+		});
+</script>
+</head>
+<body>
+	<div>测试啊，我测试~~<button id="ck1">click1</button><button id="ck2">click2</button>
+	</div>
+	<div id="ct2">bbbbbbbbbbbbbbbbbb</div>
+	<div id="ct1" title="Hello World">
+	</div>
+</body>
+</html>

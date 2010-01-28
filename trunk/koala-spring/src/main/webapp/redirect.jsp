@@ -59,6 +59,10 @@
         <td>
             <div><span>JFreeChart</span></div>
             <img src="jfreechart.ftl" alt="JFreeChart-图表"/></td>
+        <td>
+            <div>Flash Chart</div>
+            <jsp:include page="/ofc.jsp" flush="true"/>
+        </td>
     </tr>
 </table>
 
