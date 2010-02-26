@@ -1,0 +1,22 @@
+<script src="/resources/js/jquery/jquery.min.js"></script>
+<script src="/resources/js/idcode/jquery.idcode.js"></script>
+<link href="/resources/js/idcode/jquery.idcode.css" type="text/css" rel="stylesheet"> 
+<script>
+  $(document).ready(function() {		
+		$.idcode.setCode();
+		$("#_val").click(
+			function () {
+				var val=$.idcode.validateCode();
+				if(val){
+					alert("SUCCESS!");
+				}
+				else{
+					alert("ERROR!");
+				}		
+			}
+		);
+  });
+</script>
+<body>
+	<table><tr><td><div id="idcode"></div></td><td><input type="button" name="add" onclick="" id="_val" value="Validate"/></td></tr></table>
+</body>
