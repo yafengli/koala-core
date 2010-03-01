@@ -1,4 +1,4 @@
-package org.apache.maven.plugins;
+package org.apache.maven.plugins.impl;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -7,10 +7,12 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import org.apache.maven.plugins.util.PropertiesDefination;
 import org.apache.maven.plugins.util.TemplateProcess;
 
 /**
- * @goal create-model
+ * @goal model
  * @requiresProject true
  * @phase process-sources
  */
