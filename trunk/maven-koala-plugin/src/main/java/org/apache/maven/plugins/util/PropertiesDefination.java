@@ -1,4 +1,4 @@
-package org.apache.maven.plugins;
+package org.apache.maven.plugins.util;
 
 import java.util.Properties;
 
