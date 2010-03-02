@@ -1,7 +1,6 @@
 package cn.demo.ui;
 
 import javax.faces.context.FacesContext;
-import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.

@@ -5,13 +5,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.webapp.UIComponentELTag;
 import javax.el.ValueExpression;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Administrator
- * Date: 2009-12-17
- * Time: 13:29:26
- * To change this template use File | Settings | File Templates.
- */
 public class HelloAjaxTag extends UIComponentELTag {
     public static final String COMPONENT_TYPE = "cn.demo.ui.HelloAjax";
 

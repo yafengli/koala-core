@@ -6,13 +6,6 @@ import javax.faces.context.ResponseWriter;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Administrator
- * Date: 2009-12-17
- * Time: 13:23:18
- * To change this template use File | Settings | File Templates.
- */
 public class HelloAjax extends UIComponentBase implements Ajax {
     @Override
     public void encodeEnd(FacesContext context) throws IOException {
