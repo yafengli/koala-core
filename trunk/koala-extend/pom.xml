@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.koala</groupId>
-	<artifactId>koala-extend-jpa-ejb</artifactId>
+	<artifactId>koala-extend</artifactId>
 	<version>${parent.version}</version>
-	<name>Koala extend jpa ejb</name>
+	<name>Koala extend jpa ejb jms nio</name>
 	<parent>
 		<groupId>org.koala</groupId>
 		<artifactId>koala</artifactId>

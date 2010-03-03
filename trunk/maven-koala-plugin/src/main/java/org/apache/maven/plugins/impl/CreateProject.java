@@ -14,7 +14,7 @@ import org.dom4j.io.SAXReader;
 
 /**
  *
- * @goal create-project
+ * @goal project
  * @requiresProject false
  * @phase process-sources
  */
