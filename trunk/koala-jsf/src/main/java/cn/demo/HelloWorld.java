@@ -14,6 +14,8 @@ public class HelloWorld {
 	@ManagedProperty(name = "name", value = "@FUCK@")
 	private String name;
 
+	private Long id;
+
 	public String getName() {
 		return name;
 	}
@@ -22,8 +24,17 @@ public class HelloWorld {
 		this.name = name;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String action() {
-		System.out.printf("[%s][%s]\n","Hello World!",this.getName());
+		System.out.printf("[%s][%s,%s]\n", "Hello World!", this.getName(), this
+				.getId());
 		HttpServletRequest req = (HttpServletRequest) FacesContext
 				.getCurrentInstance().getExternalContext().getRequest();
 
