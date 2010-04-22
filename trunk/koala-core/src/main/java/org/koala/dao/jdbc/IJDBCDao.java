@@ -1,10 +1,10 @@
 package org.koala.dao.jdbc;
 
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 
 import java.util.List;
 import java.util.Map;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  * @author liyafeng
@@ -104,7 +104,7 @@ public interface IJDBCDao {
      *
      * @return
      */
-    public <T> ParameterizedRowMapper<T> getRowMapper(Class<T> c);
+    public <T> RowMapper<T> getRowMapper(Class<T> c);
 
     /**
      * 设置处理存储过程的工具SimpleJdbcCall

@@ -2,7 +2,6 @@ package org.koala.dao.jdbc;
 
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +17,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  * Date: 2009-10-12
@@ -76,7 +76,8 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
         if (t != null) {
             sps = new BeanPropertySqlParameterSource(t);
         }
-        return this.getSimpleJdbcTemplate().query(sql, getRowMapper(t.getClass()), sps);
+        Class<T> c = (Class<T>) t.getClass();
+        return this.getSimpleJdbcTemplate().query(sql, getRowMapper(c), sps);
     }
 
     @Override
@@ -101,7 +102,7 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
 
     @Override
     public <T> List<T> find(String sql, Class<T> c) {
-        return find(sql, c, null);
+        return this.getSimpleJdbcTemplate().query(sql, getRowMapper(c), null);
     }
 
     @Override
@@ -120,11 +121,11 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
         return (T) this.getSimpleJdbcTemplate().queryForObject(sql, getRowMapper(c), sps);
     }
 
-    public <T> ParameterizedRowMapper getRowMapper(final Class<T> c) {
-        return new ParameterizedRowMapper() {
+    public <T extends Object> RowMapper<T> getRowMapper(final Class<T> c) {
+        return new RowMapper<T>() {
 
-            public Object mapRow(ResultSet rs, int arg1) throws SQLException {
-                Object obj = null;
+            public T mapRow(ResultSet rs, int arg1) throws SQLException {
+                T obj = null;
                 try {
                     obj = c.newInstance();
                     BeanInfo info = Introspector.getBeanInfo(c, Object.class);
