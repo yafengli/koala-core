@@ -2,7 +2,7 @@ package cn.demo.dao.impl;
 
 import cn.demo.dao.DemoPersonDao;
 import cn.demo.pojo.DemoPerson;
-import org.koala.dao.GenericDaoJDBC;
+import org.koala.dao.jdbc.GenericDaoJDBC;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.stereotype.Service;
 

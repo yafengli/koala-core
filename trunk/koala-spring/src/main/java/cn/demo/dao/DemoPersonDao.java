@@ -5,7 +5,7 @@
 package cn.demo.dao;
 
 import cn.demo.pojo.DemoPerson;
-import org.koala.dao.IGenericJDBCDao;
+import org.koala.dao.jdbc.IGenericJDBCDao;
 
 /**
  *

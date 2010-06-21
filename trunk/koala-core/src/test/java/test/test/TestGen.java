@@ -1,10 +1,11 @@
 package test.test;
 
 
-import java.util.List;
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.koala.util.CalendarTool;
 /**
  * Date: 2009-9-24
  * Time: 14:09:26
@@ -23,6 +24,7 @@ public class TestGen {
         tg.make(1,"One");
         tg.make(1.0,true);
         tg.make(true,"232");
+		CalendarTool ct=new CalendarTool();
     }
 }
 

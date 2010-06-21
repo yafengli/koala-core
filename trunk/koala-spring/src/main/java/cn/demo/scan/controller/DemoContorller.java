@@ -40,6 +40,7 @@ import java.util.ResourceBundle;
 @Scope(WebBeanDefinition.SCOPE_SESSION)
 @SessionAttributes({"test", "date"})
 public class DemoContorller {
+
     public static final StringBuilder fsb = new StringBuilder();
 
     static {
@@ -49,7 +50,6 @@ public class DemoContorller {
         fsb.append("<RESULT>%s</RESULT>");
         fsb.append("<DESC>%s</DESC></RESPONSE>");
     }
-
     @Autowired
     private Validator validator;
     @Autowired
@@ -204,12 +204,9 @@ public class DemoContorller {
             bss.put(seveen);
             bss.put(eight);
             bss.put(nine);
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         resp.getWriter().write(bss.toString());
     }
 }
-

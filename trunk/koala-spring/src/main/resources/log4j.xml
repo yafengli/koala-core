@@ -16,7 +16,7 @@
         </layout>
     </appender>
     <root>
-       <level value="INFO"/>
+       <level value="ERROR"/>
         <appender-ref ref="PUB_TWO"/>
         <appender-ref ref="PUB_ONE"/>
     </root>

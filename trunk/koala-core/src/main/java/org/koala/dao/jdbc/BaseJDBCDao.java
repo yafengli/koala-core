@@ -102,7 +102,7 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
 
     @Override
     public <T> List<T> find(String sql, Class<T> c) {
-        return this.getSimpleJdbcTemplate().query(sql, getRowMapper(c), null);
+        return this.getSimpleJdbcTemplate().query(sql, getRowMapper(c));
     }
 
     @Override
