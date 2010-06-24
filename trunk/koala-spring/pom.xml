@@ -54,11 +54,6 @@
             <artifactId>ognl</artifactId>
             <version>${ognl.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springmodules</groupId>
-            <artifactId>spring-modules-validation</artifactId>
-            <version>${springmodules.validation.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>commons-validator</groupId>
@@ -112,6 +107,12 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>${cxf.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-web</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
         <dependency>
             <groupId>xstream</groupId>
@@ -225,6 +226,6 @@
         <urlrewritefilter.version>3.2.0</urlrewritefilter.version>
         <json.version>20090211</json.version>
         <jfreechart.version>1.0.11</jfreechart.version>
-        <cxf.version>2.2.3</cxf.version>
+        <cxf.version>2.2.9</cxf.version>
     </properties>
 </project>
