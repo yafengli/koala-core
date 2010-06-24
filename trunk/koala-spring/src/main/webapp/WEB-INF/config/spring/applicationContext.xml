@@ -19,6 +19,8 @@
             <value>java:comp/env/jdbc/kp</value>
         </property>
     </bean>
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+    
     <!-- 配置-->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>

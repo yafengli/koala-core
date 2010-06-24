@@ -31,11 +31,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
     <bean id="registryController" class="cn.demo.base.controller.RegistroyStudentController">
         <property name="formView" value="registroy"/>
-        <property name="successView" value="success"/>
-        <!--<property name="validator">
-            <bean class="cn.demo.validation.ModelValidator"/>
-        </property>-->
-        <property name="validator" ref="validator"/>
+        <property name="successView" value="success"/>        
     </bean>
     <bean id="paramMuliController"
           class="org.springframework.web.servlet.mvc.multiaction.MultiActionController">
