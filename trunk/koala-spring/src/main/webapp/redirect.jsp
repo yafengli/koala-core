@@ -55,6 +55,8 @@
             <a href="auto/test.jsp">自动完成</a>
             <hr/>
             <a href="map/index.jsp">Google Map</a><br/>
+            <hr/>
+            <a href="tiles/home/23/">Tiles 2测试</a>
         </td>
         <td>
             <div><span>JFreeChart</span></div>
