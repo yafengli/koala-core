@@ -3,13 +3,13 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>[aindex.jsp]</title>
-    </head>
-    
-    <body>
-        <p>欢迎使用，这是[aindex.jsp].</p>
-        <h3>${message}</h3>
-    </body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[aindex.jsp]</title>
+</head>
+
+<body>
+<p>欢迎使用，这是[aindex.jsp].</p>
+<h3>${message}</h3>
+</body>
 </html>

@@ -59,13 +59,18 @@ public class DemoContorller {
 
     @RequestMapping("/aindex.ftl")
     public ModelAndView index(@RequestParam(required = false, value = "id") String id) {
+        System.out.println("come in");
         ModelAndView mav = new ModelAndView("aindex");
         Map map = new HashMap();
         ResourceBundle rb = ResourceBundle.getBundle("sql");
         String ssql = rb.getString("demo.person.sql");
-        DemoPerson dp = demoPersonDaoImpl.findForObject(ssql, 1L);
-        map.put("message", String.format("This is cn.neto message!The id is [%s]", dp.getName()));
-        mav.addAllObjects(map);
+        try {
+            DemoPerson dp = demoPersonDaoImpl.findForObject(ssql, 1L);
+            map.put("message", String.format("This is cn.neto message!The id is [%s]", dp.getName()));
+            mav.addAllObjects(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return mav;
     }
 
