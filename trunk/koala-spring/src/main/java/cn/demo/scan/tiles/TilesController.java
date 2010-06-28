@@ -18,7 +18,7 @@ public class TilesController {
     public ModelAndView forward(@PathVariable String id, Model model) {
         ModelAndView mav = new ModelAndView("home");
         System.out.println("homepage");
-        model.addAttribute("message", "我去，这是个测试页面！");
+        model.addAttribute("message", "This is a test page.");
         return mav;
     }
 }

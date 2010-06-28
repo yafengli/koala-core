@@ -13,8 +13,17 @@ import javax.servlet.http.HttpSession;
  */
 @Aspect
 public class HelloWorldAspect {
-    @Pointcut("execution(*  *.testp(..))")
+    @Pointcut("execution(* *.testp(..))")
     public void tesp() {
+    }
+
+    @Pointcut("execution(* *.setName(..)) || execution(* *.*.this.setName(..))")
+    public void setTest() {
+    }
+
+    @Pointcut("execution(* *.findForObject(..))")
+    public void findForObject() {
+
     }
 
     @Before("tesp() &&" + "args(req,session,model)")
@@ -23,13 +32,28 @@ public class HelloWorldAspect {
         System.out.printf("[args:][%s,%s,%s,%s]\n", req, session, model, session.getId());
     }
 
-    @After(value = "tesp()")
+    @After("tesp()")
     public void sayGoodBye() {
         System.out.println("********Good Bye.*********");
     }
 
-    @Around("set(* *.UploadContorller.name)" + "&&args(name)")
-    public void invoke(String name) {
-        System.out.printf("[set=%s]\n", name);
+    @Before("setTest() &&" + "args(name)")
+    public void before(String name) {
+        System.out.printf("********before[set=%s]**************\n", name);
+    }
+
+    @After("setTest() &&" + "args(name)")
+    public void after(String name) {
+        System.out.printf("****************after[set=%s]*****************\n", name);
+    }
+
+    @Before("findForObject()")
+    public void beforefindForObject() {
+        System.out.println("********beforfindForObject**************");
+    }
+
+    @After("findForObject()")
+    public void afterfindForObject() {
+        System.out.println("********afterfindForObject**************");
     }
 }

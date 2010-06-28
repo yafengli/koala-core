@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ImportResource;
  * @author Administrator
  */
 @Configuration
-@ImportResource("classpath:/applicationContext.xml")
 public class LoadConfig {
 
     private

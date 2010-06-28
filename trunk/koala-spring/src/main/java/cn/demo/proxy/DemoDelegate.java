@@ -9,14 +9,14 @@ public class DemoDelegate {
 	
 	public ModelAndView sayHello(HttpServletRequest req,HttpServletResponse resp)
 	{
-		return new ModelAndView("hello","action","问好！");
+		return new ModelAndView("hello","action","Say hello.");
 	}
 	public ModelAndView logIn(HttpServletRequest req,HttpServletResponse resp)
 	{
-		return new ModelAndView("hello","action","登入！");
+		return new ModelAndView("hello","action","Login");
 	}
 	public ModelAndView logOut(HttpServletRequest req,HttpServletResponse resp)
 	{
-		return new ModelAndView("hello","action","登出！");
+		return new ModelAndView("hello","action","Logout");
 	}
 }

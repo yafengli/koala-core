@@ -27,7 +27,7 @@ public class StudentValidator implements Validator {
                 errors.rejectValue("firstName", "required", new Object[]{"FirstName"}, "required");
             }
             if (test.getLastName() == null || test.getLastName().trim().length() < 1) {
-                errors.rejectValue("lastName", "required", "字段是必须滴！");
+                errors.rejectValue("lastName", "required", "The content is required.");
             }
         }
         else

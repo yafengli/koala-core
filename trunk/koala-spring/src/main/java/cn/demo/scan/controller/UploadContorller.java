@@ -2,6 +2,7 @@ package cn.demo.scan.controller;
 
 import cn.demo.annotation.LoadConfig;
 import cn.demo.pojo.UploadForm;
+import cn.demo.scan.component.HelloWorldComp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -44,6 +45,8 @@ public class UploadContorller {
 
     @Autowired
     private LoadConfig loadConfig;
+    @Autowired
+    private HelloWorldComp helloWorldComp;
     public static final String S_FILES = "files";
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -135,24 +138,23 @@ public class UploadContorller {
     }
 
     @RequestMapping(value = "/swfupload", method = RequestMethod.GET)
-    public ModelAndView test(HttpServletRequest resp) {
+    public ModelAndView test(HttpServletRequest resp, HttpSession session) {
         ModelAndView mav = new ModelAndView("swfupload");
         mav.addObject("user", "@FUVK GCD@");
+        this.setName("111");
+        this.getName();
+        helloWorldComp.findForObject();
         return mav;
     }
 
     @RequestMapping(value = "/swfupload", method = RequestMethod.POST)
     public void testp(HttpServletRequest resp, HttpSession session, ModelMap model) {
         try {
-            System.out.printf("[id=%s]\n",session.getId());
-            this.setName(session.getId());
-            this.getName();
             MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
-
             File baseDir = loadStorgePath();
             for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
                 String fileName = (String) it.next();
-                MultipartFile mf = mhsr.getFile(fileName);                
+                MultipartFile mf = mhsr.getFile(fileName);
                 if (mf != null) {
                     mf.transferTo(new File(baseDir, mf.getOriginalFilename()));
                 }
@@ -191,7 +193,7 @@ public class UploadContorller {
             File baseDir = loadStorgePath();
             for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
                 String fileName = (String) it.next();
-                MultipartFile mf = mhsr.getFile(fileName);                
+                MultipartFile mf = mhsr.getFile(fileName);
                 if (mf != null) {
                     mf.transferTo(new File(baseDir, mf.getOriginalFilename()));
                 }

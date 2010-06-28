@@ -1,5 +1,26 @@
 package cn.demo.scan.controller;
 
+import cn.demo.dao.DemoPersonDao;
+import cn.demo.pojo.DemoPerson;
+import cn.demo.webservice.HelloWorld;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,36 +30,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.Node;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.servlet.ModelAndView;
-
-import cn.demo.dao.DemoPersonDao;
-import cn.demo.pojo.DemoPerson;
-import cn.demo.support.WebBeanDefinition;
-import cn.demo.webservice.HelloWorld;
-
 /**
  * @author yafengli
  */
 @Controller
-@Scope(WebBeanDefinition.SCOPE_SESSION)
 public class DemoContorller {
 
     public static final StringBuilder fsb = new StringBuilder();
@@ -50,6 +45,7 @@ public class DemoContorller {
         fsb.append("<RESULT>%s</RESULT>");
         fsb.append("<DESC>%s</DESC></RESPONSE>");
     }
+
     @Autowired
     private Validator validator;
     @Autowired
