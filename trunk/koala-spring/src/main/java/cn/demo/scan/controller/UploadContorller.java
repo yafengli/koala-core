@@ -32,6 +32,15 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes({UploadContorller.S_FILES})
 @RequestMapping("/")
 public class UploadContorller {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Autowired
     private LoadConfig loadConfig;
@@ -136,6 +145,8 @@ public class UploadContorller {
     public void testp(HttpServletRequest resp, HttpSession session, ModelMap model) {
         try {
             System.out.printf("[id=%s]\n",session.getId());
+            this.setName(session.getId());
+            this.getName();
             MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
 
             File baseDir = loadStorgePath();
@@ -180,8 +191,7 @@ public class UploadContorller {
             File baseDir = loadStorgePath();
             for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
                 String fileName = (String) it.next();
-                MultipartFile mf = mhsr.getFile(fileName);
-                System.out.println(mf);
+                MultipartFile mf = mhsr.getFile(fileName);                
                 if (mf != null) {
                     mf.transferTo(new File(baseDir, mf.getOriginalFilename()));
                 }
