@@ -134,15 +134,13 @@ public class UploadContorller {
 
     @RequestMapping(value = "/swfupload", method = RequestMethod.POST)
     public void testp(HttpServletRequest resp, HttpSession session, ModelMap model) {
-        try {
-            System.out.println("@FUVK@");
+        try {            
             MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
 
             File baseDir = loadStorgePath();
             for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
                 String fileName = (String) it.next();
-                MultipartFile mf = mhsr.getFile(fileName);
-                System.out.println(mf);
+                MultipartFile mf = mhsr.getFile(fileName);                
                 if (mf != null) {
                     mf.transferTo(new File(baseDir, mf.getOriginalFilename()));
                 }
