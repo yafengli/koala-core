@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by IntelliJ IDEA.
  * User: YaFengLi
  * Date: 2010-6-28
  * Time: 14:42:37
- * To change this template use File | Settings | File Templates.
  */
 @Aspect
 public class HelloWorldAspect {
@@ -25,10 +23,10 @@ public class HelloWorldAspect {
     @Before("tesp() &&" + "args(req,session,model)")
     public void sayHello(HttpServletRequest req, HttpSession session, ModelMap model) {
         System.out.println("********Hello World.*********");
-        System.out.printf("[args:][%s,%s,%s]\n", req, session, model);
+        System.out.printf("[args:][%s,%s,%s,%s]\n", req, session, model,session.getId());
     }
 
-    @After("tesp()")
+    @After(value="tesp()")
     public void sayGoodBye() {
         System.out.println("********Good Bye.*********");
     }

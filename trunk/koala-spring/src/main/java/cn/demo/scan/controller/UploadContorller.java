@@ -134,7 +134,8 @@ public class UploadContorller {
 
     @RequestMapping(value = "/swfupload", method = RequestMethod.POST)
     public void testp(HttpServletRequest resp, HttpSession session, ModelMap model) {
-        try {            
+        try {
+            System.out.printf("[id=%s]\n",session.getId());
             MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
 
             File baseDir = loadStorgePath();
