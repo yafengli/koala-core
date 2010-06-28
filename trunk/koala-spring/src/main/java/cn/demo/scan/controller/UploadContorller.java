@@ -30,13 +30,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 @SessionAttributes({UploadContorller.S_FILES})
+@RequestMapping("/")
 public class UploadContorller {
 
     @Autowired
     private LoadConfig loadConfig;
     public static final String S_FILES = "files";
 
-    @RequestMapping(value = "/upload.ftl", method = RequestMethod.POST)
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ModelAndView index(@ModelAttribute("type") UploadForm type, BindingResult result, ModelMap model, HttpServletRequest request, HttpServletResponse resp) {
 
         ModelAndView mav = new ModelAndView("upload");
@@ -116,7 +117,7 @@ public class UploadContorller {
         return mav;
     }
 
-    @RequestMapping(value = "/upload.ftl", method = RequestMethod.GET)
+    @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public ModelAndView index() {
         System.out.println("GET");
         ModelAndView mav = new ModelAndView("upload");
@@ -124,14 +125,14 @@ public class UploadContorller {
         return mav;
     }
 
-    @RequestMapping(value = "/swfupload.ftl", method = RequestMethod.GET)
+    @RequestMapping(value = "/swfupload", method = RequestMethod.GET)
     public ModelAndView test(HttpServletRequest resp) {
         ModelAndView mav = new ModelAndView("swfupload");
         mav.addObject("user", "@FUVK GCD@");
         return mav;
     }
 
-    @RequestMapping(value = "/swfupload.ftl", method = RequestMethod.POST)
+    @RequestMapping(value = "/swfupload", method = RequestMethod.POST)
     public void testp(HttpServletRequest resp, HttpSession session, ModelMap model) {
         try {
             System.out.println("@FUVK@");
@@ -151,7 +152,7 @@ public class UploadContorller {
         }
     }
 
-    @RequestMapping(value = "/swfupload/view.ftl")
+    @RequestMapping(value = "/swfupload/view")
     public ModelAndView view(HttpServletRequest resp) {
         ModelAndView mav = new ModelAndView("view");
         File baseDir = loadStorgePath();
@@ -164,18 +165,18 @@ public class UploadContorller {
         return mav;
     }
 
-    @RequestMapping(value = "/uploadify.ftl", method = RequestMethod.GET)
+    @RequestMapping(value = "/uploadify", method = RequestMethod.GET)
     public ModelAndView uploadify(HttpServletRequest resp) {
         ModelAndView mav = new ModelAndView("uploadify");
         mav.addObject("user", "@FUVK GCD@");
         return mav;
     }
 
-    @RequestMapping(value = "/uploadify.ftl", method = RequestMethod.POST)
-    public void uploadify(HttpServletRequest resp, HttpSession session, ModelMap model) {
+    @RequestMapping(value = "/uploadify", method = RequestMethod.POST)
+    public void uploadify(HttpServletRequest req, HttpSession session, ModelMap model) {
         try {
             System.out.println("@FUVK@");
-            MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) resp;
+            MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) req;
 
             File baseDir = loadStorgePath();
             for (Iterator it = mhsr.getFileNames(); it.hasNext();) {
@@ -196,11 +197,12 @@ public class UploadContorller {
         String osName = System.getProperty("os.name");
 
         if (osName.toLowerCase().startsWith("window")) {
-            dirName = loadConfig.getBaseXpDir();
+            dirName = loadConfig.getBaseWinDir();
         } else if (osName.toLowerCase().startsWith("linux")) {
             dirName = loadConfig.getBaseLinuxDir();
         }
         File baseDir = new File(dirName);
+
         return baseDir;
     }
 }

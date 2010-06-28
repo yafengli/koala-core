@@ -14,17 +14,17 @@ public class LoadConfig {
 
     private
     @Value("#{cp.xp}")
-    String baseXpDir;
+    String baseWinDir;
     private
     @Value("#{cp.linux}")
     String baseLinuxDir;
 
-    public String getBaseXpDir() {
-        return baseXpDir;
+    public String getBaseWinDir() {
+        return baseWinDir;
     }
 
-    public void setBaseXpDir(String baseXpDir) {
-        this.baseXpDir = baseXpDir;
+    public void setBaseWinDir(String baseXpDir) {
+        this.baseWinDir = baseXpDir;
     }
 
     public String getBaseLinuxDir() {
