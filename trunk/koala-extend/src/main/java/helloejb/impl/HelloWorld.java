@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package helloejb.impl;
 
 import helloejb.Hello;
@@ -10,7 +6,7 @@ import javax.ejb.Stateless;
 
 /**
  *
- * @author Administrator
+ * @author YaFengLi
  */
 @Stateless(name="HelloBeanRemote")
 @Remote(Hello.class)

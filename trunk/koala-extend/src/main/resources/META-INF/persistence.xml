@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     version="1.0">
     <persistence-unit name="hellojpa" transaction-type="RESOURCE_LOCAL">
-        <class>org.helloworld.Person</class>
+        <class>hellojpa.Person</class>
         <class>hellojpa.Message</class>
         <properties>
              <property name="openjpa.ConnectionURL"

@@ -5,11 +5,9 @@ import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Administrator
+ * User: YaFengLi
  * Date: 2010-1-11
- * Time: 14:28:00
- * To change this template use File | Settings | File Templates.
+ * Time: 14:28:00 
  */
 public class TextListener implements MessageListener {
     public void onMessage(Message message) {

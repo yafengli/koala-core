@@ -1,4 +1,4 @@
-package org.helloworld;
+package hellojpa;
 
 import hellojpa.Message;
 import java.io.Serializable;
