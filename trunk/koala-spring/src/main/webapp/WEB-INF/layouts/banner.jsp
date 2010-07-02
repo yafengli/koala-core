@@ -9,5 +9,6 @@
     </head>
     <body>
         <h1>Banner!</h1>
+        <a href="${pageContext.request.contextPath}">首页</a>
     </body>
 </html>

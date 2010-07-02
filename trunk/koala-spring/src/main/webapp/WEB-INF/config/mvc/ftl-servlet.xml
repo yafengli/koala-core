@@ -24,6 +24,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
         <property name="contentType" value="text/html;charset=utf-8"/>
-    </bean>
+    </bean>    
     <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
 </beans>

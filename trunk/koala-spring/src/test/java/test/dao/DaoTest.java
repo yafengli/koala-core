@@ -9,6 +9,7 @@ import cn.demo.pojo.DemoPerson;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
@@ -22,9 +23,9 @@ public class DaoTest {
 
     @Before
     public void before() {
-        ctx = new FileSystemXmlApplicationContext(new String[]{
-                    "F:/Projects/koala/koala-spring/src/main/webapp/WEB-INF/config/spring/applicationContext.xml",
-                    "F:/Projects/koala/koala-spring/src/main/webapp/WEB-INF/config/spring/applicationContext-dao.xml"
+        ctx = new ClassPathXmlApplicationContext(new String[]{
+                    "META-INF/spring/applicationContext.xml",
+                    "META-INF/spring/applicationContext-dao.xml"
                 });
         dpdao = (DemoPersonDao) ctx.getBean("demoPersonDaoImpl");
     }

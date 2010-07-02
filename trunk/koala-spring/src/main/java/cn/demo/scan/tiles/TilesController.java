@@ -17,7 +17,7 @@ public class TilesController {
     @RequestMapping("home/{id}/")
     public ModelAndView forward(@PathVariable String id, Model model) {
         ModelAndView mav = new ModelAndView("home");
-        System.out.println("homepage");
+        System.out.printf("[homepage,the id is {%s}]\n",id);
         model.addAttribute("message", "This is a test page.");
         return mav;
     }

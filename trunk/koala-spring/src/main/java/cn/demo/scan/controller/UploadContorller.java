@@ -186,8 +186,7 @@ public class UploadContorller {
 
     @RequestMapping(value = "/uploadify", method = RequestMethod.POST)
     public void uploadify(HttpServletRequest req, HttpSession session, ModelMap model) {
-        try {
-            System.out.println("@FUVK@");
+        try {            
             MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) req;
 
             File baseDir = loadStorgePath();

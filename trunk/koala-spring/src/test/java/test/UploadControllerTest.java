@@ -1,29 +1,28 @@
 package test;
 
-import cn.demo.scan.controller.DemoContorller;
 import cn.demo.scan.controller.UploadContorller;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * User: phoenixup
  * Date: 2010-6-28
  * Time: 17:09:05
  */
-
 public class UploadControllerTest {
+
     ApplicationContext ctx;
     UploadContorller controller;
 
     @Before
     public void init() {
-        ctx = new FileSystemXmlApplicationContext(new String[]{
-                "f:\\Google\\koala-core\\koala-spring\\src\\main\\webapp\\WEB-INF\\config\\spring\\applicationContext.xml",
-                "f:\\Google\\koala-core\\koala-spring\\src\\main\\webapp\\WEB-INF\\config\\spring\\applicationContext-aop.xml",
-                "f:\\Google\\koala-core\\koala-spring\\src\\main\\webapp\\WEB-INF\\config\\spring\\applicationContext-dao.xml"
-        });
+        ctx = new ClassPathXmlApplicationContext(new String[]{
+                    "META-INF/spring/applicationContext.xml", 
+                    "META-INF/spring/applicationContext-aop.xml",
+                    "META-INF/spring/applicationContext-dao.xml"
+                });
         controller = (UploadContorller) ctx.getBean("uploadContorller");
     }
 

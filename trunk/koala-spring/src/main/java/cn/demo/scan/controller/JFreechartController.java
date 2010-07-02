@@ -20,7 +20,7 @@ import cn.demo.support.WebBeanDefinition;
 @Scope(WebBeanDefinition.SCOPE_SESSION)
 public class JFreechartController {
 
-    @RequestMapping("/jfreechart.ftl")
+    @RequestMapping("/jfreechart")
     public void jfreechartdemo(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         resp.setContentType("img/png");
         DefaultPieDataset pie = new DefaultPieDataset();

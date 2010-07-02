@@ -3,21 +3,20 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Uploadify Example Script</title>
-    <link href="<%=request.getContextPath()%>/resources/uploadify/css/default.css" rel="stylesheet" type="text/css"/>
-    <link href="<%=request.getContextPath()%>/resources/uploadify/css/uploadify.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/resources/uploadify/css/default.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/resources/uploadify/css/uploadify.css" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery/jquery.min.js"></script>
     <script type="text/javascript"
-            src="<%=request.getContextPath()%>/resources/uploadify/scripts/swfobject.js"></script>
+            src="${pageContext.request.contextPath}/resources/uploadify/scripts/swfobject.js"></script>
     <script type="text/javascript"
-            src="<%=request.getContextPath()%>/resources/uploadify/scripts/jquery.uploadify.v2.1.0.min.js"></script>
+            src="${pageContext.request.contextPath}/resources/uploadify/scripts/jquery.uploadify.v2.1.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#uploadify").uploadify({
-                'uploader'       : '<%=request.getContextPath()%>/resources/uploadify/scripts/uploadify.swf',
-                'script'         : '<%=request.getContextPath()%>/uploadify.ftl',
-                'cancelImg'      : '<%=request.getContextPath()%>/resources/uploadify/cancel.png',
-                //'buttonImg'      : '<%=request.getContextPath()%>/resources/uploadify/cancel.png',
+                'uploader'       : '${pageContext.request.contextPath}/resources/uploadify/scripts/uploadify.swf',
+                'script'         : '${pageContext.request.contextPath}/swf/uploadify',
+                'cancelImg'      : '${pageContext.request.contextPath}/resources/uploadify/cancel.png',
                 'folder'         : 'uploads',
                 'queueID'        : 'fileQueue',
                 'auto'           : false,

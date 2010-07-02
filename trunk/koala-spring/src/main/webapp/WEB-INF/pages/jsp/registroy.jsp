@@ -30,7 +30,7 @@
             birthday:<sf:input path="birthday"/><sf:errors path="birthday"/> <br/>
             <input type="submit" value="submit"/>
         </sf:form>
-        <form name="hello" action="<%=request.getContextPath()%>/registroy.htm"
+        <form name="hello" action="${pageContext.request.contextPath}/registroy.htm"
               method="post">name:<input type="text" name="name"/><br/>
             sex:<input type="text" name="sex"/><br/>
             age:<input type="text" name="age"/><br/>

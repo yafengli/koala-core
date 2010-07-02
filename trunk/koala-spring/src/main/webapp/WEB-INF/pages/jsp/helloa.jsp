@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>[helloa.jsp]</title>
     <style type="text/css">
-        @import "<%=request.getContextPath()%>/resources/js/jquery/ui/tabs/tab.css";
+        @import "${pageContext.request.contextPath}/resources/js/jquery/ui/tabs/tab.css";
     </style>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/jquery/ui/tabs/tab.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/demo.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery/ui/tabs/tab.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/demo.js"></script>
     <script type="text/javascript">
         //Tabs
         var tab = null;

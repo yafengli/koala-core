@@ -5,10 +5,10 @@
         <title>SWFUpload Demos - Simple Demo</title>
         <link href="${pageContext.request.contextPath}/resources/upload/css/default.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="http://www.swfupload.org/swfupload.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/resources/upload/swfupload/swfupload.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/resources/upload/js/swfupload.queue.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/resources/upload/js/fileprogress.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/resources/upload/js/handlers.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/upload/swfupload/swfupload.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/upload/js/swfupload.queue.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/upload/js/fileprogress.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/upload/js/handlers.js"></script>
         <script type="text/javascript">
             var swfu;
             window.onload = function() {               
