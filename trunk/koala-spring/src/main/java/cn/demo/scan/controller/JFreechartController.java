@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.demo.support.WebBeanDefinition;
 
+import java.io.PrintWriter;
+
 /**
  * @author yafengli
  */
@@ -21,7 +23,7 @@ import cn.demo.support.WebBeanDefinition;
 public class JFreechartController {
 
     @RequestMapping("/jfreechart")
-    public void jfreechartdemo(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public void jfreechartdemo(HttpServletRequest req, HttpServletResponse resp) throws Exception {        
         resp.setContentType("img/png");
         DefaultPieDataset pie = new DefaultPieDataset();
         pie.setValue("Nokia", Integer.valueOf(60));
@@ -30,6 +32,6 @@ public class JFreechartController {
         pie.setValue("ChangHong", Integer.valueOf(10));
         JFreeChart chart = ChartFactory.createPieChart("Demo", pie, true, true, true);
         ChartUtilities.writeChartAsPNG(resp.getOutputStream(), chart, 400, 400);
-        resp.getOutputStream().close();
+        resp.flushBuffer();
     }
 }

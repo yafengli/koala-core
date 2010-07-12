@@ -6,6 +6,6 @@
 <body>
 <h1>Hello World!This is Freemarker Template.<span style="font-size:12px;color:blue">[hello.ftl]</span></h1>
 
-<h2>${message}</h2>
+<h2>${message?if_exists}</h2>
 </body>
 </html>

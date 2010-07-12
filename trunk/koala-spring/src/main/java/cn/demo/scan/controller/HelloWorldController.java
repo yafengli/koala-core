@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Scope;
  */
 @Controller
 @Scope(WebBeanDefinition.SCOPE_SESSION)
-@RequestMapping({"/helloa.ftl"})
+@RequestMapping({"/helloa"})
 public class HelloWorldController {
 
     @Autowired

@@ -10,12 +10,12 @@
             <a href="helloa.ftl?id=id">返回String为View名</a><br/>
             <hr/>
             <div><span>分页</span></div>
-            <a href="displaytag.ftl">DisplayTag</a><br/>
+            <a href="displaytag.view">DisplayTag</a><br/>
             <a href="list.ftl?pageNumber=1&pageSize=15">FreeMarker-宏</a><br/>
-            <a href="jmesa.ftl?name=hello">Jmesa-分页</a><br/>
+            <a href="jmesa.view?name=hello">Jmesa-分页</a><br/>
             <hr/>
             <div><span>Web Flow</span></div>
-            <a href="main">含子流程</a><br/>
+            <a href="main.view">含子流程</a><br/>
             <hr/>
             <div><span>Web Service</span></div>
             <a href="services/HelloWorld?wsdl">Web Service WSDL</a><br/>
@@ -30,17 +30,17 @@
             <hr/>
             <div><span>JSON</span></div>
             <a href="mapjson.ftl">Map Json String</a><br/>
-            <a href="autojson.ftl">Auto Json String</a> <a href="pages/json.jsp">JQuery
-                Ajax Json</a>
+            <a href="autojson.ftl">Auto Json String</a><br/>
+            <a href="pages/json.jsp">JQuery Ajax Json</a>
             <hr/>
             <div><span>JS+CSS</span></div>
             <a href="pages/js_demo.jsp">JQuery</a><br/>
             <hr/>
             <a href="testdemo.ftl">Test Xml Demo</a><br/>
             <hr/>
-            <a href="${pageContext.request.contextPath}/swf/upload">上传文件-大文件断点续传</a><br/>
-            <a href="${pageContext.request.contextPath}/swf/swfupload">上传文件-Flash</a><br/>
-            <a href="${pageContext.request.contextPath}/swf/uploadify">上传文件-JQuery</a>
+            <a href="${pageContext.request.contextPath}/upload.view">上传文件-大文件断点续传</a><br/>
+            <a href="${pageContext.request.contextPath}/swfupload.view">上传文件-Flash</a><br/>
+            <a href="${pageContext.request.contextPath}/uploadify.view">上传文件-JQuery</a>
             <hr/>
             <a href="auto/test.jsp">自动完成</a>
             <hr/>

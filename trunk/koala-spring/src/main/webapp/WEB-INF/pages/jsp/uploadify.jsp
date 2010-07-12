@@ -15,7 +15,7 @@
         $(document).ready(function() {
             $("#uploadify").uploadify({
                 'uploader'       : '${pageContext.request.contextPath}/resources/uploadify/scripts/uploadify.swf',
-                'script'         : '${pageContext.request.contextPath}/swf/uploadify',
+                'script'         : '${pageContext.request.contextPath}/uploadify.view',
                 'cancelImg'      : '${pageContext.request.contextPath}/resources/uploadify/cancel.png',
                 'folder'         : 'uploads',
                 'queueID'        : 'fileQueue',
@@ -30,6 +30,6 @@
 <input type="file" name="uploadify" id="uploadify"/>
 <button onclick="javascript:$('#uploadify').uploadifyUpload();">上传文件</button>
 |
-<button onclick="javascript:jQuery('#uploadify').uploadifyClearQueue()">取消所有上传</button>|<a href="swfupload/view.ftl" target="_blank">查看</a>
+<button onclick="javascript:jQuery('#uploadify').uploadifyClearQueue()">取消所有上传</button>| <a href="${pageContext.request.contextPath}/swf/swfupload/view" target="_blank">查看</a>
 </body>
 </html>

@@ -2,6 +2,7 @@ package cn.demo.scan.controller;
 
 import cn.demo.dao.DemoPersonDao;
 import cn.demo.pojo.DemoPerson;
+import cn.demo.vo.Account;
 import cn.demo.webservice.HelloWorld;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -11,8 +12,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +25,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -53,24 +58,42 @@ public class DemoContorller {
     @Autowired
     private DemoPersonDao demoPersonDaoImpl;
 
-    @RequestMapping("/aindex.ftl")
-    public ModelAndView index(@RequestParam(required = false, value = "id") String id) {
+    @RequestMapping(value="/aindex", method = RequestMethod.GET)
+    public ModelAndView indexGet(@RequestParam(required = false, value = "id") String id, Model model) {
         System.out.println("come in");
         ModelAndView mav = new ModelAndView("aindex");
         Map map = new HashMap();
         ResourceBundle rb = ResourceBundle.getBundle("sql");
         String ssql = rb.getString("demo.person.sql");
         try {
-            DemoPerson dp = demoPersonDaoImpl.findForObject(ssql, 1L);
+            DemoPerson dp = demoPersonDaoImpl.findForObject(ssql, -1);
             map.put("message", String.format("This is cn.neto message!The id is [%s]", dp.getName()));
             mav.addAllObjects(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mav.addObject(new Account());
+        return mav;
+    }
+
+    @RequestMapping(value = "/aindex", method = RequestMethod.POST)
+    public ModelAndView indexPost(@Valid Account account , BindingResult binding,Model model) {
+        System.out.println("come in");
+        ModelAndView mav = new ModelAndView("aindex");
+        try {
+            if(!binding.hasErrors()){
+                model.addAttribute("message",String.format("[%s,%s]",account.getId(),account.getName()));   
+            }
+            else{
+                mav.addObject(new Account());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return mav;
     }
 
-    @RequestMapping("/helloj.ftl")
+    @RequestMapping("/helloj")
     public ModelAndView helloj(@RequestParam(required = false, value = "id") String id, HttpServletRequest request, HttpServletResponse resp) {
         ModelAndView mav = new ModelAndView("helloj");
         Map map = new HashMap();
@@ -79,7 +102,7 @@ public class DemoContorller {
         return mav;
     }
 
-    @RequestMapping("/hellof.ftl")
+    @RequestMapping("/hellof")
     public ModelAndView hellof(@RequestParam(required = false, value = "id") String id) {
         ModelAndView mav = new ModelAndView("hellof");
         Map map = new HashMap();
@@ -88,7 +111,7 @@ public class DemoContorller {
         return mav;
     }
 
-    @RequestMapping("/webservice.ftl")
+    @RequestMapping("/webservice")
     public ModelAndView webservice(@RequestParam(required = false, value = "name") String name, HttpServletRequest req, HttpServletResponse resp) {
 
         for (Enumeration<String> enu = req.getParameterNames(); enu.hasMoreElements();) {
@@ -104,7 +127,7 @@ public class DemoContorller {
 
     }
 
-    @RequestMapping("/testdemo.ftl")
+    @RequestMapping("/testdemo")
     public void index(HttpServletRequest req, HttpServletResponse resp) {
         try {
             System.out.println("Test");
@@ -128,13 +151,14 @@ public class DemoContorller {
             String str = String.format(fsb.toString(), serial.getText(), 0, "successful");
             System.out.printf("Str:[%s]\n", str);
             writer.write(str);
+            writer.flush();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @RequestMapping("/mapjson.ftl")
+    @RequestMapping("/mapjson")
     public void json(HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setHeader("Cache-Control", "no-cache");
@@ -162,7 +186,7 @@ public class DemoContorller {
         resp.getWriter().write(data.toString());
     }
 
-    @RequestMapping("/autojson.ftl")
+    @RequestMapping("/autojson")
     public void autojson(HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setHeader("Cache-Control", "no-cache");

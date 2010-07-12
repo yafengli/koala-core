@@ -41,16 +41,16 @@ public class PageDemoController {
     @Autowired
     private DemoPersonDao demoPersonDaoImpl;
 
-    @RequestMapping("/list.ftl")
+    @RequestMapping("/list")
     public ModelAndView list(@RequestParam(required = false, value = "pageNumber") String pageNumber,
                              @RequestParam(required = false, value = "pageSize") String pageSize,
                              @RequestParam(required = false, value = "sortName") String sortName,
                              @RequestParam(required = false, value = "orderName") String orderName) {
         ModelAndView mav = new ModelAndView("list");
-        DemoPerson dp = demoPersonDaoImpl.findForObject("select count(*) as version from demo_person");
+        DemoPerson dp = demoPersonDaoImpl.findForObject("select count(*) as version from add_user");
         Integer pn = pageNumber != null ? Integer.valueOf(pageNumber) : 1;
         Integer ps = pageSize != null ? Integer.valueOf(pageSize) : 15;
-        String sqlToUse = String.format("select * from demo_person %s limit %s offset %s", fmCreateSortStr(sortName, orderName), ps, (pn - 1) * ps);
+        String sqlToUse = String.format("select * from add_user %s limit %s offset %s", fmCreateSortStr(sortName, orderName), ps, (pn - 1) * ps);
         logger.info(String.format("[%s]\n", sqlToUse));
         List<DemoPerson> pl = demoPersonDaoImpl.find(sqlToUse);
 
@@ -65,7 +65,7 @@ public class PageDemoController {
         return mav;
     }
 
-    @RequestMapping({"/jmesa.ftl", "/jmesa/ajax.ftl"})
+    @RequestMapping({"/jmesa", "/jmesa/ajax"})
     public ModelAndView demo(
             @RequestParam(required = false, value = "id") String id,
             HttpServletRequest request, HttpServletResponse response) {
@@ -79,16 +79,16 @@ public class PageDemoController {
         }
     }
 
-    @RequestMapping("/displaytag.ftl")
+    @RequestMapping("/displaytag")
     public ModelAndView displayTag(
             @RequestParam(required = false, value = "id") String id,
             HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("tab/displaytag");
         String pageIndexName = new ParamEncoder("id").encodeParameterName(TableTagParameters.PARAMETER_PAGE);
         Integer pageNumber = request.getParameter(pageIndexName) != null ? Integer.valueOf(request.getParameter(pageIndexName)) : 1;
-        DemoPerson dp = demoPersonDaoImpl.findForObject("select count(*) as version from demo_person");
+        DemoPerson dp = demoPersonDaoImpl.findForObject("select count(*) as version from add_user");
         String orderStr = displayTagCreateSortStr(request, "id");
-        String sqlToUse = String.format("select * from demo_person %s limit %s offset %s", orderStr, 10, (pageNumber - 1) * 10);
+        String sqlToUse = String.format("select * from add_user %s limit %s offset %s", orderStr, 10, (pageNumber - 1) * 10);
         logger.info(String.format(
                 "[sql,start,end][%s,%s,%s]\n", sqlToUse, pageNumber, (pageNumber - 1) * 10));
         Collection<DemoPerson> items = demoPersonDaoImpl.find(sqlToUse);
@@ -109,7 +109,7 @@ public class PageDemoController {
         Limit limit = tableFacade.getLimit();
         /* set the TotalRows*/
         if (!limit.isComplete()) {
-            DemoPerson dp = demoPersonDaoImpl.findForObject("select count(*) as version from demo_person");
+            DemoPerson dp = demoPersonDaoImpl.findForObject("select count(*) as version from add_user");
             tableFacade.setTotalRows(dp.getVersion());
         }
 
@@ -119,7 +119,7 @@ public class PageDemoController {
 
         String orderStr = jmesaCreateSortStr(limit);
         String sqlToUse = String.format(
-                "select * from demo_person %s limit %d offset %d", orderStr, end - start, start);
+                "select * from add_user %s limit %d offset %d", orderStr, end - start, start);
          logger.info(String.format(
                 "[sql,start,end][%s,%s,%s]\n", sqlToUse, start, end));
 

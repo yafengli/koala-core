@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 @SessionAttributes({UploadContorller.S_FILES})
-@RequestMapping("/")
 public class UploadContorller {
     private String name;
 

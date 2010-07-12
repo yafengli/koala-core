@@ -14,7 +14,7 @@
             window.onload = function() {               
                 var settings = {
                     flash_url : "${pageContext.request.contextPath}/resources/upload/swfupload/swfupload.swf",
-                    upload_url: "${pageContext.request.contextPath}/swf/swfupload",
+                    upload_url: "${pageContext.request.contextPath}/swfupload.view",
                     post_params: {"sessionid" : "${user}"},
                     file_size_limit : "100 MB",
                     file_types : "*.jpg;*.gif;*.png",

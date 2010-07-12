@@ -97,7 +97,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/swf/*</url-pattern>
+        <url-pattern>*.view</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ftl</servlet-name>

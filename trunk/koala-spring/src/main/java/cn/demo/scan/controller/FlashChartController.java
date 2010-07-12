@@ -25,7 +25,7 @@ import java.io.PrintWriter;
 public class FlashChartController {
 
 
-    @RequestMapping("/ofc.ftl")
+    @RequestMapping("/ofc")
     public void createchart(HttpServletResponse resp, ModelMap model) {
         PrintWriter out = null;
         try {

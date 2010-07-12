@@ -13,28 +13,35 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.4</version>
+			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
 		<!--Spring-->
-			<!--  Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-            <exclusions>
-		<!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
+		<!--  Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!--Spring JMS -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring ORM -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -114,6 +121,12 @@
 			<groupId>org.apache.ibatis</groupId>
 			<artifactId>ibatis-sqlmap</artifactId>
 			<version>${ibatis.version}</version>
+		</dependency>
+		<!-- IBatis -->
+		<dependency> 
+			<groupId>org.mybatis</groupId> 
+			<artifactId>mybatis</artifactId> 
+			<version>${mybatis.ver}</version> 
 		</dependency>
 		<!-- Log4j-->
 		<dependency>
@@ -244,11 +257,12 @@
 		<spring.version>3.0.3.RELEASE</spring.version>
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
 		<spring-webflow.version>2.1.0.RELEASE</spring-webflow.version>
-		<hibernate.version>3.5.0-Final</hibernate.version>
-		<hibernate-validator.version>4.0.2.GA</hibernate-validator.version>
+		<hibernate.version>3.5.3-Final</hibernate.version>
+		<hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
 		<ibatis.version>2.3.4.726</ibatis.version>
+		<mybatis.ver>3.0.1</mybatis.ver>
 		<log4j.version>1.2.14</log4j.version>
-		<aspectj.version>1.5.4</aspectj.version>
+		<aspectj.version>1.6.8</aspectj.version>
 		<jsf.version>1.2_10</jsf.version>
 		<commons-lang.version>2.4</commons-lang.version>
 		<commons-fileupload.version>1.2</commons-fileupload.version>
@@ -263,7 +277,7 @@
 		<jpa.version>1.0</jpa.version>
 		<jta.version>1.1</jta.version>
 		<lucene-core.version>3.0.0</lucene-core.version>
-		<freemarker.version>2.3.15</freemarker.version>
+		<freemarker.version>2.3.16</freemarker.version>
 		<h2.version>1.1.107</h2.version>
 		<postgresql.version>8.4-701.jdbc4</postgresql.version>
 	</properties>
