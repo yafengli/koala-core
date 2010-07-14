@@ -32,8 +32,7 @@ public class CropAFactoryA implements ICropFactory  {
             default:
                 instance = new CropA();
                 break;
-        }
-        System.out.printf("[##%s##]\n",this.getClass().getName());
+        }        
         return instance;
     }
 }
