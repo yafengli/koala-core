@@ -1,7 +1,7 @@
 package factory.factorymethod;
 
-import factory.Crop;
-import factory.CropEnum;
+import factory.product.Crop;
+import factory.product.CropEnum;
 
 /**
  *

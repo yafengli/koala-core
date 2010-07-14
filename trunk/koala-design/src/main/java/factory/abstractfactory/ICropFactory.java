@@ -1,10 +1,9 @@
 package factory.abstractfactory;
 
-import factory.Crop;
-import factory.CropEnum;
+import factory.product.Crop;
+import factory.product.CropEnum;
 
 /**
- *
  * @author phoenixup
  */
 public interface ICropFactory {

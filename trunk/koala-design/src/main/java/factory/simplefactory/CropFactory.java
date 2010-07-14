@@ -1,13 +1,10 @@
 package factory.simplefactory;
 
-import factory.Crop;
-import factory.CropA;
-import factory.CropB;
-import factory.CropC;
-import factory.CropD;
-import factory.CropEnum;
-import java.util.ArrayList;
-import java.util.List;
+import factory.product.Crop;
+import factory.product.CropA;
+import factory.product.*;
+import factory.product.CropC;
+import factory.product.CropEnum;
 
 /**
  * User: phoenixup

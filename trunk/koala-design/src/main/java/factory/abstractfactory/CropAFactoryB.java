@@ -1,18 +1,15 @@
 package factory.abstractfactory;
 
-import factory.Crop;
-import factory.CropA;
-import factory.CropB;
-import factory.CropC;
-import factory.CropD;
-import factory.CropEnum;
+import factory.product.*;
+import factory.product.CropC;
+import factory.product.CropD;
+import factory.product.CropEnum;
+import factory.product.CropB;
 
 /**
- *
  * @author phoenixup
  */
 public class CropAFactoryB implements ICropFactory {
-
     @Override
     public Crop factory(CropEnum name) {
         Crop instance = null;
@@ -32,7 +29,7 @@ public class CropAFactoryB implements ICropFactory {
             default:
                 instance = new CropC();
                 break;
-        }        
+        }
         return instance;
     }
 }

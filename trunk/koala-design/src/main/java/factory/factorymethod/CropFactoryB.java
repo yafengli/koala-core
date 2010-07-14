@@ -1,16 +1,14 @@
 package factory.factorymethod;
 
-import factory.Crop;
-import factory.CropC;
-import factory.CropD;
-import factory.CropEnum;
+import factory.product.Crop;
+import factory.product.CropC;
+import factory.product.CropD;
+import factory.product.CropEnum;
 
 /**
- *
  * @author phoenixup
  */
 public class CropFactoryB extends ACropFactory {
-
     @Override
     public Crop factory(CropEnum name) {
         Crop instance = null;

@@ -1,9 +1,9 @@
 package factory.factorymethod;
 
-import factory.Crop;
-import factory.CropA;
-import factory.CropB;
-import factory.CropEnum;
+import factory.product.Crop;
+import factory.product.CropA;
+import factory.product.CropB;
+import factory.product.CropEnum;
 
 /**
  *
