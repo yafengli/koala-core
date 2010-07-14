@@ -6,5 +6,5 @@ package mybatis;
  * Time: 14:11:43
  */
 public interface BookMapper {
-    public Book selectSingle(String id);
+    public Book selectSingle(long id);
 }

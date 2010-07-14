@@ -2,8 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mybatis.BookMapper">    
+<mapper namespace="mybatis.BookMapper">
     <select id="selectSingle" parameterType="long" resultType="mybatis.Book">
         select * from add_book where id = #{id}
+    </select>
+    <select id="selectAll.next" parameterType="mybatis.Book" resultType="mybatis.Book">
+        select * from add_book
+        <if test="{}">
+
+        </if>
     </select>
 </mapper>

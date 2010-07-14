@@ -9,7 +9,6 @@
   <name>koala</name>
   <url>http://maven.apache.org</url>
   <modules>
-
 	<module>koala-parent</module>
 	<module>koala-core</module>
 	<module>extend-jpa-ejb</module>
@@ -18,5 +17,6 @@
 	<module>koala-jsf</module>
 	<module>ui-datepicker</module>
 	<module>koala-seam</module>
+	<module>koala-design</module>
   </modules>
 </project>

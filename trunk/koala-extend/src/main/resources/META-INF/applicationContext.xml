@@ -20,7 +20,7 @@
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
     	<property name="connectionFactory" ref="connectionFactory"/>
     	<property name="defaultDestinationName" value="helloq"/>    	
-    </bean>
+    </bean>    
     <jms:listener-container>
     	<jms:listener destination="helloq" ref="messageListener"/>
     </jms:listener-container>
