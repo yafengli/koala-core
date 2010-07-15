@@ -6,21 +6,72 @@
 	<artifactId>koala-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>2.0.0</version>
-	<name>koala-parent</name>
+	<name>koala-web</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
-		<!-- Test -->
+		<!--  Spring -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		<!-- Log4j-->
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring Security-->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-acl</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<!-- Spring Web Flow -->
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-binding</artifactId>
+			<version>${spring-webflow.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-js</artifactId>
+			<version>${spring-webflow.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-webflow</artifactId>
+			<version>${spring-webflow.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
 		</dependency>
 		<!-- Lucene-->
 		<dependency>
@@ -60,16 +111,17 @@
 			<groupId>commons-io</groupId>
 			<version>${commons-io.version}</version>
 		</dependency>
-		<dependency>
-			<artifactId>commons-beanutils</artifactId>
-			<groupId>commons-beanutils</groupId>
-			<version>${commons-beanutils.version}</version>
-		</dependency>
 		<!--Regexp -->
 		<dependency>
 			<groupId>jakarta-regexp</groupId>
 			<artifactId>jakarta-regexp</artifactId>
 			<version>${jakarta-regexp.version}</version>
+		</dependency>
+		<!-- POI -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -118,6 +170,10 @@
 		<spring.version>3.0.3.RELEASE</spring.version>
 		<spring-security.version>3.0.2.RELEASE</spring-security.version>
 		<spring-webflow.version>2.1.0.RELEASE</spring-webflow.version>
+		<hibernate.version>3.5.3-Final</hibernate.version>
+		<hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
+		<ibatis.version>2.3.4.726</ibatis.version>
+		<mybatis.ver>3.0.1</mybatis.ver>
 		<log4j.version>1.2.14</log4j.version>
 		<aspectj.version>1.6.8</aspectj.version>
 		<jsf.version>1.2_10</jsf.version>
@@ -125,16 +181,17 @@
 		<commons-fileupload.version>1.2</commons-fileupload.version>
 		<commons-net.version>2.0</commons-net.version>
 		<commons-io.version>1.4</commons-io.version>
-		<commons-beanutils.version>1.8.3</commons-beanutils.version>
 		<c3p0.version>0.9.1.1</c3p0.version>
 		<cglib.version>2.2</cglib.version>
 		<dbcp.version>1.2.2</dbcp.version>
-		<slf4j.version>1.6.1</slf4j.version>
+		<slf4j.version>1.5.8</slf4j.version>
 		<jakarta-regexp.version>1.4</jakarta-regexp.version>
 		<poi.version>3.2-FINAL</poi.version>
 		<jpa.version>1.0</jpa.version>
 		<jta.version>1.1</jta.version>
 		<lucene-core.version>3.0.0</lucene-core.version>
 		<freemarker.version>2.3.16</freemarker.version>
+		<h2.version>1.1.107</h2.version>
+		<postgresql.version>8.4-701.jdbc4</postgresql.version>
 	</properties>
 </project>

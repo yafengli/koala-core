@@ -28,18 +28,20 @@ public class ListPage<T> implements Page<T> {
         this.setPageSize(pageSize);
         this.setPageNumber(pageNumber);
         this.setTotalNumber(elements.size());
-        this.setElements(elements.subList(getFirstElementNumber() - 1, getLastElementNumber()));
+        this.setElements(elements.subList(getFirstElementNumber(), getLastElementNumber()));
+
+        this.setElements(elements.subList(pageSize * (pageNumber - 1), pageSize * pageNumber < elements.size() ? pageSize * pageNumber : elements.size()));
     }
 
     /**
      * 构建ListPage对象，完成List数据的分页处理
      *
-     * @param elements   List数据源
+     * @param elements    List数据源
      * @param totalNumber 总结果数
-     * @param pageNumber 当前页编码，从1开始，如果传的值为Integer.MAX_VALUE表示获取最后一页。
-     *                   如果你不知道最后一页编码，传Integer.MAX_VALUE即可。如果当前页超过总页数，也表示最后一页。
-     *                   这两种情况将重新更改当前页的页码，为最后一页编码。
-     * @param pageSize   每一页显示的条目数
+     * @param pageNumber  当前页编码，从1开始，如果传的值为Integer.MAX_VALUE表示获取最后一页。
+     *                    如果你不知道最后一页编码，传Integer.MAX_VALUE即可。如果当前页超过总页数，也表示最后一页。
+     *                    这两种情况将重新更改当前页的页码，为最后一页编码。
+     * @param pageSize    每一页显示的条目数
      */
     public ListPage(List pageElements, int totalNumber, int pageNumber, int pageSize) {
         this.setPageSize(pageSize);
@@ -99,11 +101,11 @@ public class ListPage<T> implements Page<T> {
     }
 
     public int getFirstElementNumber() {
-        return (getPageNumber() - 1) * getPageSize() + 1;
+        return (getPageNumber() - 1) * getPageSize();
     }
 
     public int getLastElementNumber() {
-        return getPageNumber() * getPageSize() - 1;
+        return getPageNumber() * getPageSize() < getTotalNumberOfElements() ? getPageNumber() * getPageSize() : getTotalNumberOfElements();
     }
 
     public int getNextPageNumber() {
@@ -123,11 +125,11 @@ public class ListPage<T> implements Page<T> {
     }
 
     public int getPageNumber() {
-        // 页数必须为证书
+        // 页数必须为正数
         if (this.pageNumber <= 0) {
             this.pageNumber = 1;
         }
-        if (Integer.MAX_VALUE == this.pageNumber || pageNumber > getLastPageNumber()) {
+        if (pageNumber >= getLastPageNumber()) {
             this.pageNumber = getLastPageNumber();
         }
         return pageNumber;

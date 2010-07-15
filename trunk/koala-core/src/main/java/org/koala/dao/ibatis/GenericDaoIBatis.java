@@ -20,12 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class GenericDaoIBatis<T, Id extends Serializable> extends SqlMapClientDaoSupport
         implements IGenericIBatisDao<T, Id> {
 
-    public static final String findbyid = "_findbyid";
-    public static final String findall = "_findall";
-    public static final String save = "_save";
-    public static final String remove = "_remove";
-    public static final String update = "_update";
-
     public T findById(String statementName, Id id) {
         return (T) getSqlMapClientTemplate().queryForObject(statementName, id);
     }
@@ -69,18 +63,18 @@ public class GenericDaoIBatis<T, Id extends Serializable> extends SqlMapClientDa
     }
 
     public List<T> findByQueryName(final String statementName, final Object paramObject) {
-        return getSqlMapClientTemplate().executeWithListResult(new SqlMapClientCallback() {
+        return getSqlMapClientTemplate().execute(new SqlMapClientCallback<List<T>>() {
 
-            public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
+            public List<T> doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
                 return executor.queryForList(statementName, paramObject);
             }
         });
     }
 
     public List<T> findByQueryName(final String statementName, final Object paramObject, final int startPosition, final int maxResult) {
-        return getSqlMapClientTemplate().executeWithListResult(new SqlMapClientCallback() {
+        return getSqlMapClientTemplate().execute(new SqlMapClientCallback<List<T>>() {
 
-            public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
+            public List<T> doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
                 return executor.queryForList(statementName, paramObject, startPosition, maxResult);
             }
         });

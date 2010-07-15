@@ -39,21 +39,22 @@ public interface IIBatisDao {
      * @param queryName 命名查询
      * @return 查询结果数目
      */
-    public long findCount(String statementName);
+    public long findCount(String queryName);
 
     /**
      * 根据命名查询查找返回条数
      * @param queryName 命名查询
+     * @param paramObject 
      * @return 查询结果数目
      */
-    public long findCount(String statementName, Object paramObject);
+    public long findCount(String queryName, Object paramObject);
 
     /**
      * 根据命名查询查找返回对象列表
      * @param queryName
      * @return 查询结果对象集合
      */
-    public <T> List<T> find(String statementName);
+    public <T> List<T> find(String queryName);
 
     /**
      * 根据命名查询查找返回固定条数的对象列表

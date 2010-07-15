@@ -1,6 +1,7 @@
 package org.koala.dao.ibatis;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
+
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,17 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
  * User: liyafeng
  * Date: 2008-3-19
  * Time: 10:13:04
- * @version 1.0
+ *
  * @author YaFengLi
+ * @version 1.0
  */
 @Transactional
-public class BaseIBatisDao extends SqlMapClientDaoSupport implements IIBatisDao {
-
-    public static final String findbyid = "_findbyid";
-    public static final String findall = "_findall";
-    public static final String save = "_save";
-    public static final String remove = "_remove";
-    public static final String update = "_update";
+public class BaseIBatisDao extends SqlMapClientDaoSupport implements IIBatisDao {    
 
     public <T, Id extends Serializable> T findById(String statementName, Id id) {
         return (T) getSqlMapClientTemplate().queryForObject(statementName, id);
@@ -68,19 +64,20 @@ public class BaseIBatisDao extends SqlMapClientDaoSupport implements IIBatisDao 
     }
 
     public <T> List<T> find(final String statementName, final Object paramObject) {
-        return getSqlMapClientTemplate().executeWithListResult(new SqlMapClientCallback() {
+        return getSqlMapClientTemplate().execute(new SqlMapClientCallback<List<T>>() {
 
-            public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
+            public List<T> doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
                 return executor.queryForList(statementName, paramObject);
             }
         });
     }
 
     public <T> List<T> find(final String statementName, final Object paramObject, final int startPosition, final int maxResult) {
-        return getSqlMapClientTemplate().executeWithListResult(new SqlMapClientCallback() {
-
-            public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
+        return getSqlMapClientTemplate().execute(new SqlMapClientCallback<List<T>>() {
+            @Override
+            public List<T> doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
                 return executor.queryForList(statementName, paramObject, startPosition, maxResult);
+
             }
         });
     }
