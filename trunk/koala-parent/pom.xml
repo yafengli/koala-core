@@ -115,25 +115,16 @@
 		</repository>
 	</distributionManagement>
 	<properties>
-		<spring.version>3.0.3.RELEASE</spring.version>
-		<spring-security.version>3.0.2.RELEASE</spring-security.version>
-		<spring-webflow.version>2.1.0.RELEASE</spring-webflow.version>
-		<log4j.version>1.2.14</log4j.version>
-		<aspectj.version>1.6.8</aspectj.version>
-		<jsf.version>1.2_10</jsf.version>
-		<commons-lang.version>2.4</commons-lang.version>
-		<commons-fileupload.version>1.2</commons-fileupload.version>
-		<commons-net.version>2.0</commons-net.version>
+		<log4j.version>1.2.16</log4j.version>
+		<aspectj.version>1.6.9</aspectj.version>
+		<commons-lang.version>2.5</commons-lang.version>
+		<commons-fileupload.version>1.2.1</commons-fileupload.version>
+		<commons-net.version>2.1</commons-net.version>
 		<commons-io.version>1.4</commons-io.version>
 		<commons-beanutils.version>1.8.3</commons-beanutils.version>
-		<c3p0.version>0.9.1.1</c3p0.version>
-		<cglib.version>2.2</cglib.version>
 		<dbcp.version>1.2.2</dbcp.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<jakarta-regexp.version>1.4</jakarta-regexp.version>
-		<poi.version>3.2-FINAL</poi.version>
-		<jpa.version>1.0</jpa.version>
-		<jta.version>1.1</jta.version>
 		<lucene-core.version>3.0.0</lucene-core.version>
 		<freemarker.version>2.3.16</freemarker.version>
 	</properties>
