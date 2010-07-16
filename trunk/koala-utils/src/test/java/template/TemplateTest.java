@@ -2,9 +2,9 @@ package template;
 
 import org.junit.Test;
 import freemarker.template.Configuration;
-import org.koala.template.ITemplateUtils;
-import org.koala.template.TemplateUtilsFactory;
-import org.koala.template.freemarker.FreemarkerUtils;
+import org.koala.utils.template.ITemplateUtils;
+import org.koala.utils.template.TemplateUtilsFactory;
+import org.koala.utils.template.freemarker.FreemarkerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

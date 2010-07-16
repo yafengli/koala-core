@@ -1,10 +1,9 @@
-package org.koala.template.freemarker;
+package org.koala.utils.template.freemarker;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import org.koala.template.ITemplateUtils;
+import org.koala.utils.template.ITemplateUtils;
 
-import java.io.File;
 import java.io.StringWriter;
 import java.util.Map;
 

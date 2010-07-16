@@ -1,4 +1,4 @@
-package org.koala.template;
+package org.koala.utils.template;
 
 import java.util.Map;
 
