@@ -17,7 +17,7 @@ import java.util.List;
  * Time: 14:58:20
  */
 public class JdbcDaoTest {
-    public static final Logger logger= LoggerFactory.getLogger(JdbcDaoTest.class);
+    public static final Logger logger = LoggerFactory.getLogger(JdbcDaoTest.class);
     public static String sql_1 = "select * from add_book where id=:id";
     public static String sql_2 = "select * from add_book where id=?";
     public static String sql_3 = "select * from add_book where id >=:id";
@@ -52,25 +52,23 @@ public class JdbcDaoTest {
             logger.info("[{},{}]", bk.getIsbn(), bk.getName());
         }
         logger.info("#################");
-        list = dao.find(sql_4,Book.class);
+        list = dao.find(sql_4, Book.class);
         for (Book bk : list) {
             logger.info("[{},{}]", bk.getIsbn(), bk.getName());
         }
         logger.info("#################");
     }
+
     @Test
-    public void create(){
-        Book book=new Book();
-        book.setId((long)(Math.random()*1000L));
+    public void create() {
+        Book book = new Book();
+        book.setId((long) (Math.random() * 1000L) + 1000L);
         book.setName(String.valueOf(book.getId()));
         book.setIsbn(String.valueOf(book.getId()));
-        for(int i=0;i<3;i++){
-            logger.info("[{},{},{}]",new Object[]{book.getId(),book.getName(),book.getIsbn()});
-            dao.save(sql_5,book);
-            book.setId(book.getId()+i);
-        }
+        logger.info("[{},{},{}]", new Object[]{book.getId(), book.getName(), book.getIsbn()});
+        dao.save(sql_5, book);
         book.setName(new Date().toString());
         book.setIsbn(new Date().toString());
-        dao.update(sql_6,book);
+        dao.update(sql_6, book);
     }
 }
