@@ -9,6 +9,12 @@
 	<name>koala-parent</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- Log4j-->
 		<dependency>
 			<groupId>log4j</groupId>

@@ -1,10 +1,13 @@
 package template;
 
+import org.apache.velocity.app.VelocityEngine;
+import org.junit.Before;
 import org.junit.Test;
 import freemarker.template.Configuration;
 import org.koala.utils.template.ITemplateUtils;
 import org.koala.utils.template.TemplateUtilsFactory;
 import org.koala.utils.template.freemarker.FreemarkerUtils;
+import org.koala.utils.template.velocity.VelocityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,24 +24,63 @@ public class TemplateTest {
 
     private static Logger logger = LoggerFactory.getLogger(TemplateTest.class);
 
+    private TemplateUtilsFactory factory;
+    private ITemplateUtils freemarkerUtils;
+    private ITemplateUtils velocityUtils;
+
+    @Before
+    public void init() {
+        try {
+            factory = new TemplateUtilsFactory();
+            freemarkerUtils = factory.factory(FreemarkerUtils.class.getName());
+            Configuration conf = new Configuration();
+            conf.setDirectoryForTemplateLoading(new File("F:/Tmp"));
+            freemarkerUtils.init(conf);
+
+
+            velocityUtils = factory.factory(VelocityUtils.class.getName());
+            VelocityEngine ve = new VelocityEngine();
+            ve.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, "f:/tmp");
+            ve.init();
+            velocityUtils.init(ve);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Test
     public void freemarker() {
         try {
-
-            TemplateUtilsFactory factory = new TemplateUtilsFactory();
-            ITemplateUtils utils = factory.factory(FreemarkerUtils.class.getName());
-            Configuration conf = new Configuration();
-            conf.setDirectoryForTemplateLoading(new File("F:/Tmp"));
-            utils.init(conf);
             Map map = new Hashtable();
             map.put("msg", "##Hello World!##");
 
             long startTime = System.currentTimeMillis();
-            for (int i = 0; i < 10; i++) {
-                String content = utils.template("test.ftl", map);
+            String content = null;
+            for (int i = 0; i < 50; i++) {
+                content = freemarkerUtils.template("test.ftl", map);
             }
             long endTime = System.currentTimeMillis();
-            logger.info("The time is [{}] millisecond", String.valueOf(endTime - startTime));
+            logger.info("{},{}", String.valueOf(endTime - startTime), content);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void velocity() {
+        try {
+            Map map = new Hashtable();
+            map.put("msg", "##Hello World!##");
+
+            long startTime = System.currentTimeMillis();
+            String content = null;
+            for (int i = 0; i < 50; i++) {
+                content = velocityUtils.template("test.vm", map);
+            }
+            long endTime = System.currentTimeMillis();
+            logger.info("{},{} ", String.valueOf(endTime - startTime), content);
 
         } catch (Exception e) {
             e.printStackTrace();

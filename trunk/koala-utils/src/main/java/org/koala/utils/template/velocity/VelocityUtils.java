@@ -30,8 +30,7 @@ public class VelocityUtils implements ITemplateUtils {
         try {
             if (initObj != null && initObj instanceof VelocityEngine) {
                 this.setVelocityEngine((VelocityEngine) initObj);
-            }
-            this.getVelocityEngine().init();
+            }            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,10 +39,9 @@ public class VelocityUtils implements ITemplateUtils {
     public String template(String templateFileName, Map model) {
         StringWriter writer = new StringWriter();
         try {
-
             Template t = this.getVelocityEngine().getTemplate(templateFileName);
             VelocityContext context = new VelocityContext(model);
-            t.merge(context, writer);
+            t.merge(context, writer);            
         }
 
         catch (Exception e) {
