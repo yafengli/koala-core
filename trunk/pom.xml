@@ -12,6 +12,7 @@
 	<module>koala-parent</module>
 	<module>koala-core</module>
 	<module>koala-orm</module>
+	<module>koala-utils</module>
 	<module>extend-jpa-ejb</module>
 	<module>maven-koala-plugin</module>
 	<module>koala-spring</module>

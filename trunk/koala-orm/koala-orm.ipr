@@ -426,17 +426,6 @@
         <root url="jar://F:/Source/Maven/repository/javax/transaction/jta/1.1/jta-1.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.slf4j:slf4j-api:1.5.8">
-      <CLASSES>
-        <root url="jar://F:/Source/Maven/repository/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://F:/Source/Maven/repository/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://F:/Source/Maven/repository/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: org.hibernate:hibernate-annotations:3.5.3-Final">
       <CLASSES>
         <root url="jar://F:/Source/Maven/repository/org/hibernate/hibernate-annotations/3.5.3-Final/hibernate-annotations-3.5.3-Final.jar!/" />
@@ -710,6 +699,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://F:/Source/Maven/repository/org/aspectj/aspectjweaver/1.6.9/aspectjweaver-1.6.9-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.slf4j:slf4j-api:1.6.1">
+      <CLASSES>
+        <root url="jar://F:/Source/Maven/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://F:/Source/Maven/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://F:/Source/Maven/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1-sources.jar!/" />
       </SOURCES>
     </library>
   </component>
