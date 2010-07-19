@@ -69,6 +69,6 @@ public class JdbcDaoTest {
         dao.save(sql_5, book);
         book.setName(new Date().toString());
         book.setIsbn(new Date().toString());
-        dao.update(sql_6, book);
+        dao.update(sql_6, book);        
     }
 }

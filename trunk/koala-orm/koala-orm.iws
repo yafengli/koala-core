@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="4b8568f2-a6dc-43bf-844c-4d1755744510" name="Default" comment="" />
+    <list default="true" readonly="true" id="4b8568f2-a6dc-43bf-844c-4d1755744510" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/koala-orm.iml" afterPath="$PROJECT_DIR$/koala-orm.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/koala-orm.iws" afterPath="$PROJECT_DIR$/koala-orm.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/koala-orm.ipr" afterPath="$PROJECT_DIR$/koala-orm.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/jdbc/JdbcDaoTest.java" afterPath="$PROJECT_DIR$/src/test/java/jdbc/JdbcDaoTest.java" />
+    </list>
     <ignored path="$USER_HOME_GRIFFON$/" />
     <ignored path="$USER_HOME_GRAILS$/" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,19 +64,7 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="JdbcDaoTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/jdbc/JdbcDaoTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="13" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.8333333">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -108,11 +101,6 @@
         <option name="mavenSettingsFile" value="F:\Source\Maven\maven\conf\settings.xml" />
         <option name="workOffline" value="true" />
       </MavenGeneralSettings>
-    </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
     </option>
   </component>
   <component name="MavenRunner">
@@ -153,6 +141,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -184,29 +173,90 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koala-orm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koala-orm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koala-orm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koala-orm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jdbc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koala-orm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="koala-orm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Favorites" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="OverrideImplement.combined" value="true" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
@@ -393,6 +443,24 @@
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\Google\koala-core\koala-orm" />
+          <option name="myCopyRoot" value="F:\Google\koala-core\koala-orm" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="F:\Google\koala-core\koala-orm" />
+          <option name="myCopyRoot" value="F:\Google\koala-core\koala-orm" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4b8568f2-a6dc-43bf-844c-4d1755744510" name="Default" comment="" />
@@ -416,7 +484,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34771988" sideWeight="0.575" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32980457" sideWeight="0.0" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22882736" sideWeight="0.0" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -517,11 +585,6 @@
         <state line="16" column="49" selection-start="1137" selection-end="1137" vertical-scroll-proportion="0.49382716" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/jdbc/Book.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="29" selection-start="444" selection-end="444" vertical-scroll-proportion="0.7984791" />
-      </provider>
-    </entry>
     <entry file="jar://F:/Source/Maven/repository/org/springframework/spring-jdbc/3.0.3.RELEASE/spring-jdbc-3.0.3.RELEASE-sources.jar!/org/springframework/jdbc/core/simple/SimpleJdbcTemplate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="241" column="15" selection-start="9303" selection-end="9303" vertical-scroll-proportion="0.5203426" />
@@ -529,45 +592,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/koala/orm/jpa/BaseJpaDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="13" selection-start="533" selection-end="533" vertical-scroll-proportion="0.01891551">
-          <folding />
-        </state>
+        <state line="22" column="13" selection-start="533" selection-end="533" vertical-scroll-proportion="0.01891551" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/koala/orm/jpa/IDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="17" selection-start="170" selection-end="170" vertical-scroll-proportion="0.01891551">
-          <folding />
-        </state>
+        <state line="10" column="17" selection-start="170" selection-end="170" vertical-scroll-proportion="0.01891551" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/koala/orm/jdbc/IJdbcDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="19" selection-start="526" selection-end="526" vertical-scroll-proportion="0.018518519">
-          <folding />
-        </state>
+        <state line="33" column="19" selection-start="526" selection-end="526" vertical-scroll-proportion="0.018518519" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/log4j.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="997" selection-end="997" vertical-scroll-proportion="0.46296296">
-          <folding />
-        </state>
+        <state line="25" column="0" selection-start="997" selection-end="997" vertical-scroll-proportion="0.46296296" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/koala/orm/jdbc/BaseJdbcDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="19" selection-start="1736" selection-end="1736" vertical-scroll-proportion="0.01891551">
+        <state line="55" column="19" selection-start="1736" selection-end="1736" vertical-scroll-proportion="0.01891551" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/jdbc/Book.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="13" selection-start="92" selection-end="92" vertical-scroll-proportion="0.12962963">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/jdbc/JdbcDaoTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="13" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.8333333">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="71" column="32" selection-start="2748" selection-end="2748" vertical-scroll-proportion="0.8333333">
+          <folding />
         </state>
       </provider>
     </entry>
