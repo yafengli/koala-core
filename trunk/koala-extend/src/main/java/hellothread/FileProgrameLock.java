@@ -22,7 +22,7 @@ public class FileProgrameLock {
         FileChannel channel = new RandomAccessFile(tf, "rw").getChannel();
         try {
             lock = channel.tryLock();
-            if (lock != null) {
+            if (lock != null) {                
                 return true;
             } else {
                 return false;
@@ -66,19 +66,22 @@ class TestRun implements Runnable {
 
     public void run() {
         try {
-            if (!plock.lock("F:/tmp/lock.log")) {
-                while (true) {
-                    System.out.println("File is locked.");
-                    if (!plock.lock("F:/tmp/lock.log")) {
-                        System.out.println("File is unlocked.");
-                        return;
-                    }
-                    Thread.sleep(3000);
-                }
-            } else {
+            if (plock.lock("F:/tmp/lock.log")) {
                 System.out.println("File is locking...");
+                //TODO
+                Thread.sleep(3000);
                 plock.unlock();
                 System.out.println("File is unlocking...");
+            } else {
+                while (true) {
+                    System.out.println("File is locked.");
+                    if (plock.lock("F:/tmp/lock.log")) {
+                        System.out.println("File is unlocked.");
+                        plock.unlock();
+                        return;
+                    }
+                    Thread.sleep(50);
+                }
             }
         }
         catch (Exception e) {
