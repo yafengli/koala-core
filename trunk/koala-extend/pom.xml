@@ -12,10 +12,13 @@
         <version>2.0.0</version>
     </parent>
     <properties>
+        <spring.ver>3.0.3.RELEASE</spring.ver>
         <openejb-core.ver>3.1.2</openejb-core.ver>
         <openjpa.ver>2.0.0-M3</openjpa.ver>
         <activemq-core.ver>5.3.0</activemq-core.ver>
         <netty.ver>3.2.1.Final</netty.ver>
+        <mybatis.ver>3.0.1</mybatis.ver>
+        <json.ver>20090211</json.ver>
     </properties>
     <dependencies>
         <!--Test-->
@@ -47,13 +50,31 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-core</artifactId>
             <version>${activemq-core.ver}</version>
-        </dependency>        
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>${spring.ver}</version>
+        </dependency>
         <!-- NIO Netty  -->
         <dependency>
             <groupId>org.jboss.netty</groupId>
             <artifactId>netty</artifactId>
             <version>${netty.ver}</version>
         </dependency>
+        <!-- JSON -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json.ver}</version>
+        </dependency>
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.ver}</version>
+        </dependency>
+        
     </dependencies>
     <repositories>
         <repository>
