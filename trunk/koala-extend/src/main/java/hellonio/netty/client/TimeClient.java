@@ -33,6 +33,5 @@ public class TimeClient {
         }
         long end=System.currentTimeMillis();
         System.out.printf("[time=%d]\n",(end-start)/1000L);
-
     }
 }
