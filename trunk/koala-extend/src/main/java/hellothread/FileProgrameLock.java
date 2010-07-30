@@ -1,24 +1,23 @@
 package hellothread;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.net.ServerSocket;
+import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
+import java.util.zip.GZIPInputStream;
 
 public class FileProgrameLock {
-
-    protected FileLock lock = null;
+    private FileLock lock = null;
     private FileChannel channel = null;
 
-    public boolean lock(String fileName) throws FileNotFoundException {
+    public boolean lock(String fileName, File gzipFile) throws FileNotFoundException {
         File tf = new File(fileName);
         long ctime = System.currentTimeMillis();
+        GZIPInputStream in = null;
         try {
-            channel = new RandomAccessFile(tf, "rw").getChannel();
+            RandomAccessFile raf = new RandomAccessFile(tf, "rw");
+            channel = raf.getChannel();
             lock = channel.tryLock();
             if (lock != null) {
                 if (tf.lastModified() < ctime) {
@@ -26,6 +25,14 @@ public class FileProgrameLock {
                     return true;
                 } else {
                     System.out.println("File is no exists, and DO SOMETHING.");
+
+
+                    in = new GZIPInputStream(new FileInputStream(gzipFile));
+                    int count = -1;
+                    byte[] data = new byte[1024];
+                    while ((count = in.read(data)) != -1) {
+                        raf.write(data);
+                    }
                     return true;
                 }
             } else {
@@ -48,9 +55,11 @@ public class FileProgrameLock {
             }
             if (channel != null) {
                 channel.close();
+
             }
         }
         catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -61,7 +70,8 @@ public class FileProgrameLock {
         Thread t2 = new Thread(new TestRun(plock2));
         t1.start();
         t2.start();
-        Thread.sleep(5000);
+        System.out.println("OK.");
+        Thread.sleep(4000);
     }
 }
 
@@ -74,7 +84,7 @@ class TestRun implements Runnable {
 
     public void run() {
         try {
-            if (plock.lock("F:/tmp/lock.log")) {
+            if (plock.lock("F:/tmp/lock.pcap", new File("f:/tmp/1.pcap.gz"))) {
                 System.out.printf("[%s] file is locking...\n", Thread.currentThread().getName());
                 //TODO
                 Thread.sleep(2000);
@@ -83,7 +93,7 @@ class TestRun implements Runnable {
             } else {
                 while (true) {
                     System.out.printf("[%s] file is locked.\n", Thread.currentThread().getName());
-                    if (plock.lock("F:/tmp/lock.log")) {
+                    if (plock.lock("F:/tmp/lock.pcap", new File("f:/tmp/1.pcap.gz"))) {
                         System.out.printf("[%s]file is unlocked.\n", Thread.currentThread().getName());
                         plock.unlock();
                         return;
