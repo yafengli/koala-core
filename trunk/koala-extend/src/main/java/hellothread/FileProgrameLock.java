@@ -19,11 +19,18 @@ public class FileProgrameLock {
 
     public boolean lock(String fileName) throws FileNotFoundException {
         File tf = new File(fileName);
+        long ctime=System.currentTimeMillis();
         FileChannel channel = new RandomAccessFile(tf, "rw").getChannel();
         try {
             lock = channel.tryLock();
-            if (lock != null) {                
-                return true;
+            if (lock != null) {
+                if (tf.lastModified()<ctime) {
+                    System.out.println("File is exists.");
+                    return true;
+                } else {
+                    System.out.println("File is no exists, and DO SOMETHING.");
+                    return true;
+                }
             } else {
                 return false;
             }
@@ -69,7 +76,7 @@ class TestRun implements Runnable {
             if (plock.lock("F:/tmp/lock.log")) {
                 System.out.println("File is locking...");
                 //TODO
-                Thread.sleep(3000);
+                Thread.sleep(2000);
                 plock.unlock();
                 System.out.println("File is unlocking...");
             } else {
@@ -80,7 +87,7 @@ class TestRun implements Runnable {
                         plock.unlock();
                         return;
                     }
-                    Thread.sleep(50);
+                    Thread.sleep(500);
                 }
             }
         }
