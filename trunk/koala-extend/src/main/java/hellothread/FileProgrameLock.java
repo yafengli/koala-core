@@ -11,20 +11,17 @@ import java.nio.channels.OverlappingFileLockException;
 
 public class FileProgrameLock {
 
-    protected boolean running;
-
-    protected ServerSocket ss;
-
-    protected FileLock lock;
+    protected FileLock lock = null;
+    private FileChannel channel = null;
 
     public boolean lock(String fileName) throws FileNotFoundException {
         File tf = new File(fileName);
-        long ctime=System.currentTimeMillis();
-        FileChannel channel = new RandomAccessFile(tf, "rw").getChannel();
+        long ctime = System.currentTimeMillis();
         try {
+            channel = new RandomAccessFile(tf, "rw").getChannel();
             lock = channel.tryLock();
             if (lock != null) {
-                if (tf.lastModified()<ctime) {
+                if (tf.lastModified() < ctime) {
                     System.out.println("File is exists.");
                     return true;
                 } else {
@@ -41,12 +38,16 @@ public class FileProgrameLock {
         catch (IOException e) {
             return false;
         }
+
     }
 
     public void unlock() {
         try {
             if (lock != null) {
                 lock.release();
+            }
+            if (channel != null) {
+                channel.close();
             }
         }
         catch (IOException e) {
@@ -74,16 +75,16 @@ class TestRun implements Runnable {
     public void run() {
         try {
             if (plock.lock("F:/tmp/lock.log")) {
-                System.out.println("File is locking...");
+                System.out.printf("[%s] file is locking...\n", Thread.currentThread().getName());
                 //TODO
                 Thread.sleep(2000);
                 plock.unlock();
-                System.out.println("File is unlocking...");
+                System.out.printf("[%s] file is unlocking...\n", Thread.currentThread().getName());
             } else {
                 while (true) {
-                    System.out.println("File is locked.");
+                    System.out.printf("[%s] file is locked.\n", Thread.currentThread().getName());
                     if (plock.lock("F:/tmp/lock.log")) {
-                        System.out.println("File is unlocked.");
+                        System.out.printf("[%s]file is unlocked.\n", Thread.currentThread().getName());
                         plock.unlock();
                         return;
                     }
