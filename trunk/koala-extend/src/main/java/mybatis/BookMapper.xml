@@ -4,12 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.BookMapper">
     <select id="selectSingle" parameterType="long" resultType="mybatis.Book">
-        select * from add_book where id = #{id}
+        SELECT * FROM ADD_BOOK where id = #{value}
+    </select>
+    <select id="selectSingleUser" parameterType="long" resultType="mybatis.User">
+        SELECT * FROM ADD_USER where id = #{value}
+    </select>
+
+    <select id="selectTableSingle" parameterType="mybatis.Book" resultType="mybatis.Book">
+        select * from ${tablename} where isbn = #{id}
     </select>
     <select id="selectAll.next" parameterType="mybatis.Book" resultType="mybatis.Book">
         select * from add_book
-        <if test="{}">
-
-        </if>
     </select>
 </mapper>

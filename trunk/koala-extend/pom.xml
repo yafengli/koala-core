@@ -74,7 +74,17 @@
             <artifactId>mybatis</artifactId>
             <version>${mybatis.ver}</version>
         </dependency>
-        
+        <dependency>
+            <groupId>org.h2</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.1.107</version>
+        </dependency>
+        <!-- org.apache.commons io-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>com.springsource.org.apache.commons.io</artifactId>
+            <version>1.4.0</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>

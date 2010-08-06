@@ -1,109 +1,89 @@
 package hellothread;
 
-import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
-import java.nio.channels.OverlappingFileLockException;
-import java.util.zip.GZIPInputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FileProgrameLock {
-    private FileLock lock = null;
-    private FileChannel channel = null;
-
-    public boolean lock(String fileName, File gzipFile) throws FileNotFoundException {
-        File tf = new File(fileName);
-        long ctime = System.currentTimeMillis();
-        GZIPInputStream in = null;
-        try {
-            RandomAccessFile raf = new RandomAccessFile(tf, "rw");
-            channel = raf.getChannel();
-            lock = channel.tryLock();
-            if (lock != null) {
-                if (tf.lastModified() < ctime) {
-                    System.out.println("File is exists.");
-                    return true;
-                } else {
-                    System.out.println("File is no exists, and DO SOMETHING.");
-
-
-                    in = new GZIPInputStream(new FileInputStream(gzipFile));
-                    int count = -1;
-                    byte[] data = new byte[1024];
-                    while ((count = in.read(data)) != -1) {
-                        raf.write(data);
-                    }
-                    return true;
-                }
-            } else {
-                return false;
-            }
-        }
-        catch (OverlappingFileLockException e) {
-            return false;
-        }
-        catch (IOException e) {
-            return false;
-        }
-
-    }
-
-    public void unlock() {
-        try {
-            if (lock != null) {
-                lock.release();
-            }
-            if (channel != null) {
-                channel.close();
-
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public static final Logger logger = LoggerFactory.getLogger(FileProgrameLock.class);
 
     public static void main(String[] args) throws Exception {
-        final FileProgrameLock plock = new FileProgrameLock();
-        Thread t1 = new Thread(new TestRun(plock));
-        final FileProgrameLock plock2 = new FileProgrameLock();
-        Thread t2 = new Thread(new TestRun(plock2));
-        t1.start();
-        t2.start();
+        ExecutorService execu = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+        long start = System.currentTimeMillis();
+        File files[] = new File("f:/tmp/pcap/").listFiles();
+        execu.execute(new CountRun(files.length, 500));
+        for (File gzipFile : files) {
+            File pcapFile = new File("f:/tmp/testlock", gzipFile.getName().substring(0, gzipFile.getName().length() - 3));
+            System.out.printf("#%s,%s\n", pcapFile.getAbsolutePath(), gzipFile.getAbsolutePath());
+            Runnable run = new UnzipThread(pcapFile, gzipFile, 50L);
+            execu.execute(run);
+        }
+        execu.shutdown();
+        long end = System.currentTimeMillis();
+        logger.info("#time use: {} ms.", end - start);
         System.out.println("OK.");
-        Thread.sleep(4000);
     }
 }
 
-class TestRun implements Runnable {
-    private FileProgrameLock plock;
+class UnzipThread implements Runnable {
+    public static final Logger logger = LoggerFactory.getLogger(UnzipThread.class);
+    private File gzipFile;
+    private File unzipFile;
+    private long blockTime;
 
-    public TestRun(FileProgrameLock plock) {
-        this.plock = plock;
+    public UnzipThread(File unzipFile, File gzipFile, long blockTime) {
+
+        this.gzipFile = gzipFile;
+        this.unzipFile = unzipFile;
+        this.blockTime = blockTime;
     }
 
     public void run() {
-        try {
-            if (plock.lock("F:/tmp/lock.pcap", new File("f:/tmp/1.pcap.gz"))) {
-                System.out.printf("[%s] file is locking...\n", Thread.currentThread().getName());
-                //TODO
-                Thread.sleep(2000);
-                plock.unlock();
-                System.out.printf("[%s] file is unlocking...\n", Thread.currentThread().getName());
-            } else {
-                while (true) {
-                    System.out.printf("[%s] file is locked.\n", Thread.currentThread().getName());
-                    if (plock.lock("F:/tmp/lock.pcap", new File("f:/tmp/1.pcap.gz"))) {
-                        System.out.printf("[%s]file is unlocked.\n", Thread.currentThread().getName());
-                        plock.unlock();
-                        return;
-                    }
-                    Thread.sleep(500);
+        FileStateLock plock = new FileStateLock();
+        String filename = this.unzipFile.getAbsolutePath();
+        while (true) {
+            try {
+                if (plock.lock(filename, gzipFile)) {
+                    plock.unlock();
+                    break;
                 }
+                logger.error("#unzip [{}->{}] is waiting...\n", gzipFile.getAbsolutePath(), unzipFile.getAbsolutePath());
+                Thread.sleep(blockTime);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        catch (Exception e) {
-            e.printStackTrace();
+    }
+}
+
+class CountRun implements Runnable {
+
+    private long count;
+    private long blockTime;
+
+    public CountRun(long count, long blockTime) {
+        this.count = count;
+        this.blockTime = blockTime;
+    }
+
+    public void run() {
+        while (true) {
+            try {
+                if (FileStateLock.getLockCount() >= this.count) {
+                    System.out.printf("#all file is ok,%d :%d\n", FileStateLock.getLockCount(), this.count);
+                    break;
+                } else {
+                    System.out.printf("#index=%d, slide=%d\n", FileStateLock.getLockCount(), this.count);
+                    Thread.sleep(this.blockTime);
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

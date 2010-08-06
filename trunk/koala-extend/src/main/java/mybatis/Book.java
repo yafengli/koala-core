@@ -9,6 +9,7 @@ public class Book {
     private Long id;
     private String name;
     private String isbn;
+    private String tablename;
 
     public Long getId() {
         return id;
@@ -32,5 +33,13 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getTablename() {
+        return tablename;
+    }
+
+    public void setTablename(String tablename) {
+        this.tablename = tablename;
     }
 }

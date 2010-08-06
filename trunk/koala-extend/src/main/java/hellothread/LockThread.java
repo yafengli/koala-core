@@ -50,9 +50,9 @@ public class LockThread implements Runnable {
             Thread t1 = new Thread(new LockThread());
             t1.setName("Write--T");
             t1.start();
-//            Thread t2 = new Thread(new ReadThread());
-//            t2.setName("Read--T");
-//            t2.start();
+            Thread t2 = new Thread(new ReadThread());
+            t2.setName("Read--T");
+            t2.start();
             Thread.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
