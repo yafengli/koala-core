@@ -19,6 +19,7 @@
         <netty.ver>3.2.1.Final</netty.ver>
         <mybatis.ver>3.0.1</mybatis.ver>
         <json.ver>20090211</json.ver>
+        <jackson.ver>1.5.5</jackson.ver>
     </properties>
     <dependencies>
         <!--Test-->
@@ -68,6 +69,11 @@
             <artifactId>json</artifactId>
             <version>${json.ver}</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.ver}</version>
+        </dependency>
         <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -85,6 +91,30 @@
             <artifactId>com.springsource.org.apache.commons.io</artifactId>
             <version>1.4.0</version>
         </dependency>
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.ver}</version>
+            <exclusions>
+                <!-- Exclude Commons Logging in favor of SLF4j -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <!--  mongodb -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.1</version>
+        </dependency>        
     </dependencies>
     <repositories>
         <repository>
@@ -128,17 +158,19 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
                     <forkMode>once</forkMode>
-                    <argLine>-Xms32m -Xmx1024m
+                    <argLine>-Xms32m -Xmx512m
                         -Dlog4j.configuration=log4j-test.properties
                     </argLine>
                 </configuration>
             </plugin>
+            -->
         </plugins>
     </build>
 </project>
