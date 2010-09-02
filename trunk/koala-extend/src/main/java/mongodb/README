@@ -41,8 +41,6 @@ switched to db admin
 > config=connect("localhost:20000")
 connecting to: localhost:20000
 localhost:20000
-> config=config.getSisterDB("config")
-config
 >test=db.getSisterDB("test")  
 test
 > db.runCommand( { enablesharding : "test" } )
@@ -74,7 +72,20 @@ test
 { "_id" : ObjectId("4c7b85d6d2b4f73a498fac48"), "uid" : 1, "un" : "test1", "age" : 25 }
 
 ;;看看test库分配到了哪个shard上
- 
+cd /tmp/data
+ls -R
+
+
+;;删除collection、db
+>use [dbname]
+>db.[collectionname].drop()
+>db.dropDatabase()
+
+;;删除配置分片、数据库信息
+>use config
+>db.printShardingStatus()
+>db.shards.remove({_id:[shardname]})
+>db.databases.remove({_id:[dbname]})    
 
 ;;help
 # ./mongo

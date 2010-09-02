@@ -12,11 +12,9 @@ import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSFile;
 
 /**
- * Created by IntelliJ IDEA.
- * User: phoenixup
+ * User: YaFengLi
  * Date: 2010-8-30
  * Time: 18:24:55
- * To change this template use File | Settings | File Templates.
  */
 public class MongodbFile {
     static DB imgDB = null;
@@ -25,26 +23,25 @@ public class MongodbFile {
     public static void main(String[] args) throws Exception {
         long start = System.currentTimeMillis();
         Mongo mongo = new Mongo("127.0.0.1", 20000);   //数据库地址，端口号
-        imgDB = mongo.getDB("imgs");  // 数据库名称
+        imgDB = mongo.getDB("imgs");  // 数据库名称        
         gridFS = new GridFS(imgDB);
+           
 
-        String fileName = "1.pcap"; // 读取428 M 的文件
-        String fileNameO = "1.pcap.out";   // 写入文件名称
         MongodbFile mon = new MongodbFile();
-        File fileIN = new File("/tmp/" + fileName);
-        File fileOUT = new File("/tmp/" + fileNameO);
+        File fileIN = new File("f:/tmp/1.pcap");// 读取428 M 的文件
+        File fileOUT = new File("f:/tmp/1.pcap.out"); // 写入文件名称
 
         /**
          * 将文件存入 MongoDB 数据库中
          */
-        mon.saveFile(fileIN, fileName);
+        mon.saveFile(fileIN, fileIN.getName());
         long end = System.currentTimeMillis();
         System.out.println(end - start);
 
         /**
          * 从MongoDB中读取数据，并且写入磁盘
          */
-        List<?> list = mon.findFilesByName(fileName);
+        List<?> list = mon.findFilesByName(fileIN.getName());
         GridFSDBFile gridFSDBFile = (GridFSDBFile) list.get(0);
         gridFSDBFile.writeTo(fileOUT);
         System.out.println(list.size());
