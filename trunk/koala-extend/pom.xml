@@ -11,166 +11,106 @@
         <artifactId>koala-parent</artifactId>
         <version>2.0.0</version>
     </parent>
-    <properties>
-        <spring.ver>3.0.3.RELEASE</spring.ver>
-        <openejb-core.ver>3.1.2</openejb-core.ver>
-        <openjpa.ver>2.0.0-M3</openjpa.ver>
-        <activemq-core.ver>5.3.0</activemq-core.ver>
-        <netty.ver>3.2.1.Final</netty.ver>
-        <mybatis.ver>3.0.1</mybatis.ver>
-        <json.ver>20090211</json.ver>
-        <jackson.ver>1.5.5</jackson.ver>
-    </properties>
     <dependencies>
-        <!--Test-->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.7</version>
-            <scope>test</scope>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <!-- mongodb -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
         </dependency>
         <!-- JPA2.0 -->
         <dependency>
             <groupId>org.apache.openjpa</groupId>
             <artifactId>openjpa</artifactId>
-            <version>${openjpa.ver}</version>
         </dependency>
         <!-- EJB3.1 -->
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>openejb-core</artifactId>
-            <version>${openejb-core.ver}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>openejb-client</artifactId>
-            <version>${openejb-core.ver}</version>
         </dependency>
         <!-- JMS ActiveMq -->
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-core</artifactId>
-            <version>${activemq-core.ver}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jms</artifactId>
-            <version>${spring.ver}</version>
         </dependency>
-        <!-- NIO Netty  -->
+        <!-- NIO Netty -->
         <dependency>
             <groupId>org.jboss.netty</groupId>
             <artifactId>netty</artifactId>
-            <version>${netty.ver}</version>
         </dependency>
         <!-- JSON -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>${json.ver}</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
-            <version>${jackson.ver}</version>
         </dependency>
         <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>${mybatis.ver}</version>
         </dependency>
+        <!-- org.apache.commons io -->
         <dependency>
-            <groupId>org.h2</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.1.107</version>
-        </dependency>
-        <!-- org.apache.commons io-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>com.springsource.org.apache.commons.io</artifactId>
-            <version>1.4.0</version>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
         </dependency>
         <!-- spring -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.ver}</version>
-            <exclusions>
-                <!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
-            <version>2.2</version>
         </dependency>
-        <!--  mongodb -->
         <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>2.1</version>
-        </dependency>        
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+        </dependency>
+		<!--
+        <dependency>
+            <groupId>org.codehaus.gmaven</groupId>
+            <artifactId>gmaven-mojo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.gmaven.runtime</groupId>
+            <artifactId>gmaven-runtime-1.7</artifactId>
+		</dependency>
+		-->
     </dependencies>
-    <repositories>
-        <repository>
-            <id>repository.jboss.org</id>
-            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <build>
         <finalName>koala-extend-jpa-ejb</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ejb-plugin</artifactId>
-                <configuration>
-                    <ejbVersion>3.1</ejbVersion>
-                    <generateClient>true</generateClient>
-                    <clientIncludes>
-                        <clientInclude>**/serviceapi/*</clientInclude>
-                        <clientInclude>**/domain/*</clientInclude>
-                        <clientInclude>**/exception/*</clientInclude>
-                    </clientIncludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>ejb</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.3</version>
-                <configuration>
-                    <forkMode>once</forkMode>
-                    <argLine>-Xms32m -Xmx512m
-                        -Dlog4j.configuration=log4j-test.properties
-                    </argLine>
-                </configuration>
             </plugin>
-            -->
         </plugins>
     </build>
 </project>

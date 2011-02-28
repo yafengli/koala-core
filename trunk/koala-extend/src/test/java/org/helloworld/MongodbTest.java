@@ -1,6 +1,7 @@
 package org.helloworld;
 
 import com.mongodb.*;
+import com.mongodb.gridfs.GridFSDBFile;
 import mongodb.MongodbService;
 import mongodb.MongodbServiceFactory;
 import org.junit.Before;
@@ -33,15 +34,33 @@ public class MongodbTest {
     public void init() {
         try {
             /*必须连接mongos才能使用分片功能，否则会在mongod启动的服务上存储*/
-            mongo = new Mongo("58.223.0.180", 27017);            
+            mongo = new Mongo("58.223.0.180", 27017);
             factory = new MongodbServiceFactory(mongo);
             service = factory.factory("test", "people");
+            initCreateShards();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Test
+
+    public void initCreateShards() {
+        DB config = mongo.getDB("admin");
+        BasicDBObject cmd = new BasicDBObject();
+        cmd.put("enableSharding", "test_s7");
+        CommandResult rt = config.command(cmd);
+        System.out.println("#msg" + rt.getErrorMessage());
+        cmd.clear();
+        cmd.put("shardCollection", "test_s7.people_s1");
+        BasicDBObject name = new BasicDBObject();
+        name.put("name", 1);
+        cmd.put("key", name);
+        rt = config.command(cmd);
+        System.out.println("#msg" + rt.getErrorMessage());
+    }
+
+//    @Test
+
     public void testDB() {
         try {
             List<Map<String, Object>> list = service.findAll();
@@ -51,12 +70,12 @@ public class MongodbTest {
         }
     }
 
-    @Test
-    public void testMongod() throws Exception{
-        DB db = mongo.getDB("test_s5");
-        DBCollection dbcoll = db.getCollection("people");
-        BasicDBObject cmd = new BasicDBObject();
+//    @Test
 
+    public void testMongod() throws Exception {
+
+        DB db = mongo.getDB("test_s7");
+        DBCollection dbcoll = db.getCollection("people_s1");
         BasicDBObject val = new BasicDBObject();
         val.put("_id", System.currentTimeMillis());
         val.put("name", "凤姐");
@@ -67,20 +86,22 @@ public class MongodbTest {
         for (DBObject obj = null; cur.hasNext();) {
             obj = cur.next();
             System.out.println("@@" + obj);
-        }        
+        }
     }
 
     @Test
-    public void testFile() {
 
+    public void testFile() {
         FileChannel fc = null;
         InputStream in = null;
         try {
-
+            String filename = "460030947772780_zj_917430821.pcap";
             FileOutputStream fos = new FileOutputStream("f:/tmp/hhh.pcap.out");
             fc = fos.getChannel();
             service.saveFile(new File("f:/tmp/460030947772780_zj_917430821.pcap"), "460030947772780_zj_917430821.pcap");
-            in = service.getFileInputStream("460030947772780_zj_917430821.pcap");
+//            GridFSDBFile dbfile = service.findFileByName(filename);
+//            service.removeFile(filename);
+            in = service.getFileInputStream(filename);
             ReadableByteChannel channel = Channels.newChannel(in);
 
             System.out.printf("#count %d,[%s]", service.getFileCount(), fc.transferFrom(channel, 0, 24));

@@ -1,6 +1,7 @@
 package mongodb;
 
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,4 +12,5 @@ import com.mongodb.DB;
  */
 public interface MongodbTemplate {
     public DB getDB(String name);
+    public DBCollection getCollection();
 }

@@ -1,6 +1,5 @@
 package hellothread;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +39,8 @@ public class FileStateLock {
                 lockCount++;
                 if (!tf.getParentFile().exists()) {
                     try {
-                        FileUtils.forceMkdir(tf.getParentFile());
+                        //FileUtils.forceMkdir(tf.getParentFile());
+                        logger.error(String.format("@NO_EXISTS:%s\n",tf.getParentFile().getAbsolutePath()));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
