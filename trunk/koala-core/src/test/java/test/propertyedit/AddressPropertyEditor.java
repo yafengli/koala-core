@@ -4,8 +4,9 @@
  */
 package test.propertyedit;
 
-import java.beans.PropertyEditorSupport;
 import org.springframework.util.StringUtils;
+
+import java.beans.PropertyEditorSupport;
 
 /**
  *

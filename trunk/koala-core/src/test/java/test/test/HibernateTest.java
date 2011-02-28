@@ -3,7 +3,6 @@ package test.test;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import test.dao.AccountDao;
 import test.dao.impl.hibernate.AccountHDaoImpl;
 import test.model.Account;

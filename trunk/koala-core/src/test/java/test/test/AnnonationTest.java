@@ -3,7 +3,6 @@ package test.test;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import test.annotation.aop.HelloWorld;
 import test.annotation.config.AnnotationPojo;
 import test.annotation.config.PropertiesLoader;

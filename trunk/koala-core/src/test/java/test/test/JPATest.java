@@ -2,10 +2,10 @@ package test.test;
 
 import org.junit.Test;
 import org.koala.dao.IDao;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.dao.ExUserDao;
 import test.dao.UserDao;
 import test.dao.impl.jpa.ExUserDaoImpl;

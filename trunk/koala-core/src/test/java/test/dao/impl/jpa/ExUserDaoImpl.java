@@ -4,7 +4,6 @@ import org.koala.dao.jpa.GenericDaoJpa;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import test.dao.ExUserDao;
 import test.model.ExUser;
 

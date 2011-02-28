@@ -1,5 +1,6 @@
 package org.koala.dao.jpa;
 
+import org.koala.dao.IDao;
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,10 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
-import org.koala.dao.IDao;
 
 /**
  * Date: 2009-9-24

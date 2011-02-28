@@ -4,14 +4,15 @@
  */
 package test.test;
 
-import java.lang.reflect.Proxy;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import test.aop.HelloWorldImpl;
 import test.aop.HelloWorld;
 import test.aop.HelloWorldHandler;
+import test.aop.HelloWorldImpl;
+
+import java.lang.reflect.Proxy;
 
 /**
  *

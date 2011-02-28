@@ -7,8 +7,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.propertyedit.Person;
 
 import java.util.Iterator;
-import java.util.TreeMap;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Date: 2009-08-01

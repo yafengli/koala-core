@@ -1,8 +1,7 @@
 package org.koala.page;
 
-import java.util.List;
-
 import javax.persistence.Query;
+import java.util.List;
 
 /**
  * 使用JPA查询获取数据内容构建分页信息

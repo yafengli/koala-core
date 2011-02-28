@@ -1,6 +1,7 @@
 package test.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by IntelliJ IDEA.

@@ -1,12 +1,12 @@
 package org.koala.spring.annotation;
 
-import java.lang.reflect.Field;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.ReflectionUtils;
+
+import java.lang.reflect.Field;
 
 public class AnnotationBeanPostProcessor extends PropertyPlaceholderConfigurer
         implements BeanPostProcessor, InitializingBean {

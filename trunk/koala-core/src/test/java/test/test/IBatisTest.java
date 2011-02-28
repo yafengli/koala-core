@@ -1,6 +1,5 @@
 package test.test;
 
-import java.util.List;
 import org.junit.Test;
 import org.koala.dao.ibatis.BaseIBatisDao;
 import org.koala.dao.ibatis.IIBatisDao;
@@ -9,6 +8,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.dao.AccountIBatisDao;
 import test.dao.impl.ibatis.AccountDaoImpl;
 import test.model.Account;
+
+import java.util.List;
 
 public class IBatisTest {
 

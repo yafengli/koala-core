@@ -1,10 +1,10 @@
 package org.koala.dao.jdbc;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 
 import java.util.List;
 import java.util.Map;
-import org.springframework.jdbc.core.RowMapper;
 
 /**
  * @author liyafeng

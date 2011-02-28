@@ -1,19 +1,18 @@
 package org.koala.dao.jpa;
 
+import org.koala.dao.IGenericDao;
+import org.springframework.orm.jpa.JpaCallback;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
-import org.koala.dao.IGenericDao;
-
-import org.springframework.orm.jpa.JpaCallback;
-import org.springframework.orm.jpa.support.JpaDaoSupport;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author liyafeng

@@ -1,10 +1,11 @@
 package org.koala.spring.support;
 
+import org.springframework.jdbc.core.StatementCreatorUtils;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+
 import java.sql.Types;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.springframework.jdbc.core.StatementCreatorUtils;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 /**
  *

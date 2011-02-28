@@ -1,7 +1,6 @@
 package test.filelock;
 
 import java.io.FileOutputStream;
-import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 

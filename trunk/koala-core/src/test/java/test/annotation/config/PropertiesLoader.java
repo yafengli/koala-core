@@ -1,9 +1,9 @@
 package test.annotation.config;
 
-import java.io.Serializable;
-
 import org.koala.spring.annotation.Properties;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 
 /**
  * @author YaFengLi

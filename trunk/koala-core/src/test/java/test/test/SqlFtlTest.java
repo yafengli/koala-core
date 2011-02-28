@@ -1,14 +1,13 @@
 package test.test;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.koala.spring.support.SqlFtlUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Map;
 import java.util.HashMap;
-import java.io.File;
+import java.util.Map;
 
 /**
  * Created by YaFengli.

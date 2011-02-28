@@ -1,14 +1,13 @@
 package test.dao.impl.jpa;
 
-import javax.persistence.EntityManagerFactory;
-
 import org.koala.dao.jpa.GenericDaoJpa;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
 import test.dao.UserDao;
 import test.model.User;
+
+import javax.persistence.EntityManagerFactory;
 
 /**
  * Created by IntelliJ IDEA. User: liyafeng Date: 2007-12-13 Time: 11:17:46 To

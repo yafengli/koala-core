@@ -81,16 +81,10 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
         </dependency>
-		<!--
         <dependency>
-            <groupId>org.codehaus.gmaven</groupId>
-            <artifactId>gmaven-mojo</artifactId>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.codehaus.gmaven.runtime</groupId>
-            <artifactId>gmaven-runtime-1.7</artifactId>
-		</dependency>
-		-->
     </dependencies>
     <build>
         <finalName>koala-extend-jpa-ejb</finalName>

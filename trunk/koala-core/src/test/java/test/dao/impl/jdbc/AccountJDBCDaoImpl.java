@@ -1,13 +1,13 @@
 package test.dao.impl.jdbc;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.koala.dao.jdbc.GenericDaoJDBC;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.stereotype.Service;
 import test.dao.AccountJDBCDao;
 import test.model.Account;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Service("test.dao.impl.jdbc.AccountJDBCDaoImpl")
 public class AccountJDBCDaoImpl extends GenericDaoJDBC<Account, Long> implements

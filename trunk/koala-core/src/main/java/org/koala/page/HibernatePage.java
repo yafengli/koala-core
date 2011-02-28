@@ -1,10 +1,10 @@
 package org.koala.page;
 
-import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.ScrollableResults;
+
+import java.util.List;
 
 /**
  * 使用Hibernate查询数据内容构建分页信息

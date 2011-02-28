@@ -1,11 +1,5 @@
 package org.koala.dao.hibernate;
 
-import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -13,6 +7,12 @@ import org.koala.dao.IGenericDao;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 @Transactional
 public class GenericDaoHibernate<T, ID extends Serializable> extends HibernateDaoSupport implements IGenericDao<T, ID> {

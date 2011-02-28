@@ -1,5 +1,6 @@
 package org.koala.dao.jdbc;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
@@ -17,7 +18,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.springframework.jdbc.core.RowMapper;
 
 /**
  * Date: 2009-10-12

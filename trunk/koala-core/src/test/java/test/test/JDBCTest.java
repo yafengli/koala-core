@@ -2,12 +2,12 @@ package test.test;
 
 import org.junit.Test;
 import org.koala.dao.jdbc.IJDBCDao;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.beans.BeansException;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.dao.AccountJDBCDao;
 import test.dao.impl.jdbc.AccountJDBCDaoImpl;
 import test.model.Account;

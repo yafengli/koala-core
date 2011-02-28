@@ -1,8 +1,6 @@
 package test.dao;
 
 import org.koala.dao.IGenericDao;
-import org.springframework.transaction.annotation.Transactional;
-
 import test.model.User;
 
 /**
