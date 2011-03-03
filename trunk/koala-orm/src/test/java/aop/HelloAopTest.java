@@ -1,6 +1,7 @@
 package aop;
 
 import org.junit.Test;
+import org.koala.orm.aop.HelloAop;
 
 /**
  * User: phoenixup
@@ -9,13 +10,11 @@ import org.junit.Test;
  * Desc: //TODO:WRITE YOUR OWN DESCRIPTION.
  */
 public class HelloAopTest {
-	private void sayHello() {
-		System.out.println("Hello World!");
-	}
 
 	@Test
 	public void testSay() {
-		HelloAopTest test = new HelloAopTest();
+		HelloAop test = new HelloAop();
 		test.sayHello();
+		test.sayHello2();
 	}
 }
