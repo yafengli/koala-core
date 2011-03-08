@@ -8,17 +8,16 @@ import java.util.Map;
  * Time: 10:39:43
  */
 public interface ITemplateUtils {
-    /**
-     * @param templateFileName
-     * @param model
-     * @return
-     */
-    public String template(String templateFileName, Map model);
+	/**
+	 * @param templateFileName
+	 * @param model
+	 * @return
+	 */
+	public String template(String templateFileName, Map model);
 
-    /**
-     * @param initObj
-     */
-    public void init(Object initObj);
-
-
+	/**
+	 * @param t
+	 * @param <T>
+	 */
+	public <T> void init(T t);
 }

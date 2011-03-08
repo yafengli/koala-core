@@ -7,8 +7,7 @@ package org.koala.utils.template;
  */
 public interface ITemplateUtilsFactory {
 
+	public ITemplateUtils factory(Class c);
 
-    public ITemplateUtils factory();
-
-    public ITemplateUtils factory(String utilsClassName);
+	public ITemplateUtils factory(String utilsClassName);
 }

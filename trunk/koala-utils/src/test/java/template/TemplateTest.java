@@ -1,15 +1,15 @@
 package template;
 
-import org.apache.velocity.app.VelocityEngine;
-import org.junit.Before;
-import org.junit.Test;
 import freemarker.template.Configuration;
+import org.apache.velocity.app.VelocityEngine;
 import org.koala.utils.template.ITemplateUtils;
 import org.koala.utils.template.TemplateUtilsFactory;
 import org.koala.utils.template.freemarker.FreemarkerUtils;
 import org.koala.utils.template.velocity.VelocityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.Hashtable;
@@ -26,7 +26,7 @@ public class TemplateTest {
 	private ITemplateUtils freemarkerUtils;
 	private ITemplateUtils velocityUtils;
 
-	@Before
+	@BeforeClass
 	public void init() {
 		try {
 			// System.out.printf("log4j:%s\n",System.getProperty("log4j.configuration"));

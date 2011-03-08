@@ -7,35 +7,25 @@ package org.koala.utils.template;
  */
 public class TemplateUtilsFactory implements ITemplateUtilsFactory {
 
+	@Override
+	public ITemplateUtils factory(String utilsClassName) {
+		try {
+			return factory(Class.forName(utilsClassName));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
-    private ITemplateUtils utils;
-
-
-    public ITemplateUtils getUtils() {
-        return utils;
-    }
-
-    public void setUtils(ITemplateUtils utils) {
-        this.utils = utils;
-    }
-
-    public ITemplateUtils factory() {
-        ITemplateUtils tu = null;
-        if (this.getUtils() != null) {
-            tu = this.getUtils();
-        }
-        return tu;
-    }
-
-    public ITemplateUtils factory(String utilsClassName) {
-        ITemplateUtils tu = null;
-        try {
-            if (utilsClassName != null) {
-                tu = (ITemplateUtils) Class.forName(utilsClassName).newInstance();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return tu;
-    }
+	@Override
+	public ITemplateUtils factory(Class c) {
+		try {
+			if (c != null) {
+				return (ITemplateUtils) c.newInstance();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
