@@ -1,14 +1,9 @@
 package aop;
 
-import org.junit.Test;
-import org.koala.orm.aop.HelloAop;
 
-/**
- * User: phoenixup
- * Date: 11-3-3
- * Time: 上午9:39
- * Desc: //TODO:WRITE YOUR OWN DESCRIPTION.
- */
+import org.koala.orm.aop.HelloAop;
+import org.testng.annotations.Test;
+
 public class HelloAopTest {
 
 	@Test

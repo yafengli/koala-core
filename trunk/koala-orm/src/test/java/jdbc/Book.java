@@ -6,6 +6,7 @@ package jdbc;
  * Time: 15:07:36
  */
 public class Book {
+
     private Long id;
     private String name;
     private String isbn;

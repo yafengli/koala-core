@@ -1,21 +1,16 @@
 package org.koala.orm.aop;
 
-/**
- * User: phoenixup
- * Date: 11-3-3
- * Time: 上午9:40
- * Desc: //TODO:WRITE YOUR OWN DESCRIPTION.
- */
+
 public aspect HelloAop_Demo_Log {
 	pointcut log():
 		execution(* HelloAop.sayHello(..));
 	before():log(){
-		System.out.println("Log before.");
+		System.out.println("Aop before.");
 	}
 	after() returning :log(){
-		System.out.println("Log after.");
+		System.out.println("Aop after.");
 	}
 	public void HelloAop.sayHello2(){
-		System.out.println("#Hello World!");
+		System.out.println("#Aop Add@Hello World!");
 	}
 }
