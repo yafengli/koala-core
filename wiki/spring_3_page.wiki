@@ -49,7 +49,7 @@ class="org.springframework.context.support.ResourceBundleMessageSource">
 }}}
 在JSP视图中可以使用`<spring:message code="message_name_key"/>`
 控制器、请求映射、返回
-使用@Controller注解将bean定义为控制器，使用_@Controller_为bean或者方法定义请求的映射处理关系。使用@PathVariable定义映射URI解析参数，使用@ModelAttribute定义模型属性。
+使用@Controller注解将bean定义为控制器，使用_@RequestMapping_为bean或者方法定义请求的映射处理关系。使用@PathVariable定义映射URI解析参数，使用@ModelAttribute定义模型属性。
 {{{
 @Controller
 @RequestMapping("/freemarker")
