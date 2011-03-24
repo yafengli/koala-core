@@ -175,6 +175,7 @@ JSP文件default.jspx
 }}}
 ====Freemarker====
 	修改Spring MVC Configuration文件，增加以下内容：
+{{{
 <!-- Freemarker Configuration-->
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -194,12 +195,14 @@ JSP文件default.jspx
 		<!—解决中文乱码@2-->
 		<property name="contentType" value="text/html;charset=UTF-8" />		
 	</bean>
+}}}
 	Spring提供了在freemarker模板文件中的标签支持，将spring-webmvc-xxx.jar文件的spring.ftl文件复制到freemarker configuration中定义的templateLoaderPath目录或子目录下。
 在需要使用标签的文件中添加:
-<#import "/path/spring.ftl" as sp>
+`<#import "/path/spring.ftl" as sp>`
 
-Sitemesh
+====Sitemesh====
 	使用sitemesh模板技术，需要在WEB-INF/web.xml文件中配置：
+{{{
 <filter>
 	<filter-name>sitemesh</filter-name>
 	<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
@@ -208,7 +211,9 @@ Sitemesh
 	<filter-name>sitemesh</filter-name>
 	<url-pattern>/*</url-pattern>
 </filter-mapping>
+}}}
 缺省在sitemesh的装饰配置文件decorators.xml支持JSP模板定义，如果要使用freemarker定义模板，需要在WEB-INF/web.xml中添加配置：
+{{{
 <servlet>
 	<servlet-name>FreemarkerDecorator</servlet-name>
 	<servlet-class>com.opensymphony.module.sitemesh.freemarker.FreemarkerDecoratorServlet</servlet-class>
@@ -226,14 +231,17 @@ Sitemesh
 	<servlet-name>FreemarkerDecorator</servlet-name>
 	<url-pattern>*.ftl</url-pattern>
 </servlet-mapping>
+}}}
 然后在decorators.xml文件定义：
+{{{
 <decorators defaultdir="/WEB-INF/_decorators/ftl">
     <decorator name="main" page="main.ftl">
           <pattern>/freemarker/*.view</pattern>
     </decorator>
 </decorators>
-
+}}}
 就可以使用freemarker编写的模板文件main.ftl：
+{{{
 <html>
 	<head>
 	${title}
@@ -248,9 +256,11 @@ Sitemesh
  	<#include "/WEB-INF/_decorators/ftl/footer.ftl">
  	</body>
 </html>
-	避免表单重复提交
+}}}
+_*避免表单重复提交*_
 使用redirect:前缀。
 如表单的Action对应的方法：
+{{{
 @RequestMapping("/index/form")
 public String form(@ModelAttribute("type") @Valid FormInfo info,
 		BindingResult result) {
@@ -260,10 +270,10 @@ public String form(@ModelAttribute("type") @Valid FormInfo info,
 		return "redirect:/tiles/form.view";
 	}
 }
-
-
-多视图配置
+}}}
+====多视图配置====
 1.	使用ResourceBundleViewResolver配置内容：
+{{{
 < bean id="r" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
     <property name="basename" value="views"/>
 <property name="order" value="0"/>
@@ -272,15 +282,16 @@ public String form(@ModelAttribute("type") @Valid FormInfo info,
 <!-- 对于FreeMarker等还需要有额外的配置-->
 <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer" 
           id="freemarkerConfig" p:templateLoaderPath="/WEB-INF/ftl/"/>
-
+}}}
 在views.properties中配置属性：[视图名].class、[视图名].url
+{{{
 helloj.class=org.springframework.web.servlet.view.JstlView
 helloj.url=WEB-INF/jsp/helloj.jsp
 
 hellof.class=org.springframework.web.servlet.view.freemarker.FreeMarkerView
 hellof.contentType=text/html;charset=UTF-8
 hellof.url=hellof.ftl
-
+}}}
 2.	视图链配置
 当一个配置文件中定义多个ViewResolver的时候，使用<property name=”order” value=”1”/>，value的数值越小，优先级越高。
 
@@ -290,6 +301,7 @@ hellof.url=hellof.ftl
 	
 验证
 	可以使用实现JSR 303规范的的Hiberate Validator 4+版本与Spring集成使用，在需要约束的Bean中对属性添加约束注解@NotEmpty、@Size、@Length等。
+{{{
 public class FormInfo {
 	@NotEmpty
 	private String name;
@@ -302,9 +314,10 @@ public class FormInfo {
 	private Date birthday;
 	//sets and gets
 }
-
+}}}
 如果需要自定义validation messages，classpath目录中建立新的ValidationMessages_[local].properties，然后你将hibernate-validator-xxx.jar中的ValidationMessages.properties中的内容复制到这文件中修改。
 在Spring MVC中的Controller中可以使用@Vaild注解对bean进行验证。
+{{{
 @InitBinder
 public void initBinder(WebDataBinder binder) {
 	binder.setValidator(validator);
@@ -313,10 +326,10 @@ public void initBinder(WebDataBinder binder) {
 public String form(@ModelAttribute("type") @Valid FormInfo info){
 	//do something
 }
-
-
-注解配置
+}}}
+*注解配置*
 需要使用XSD定义
+{{{
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -326,14 +339,16 @@ public String form(@ModelAttribute("type") @Valid FormInfo info){
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">	
 </beans>
-
+}}}
 注解注入配置
+{{{
 <!-- 声明式事务管理，处理Hibernate、JPA、Ibatis DAO模型 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<!-- 注释配置 -->
 	<context:annotation-config />
     <!-- 配置组件扫描的路径（包名） -->
 	<context:component-scan base-package="scan.package.name" />
+}}}
 Spring扩展注解
 主要使用的注解
 @Service  @Compenent 
@@ -363,6 +378,7 @@ AOP配置：注解定义
 
 配置属性：注解定义
 1.	自定义Annotation满足注解注入的Bean可以使用属性文件中的配置内容。
+{{{
 	<!-- 属性文件读取 -->
 	<bean id="loader"
 		class="org.koala.spring.AnnotationBeanPostProcessor">
@@ -372,9 +388,11 @@ AOP配置：注解定义
 			</list>
 		</property>
 	</bean>
+}}}
 其中jdbc.properties为提供的属性文件
 
 2.	在配置文件中代替PropertyPlaceholderConfiguter就可以在类中使用如：
+{{{
 @Service  
 public class PropertiesLoader  implements Serializable {   
   
@@ -385,8 +403,7 @@ public class PropertiesLoader  implements Serializable {
     private String picUrl;   
    
 }  
-
-参考程序包：test.annotation.config  org.koala.spring
+}}}
 
 使用Annotation配置Spring MVC
 @Controller
@@ -403,7 +420,8 @@ value，params，method。
 @SessionAttibute
 作用于Class，通常会列出模型属性的名称，这些属性被透明的保存在会话或者对话存储中，用于在后续的请求之间作为表单支持。
 
-	DemoContorller.java
+_*DemoContorller.java*_
+{{{
 @Controller("democontroller")
 public class DemoContorller {
     @RequestMapping("/helloj.action")
@@ -415,8 +433,10 @@ public class DemoContorller {
         return mav;
     }
 }
+}}}
 
-applcationContext.xml
+_*applcationContext.xml*_
+{{{
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -429,10 +449,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 <context:component-scan base-package="demo.scan.controller"/>
 ***
 </beans>
+}}}
 
 表单、验证
-
-
 
 依赖注入DI(控制反转)
 name id区别
@@ -449,6 +468,7 @@ bean定义中id为XML推荐的标识必须为有效字符，一个类型多个be
 
 容器扩展
 可以通过扩展BeanPostProcessor对bean提供自定义（或默认地来覆盖容器）的实例化逻辑、依赖解析逻辑，完成bean的实例化、配置和其它的初始化后执行一些自定义逻辑。
+{{{
 AbstractApplicationContext ctx = new ClassPathXmlApplicationContext(new String[]{
            "applicationContext-common.xml", "applicationContext-jdbc.xml"});
 ctx.getBeanFactory().addBeanPostProcessor(new BeanPostProcessor() {
@@ -461,18 +481,21 @@ ctx.getBeanFactory().addBeanPostProcessor(new BeanPostProcessor() {
            return o;
 }
 });
-
+}}}
 BeanFactoryPostProcessor可以对bean的定义（配置元数据）进行处理。允许其在容器实际实例化任何其它的bean之前读取配置元数据并可以修改它。
+{{{
 XmlBeanFactory factory = new XmlBeanFactory(new FileSystemResource("beans.xml"));
 // bring in some property values from a Properties file
 PropertyPlaceholderConfigurer cfg = new PropertyPlaceholderConfigurer();
 cfg.setLocation(new FileSystemResource("jdbc.properties"));
 // now actually do the replacement
 cfg.postProcessBeanFactory(factory);
+}}}
 
 方法注入
 一般当bean要引用另一个bean时，只要将被引用的bean定义为property就可以了，但是有一些情况是有区别的，比如两个bean的生命周期不同，构建实例规则不同。比如一个singleton bean引用prototype bean，则singleton bean只会在初始化的时候创建一个prototype bean并一直使用他，而prototype bean的多实例规则将失效。
 这个时候有两种办法处理，一是放弃依赖注入，使用提供BeanFactoryAware实现的办法提供prototype bean的创建。
+{{{
 public class CommandManager implements BeanFactoryAware{
 private BeanFactory beanFactory;
 //覆盖方法
@@ -489,7 +512,9 @@ public T createT(){
     return (T)this.beanFactory.getBean("t");
 }
 }
+}}}
 第二种方法：使用lookup方法注入bean。在被注入的bean中定义创建注入bean的抽象方法。
+{{{
 public abstract class CommandManager{
     //声明创建注入bean的抽象方法，容器会创建实现此方法的动态子类
 public abstract T createT();
@@ -499,15 +524,16 @@ public Object process(){
     return t.action();
 }
 }
-
+}}}
+{{{
 <bean id="t" class="x.xx.T" scope="prototype"/>
 <bean id="commandManager" class="x.xx.CommandManager" scope="singleton">
         <lookup-method name="createT" bean="t"/>
 </bean>
+}}}
 内建PropertyEditor的实现
 Spring中提供了大量的内建PropertyEditor提供Object与String之间的转化。自定义PropertyEditor也非常容易。
 定义bean类型；
 继承PropertyEditorSurport定义bean类型的PropertyEditor；
 注册PropertyEditor；
 参考：test.propertyedit.*、applicaitonContext-property.xml
-
