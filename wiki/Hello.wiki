@@ -1,5 +1,5 @@
 #labels Featured,Phase-Design,Phase-Design
- * [Articles Spring 3版本内容拾遗]
+ * [spring_3 Spring 3版本内容拾遗]
      * [Hello IOC属性注入]
      * [ArticlesDom DOM manipulation]
      * [ArticlesStyle CSS and style]
