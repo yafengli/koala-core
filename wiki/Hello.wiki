@@ -1,6 +1,6 @@
 #labels Featured,Phase-Design,Phase-Design
- * [Articles HOWTO articles]
-     * [ArticlesXSS Web security]
+ * [Spring 3版本内容拾遗]
+     * [IOC属性注入]
      * [ArticlesDom DOM manipulation]
      * [ArticlesStyle CSS and style]
  * [ArticlesTips Tips and tricks]
