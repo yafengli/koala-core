@@ -1,9 +1,1 @@
- 
- *[spring Spring 拾遗 ]
-    *[spring_annotations Spring 注解 ]
-    *[spring_i18 Spring 国际化 ]
-    *[spring_mvc_web Spring mvc配置 ]
-    *[spring_mvc_web_view Spring mvc视图 ]
-    *[spring_mvc_web_validation Spring mvc验证 ]
- *[jsf jsf相关内容 ]
-    *[jsf_component JSF组件 ]
+ * [spring_3_page Spring 3版本内容拾遗]
