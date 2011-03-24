@@ -1,1 +1,2 @@
- *[spring_3_page Spring 3 版本内容拾遗]
+ * [spring_3_page Spring 3版本内容拾遗 ]
+     * [Hello IOC属性注入]
