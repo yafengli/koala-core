@@ -1,4 +1,4 @@
-package org.koala.orm.aop;
+package org.koala.orm.aopi;
 
 
 public class Time {
