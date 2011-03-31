@@ -12,5 +12,6 @@ public class ActionTest {
     public void testAction() {
         Action action = new Action();
         action.action();
+        String fk=action.lookName("FUCK!");
     }
 }
