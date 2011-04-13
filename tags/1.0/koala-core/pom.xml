@@ -7,12 +7,12 @@
     <packaging>jar</packaging>
     <name>koala-core</name>
     <url>http://www.neto.org</url>
-    <version>${parent.version}</version>
+    <version>${project.parent.version}</version>
     <description>phoenixup</description>
     <parent>
         <groupId>org.koala</groupId>
         <artifactId>koala</artifactId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
     </parent>
     <dependencies>
         <!-- Test -->
@@ -95,11 +95,6 @@
             <artifactId>cglib-nodep</artifactId>
             <version>${cglib.version}</version>
         </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>${jpa.version}</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -169,7 +164,7 @@
         </plugins>
     </build>
     <properties>
-        <aspectj.version>1.5.4</aspectj.version>
+        <aspectj.version>1.6.10</aspectj.version>
         <jsf.version>1.2_10</jsf.version>
         <commons-lang.version>2.4</commons-lang.version>
         <commons-fileupload.version>1.2</commons-fileupload.version>
