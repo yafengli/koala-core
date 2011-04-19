@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<entity-mappings version="1.0"
-	xmlns="http://java.sun.com/xml/ns/persistence/orm"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd ">
+<entity-mappings version="2.0"
+                 xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
 
 	<named-query name="find.test">
 		<query>
@@ -11,14 +11,14 @@
                      ]]>
 		</query>
 	</named-query>
-    <named-query name="find.test.param">
+	<named-query name="find.test.param">
 		<query>
 			<![CDATA[
          SELECT info FROM User info where info.username=:username order by info.id desc
                      ]]>
 		</query>
 	</named-query>
-    <named-query name="find.test.id">
+	<named-query name="find.test.id">
 		<query>
 			<![CDATA[
          SELECT info FROM User info where info.id=:id 
@@ -32,10 +32,17 @@
 			]]>
 		</query>
 	</named-query>
-        <named-query name="find.test.username">
+	<named-query name="find.test.username">
 		<query>
 			<![CDATA[
 			SELECT user FROM User user where user.username=:username
+			]]>
+		</query>
+	</named-query>
+	<named-query name="find.test.eu">
+		<query>
+			<![CDATA[
+			SELECT user FROM ExUser user where user.username=:username
 			]]>
 		</query>
 	</named-query>
