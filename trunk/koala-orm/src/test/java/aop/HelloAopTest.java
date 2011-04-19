@@ -1,6 +1,5 @@
 package aop;
 
-
 import org.koala.orm.aop.HelloAop;
 import org.testng.annotations.Test;
 

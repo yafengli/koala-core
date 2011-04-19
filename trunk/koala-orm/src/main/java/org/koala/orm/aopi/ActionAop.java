@@ -21,7 +21,9 @@ public class ActionAop {
 
     @AfterReturning(pointcut = "execution(* org.koala.orm.aop.Action.look*(..)", returning = "retVal")
     public void actionRB(JoinPoint jp, Object retVal) {
-        System.out.println(jp);
         System.out.println(retVal);
+        for(Object obj:jp.getArgs()){
+            System.out.println(obj);
+        }
     }
 }
