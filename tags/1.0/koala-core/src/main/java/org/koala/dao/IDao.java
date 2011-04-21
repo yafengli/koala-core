@@ -44,7 +44,7 @@ public interface IDao {
      *
      * @return 查找全部对象
      */
-    public <T> List<T> findAll(Class c);
+    public <T> List<T> findAll(Class<T> c);
 
     /**
      * 根据命名查询查找返回条数

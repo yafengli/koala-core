@@ -20,7 +20,7 @@ public class AddressPropertyEditor extends PropertyEditorSupport {
 
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
-        System.out.println("我编辑呀，我编辑！");
+        System.out.println("Come on,Come on!");
         Address add = null;
         if (text != null) {
             String[] attrs = StringUtils.tokenizeToStringArray(text, ",");
