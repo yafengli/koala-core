@@ -1,69 +1,77 @@
 package org.koala.util;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
 
 public class MD5Tool {
 
-    private final static String[] hexDigits = {"0", "1", "2", "3", "4", "5",
-        "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"
-    };
+	public static final String PREFIX_ZERO = "0";
+	private static ThreadLocal<MD5Tool> threadLocal = new ThreadLocal<MD5Tool>();
 
-    private String byteArrayToHexString(byte[] b) {
-        StringBuffer resultSb = new StringBuffer();
-        for (int i = 0; i < b.length; i++) {
-            resultSb.append(byteToHexString(b[i]));
-        }
-        return resultSb.toString();
-    }
+	private MD5Tool() {
 
-    private String byteToHexString(byte b) {
-        int n = b;
-        if (n < 0) {
-            n = 256 + n;
-        }
-        int d1 = n / 16;
-        int d2 = n % 16;
-        return hexDigits[d1] + hexDigits[d2];
-    }
+	}
 
-    /**
-     * Handle the file input and return the MD5 code.
-     * 
-     * @param file
-     *            the file path to read from
-     * @return the MD5 code
-     */
-    public String handleFileInput(File file) throws Exception {
-        BufferedInputStream br = null;
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            br = new BufferedInputStream(fis);
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] buffer = new byte[256];
-            int bytesRead = 0;
-            while ((bytesRead = br.read(buffer, 0, 256)) != -1) {
-                md.update(buffer, 0, bytesRead);
-            }
-            return new String(byteArrayToHexString(md.digest()));
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            if (br != null) {
-                br.close();
-            }
-        }
-    }
+	public static MD5Tool getInstance() {
+		MD5Tool mt = threadLocal.get();
+		if (mt == null) {
+			mt = new MD5Tool();
+			threadLocal.set(mt);
+		}
+		return mt;
+	}
 
-    public String handleString(String str) throws Exception {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(str.getBytes());
-            return new String(byteArrayToHexString(md.digest()));
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+	public String byteArrayToHexString(byte[] b) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < b.length; i++) {
+			builder.append(byteToHexString(b[i]));
+		}
+		return builder.toString();
+	}
+
+	public String byteToHexString(byte b) {
+		int value = b & 0xFF;
+		StringBuilder builder = new StringBuilder();
+		if (value >= 0x10) {
+			builder.append(Integer.toHexString(value));
+		} else {
+			builder.append(PREFIX_ZERO);
+			builder.append(Integer.toHexString(value));
+		}
+		return builder.toString();
+	}
+
+	/**
+	 * Handle the file input and return the MD5 code.
+	 *
+	 * @param file the file path to read from
+	 * @return the MD5 code
+	 */
+	public String handleFileInput(File file) throws Exception {
+		FileChannel fc = null;
+		try {
+			fc = new FileInputStream(file).getChannel();
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			ByteBuffer buffer = ByteBuffer.allocate(1024);
+			while (fc.read(buffer) != -1) {
+				buffer.flip();
+				md.update(buffer);
+				buffer.clear();
+			}
+			return new String(byteArrayToHexString(md.digest()));
+		} finally {
+			if (fc != null) {
+				fc.close();
+			}
+		}
+	}
+
+	public String handleString(String str) throws Exception {
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(str.getBytes());
+		return new String(byteArrayToHexString(md.digest()));
+	}
 }

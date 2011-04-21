@@ -17,7 +17,7 @@ import test.model.UserDetail;
 import java.util.Date;
 
 /**
- * @author liyafeng 这是JPA的测试程序！
+ * @author liyafeng JPA
  */
 public class JPATest {
 

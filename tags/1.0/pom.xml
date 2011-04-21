@@ -20,63 +20,50 @@
         </dependency>
 		<!-- Database Driver -->
         <dependency>
-            <groupId>org.h2</groupId>
+            <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
-            <optional>true</optional>
+            <version>${h2.ver}</version>
+            <scope>test</scope>
         </dependency>
             <!--Spring-->              
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring.ver}</version>
         </dependency>   
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
+            <version>${spring.ver}</version>
         </dependency>  		
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator.version}</version>
-        </dependency>
-		<!--
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <version>${hibernate-annotations.version}</version>
-		</dependency>
-		-->
+            <version>${hibernate-validator.ver}</version>
+        </dependency>		
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>${hibernate-entitymanager.version}</version>
+            <version>${hibernate-entitymanager.ver}</version>
         </dependency>
         <!-- IBatis -->
         <dependency>
             <groupId>org.apache.ibatis</groupId>
             <artifactId>ibatis-sqlmap</artifactId>
-            <version>${ibatis.version}</version>
+            <version>${ibatis.ver}</version>
         </dependency>
-        <!-- Log4j-->
+        <!-- Log slf4j-log4j -->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-        <!-- Lucene-->
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-            <version>${lucene-core.version}</version>
-        </dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.ver}</version>
+        </dependency>        
         <!-- FreeMarker-->
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>${freemarker.version}</version>
+            <version>${freemarker.ver}</version>
         </dependency>        
     </dependencies>    
     <distributionManagement>
@@ -87,13 +74,12 @@
         </repository>
     </distributionManagement>
     <properties>
-        <spring.version>3.0.5.RELEASE</spring.version>
-        <hibernate-validator.version>4.1.0.Final</hibernate-validator.version>
-        <hibernate-entitymanager.version>3.6.3.Final</hibernate-entitymanager.version>
-        <ibatis.version>2.3.4.726</ibatis.version>
-        <log4j.version>1.2.14</log4j.version>
-        <lucene-core.version>2.4.1</lucene-core.version>
-        <freemarker.version>2.3.15</freemarker.version>
-        <h2.version>1.1.107</h2.version>
+        <spring.ver>3.0.5.RELEASE</spring.ver>
+        <hibernate-validator.ver>4.1.0.Final</hibernate-validator.ver>
+        <hibernate-entitymanager.ver>3.6.3.Final</hibernate-entitymanager.ver>
+        <ibatis.ver>2.3.4.726</ibatis.ver>
+        <slf4j.ver>1.6.1</slf4j.ver>        
+        <freemarker.ver>2.3.16</freemarker.ver>
+        <h2.ver>1.3.154</h2.ver>
     </properties>
 </project>
