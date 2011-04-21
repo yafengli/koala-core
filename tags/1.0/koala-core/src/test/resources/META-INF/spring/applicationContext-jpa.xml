@@ -29,11 +29,11 @@
     <context:component-scan base-package="test.dao.impl.jpa" />
     -->
     <!--如果不使用context:component-scan，可以使用以下xml配置的内容   -->
-    <bean id="userservice" class="test.dao.impl.jpa.UserDaoImpl">
+    <bean id="userservice" class="test.dao.impl.jpa.UserServiceImpl">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <bean id="exuserservice"
-          class="test.dao.impl.jpa.ExUserDaoImpl">
+          class="test.dao.impl.jpa.ExUserServiceImpl">
         <property
             name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>

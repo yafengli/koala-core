@@ -6,21 +6,21 @@ import org.koala.dao.BaseIBatisDao;
 import org.koala.dao.IIBatisDao;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import test.dao.AccountIBatisDao;
+import test.dao.AccountIBatisService;
 import test.dao.impl.ibatis.AccountDaoImpl;
 import test.model.Account;
 
 public class IBatisTest {
 
     private ApplicationContext ctx = null;
-    private AccountIBatisDao iadao = null;
+    private AccountIBatisService iadao = null;
     private IIBatisDao baseDao = null;
 
     public IBatisTest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
                     "applicationContext-common.xml", "applicationContext-ibatis.xml"});
-        iadao = (AccountIBatisDao) ctx.getBean(AccountDaoImpl.BEANNAME,
-                AccountIBatisDao.class);
+        iadao = (AccountIBatisService) ctx.getBean(AccountDaoImpl.BEANNAME,
+                AccountIBatisService.class);
         baseDao = (BaseIBatisDao) ctx.getBean("baseIBatisDao");
     }
 

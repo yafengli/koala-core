@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.BeansException;
-import test.dao.AccountJDBCDao;
+import test.dao.AccountJdbcService;
 import test.dao.impl.jdbc.AccountJDBCDaoImpl;
 import test.model.Account;
 import test.model.Bill;
@@ -26,7 +26,7 @@ public class JDBCTest {
 
     private ApplicationContext actx = null;
     private AbstractApplicationContext ctx = null;
-    private AccountJDBCDao adao = null;
+    private AccountJdbcService adao = null;
 
     public JDBCTest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
@@ -44,7 +44,7 @@ public class JDBCTest {
             }
         });
         System.out.printf("[----messageSource---][%s]\n", ((MessageSource) ctx).getMessage("tsql", null, null));
-        adao = (AccountJDBCDao) ctx.getBean(AccountJDBCDaoImpl.class.getName());
+        adao = (AccountJdbcService) ctx.getBean(AccountJDBCDaoImpl.class.getName());
     }
 
     public void destory() {

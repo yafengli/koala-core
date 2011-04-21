@@ -4,21 +4,21 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import test.dao.AccountDao;
-import test.dao.impl.hibernate.AccountHDaoImpl;
+import test.dao.AccountService;
+import test.dao.impl.hibernate.AccountHBNServiceImpl;
 import test.model.Account;
 
 public class HibernateTest {
 
     private ApplicationContext ctx = null;
-    private AccountDao hadao = null;
+    private AccountService hadao = null;
 
     public HibernateTest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
                     "applicationContext-common.xml",
                     "applicationContext-hibernate.xml"});
-        hadao = (AccountDao) ctx.getBean(AccountHDaoImpl.beanName,
-                AccountDao.class);
+        hadao = (AccountService) ctx.getBean(AccountHBNServiceImpl.beanName,
+                AccountService.class);
     }
 
     @Test

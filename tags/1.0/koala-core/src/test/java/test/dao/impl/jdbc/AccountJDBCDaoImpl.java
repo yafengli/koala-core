@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import org.koala.dao.GenericDaoJDBC;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.stereotype.Service;
-import test.dao.AccountJDBCDao;
+import test.dao.AccountJdbcService;
 import test.model.Account;
 
 @Service("test.dao.impl.jdbc.AccountJDBCDaoImpl")
 public class AccountJDBCDaoImpl extends GenericDaoJDBC<Account, Long> implements
-        AccountJDBCDao {
+        AccountJdbcService {
 
     public ParameterizedRowMapper<Account> getRowMapper() {
         return new ParameterizedRowMapper<Account>() {
