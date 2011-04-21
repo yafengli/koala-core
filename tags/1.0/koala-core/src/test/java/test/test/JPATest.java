@@ -21,43 +21,39 @@ import java.util.Date;
  */
 public class JPATest {
 
-	private static final Logger logger = LoggerFactory.getLogger(JPATest.class);
-	private ApplicationContext ctx = null;
-	private ExUserDao jeudao = null;
-	private UserDao judao = null;
-	private IDao dao = null;
+    private static final Logger logger = LoggerFactory.getLogger(JPATest.class);
+    private ApplicationContext ctx = null;
+    private ExUserDao jeudao = null;
+    private UserDao judao = null;
+    private IDao dao = null;
 
-	public JPATest() {
+    @Before
+    public void init() {
+        ctx = new ClassPathXmlApplicationContext(new String[]{
+                    "META-INF/spring/applicationContext-common.xml", "META-INF/spring/applicationContext-jpa.xml"});
+        judao = UserDaoImpl.getInstance(ctx);
+        jeudao = ExUserDaoImpl.getInstance(ctx);
+        dao = (IDao) ctx.getBean("baseJPADao");
+        for (int i = 0; i < 4; i++) {
+            UserDetail ud = new UserDetail();
+            ud.setAddress("fuck" + i);
+            ud.setBirthday(new Date());
+            ud.setUsername("fuck" + i);
+            dao.save(ud);
+            ExUser eu = new ExUser();
+            eu.setAge(String.valueOf(i));
+            eu.setExkey(String.valueOf(i));
+            eu.setPassword("user" + String.valueOf(i));
+            eu.setUsername("user" + String.valueOf(i));
+            eu.setUserDetail(ud);
+            jeudao.save(eu);
+        }
+    }
 
-	}
-
-	@Before
-	public void init() {
-		ctx = new ClassPathXmlApplicationContext(new String[]{
-				"applicationContext-common.xml", "applicationContext-jpa.xml"});
-		judao = UserDaoImpl.getInstance(ctx);
-		jeudao = ExUserDaoImpl.getInstance(ctx);
-		dao = (IDao) ctx.getBean("baseJPADao");
-		for (int i = 0; i < 4; i++) {
-			UserDetail ud = new UserDetail();
-			ud.setAddress("fuck" + i);
-			ud.setBirthday(new Date());
-			ud.setUsername("fuck" + i);
-			dao.save(ud);
-			ExUser eu = new ExUser();
-			eu.setAge(String.valueOf(i));
-			eu.setExkey(String.valueOf(i));
-			eu.setPassword("user" + String.valueOf(i));
-			eu.setUsername("user" + String.valueOf(i));
-			eu.setUserDetail(ud);
-			jeudao.save(eu);
-		}
-	}
-
-	@Test
-	public void testFind() {
-		for (ExUser eu : jeudao.findAll()) {
-			System.out.println(eu.getUsername());
-		}
-	}
+    @Test
+    public void testFind() {
+        for (ExUser eu : jeudao.findAll()) {
+            System.out.println(eu.getUsername());
+        }
+    }
 }

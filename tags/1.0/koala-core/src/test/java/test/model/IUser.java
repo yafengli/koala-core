@@ -3,13 +3,6 @@ package test.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by IntelliJ IDEA.
- * User: liyafeng
- * Date: 2007-12-13
- * Time: 12:17:33
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name = "TEST_IUSER")
 public class IUser implements Serializable {
