@@ -46,7 +46,7 @@ public class JPATest {
             eu.setPassword("user" + String.valueOf(i));
             eu.setUsername("user" + String.valueOf(i));
             eu.setUserDetail(ud);
-            jeudao.save(eu);
+            jeudao.save(eu);            
         }
     }
 

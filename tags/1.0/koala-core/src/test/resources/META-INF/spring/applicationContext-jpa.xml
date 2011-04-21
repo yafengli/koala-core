@@ -38,6 +38,4 @@
             name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <bean id="baseJPADao" class="org.koala.dao.BaseJPADao" scope="prototype"/>
-
-
 </beans>
