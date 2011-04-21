@@ -1,10 +1,11 @@
 package test.model;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 
 @Entity
-@Table(name = "TEST_IUSER")
+@Table(name = "TEST_I_USER")
 public class IUser implements Serializable {
 
     @Id

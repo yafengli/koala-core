@@ -3,7 +3,12 @@ package test.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TEST_EX_USER")
+@NamedQueries({
+		@NamedQuery(name = "find.username", query = "select eu from ExUser eu where eu.username=:username"),
+		@NamedQuery(name = "find.exkey", query = "select eu from ExUser eu where eu.exkey=:exkey") })
+@NamedNativeQueries({
+		@NamedNativeQuery(name = "native.find.username", query = "select * from TEST_I_USER where username=?", resultClass = ExUser.class),
+		@NamedNativeQuery(name = "native.find.exkey", query = "select * from TEST_I_USER where exkey=?", resultClass = ExUser.class) })
 public class ExUser extends IUser {
 	@Basic
 	@Column(name = "exkey", length = 50, nullable = false)
