@@ -5,7 +5,7 @@
 	<groupId>org.koala</groupId>
 	<artifactId>koala-orm</artifactId>
 	<packaging>jar</packaging>
-	<name>koala-core</name>
+	<name>koala-orm</name>
 	<url>http://www.neto.org</url>
 	<version>${project.parent.version}</version>
 	<description>phoenixup</description>

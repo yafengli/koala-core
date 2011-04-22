@@ -21,7 +21,7 @@ public class HibernateTest {
                 AccountService.class);
     }
 
-    @Test
+//    @Test
     public void save() {
         Account account = new Account();
         account.setAname("hibernate2");
@@ -30,7 +30,7 @@ public class HibernateTest {
         hadao.save(account);
     }
 
-    @Test
+//    @Test
     public void find() {
         for (Account item : hadao.findByQueryName("find.all")) {
             System.out.println("[find()]" + item.getAid() + "|" + item.getAdesc());
