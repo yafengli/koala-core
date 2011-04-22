@@ -23,19 +23,18 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
+    
     <!-- JPA TransactionManager -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <!--
+    <context:component-scan base-package="org.koala.dao" />
     <context:component-scan base-package="test.dao.impl.jpa" />
-    -->
     <!--replace context:component-scan-->
+    <!--
     <bean id="userservice" class="test.dao.impl.jpa.UserServiceImpl">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <bean id="exuserservice"
-          class="test.dao.impl.jpa.ExUserServiceImpl">
-        <property
-            name="entityManagerFactory" ref="entityManagerFactory"/>
+    <bean id="baseJPADao" class="org.koala.dao.BaseJPADao">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <bean id="baseJPADao" class="org.koala.dao.BaseJPADao" scope="prototype"/>
+    -->    
 </beans>

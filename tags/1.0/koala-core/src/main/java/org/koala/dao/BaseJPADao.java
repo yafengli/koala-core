@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  * @authtor YaFengLi
  */
+@Repository
 @Transactional
 public class BaseJPADao extends JpaDaoSupport implements IDao {
 	@Override
