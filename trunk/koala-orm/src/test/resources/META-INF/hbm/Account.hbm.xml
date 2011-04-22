@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="test.model">
+	<class name="Account" table="HBM_ACCOUNT" dynamic-insert="true"
+		dynamic-update="true" lazy="false">
+		<id name="aid" column="AID" type="long">
+			<generator class="sequence">
+				<param name="sequence">HBM_ACCOUNT_SEQ</param>
+			</generator>
+		</id>
+		<property name="aname">
+			<column name="ANAME" sql-type="varchar(50)" unique="false"
+				not-null="true" />
+		</property>
+		<property name="adesc">
+			<column name="ADESC" sql-type="varchar(50)" unique="false"
+				not-null="false" />
+		</property>
+		<property name="address">
+			<column name="ADDRESS" sql-type="varchar(50)" unique="false"
+				not-null="false" />
+		</property>
+		<property name="adddesc">
+			<column name="ADDDESC" sql-type="varchar(50)" unique="false"
+				not-null="false" />
+		</property>
+	</class>
+	<query name="find.all">
+		<![CDATA[
+		select ac from Account ac order by ac.adesc
+		]]>
+	</query>
+    <query name="find.count.all">
+		<![CDATA[
+		select count(*) from Account ac
+		]]>
+	</query>
+</hibernate-mapping>
