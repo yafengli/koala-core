@@ -24,7 +24,7 @@ public class IBatisTest {
         baseDao = (BaseIBatisDao) ctx.getBean("baseIBatisDao");
     }
 
-    @Test
+//    @Test
     public void ibatis() {
         long id = System.currentTimeMillis();
         Account account = new Account();
@@ -42,7 +42,7 @@ public class IBatisTest {
         }
     }
 
-    @Test
+//    @Test
     public void test2() {
         long id = System.currentTimeMillis();
         Account account = new Account();

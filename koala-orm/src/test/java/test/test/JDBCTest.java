@@ -98,7 +98,7 @@ public class JDBCTest {
          */
     }
 
-    @Test
+//    @Test
     public void newtest() {
         try {
             Calendar cal = Calendar.getInstance();
