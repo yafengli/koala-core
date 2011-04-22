@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+    <composite:interface>
+        <composite:attribute name="items"/>
+        <composite:attribute name="layoutEl"/>
+    </composite:interface>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </h:head>
+    <composite:implementation>
+        <h:head>
+            <script type="text/javascript">
+                Ext.onReady(function() {
+                    var view =new Ext.Viewport({
+                        contentEl:'${cc.attrs.layoutEl}',
+                        layout:'border',
+                        defaults: {
+                            collapsible: true,
+                            split: true
+                        },
+                        items: #{cc.attrs.items}
+                    });
+                });
+            </script>
+        </h:head>
+    </composite:implementation>   
+</html>

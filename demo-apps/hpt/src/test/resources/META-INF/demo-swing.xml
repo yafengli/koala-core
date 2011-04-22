@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	default-autowire="byName" default-lazy-init="true">
+	<!-- Demo Swing -->
+	<bean id="testBean" class="cn.demo.MainFrame" scope="singleton"
+		init-method="init">
+		<property name="contentPane">
+			<ref bean="jpanel" />
+		</property>
+		<property name="title">
+			<value>哇哈哈哈</value>
+		</property>
+		<property name="jmenu" ref="jmenu" />
+		<property name="jmenuBar" ref="jmenubar" />
+		<property name="jdialog" ref="jdialog" />
+		<property name="closeActionListener" ref="closeActionListener" />
+	</bean>
+	<bean id="closeActionListener" class="cn.demo.DemoCloseActionListener" />
+	<bean id="jdialog" class="javax.swing.JDialog">
+		<property name="title" value="消息" />
+		<property name="visible" value="false" />
+		<property name="modal" value="true" />
+	</bean>
+	<bean id="jmenubar" class="javax.swing.JMenuBar">
+		<property name="name" value="菜单条" />
+	</bean>
+	<bean id="jmenu" class="cn.demo.FileMenu" init-method="init">
+		<property name="text" value="测试" />
+		<property name="closeActionListener" ref="closeActionListener" />
+		<property name="ljis">
+			<list>
+				<bean class="javax.swing.JMenuItem">
+					<property name="text" value="打开" />
+				</bean>
+				<bean class="javax.swing.JMenuItem">
+					<property name="text" value="测试" />
+				</bean>
+				<bean class="javax.swing.JMenuItem">
+					<property name="text" value="关闭" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="jpanel" class="cn.demo.BoxLayoutPanel" init-method="init">
+		<property name="axis">
+			<value>1</value>
+		</property>
+		<property name="panelComponents">
+			<list>
+				<ref bean="jcp" />
+				<ref bean="bp" />
+			</list>
+		</property>
+	</bean>
+	<bean id="jcp" class="javax.swing.JScrollPane">
+		<constructor-arg>
+			<ref bean="it" />
+		</constructor-arg>
+	</bean>
+	<bean id="it" class="cn.demo.ItemJTable" init-method="init">
+		<property name="model" ref="itmodel" />
+		<property name="rowSorter">
+			<bean class="javax.swing.table.TableRowSorter">
+				<constructor-arg>
+					<ref bean="itmodel" />
+				</constructor-arg>
+			</bean>
+		</property>
+		<property name="genderEditor">
+			<bean class="cn.demo.GenderEditor"></bean>
+		</property>
+		<property name="genderRenderer">
+			<bean class="cn.demo.GenderRenderer"/>
+		</property>
+	</bean>
+	<bean id="bp" class="cn.demo.BoxLayoutPanel" init-method="init">
+		<property name="axis">
+			<value>0</value>
+		</property>
+		<property name="panelComponents">
+			<list>
+				<ref bean="addButton" />
+				<ref bean="deleteButton" />
+			</list>
+		</property>
+	</bean>
+	<bean id="deleteButton" class="cn.demo.ActionListenerButton"
+		init-method="init">
+		<property name="actionListener">
+			<bean class="cn.demo.DeleteButtonActionListener">
+				<property name="list" ref="itemList" />
+				<property name="JTable" ref="it" />
+				<property name="jdialog" ref="jdialog" />
+			</bean>
+		</property>
+		<property name="text" value="Delete" />
+	</bean>
+	<bean id="addButton" class="cn.demo.ActionListenerButton"
+		init-method="init">
+		<property name="actionListener">
+			<bean class="cn.demo.AddNewButtonActionListener">
+				<property name="list" ref="itemList" />
+				<property name="JTable" ref="it" />
+				<property name="jdialog" ref="jdialog" />
+				<property name="mainFrame" ref="testBean" />
+			</bean>
+		</property>
+		<property name="text" value="Add New" />
+	</bean>
+	<bean id="itmodel" class="cn.demo.ItemTableModel">
+		<property name="demoDao">
+			<ref bean="demoDao" />
+		</property>
+		<property name="columnNames">
+			<list>
+				<value>Did</value>
+				<value>Name</value>
+				<value>Desc</value>
+			</list>
+
+		</property>
+	</bean>
+	<!-- 以下将会获得结果16,它将是person bean的son的age属性-->
+	<bean id="itemList"
+		class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
+		<property name="targetBeanName">
+			<value>itmodel</value>
+		</property>
+		<property name="propertyPath">
+			<value>itemList</value>
+		</property>
+	</bean>
+</beans>

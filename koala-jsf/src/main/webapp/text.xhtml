@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:add="http://java.sun.com/jsf/composite/add">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/template/extjs.xhtml">
+            <ui:define name="body">
+                <add:panel title="Hello"  renderTo="_rt" contentEl="_ct"/>
+                <add:layout title="The layout" layoutEl="_lt" items="[{title:'Panel 1',contentEl:'_lct'},{title:'Panle 2',html:'The html content is Fuck'}]"/>
+                <add:border layoutEl="_border" items="[{title: '南部面板South Panel',
+                            region: 'south',
+                            contentEl:'_south',
+                            height: 100,
+                            minSize: 100,
+                            maxSize: 250,
+                            margins: '0 5 5 5'},{
+                            title: '西部面板West Panel',
+                            contentEl:'_lt',
+                            region:'west',
+                            margins: '5 0 0 5',
+                            cmargins: '5 5 0 5',
+                            width: 200,
+                            minSize: 100,
+                            maxSize: 300
+                            },{
+                            title: '主面板Main Content',
+                            contentEl:'_rt',
+                            region:'center',
+                            collapsible: true,
+                            margins: '5 5 0 0'
+                            }]"/>
+
+                <div id="_rt">
+                    <div id="_ct">
+                        Is this the panel of ExtJS?                        
+                    </div>                    
+                </div>
+                <div id="_lct">
+                    wowerw ewerwerwerewr<br/>
+                    wowerw ewerwerwerewr<br/>                   
+                </div>
+                <div id="_lt"></div>
+
+                <div id="_border">
+
+                </div>
+                <div id="_south">啊撒旦法撒大发生发</div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
