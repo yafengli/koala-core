@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class ChineseMan implements IMan {
 
 	public void sayHello() {
-		System.out.println("万里长城今犹在！");
+		System.out.println("##Test##");
 	}
 }
