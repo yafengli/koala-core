@@ -5,7 +5,6 @@ import java.util.List;
 
 import java.util.Map;
 
-import org.koala.spring.support.SqlCreatorUtils;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
@@ -19,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 public abstract class GenericDaoJDBC<T, ID extends Serializable> extends SimpleJdbcDaoSupport implements IGenericJDBCDao<T, ID> {
 
     private SimpleJdbcCall sjc;
-    private SqlCreatorUtils scu;
 
     public int remove(String sql, T t) {
         return update(sql, t);
@@ -79,13 +77,7 @@ public abstract class GenericDaoJDBC<T, ID extends Serializable> extends SimpleJ
         return sjc;
     }
 
-    public SqlCreatorUtils getScu() {
-        return scu;
-    }
-
-    public void setScu(SqlCreatorUtils scu) {
-        this.scu = scu;
-    }
+   
 
     public void execute(String sql) {
         this.getJdbcTemplate().execute(sql);
@@ -93,8 +85,8 @@ public abstract class GenericDaoJDBC<T, ID extends Serializable> extends SimpleJ
 
     public void execute(final String sql, T t) {
         final SqlParameterSource sps = new BeanPropertySqlParameterSource(t);
-        final SqlCreatorUtils fscu = scu;
-        String sqlToUse = fscu.createSql(sql, sps);
+        //TODO 
+        String sqlToUse =null;
         this.execute(sqlToUse);
     }
 }
