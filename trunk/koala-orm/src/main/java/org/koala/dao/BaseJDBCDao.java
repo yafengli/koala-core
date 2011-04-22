@@ -18,6 +18,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  * Date: 2009-10-12
@@ -76,7 +77,7 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
         if (t != null) {
             sps = new BeanPropertySqlParameterSource(t);
         }
-        return this.getSimpleJdbcTemplate().query(sql, getRowMapper(t.getClass()), sps);
+        return getSimpleJdbcTemplate().query(sql, getRowMapper((Class<T>) t.getClass()), sps);
     }
 
     @Override
@@ -120,11 +121,13 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
         return (T) this.getSimpleJdbcTemplate().queryForObject(sql, getRowMapper(c), sps);
     }
 
-    public <T> ParameterizedRowMapper getRowMapper(final Class<T> c) {
-        return new ParameterizedRowMapper() {
+    @Override
+    public <T> RowMapper<T> getRowMapper(final Class<T> c) {
+        return new RowMapper<T>() {
 
-            public Object mapRow(ResultSet rs, int arg1) throws SQLException {
-                Object obj = null;
+            @Override
+            public T mapRow(ResultSet rs, int rowNum) throws SQLException {
+                T obj = null;
                 try {
                     obj = c.newInstance();
                     BeanInfo info = Introspector.getBeanInfo(c, Object.class);
@@ -153,4 +156,3 @@ public class BaseJDBCDao extends SimpleJdbcDaoSupport implements IJDBCDao {
         };
     }
 }
-
