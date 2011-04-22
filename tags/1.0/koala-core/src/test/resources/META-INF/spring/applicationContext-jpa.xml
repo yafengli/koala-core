@@ -26,14 +26,15 @@
     
     <!-- JPA TransactionManager -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <context:component-scan base-package="org.koala.dao" />
+    
+    <bean id="baseJPADao" class="org.koala.dao.BaseJPADao">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    
     <context:component-scan base-package="test.dao.impl.jpa" />
     <!--replace context:component-scan-->
     <!--
     <bean id="userservice" class="test.dao.impl.jpa.UserServiceImpl">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-    <bean id="baseJPADao" class="org.koala.dao.BaseJPADao">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     -->    

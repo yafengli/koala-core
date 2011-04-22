@@ -14,14 +14,7 @@
         <property name="url" value="jdbc:h2:~/test" />
         <property name="username" value="sa" />
         <property name="password" value="" />
-    </bean>
-    <context:component-scan base-package="test.generic"/>
-    <bean id="helloGeneric" class="test.generic.HelloGeneric">
-        <property name="name" value="Hello"/>
-    </bean>
-    <bean id="helloGeneric_1" class="test.generic.HelloGeneric">
-        <property name="name" value="Hello_1"/>
-    </bean>
+    </bean>    
     <!--
     <bean id = "org.h2.tools.Server"
             class="org.h2.tools.Server"

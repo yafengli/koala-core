@@ -25,6 +25,7 @@ public class AopTest {
     public void init() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
                     "META-INF/spring/applicationContext-common.xml",
+                    "META-INF/spring/applicationContext-generic.xml",
                     "META-INF/spring/applicationContext-aop_proxy.xml"
                 });
     }

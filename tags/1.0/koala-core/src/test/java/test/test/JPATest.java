@@ -85,7 +85,7 @@ public class JPATest {
         logger.info("{},{}", id, eusii.getClass().getName());
     }
 
-    @AfterClass
+//    @AfterClass
     public static void clear() {
         for (ExUser eu : exUserService.findAll()) {
             exUserService.remove(eu);

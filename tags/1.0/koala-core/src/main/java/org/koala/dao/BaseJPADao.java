@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  * @authtor YaFengLi
  */
-@Repository
 @Transactional
 public class BaseJPADao extends JpaDaoSupport implements IDao {
 	@Override
