@@ -27,7 +27,7 @@
     <!-- JPA TransactionManager -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
     
-    <bean id="baseJPADao" class="org.koala.dao.BaseJPADao">
+    <bean id="baseJPADao" class="org.koala.dao.jpa.BaseJPADao">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     

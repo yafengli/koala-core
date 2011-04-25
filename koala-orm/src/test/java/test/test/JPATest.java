@@ -1,6 +1,9 @@
 package test.test;
 
+import java.math.BigInteger;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.AfterClass;
 
 import org.junit.BeforeClass;
@@ -39,9 +42,9 @@ public class JPATest {
         userService = UserServiceImpl.getInstance(ctx);
         exUserService = ExUserServiceImpl.getInstance(ctx);
         eusii = ctx.getBean(ExUserServiceII.class);
-        baseDao = ctx.getBean("baseJPADao",IDao.class);
+        baseDao = ctx.getBean("baseJPADao", IDao.class);
 
-        if (exUserService.findAll().size() == 0) {
+        if (exUserService.findAll().isEmpty()) {
             for (int i = 0; i < 4; i++) {
                 UserDetail ud = new UserDetail();
                 ud.setAddress("fuck" + i);
@@ -64,6 +67,12 @@ public class JPATest {
         for (ExUser eu : exUserService.findAll()) {
             logger.info(eu.getUsername());
         }
+        BigInteger count = exUserService.executeNativeByNamed("native.find.username", null, BigInteger.class);
+        Map<String,Object> pm=new HashMap<String, Object>();
+        pm.put(null, pm)
+                
+        ExUser item=exUserService.executeNativeByNamed("native.find.exkey", null, null)
+        logger.info("count:{}", count);
     }
 
     @Test
@@ -85,7 +94,7 @@ public class JPATest {
         logger.info("{},{}", id, eusii.getClass().getName());
     }
 
-//    @AfterClass
+    @AfterClass
     public static void clear() {
         for (ExUser eu : exUserService.findAll()) {
             exUserService.remove(eu);

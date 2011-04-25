@@ -157,14 +157,12 @@ public class GenericHibernateDao<T, ID extends Serializable> extends HibernateDa
     }
 
     @Override
-    public <K> K findByType(final String queryName, final Map<String, Object> paramMap, final Class<K> resultType) {
-        return getHibernateTemplate().execute(new HibernateCallback<K>() {
+    public <K> K executeNative(String nativeSql, Map<String, Object> paramMap, Class<K> resultType) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-            @Override
-            public K doInHibernate(Session session) throws HibernateException, SQLException {
-                Query query = session.getNamedQuery(queryName);
-                return (K) query.uniqueResult();
-            }
-        });
+    @Override
+    public <K> K executeNativeByNamed(String queryName, Map<String, Object> paramMap, Class<K> resultType) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
