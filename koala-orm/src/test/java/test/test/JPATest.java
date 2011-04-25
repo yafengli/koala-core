@@ -2,8 +2,6 @@ package test.test;
 
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.AfterClass;
 
 import org.junit.BeforeClass;
@@ -70,7 +68,10 @@ public class JPATest {
         BigInteger count = exUserService.executeNativeByNamed("native.find.username", null, BigInteger.class);
         logger.info("count:{}", count);
         ExUser item = exUserService.executeNativeByNamed("native.find.exkey", new Object[]{"2"}, ExUser.class);
-        logger.info("exuser:{}", item.getExkey(), item.getUsername());
+        logger.info("exuser:{},{}", item.getExkey(), item.getUsername());
+
+        Boolean status = exUserService.executeNativeByNamed("call", new Object[]{}, Boolean.class);
+        logger.info("status:{}", status);
     }
 
     @Test

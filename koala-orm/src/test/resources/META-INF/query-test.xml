@@ -71,4 +71,9 @@
                 ]]>
         </query>
     </named-native-query>
+    <named-native-query name="call" result-set-mapping="rowResult">
+        <query>
+            select add_program_time(1,'2002-10-20 0:0:0','5','60','5') as result
+        </query>
+    </named-native-query>
 </entity-mappings>

@@ -7,4 +7,7 @@
     <sql-result-set-mapping name="rowCount">
         <column-result name="count"/>
     </sql-result-set-mapping>
+    <sql-result-set-mapping name="rowResult">
+        <column-result name="result"/>
+    </sql-result-set-mapping>
 </entity-mappings>
