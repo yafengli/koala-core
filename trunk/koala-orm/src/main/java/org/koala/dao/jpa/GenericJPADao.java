@@ -17,14 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author liyafeng
+ * <p>JPA泛型DAO接口</p>
+ * @since 1.0
  */
 @Transactional
-public abstract class GenericDaoJpa<T, ID extends Serializable> extends JpaDaoSupport
+public abstract class GenericJPADao<T, ID extends Serializable> extends JpaDaoSupport
         implements IGenericDao<T, ID> {
 
     private Class persistentClass;
 
-    public GenericDaoJpa() {
+    public GenericJPADao() {
         this.persistentClass = (Class) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
@@ -32,10 +34,12 @@ public abstract class GenericDaoJpa<T, ID extends Serializable> extends JpaDaoSu
         return persistentClass;
     }
 
+    @Override
     public List<T> findAll() {
         return getJpaTemplate().find("from " + this.getPersistentClass().getName());
     }
 
+    @Override
     public T findById(ID id) {
         T entity;
         if (id != null) {
@@ -47,106 +51,87 @@ public abstract class GenericDaoJpa<T, ID extends Serializable> extends JpaDaoSu
         return entity;
     }
 
+    @Override
     public void remove(T t) {
         getJpaTemplate().remove(getJpaTemplate().merge(t));
 
     }
 
+    @Override
     public void save(T t) {
         getJpaTemplate().persist(t);
     }
 
+    @Override
     public void update(T t) {
         getJpaTemplate().merge(t);
     }
 
-    public List<T> findByQueryName(String queryName) {
+    @Override
+    public List<T> find(String queryName) {
         return getJpaTemplate().findByNamedQuery(queryName);
     }
 
-    public List<T> findByQueryName(String queryName, String[] paramNames,
+    @Override
+    public List<T> find(String queryName, String[] paramNames,
             Object[] paramValues) {
-        if (paramNames.length != paramValues.length) {
+        final Map<String, Object> paramMap = new HashMap<String, Object>();
+        if (paramNames == null || paramValues == null || paramNames.length != paramValues.length) {
             throw new IllegalArgumentException();
         }
-        Map<String, Object> map = new java.util.HashMap<String, Object>(
-                paramNames.length);
-        for (int i = 0; i < paramNames.length; ++i) {
-            map.put(paramNames[i], paramValues[i]);
+        for (int i = 0; i < paramNames.length; i++) {
+            paramMap.put(paramNames[i], paramValues[i]);
         }
-        return getJpaTemplate().findByNamedQueryAndNamedParams(queryName, map);
+        return find(queryName, paramMap, -1, -1);
     }
 
-    public List<T> findByQueryName(final String queryName,
+    @Override
+    public List<T> find(final String queryName,
             final int startPosition, final int maxResult) {
-        return getJpaTemplate().executeFind(
-                new JpaCallback() {
-
-                    public Object doInJpa(EntityManager em) throws PersistenceException {
-                        Query query = em.createNamedQuery(queryName);
-                        query.setFirstResult(startPosition);
-                        query.setMaxResults(maxResult);
-                        return query.getResultList();
-                    }
-                });
+        return find(queryName, null, startPosition, maxResult);
     }
 
-    public List<T> findByQueryName(final String queryName, final String[] paramNames, final Object[] paramValues, final int startPosition, final int maxResult) {
-        if (paramNames.length != paramValues.length) {
+    @Override
+    public List<T> find(final String queryName, final String[] paramNames, final Object[] paramValues, final int startPosition, final int maxResult) {
+        final Map<String, Object> paramMap = new HashMap<String, Object>();
+        if (paramNames == null || paramValues == null || paramNames.length != paramValues.length) {
             throw new IllegalArgumentException();
         }
-        return getJpaTemplate().executeFind(new JpaCallback() {
+        for (int i = 0; i < paramNames.length; i++) {
+            paramMap.put(paramNames[i], paramValues[i]);
+        }
+        return find(queryName, paramMap, startPosition, maxResult);
+    }
 
-            public Object doInJpa(EntityManager em) throws PersistenceException {
+    @Override
+    public List<T> find(String queryName, Map<String, Object> paramMap) {
+        return find(queryName, paramMap, -1, -1);
+    }
+
+    @Override
+    public List<T> find(final String queryName, final Map<String, Object> paramMap, final int startPosition, final int maxResult) {
+
+        return getJpaTemplate().executeFind(new JpaCallback< List<T>>() {
+
+            @Override
+            public List<T> doInJpa(EntityManager em) throws PersistenceException {
                 Query query = em.createNamedQuery(queryName);
-                query.setFirstResult(startPosition);
-                query.setMaxResults(maxResult);
-                for (int i = 0; i < paramNames.length; i++) {
-                    query.setParameter(paramNames[i], paramValues[i]);
+
+                if (paramMap != null) {
+                    for (String key : paramMap.keySet()) {
+                        query.setParameter(key, paramMap.get(key));
+                    }
+                }
+                if (startPosition >= 0 && maxResult > 0) {
+                    query.setFirstResult(startPosition);
+                    query.setMaxResults(maxResult);
                 }
                 return query.getResultList();
             }
         });
     }
 
-    public long findCountByQueryName(final String queryName) {
-
-        List ll = getJpaTemplate().executeFind(new JpaCallback() {
-
-            public Object doInJpa(EntityManager em) throws PersistenceException {
-                Query query = em.createNamedQuery(queryName);
-                return query.getResultList();
-            }
-        });
-        if (ll.size() == 1 && ll.get(0) instanceof Long) {
-            Long size = (Long) ll.get(0);
-            return size.longValue();
-        } else {
-            return -1;
-        }
-    }
-
-    public long findCountByQueryName(final String queryName, final String[] paramNames,
-            final Object[] paramValues) {
-
-        List ll = getJpaTemplate().executeFind(new JpaCallback() {
-
-            public Object doInJpa(EntityManager em) throws PersistenceException {
-                Query query = em.createNamedQuery(queryName);
-                for (int i = 0; i < paramNames.length; i++) {
-                    query.setParameter(paramNames[i], paramValues[i]);
-                }
-                return query.getResultList();
-            }
-        });
-        if (ll.size() == 1 && ll.get(0) instanceof Long) {
-            Long size = (Long) ll.get(0);
-            return size.longValue();
-        } else {
-            return -1;
-        }
-    }
-
+    @Override
     public void saveBatch(final List<T> objs) {
         getJpaTemplate().execute(new JpaCallback() {
 
@@ -190,9 +175,10 @@ public abstract class GenericDaoJpa<T, ID extends Serializable> extends JpaDaoSu
     @Override
     public T findSingle(final String queryName, final Map<String, Object> paramMap) {
         try {
-            return (T) getJpaTemplate().execute(new JpaCallback() {
+            return getJpaTemplate().execute(new JpaCallback<T>() {
 
-                public Object doInJpa(EntityManager em) throws PersistenceException {
+                @Override
+                public T doInJpa(EntityManager em) throws PersistenceException {
                     Query query = em.createNamedQuery(queryName);
                     if (paramMap != null && paramMap.size() >= 0) {
                         for (String key : paramMap.keySet()) {
@@ -202,11 +188,31 @@ public abstract class GenericDaoJpa<T, ID extends Serializable> extends JpaDaoSu
                     } else {
                         logger.error("[paramMap is null!]");
                     }
-                    return query.getSingleResult();
+                    return (T) query.getSingleResult();
                 }
             });
         } catch (Exception e) {
             return null;
-        }       
+        }
+    }
+
+    @Override
+    public <K> K findByType(final String queryName, final Map<String, Object> paramMap, final Class<K> resultType) {
+        return getJpaTemplate().execute(new JpaCallback<K>() {
+
+            @Override
+            public K doInJpa(EntityManager em) throws PersistenceException {
+                Query query = em.createNamedQuery(queryName);
+                if (paramMap != null && paramMap.size() >= 0) {
+                    for (String key : paramMap.keySet()) {
+                        Object val = paramMap.get(key);
+                        query.setParameter(key, val);
+                    }
+                } else {
+                    logger.error("[paramMap is null!]");
+                }
+                return (K) query.getSingleResult();
+            }
+        });
     }
 }

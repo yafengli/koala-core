@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
-import org.koala.dao.jpa.GenericDaoJpa;
+import org.koala.dao.jpa.GenericJPADao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +23,7 @@ import test.model.ExUser;
  */
 @Component("exuserservice")
 @Transactional
-public class ExUserServiceImpl extends GenericDaoJpa<ExUser, Integer> implements
+public class ExUserServiceImpl extends GenericJPADao<ExUser, Integer> implements
 		ExUserService {
 	public static final Logger logger = LoggerFactory
 			.getLogger(ExUserServiceImpl.class);
