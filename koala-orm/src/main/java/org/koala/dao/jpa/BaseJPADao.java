@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import org.koala.dao.IDao;
 
@@ -30,7 +29,6 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
         T entity;
         if (id != null) {
             entity = (T) getJpaTemplate().find(c, id);
-
         } else {
             entity = null;
         }
@@ -53,11 +51,16 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
     }
 
     @Override
-    public <T> List<T> findAll(Class<T> c) {
-        EntityManager entityManager = getJpaTemplate().getEntityManager();
-        CriteriaQuery<T> cq = entityManager.getCriteriaBuilder().createQuery(c);
-        cq.select(cq.from(c));
-        return entityManager.createQuery(cq).getResultList();
+    public <T> List<T> findAll(final Class<T> c) {
+        return getJpaTemplate().execute(new JpaCallback<List<T>>() {
+
+            @Override
+            public List<T> doInJpa(EntityManager em) throws PersistenceException {
+                CriteriaQuery<T> cq = em.getCriteriaBuilder().createQuery(c);
+                cq.select(cq.from(c));
+                return em.createQuery(cq).getResultList();
+            }
+        });
     }
 
     @Override
@@ -81,9 +84,10 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
     public <T> List<T> find(final String queryName, final String[] paramNames,
             final Object[] paramValues, final int startPosition,
             final int maxResult, Class<T> c) {
-        return getJpaTemplate().executeFind(new JpaCallback() {
+        return getJpaTemplate().executeFind(new JpaCallback<List<T>>() {
 
-            public Object doInJpa(EntityManager em) throws PersistenceException {
+            @Override
+            public List<T> doInJpa(EntityManager em) throws PersistenceException {
                 Query query = em.createNamedQuery(queryName);
                 if (startPosition >= 0 && maxResult >= startPosition) {
                     query.setFirstResult(startPosition);
@@ -104,9 +108,10 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
 
     @Override
     public <T> void saveBatch(final List<T> objs) {
-        getJpaTemplate().execute(new JpaCallback() {
+        getJpaTemplate().execute(new JpaCallback< List<T>>() {
 
-            public Object doInJpa(EntityManager em) throws PersistenceException {
+            @Override
+            public List<T> doInJpa(EntityManager em) throws PersistenceException {
                 try {
                     int i = 1;
                     for (T sl : objs) {
@@ -135,9 +140,10 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
     public <T> List<T> find(final String queryName,
             final Map<String, Object> paramMap, final int startPosition,
             final int maxResult, Class<T> c) {
-        return getJpaTemplate().executeFind(new JpaCallback() {
+        return getJpaTemplate().executeFind(new JpaCallback< List<T>>() {
 
-            public Object doInJpa(EntityManager em) throws PersistenceException {
+            @Override
+            public List<T> doInJpa(EntityManager em) throws PersistenceException {
                 Query query = em.createNamedQuery(queryName);
                 if (startPosition >= 0 && maxResult >= startPosition) {
                     query.setFirstResult(startPosition);
@@ -182,6 +188,7 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
         try {
             return getJpaTemplate().execute(new JpaCallback<T>() {
 
+                @Override
                 public T doInJpa(EntityManager em) throws PersistenceException {
                     Query query = em.createNamedQuery(queryName);
                     if (paramMap != null && paramMap.size() >= 0) {

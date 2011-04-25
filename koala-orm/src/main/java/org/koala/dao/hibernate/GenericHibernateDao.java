@@ -3,6 +3,7 @@ package org.koala.dao.hibernate;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +16,11 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public class GenericDaoHibernate<T, ID extends Serializable> extends HibernateDaoSupport implements IGenericDao<T, ID> {
+public class GenericHibernateDao<T, ID extends Serializable> extends HibernateDaoSupport implements IGenericDao<T, ID> {
 
     private Class persistentClass;
 
-    public GenericDaoHibernate() {
+    public GenericHibernateDao() {
         this.persistentClass = (Class) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
@@ -27,10 +28,12 @@ public class GenericDaoHibernate<T, ID extends Serializable> extends HibernateDa
         return persistentClass;
     }
 
+    @Override
     public List<T> findAll() {
         return getHibernateTemplate().loadAll(this.getPersistentClass());
     }
 
+    @Override
     public T findById(ID id) {
         T entity = null;
         if (id != null) {
@@ -40,27 +43,46 @@ public class GenericDaoHibernate<T, ID extends Serializable> extends HibernateDa
         return entity;
     }
 
-    public List<T> findByQueryName(final String queryName, final int startPosition,
+    @Override
+    public List<T> find(final String queryName, final int startPosition,
             final int maxResult) {
-        return this.findByQueryName(queryName, null, null, startPosition, maxResult);
+        return find(queryName, null, startPosition, maxResult);
     }
 
-    public List<T> findByQueryName(final String queryName, final String[] paramNames,
+    @Override
+    public List<T> find(final String queryName, final String[] paramNames,
             final Object[] paramValues, final int startPosition, final int maxResult) {
 
-        return (List<T>) getHibernateTemplate().executeWithNativeSession(new HibernateCallback() {
+        if (paramNames == null || paramValues == null || paramNames.length != paramValues.length) {
+            throw new IllegalArgumentException();
+        }
+        final Map<String, Object> paramMap = new HashMap<String, Object>();
 
-            public Object doInHibernate(Session session) throws HibernateException, SQLException {
+        for (int i = 0; i < paramNames.length; i++) {
+            paramMap.put(paramNames[i], paramValues[i]);
+        }
+        return find(queryName, paramMap, startPosition, maxResult);
+    }
+
+    @Override
+    public List<T> find(final String queryName, final Map<String, Object> paramMap) {
+        return find(queryName, paramMap, -1, -1);
+    }
+
+    @Override
+    public List<T> find(final String queryName, final Map<String, Object> paramMap, final int startPosition, final int maxResult) {
+        return getHibernateTemplate().executeWithNativeSession(new HibernateCallback<List<T>>() {
+
+            @Override
+            public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
                 Query query = session.getNamedQuery(queryName);
-                if (paramNames != null && paramValues != null && paramNames.length == paramValues.length) {
-                    for (int i = 0; i < paramNames.length; i++) {
-                        query.setParameter(paramNames[i], paramValues[i]);
+                if (paramMap != null) {
+                    for (String key : paramMap.keySet()) {
+                        query.setParameter(key, paramMap.get(key));
                     }
                 }
-                if (startPosition >= 0) {
+                if (startPosition >= 0 && maxResult > 0) {
                     query.setFirstResult(startPosition);
-                }
-                if (maxResult >= 0) {
                     query.setMaxResults(maxResult);
                 }
                 return query.list();
@@ -68,55 +90,39 @@ public class GenericDaoHibernate<T, ID extends Serializable> extends HibernateDa
         });
     }
 
-    public List<T> findByQueryName(String queryName, String[] paramNames,
+    @Override
+    public List<T> find(String queryName, String[] paramNames,
             Object[] paramValues) {
 
         return getHibernateTemplate().findByNamedQueryAndNamedParam(queryName,
                 paramNames, paramValues);
     }
 
-    public List<T> findByQueryName(String queryName) {
+    @Override
+    public List<T> find(String queryName) {
 
         return getHibernateTemplate().findByNamedQuery(queryName);
     }
 
-    public long findCountByQueryName(String queryName, String[] paramNames,
-            Object[] paramValues) {
-        List l = getHibernateTemplate().findByNamedQueryAndNamedParam(
-                queryName, paramNames, paramValues);
-        if (l != null && l.size() == 1 && l.get(0) instanceof Long) {
-            Long size = (Long) l.get(0);
-            return size.longValue();
-        } else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public long findCountByQueryName(String queryName) {
-        List l = getHibernateTemplate().findByNamedQuery(queryName);
-        if (l != null && l.size() == 1 && l.get(0) instanceof Long) {
-            Long size = (Long) l.get(0);
-            return size.longValue();
-        } else {
-            throw new IllegalArgumentException();
-        }
-    }
-
+    @Override
     public void remove(T t) {
         getHibernateTemplate().delete(t);
 
     }
 
+    @Override
     public void save(T t) {
         getHibernateTemplate().persist(t);
 
     }
 
+    @Override
     public void saveBatch(final List<T> objs) {
 
-        getHibernateTemplate().executeWithNativeSession(new HibernateCallback() {
+        getHibernateTemplate().executeWithNativeSession(new HibernateCallback<List<T>>() {
 
-            public Object doInHibernate(Session session) throws HibernateException, SQLException {
+            @Override
+            public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
                 int i = 1;
                 for (T t : objs) {
                     session.persist(t);
@@ -148,5 +154,17 @@ public class GenericDaoHibernate<T, ID extends Serializable> extends HibernateDa
     @Override
     public T findSingle(String queryName, Map<String, Object> paramMap) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public <K> K findByType(final String queryName, final Map<String, Object> paramMap, final Class<K> resultType) {
+        return getHibernateTemplate().execute(new HibernateCallback<K>() {
+
+            @Override
+            public K doInHibernate(Session session) throws HibernateException, SQLException {
+                Query query = session.getNamedQuery(queryName);
+                return (K) query.uniqueResult();
+            }
+        });
     }
 }

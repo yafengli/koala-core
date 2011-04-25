@@ -1,24 +1,31 @@
-apply plugin:'java'
-apply plugin:'idea'
+subprojects{
+	apply plugin:'java'
+	apply plugin:'idea'
 
-repositories {
-	mavenLocal()
-	mavenCentral()
-	mavenRepo urls: ['http://221.231.148.247/nexus/content/groups/public','https://repository.jboss.org/nexus/content/repositories/releases']
-}
+	compileJava.options.encoding='utf-8'
+	compileTestJava.options.encoding='utf-8'
+	compileJava.options.warnings=false
+	compileTestJava.options.warnings=false
 
-dependencies{
-	compile('org.springframework:spring-webmvc:3.0.5.RELEASE')
-	compile('org.springframework:spring-orm:3.0.5.RELEASE')
-	compile('org.hibernate:hibernate-validator:4.1.0.Final')
-	compile('org.hibernate:hibernate-entitymanager:3.6.3.Final')
-	compile('org.apache.ibatis:ibatis-sqlmap:2.3.4.726')
-	compile('org.slf4j:slf4j-api:1.6.1')
-	compile('org.slf4j:slf4j-log4j12:1.6.1')
-	compile('org.aspectj:aspectjrt:1.6.10')
-	compile('org.aspectj:aspectjweaver:1.6.10')
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		mavenRepo urls: ['http://221.231.148.247/nexus/content/groups/public','https://repository.jboss.org/nexus/content/repositories/releases']
+	}
 
-	testCompile('junit:junit:4.4')
-	testCompile('com.h2database:h2:1.3.154')
+	dependencies{
+		compile('org.springframework:spring-webmvc:3.0.5.RELEASE')
+		compile('org.springframework:spring-orm:3.0.5.RELEASE')
+		compile('org.hibernate:hibernate-validator:4.1.0.Final')
+		compile('org.hibernate:hibernate-entitymanager:3.6.3.Final')
+		compile('org.apache.ibatis:ibatis-sqlmap:2.3.4.726')
+		compile('org.slf4j:slf4j-api:1.6.1')
+		compile('org.slf4j:slf4j-log4j12:1.6.1')
+		compile('org.aspectj:aspectjrt:1.6.10')
+		compile('org.aspectj:aspectjweaver:1.6.10')
+	
+		testCompile('junit:junit:4.4')
+		testCompile('com.h2database:h2:1.3.154')
+	}
 }
 

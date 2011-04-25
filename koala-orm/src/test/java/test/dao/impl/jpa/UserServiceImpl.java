@@ -2,7 +2,7 @@ package test.dao.impl.jpa;
 
 import javax.persistence.EntityManagerFactory;
 
-import org.koala.dao.jpa.GenericDaoJpa;
+import org.koala.dao.jpa.GenericJPADao;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,7 @@ import test.model.User;
 
 @Component("userservice")
 @Transactional
-public class UserServiceImpl extends GenericDaoJpa<User, Integer> implements
+public class UserServiceImpl extends GenericJPADao<User, Integer> implements
         UserService {
 
     public static final String BEAN_NAME = "userservice";

@@ -1,13 +1,13 @@
 package test.dao.impl.hibernate;
 
-import org.koala.dao.hibernate.GenericDaoHibernate;
+import org.koala.dao.hibernate.GenericHibernateDao;
 import org.springframework.transaction.annotation.Transactional;
 
 import test.dao.AccountService;
 import test.model.Account;
 
 @Transactional
-public class AccountHBNServiceImpl extends GenericDaoHibernate<Account, Long> implements AccountService {
+public class AccountHBNServiceImpl extends GenericHibernateDao<Account, Long> implements AccountService {
 
     public static final String beanName = "haccountDao";
 

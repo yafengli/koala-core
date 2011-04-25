@@ -21,7 +21,7 @@ public class HibernateTest {
                 AccountService.class);
     }
 
-//    @Test
+    @Test
     public void save() {
         Account account = new Account();
         account.setAname("hibernate2");
@@ -30,20 +30,20 @@ public class HibernateTest {
         hadao.save(account);
     }
 
-//    @Test
+    @Test
     public void find() {
-        for (Account item : hadao.findByQueryName("find.all")) {
+        for (Account item : hadao.find("find.all")) {
             System.out.println("[find()]" + item.getAid() + "|" + item.getAdesc());
         }
         for (Account acc : hadao.findAll()) {
             System.out.println("[find()]" + acc.getAid() + "|" + acc.getAdesc());
         }
-        for (Account acc : hadao.findByQueryName("find.all", 2, 5)) {
+        for (Account acc : hadao.find("find.all", 2, 5)) {
             System.out.println("[find(2,5)]" + acc.getAid() + "|" + acc.getAdesc());
         }
-        for (Account acc : hadao.findByQueryName("find.all", null,null, 2, 6)) {
+        for (Account acc : hadao.find("find.all", null,null, 2, 6)) {
             System.out.println("[find(2,6)]" + acc.getAid() + "|" + acc.getAdesc());
         }
-        System.out.println(hadao.findCountByQueryName("find.count.all"));
+        System.out.println(hadao.find("find.count.all"));
     }
 }
