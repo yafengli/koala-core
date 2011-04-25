@@ -1,6 +1,6 @@
 package test.dao.impl.hibernate;
 
-import org.koala.dao.GenericDaoHibernate;
+import org.koala.dao.hibernate.GenericDaoHibernate;
 import org.springframework.transaction.annotation.Transactional;
 
 import test.dao.AccountService;

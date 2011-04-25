@@ -1,4 +1,4 @@
-package org.koala.dao;
+package org.koala.dao.jpa;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import org.koala.dao.IDao;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;

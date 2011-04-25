@@ -1,4 +1,4 @@
-package org.koala.dao;
+package org.koala.dao.jdbc;
 
 import java.util.List;
 import java.util.Map;

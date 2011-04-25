@@ -3,7 +3,7 @@ package test.dao.impl.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.koala.dao.GenericDaoJDBC;
+import org.koala.dao.jdbc.GenericDaoJDBC;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.stereotype.Service;
 import test.dao.AccountJdbcService;
