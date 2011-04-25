@@ -6,7 +6,7 @@
 	<artifactId>koala-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>2.0.2</version>
-	<name>koala</name>
+	<name>koala-parent</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
