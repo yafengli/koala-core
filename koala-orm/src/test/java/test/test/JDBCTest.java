@@ -1,7 +1,7 @@
 package test.test;
 
 import org.junit.Test;
-import org.koala.dao.IJDBCDao;
+import org.koala.dao.jdbc.IJDBCDao;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.ApplicationContext;

@@ -1,4 +1,4 @@
-package org.koala.dao;
+package org.koala.dao.jpa;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import org.koala.dao.IGenericDao;
 
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;

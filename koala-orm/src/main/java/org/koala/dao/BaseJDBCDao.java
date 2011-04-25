@@ -1,5 +1,6 @@
 package org.koala.dao;
 
+import org.koala.dao.jdbc.IJDBCDao;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;

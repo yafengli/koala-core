@@ -2,7 +2,7 @@ package test.test;
 
 import java.util.List;
 import org.junit.Test;
-import org.koala.dao.BaseIBatisDao;
+import org.koala.dao.ibatis.BaseIBatisDao;
 import org.koala.dao.IIBatisDao;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,9 +1,10 @@
-package org.koala.dao;
+package org.koala.dao.ibatis;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import org.koala.dao.IIBatisDao;
 
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;

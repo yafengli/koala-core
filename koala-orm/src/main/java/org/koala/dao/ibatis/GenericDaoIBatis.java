@@ -1,4 +1,4 @@
-package org.koala.dao;
+package org.koala.dao.ibatis;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 import java.io.Serializable;

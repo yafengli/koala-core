@@ -1,4 +1,4 @@
-package org.koala.dao;
+package org.koala.dao.hibernate;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -9,6 +9,7 @@ import java.util.Map;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.koala.dao.IGenericDao;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
