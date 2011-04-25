@@ -2,19 +2,8 @@ package test.model;
 
 import javax.persistence.*;
 
+
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "find.username", query = "select eu from ExUser eu where eu.username=:username"),
-    @NamedQuery(name = "find.exkey", query = "select eu from ExUser eu where eu.exkey=:exkey")})
-@NamedNativeQueries({
-    @NamedNativeQuery(name = "native.find.username", query = "select count(*) as count from TEST_I_USER", resultSetMapping = "rowCount"),
-    @NamedNativeQuery(name = "native.find.exkey", query = "select * from TEST_I_USER where exkey=?", resultClass = ExUser.class)})
-@SqlResultSetMappings({
-    @SqlResultSetMapping(name = "rowCount",
-    entities = {},
-    columns = {
-        @ColumnResult(name = "count")})
-})
 public class ExUser extends IUser {
 
     @Basic

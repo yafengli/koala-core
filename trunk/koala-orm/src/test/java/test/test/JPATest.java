@@ -68,11 +68,9 @@ public class JPATest {
             logger.info(eu.getUsername());
         }
         BigInteger count = exUserService.executeNativeByNamed("native.find.username", null, BigInteger.class);
-        Map<String,Object> pm=new HashMap<String, Object>();
-        pm.put(null, pm)
-                
-        ExUser item=exUserService.executeNativeByNamed("native.find.exkey", null, null)
         logger.info("count:{}", count);
+        ExUser item = exUserService.executeNativeByNamed("native.find.exkey", new Object[]{"2"}, ExUser.class);
+        logger.info("exuser:{}", item.getExkey(), item.getUsername());
     }
 
     @Test
