@@ -4,46 +4,71 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
 
-	<named-query name="find.test">
-		<query>
+    <named-query name="find.test">
+        <query>
 			<![CDATA[
          SELECT info FROM User info order by info.id desc
                      ]]>
-		</query>
-	</named-query>
-	<named-query name="find.test.param">
-		<query>
+        </query>
+    </named-query>
+    <named-query name="find.test.param">
+        <query>
 			<![CDATA[
          SELECT info FROM User info where info.username=:username order by info.id desc
                      ]]>
-		</query>
-	</named-query>
-	<named-query name="find.test.id">
-		<query>
+        </query>
+    </named-query>
+    <named-query name="find.test.id">
+        <query>
 			<![CDATA[
          SELECT info FROM User info where info.id=:id 
                      ]]>
-		</query>
-	</named-query>
-	<named-query name="find.count.test">
-		<query>
+        </query>
+    </named-query>
+    <named-query name="find.count.test">
+        <query>
 			<![CDATA[
 			SELECT count(*) FROM User
 			]]>
-		</query>
-	</named-query>
-	<named-query name="find.test.username">
-		<query>
+        </query>
+    </named-query>
+    <named-query name="find.test.username">
+        <query>
 			<![CDATA[
 			SELECT user FROM User user where user.username=:username
 			]]>
-		</query>
-	</named-query>
-	<named-query name="find.test.eu">
-		<query>
+        </query>
+    </named-query>
+    <named-query name="find.test.eu">
+        <query>
 			<![CDATA[
 			SELECT user FROM ExUser user where user.username=:username
 			]]>
-		</query>
-	</named-query>
+        </query>
+    </named-query>
+    <named-query name="find.username">
+        <query>
+            select eu from ExUser eu where eu.username=:username
+        </query>
+    </named-query>
+    <named-query name="find.exkey">
+        <query>
+                select eu from ExUser eu where eu.exkey=:exkey
+        </query>
+    </named-query>
+
+    <named-native-query name="native.find.username" result-set-mapping="rowCount">
+        <query>
+                <![CDATA[
+                select count(*) as count from TEST_I_USER
+                ]]>
+        </query>
+    </named-native-query>
+    <named-native-query name="native.find.exkey" result-class="test.model.ExUser">
+        <query>
+                <![CDATA[
+                select * from TEST_I_USER where exkey=?
+                ]]>
+        </query>
+    </named-native-query>
 </entity-mappings>

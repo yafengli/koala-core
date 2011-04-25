@@ -46,7 +46,8 @@ public class GenericHibernateDao<T, ID extends Serializable> extends HibernateDa
     @Override
     public List<T> find(final String queryName, final int startPosition,
             final int maxResult) {
-        return find(queryName, null, startPosition, maxResult);
+        Map paramMap = null;           
+        return find(queryName, paramMap, startPosition, maxResult);
     }
 
     @Override
@@ -157,12 +158,22 @@ public class GenericHibernateDao<T, ID extends Serializable> extends HibernateDa
     }
 
     @Override
-    public <K> K executeNative(String nativeSql, Map<String, Object> paramMap, Class<K> resultType) {
+    public <K> K executeNative(String nativeSql, Object[] paramValues, Class<K> resultType) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public <K> K executeNativeByNamed(String queryName, Map<String, Object> paramMap, Class<K> resultType) {
+    public <K> K executeNativeByNamed(String queryName, Object[] paramValues, Class<K> resultType) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<T> find(String queryName, Object[] paramValues) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<T> find(String queryName, Object[] paramValues, int startPosition, int maxResult) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -88,7 +88,34 @@ public abstract class GenericJPADao<T, ID extends Serializable> extends JpaDaoSu
     @Override
     public List<T> find(final String queryName,
             final int startPosition, final int maxResult) {
-        return find(queryName, null, startPosition, maxResult);
+        Map paramMap = null;
+        return find(queryName, paramMap, startPosition, maxResult);
+    }
+
+    @Override
+    public List<T> find(String queryName, Object[] paramValues) {
+        return find(queryName, paramValues, -1, -1);
+    }
+
+    @Override
+    public List<T> find(final String queryName, final Object[] paramValues, final int startPosition, final int maxResult) {
+        return getJpaTemplate().executeFind(new JpaCallback<List<T>>() {
+
+            @Override
+            public List<T> doInJpa(EntityManager em) throws PersistenceException {
+                Query query = em.createNamedQuery(queryName);
+                if (paramValues != null) {
+                    for (int i = 0; i < paramValues.length; i++) {
+                        query.setParameter(i + 1, paramValues[i]);
+                    }
+                }
+                if (startPosition >= 0 && maxResult > 0) {
+                    query.setFirstResult(startPosition);
+                    query.setMaxResults(maxResult);
+                }
+                return query.getResultList();
+            }
+        });
     }
 
     @Override
@@ -218,15 +245,15 @@ public abstract class GenericJPADao<T, ID extends Serializable> extends JpaDaoSu
     }
 
     @Override
-    public <K> K executeNative(final String nativeSql, final Map<String, Object> paramMap, final Class<K> resultType) {
+    public <K> K executeNative(final String nativeSql, final Object[] paramValues, final Class<K> resultType) {
         return getJpaTemplate().execute(new JpaCallback<K>() {
 
             @Override
             public K doInJpa(EntityManager em) throws PersistenceException {
                 Query query = em.createNativeQuery(nativeSql, resultType);
-                if (paramMap != null) {
-                    for (String key : paramMap.keySet()) {
-                        query.setParameter(key, paramMap.get(key));
+                if (paramValues != null) {
+                    for (int i = 0; i < paramValues.length; i++) {
+                        query.setParameter(i, paramValues[i]);
                     }
                 }
                 return (K) query.getSingleResult();
@@ -235,15 +262,15 @@ public abstract class GenericJPADao<T, ID extends Serializable> extends JpaDaoSu
     }
 
     @Override
-    public <K> K executeNativeByNamed(final String queryName, final Map<String, Object> paramMap, final Class<K> resultType) {
+    public <K> K executeNativeByNamed(final String queryName, final Object[] paramValues, final Class<K> resultType) {
         return getJpaTemplate().execute(new JpaCallback<K>() {
 
             @Override
             public K doInJpa(EntityManager em) throws PersistenceException {
                 Query query = em.createNamedQuery(queryName, resultType);
-                if (paramMap != null) {
-                    for (String key : paramMap.keySet()) {
-                        query.setParameter(key, paramMap.get(key));
+                if (paramValues != null) {
+                    for (int i = 0; i < paramValues.length; i++) {
+                        query.setParameter(i + 1, paramValues[i]);
                     }
                 }
                 return (K) query.getSingleResult();
