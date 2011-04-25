@@ -1,5 +1,6 @@
 package test.dao.impl.jpa;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,35 +25,20 @@ import test.model.ExUser;
 @Component("exuserservice")
 @Transactional
 public class ExUserServiceImpl extends GenericJPADao<ExUser, Integer> implements
-		ExUserService {
-	public static final Logger logger = LoggerFactory
-			.getLogger(ExUserServiceImpl.class);
-	public static final String BEAN_NAME = "exuserservice";
+        ExUserService {
 
-	public static ExUserService getInstance(ApplicationContext ctx) {
-		return (ExUserService) ctx.getBean(BEAN_NAME, ExUserService.class);
-	}
+    public static final Logger logger = LoggerFactory.getLogger(ExUserServiceImpl.class);
+    public static final String BEAN_NAME = "exuserservice";
 
-	@Override
-	public int service(final String username) {
-		ExUser eu = findSingle("find.test.eu", new String[] { "username" },
-				new Object[] { username });
-		logger.info("@@:{},{}", eu.getId(), eu.getUserDetail().getId());
+    public static ExUserService getInstance(ApplicationContext ctx) {
+        return (ExUserService) ctx.getBean(BEAN_NAME, ExUserService.class);
+    }
 
-		List<ExUser> list = this.getJpaTemplate().execute(
-				new JpaCallback<List<ExUser>>() {
-					public List<ExUser> doInJpa(EntityManager em)
-							throws PersistenceException {
-						logger.info("$em$:{}", em);
-						Query query = em
-								.createNamedQuery("native.find.username");
-						query.setParameter(1, username);
-						return query.getResultList();
-					}
-				});
-		for (ExUser t : list) {
-			logger.info("@t@:{},{}", t.getId(), t.getAge());
-		}
-		return eu.getId();
-	}
+    @Override
+    public int service(final String username) {
+        ExUser eu = findSingle("find.test.eu", new String[]{"username"},
+                new Object[]{username});
+        logger.info("@@:{},{}", eu.getId(), eu.getUserDetail().getId());
+        return eu.getId();
+    }
 }

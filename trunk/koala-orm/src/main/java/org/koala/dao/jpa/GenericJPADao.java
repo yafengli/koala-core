@@ -196,7 +196,6 @@ public abstract class GenericJPADao<T, ID extends Serializable> extends JpaDaoSu
         }
     }
 
-    @Override
     public <K> K findByType(final String queryName, final Map<String, Object> paramMap, final Class<K> resultType) {
         return getJpaTemplate().execute(new JpaCallback<K>() {
 
@@ -210,6 +209,42 @@ public abstract class GenericJPADao<T, ID extends Serializable> extends JpaDaoSu
                     }
                 } else {
                     logger.error("[paramMap is null!]");
+                }
+                Object obj = query.getSingleResult();
+                logger.error(obj);
+                return (K) obj;
+            }
+        });
+    }
+
+    @Override
+    public <K> K executeNative(final String nativeSql, final Map<String, Object> paramMap, final Class<K> resultType) {
+        return getJpaTemplate().execute(new JpaCallback<K>() {
+
+            @Override
+            public K doInJpa(EntityManager em) throws PersistenceException {
+                Query query = em.createNativeQuery(nativeSql, resultType);
+                if (paramMap != null) {
+                    for (String key : paramMap.keySet()) {
+                        query.setParameter(key, paramMap.get(key));
+                    }
+                }
+                return (K) query.getSingleResult();
+            }
+        });
+    }
+
+    @Override
+    public <K> K executeNativeByNamed(final String queryName, final Map<String, Object> paramMap, final Class<K> resultType) {
+        return getJpaTemplate().execute(new JpaCallback<K>() {
+
+            @Override
+            public K doInJpa(EntityManager em) throws PersistenceException {
+                Query query = em.createNamedQuery(queryName, resultType);
+                if (paramMap != null) {
+                    for (String key : paramMap.keySet()) {
+                        query.setParameter(key, paramMap.get(key));
+                    }
                 }
                 return (K) query.getSingleResult();
             }

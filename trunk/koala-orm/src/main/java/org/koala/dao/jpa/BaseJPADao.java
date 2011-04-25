@@ -91,7 +91,7 @@ public class BaseJPADao extends JpaDaoSupport implements IDao {
                 Query query = em.createNamedQuery(queryName);
                 if (startPosition >= 0 && maxResult >= startPosition) {
                     query.setFirstResult(startPosition);
-                    query.setMaxResults(maxResult);
+                    query.setMaxResults(maxResult);                    
                 }
                 if (paramNames != null && paramValues != null
                         && paramNames.length == paramValues.length) {
