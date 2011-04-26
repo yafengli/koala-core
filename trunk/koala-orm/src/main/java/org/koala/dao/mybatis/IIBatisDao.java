@@ -1,4 +1,4 @@
-package org.koala.dao.ibatis;
+package org.koala.dao.mybatis;
 
 import java.io.Serializable;
 import java.util.List;

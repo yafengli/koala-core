@@ -50,12 +50,6 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate-entitymanager.ver}</version>
 		</dependency>
-		<!-- IBatis -->
-		<dependency>
-			<groupId>org.apache.ibatis</groupId>
-			<artifactId>ibatis-sqlmap</artifactId>
-			<version>${ibatis.ver}</version>
-		</dependency>
 		<!-- Log slf4j-log4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -81,6 +75,12 @@
 	</dependencies>    
 	<dependencyManagement>
 		<dependencies>
+			<!-- MyBatis -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.ver}</version>
+			</dependency>
 			<!-- FreeMarker-->
 			<dependency>
 				<groupId>org.freemarker</groupId>
@@ -124,6 +124,7 @@
 				<artifactId>jta</artifactId>
 				<version>${jta.version}</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 	<distributionManagement>
@@ -138,7 +139,7 @@
 		<aspectj.version>1.6.10</aspectj.version>
 		<hibernate-validator.ver>4.1.0.Final</hibernate-validator.ver>
 		<hibernate-entitymanager.ver>3.6.3.Final</hibernate-entitymanager.ver>
-		<ibatis.ver>2.3.4.726</ibatis.ver>
+		<mybatis.ver>3.0.4</mybatis.ver>
 		<slf4j.ver>1.6.1</slf4j.ver>        
 		<freemarker.ver>2.3.16</freemarker.ver>
 		<h2.ver>1.3.154</h2.ver>

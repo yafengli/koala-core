@@ -15,8 +15,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.dao.ExUserService;
 import test.dao.ExUserServiceII;
 import test.dao.UserService;
-import test.dao.impl.jpa.ExUserServiceImpl;
-import test.dao.impl.jpa.UserServiceImpl;
 import test.model.ExUser;
 import test.model.UserDetail;
 
@@ -37,8 +35,8 @@ public class JPATest {
         ctx = new ClassPathXmlApplicationContext(new String[]{
                     "META-INF/spring/applicationContext-common.xml",
                     "META-INF/spring/applicationContext-jpa.xml"});
-        userService = UserServiceImpl.getInstance(ctx);
-        exUserService = ExUserServiceImpl.getInstance(ctx);
+        userService = ctx.getBean(UserService.class);
+        exUserService = ctx.getBean(ExUserService.class);
         eusii = ctx.getBean(ExUserServiceII.class);
         baseDao = ctx.getBean("baseJPADao", IDao.class);
 
@@ -69,9 +67,6 @@ public class JPATest {
         logger.info("count:{}", count);
         ExUser item = exUserService.executeNativeByNamed("native.find.exkey", new Object[]{"2"}, ExUser.class);
         logger.info("exuser:{},{}", item.getExkey(), item.getUsername());
-
-        Boolean status = exUserService.executeNativeByNamed("call", new Object[]{}, Boolean.class);
-        logger.info("status:{}", status);
     }
 
     @Test

@@ -1,6 +1,6 @@
 package test.dao.impl.ibatis;
 
-import org.koala.dao.ibatis.GenericDaoIBatis;
+import org.koala.dao.mybatis.GenericDaoIBatis;
 
 import test.dao.AccountIBatisService;
 import test.model.Account;

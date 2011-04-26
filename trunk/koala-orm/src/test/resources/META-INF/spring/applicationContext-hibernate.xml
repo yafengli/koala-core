@@ -9,27 +9,6 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd" default-autowire="byName" default-lazy-init="true">
 
-    <!-- Hibernate Config -->
-    <bean id="mySessionFactory"
-          class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="mappingResources">
-            <list>
-                <value>META-INF/hbm/Account.hbm.xml</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <value>
-                hibernate.dialect=org.hibernate.dialect.H2Dialect
-                hibernate.hbm2ddl.auto=update
-                hibernate.show_sql=true
-            </value>
-        </property>
-    </bean>
-    <bean id="hbmtransactionManager"
-          class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="sessionFactory" ref="mySessionFactory" />
-    </bean>
     <!--Hibernate TransactionManager -->
     <tx:annotation-driven transaction-manager="hbmtransactionManager" />
     <bean id="haccountDao"
