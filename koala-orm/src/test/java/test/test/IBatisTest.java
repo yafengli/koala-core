@@ -2,8 +2,8 @@ package test.test;
 
 import java.util.List;
 import org.junit.Test;
-import org.koala.dao.ibatis.BaseIBatisDao;
-import org.koala.dao.ibatis.IIBatisDao;
+import org.koala.dao.mybatis.BaseIBatisDao;
+import org.koala.dao.mybatis.IIBatisDao;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.dao.AccountIBatisService;

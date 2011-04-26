@@ -1,7 +1,7 @@
 package test.dao;
 
 
-import org.koala.dao.ibatis.IGenericIBatisDao;
+import org.koala.dao.mybatis.IGenericIBatisDao;
 
 import test.model.Account;
 
