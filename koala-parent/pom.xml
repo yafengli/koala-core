@@ -81,6 +81,11 @@
 				<artifactId>mybatis</artifactId>
 				<version>${mybatis.ver}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>${mybatis-spring.ver}</version>
+			</dependency>
 			<!-- FreeMarker-->
 			<dependency>
 				<groupId>org.freemarker</groupId>
@@ -140,6 +145,7 @@
 		<hibernate-validator.ver>4.1.0.Final</hibernate-validator.ver>
 		<hibernate-entitymanager.ver>3.6.3.Final</hibernate-entitymanager.ver>
 		<mybatis.ver>3.0.4</mybatis.ver>
+		<mybatis-spring.ver>1.0.0</mybatis-spring.ver>
 		<slf4j.ver>1.6.1</slf4j.ver>        
 		<freemarker.ver>2.3.16</freemarker.ver>
 		<h2.ver>1.3.154</h2.ver>

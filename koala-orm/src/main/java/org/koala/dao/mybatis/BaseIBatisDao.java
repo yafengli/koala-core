@@ -1,9 +1,10 @@
 package org.koala.dao.mybatis;
 
-import com.ibatis.sqlmap.client.SqlMapExecutor;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
 
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
@@ -17,13 +18,18 @@ import org.springframework.transaction.annotation.Transactional;
  * @author YaFengLi
  */
 @Transactional
-public class BaseIBatisDao extends SqlMapClientDaoSupport implements IIBatisDao {
+public class BaseIBatisDao extends SqlSessionTemplate implements IIBatisDao {
 
     public static final String findbyid = "_findbyid";
     public static final String findall = "_findall";
     public static final String save = "_save";
     public static final String remove = "_remove";
     public static final String update = "_update";
+
+    public BaseIBatisDao(SqlSessionFactory sqlSessionFactory) {
+        super(sqlSessionFactory);
+    }
+    
 
     public <T, Id extends Serializable> T findById(String statementName, Id id) {
         return (T) getSqlMapClientTemplate().queryForObject(statementName, id);
