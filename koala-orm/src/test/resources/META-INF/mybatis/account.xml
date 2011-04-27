@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.model.Account">
+    <insert id="saveone" parameterType="test.model.Account" flushCache="true">
+        INSERT INTO hbm_account(AID,ANAME,ADESC,ADDRESS,ADDDESC) VALUES(#{aid},#{aname},#{adesc},#{address},#{adddesc})
+    </insert>
+    <select id="findone" parameterType="int" resultType="test.model.Account">
+            SELECT * FROM hbm_account WHERE aid = #{aid}
+    </select>
+    <select id="findall" resultType="test.model.Account">
+            SELECT * FROM hbm_account
+    </select>
+</mapper>
