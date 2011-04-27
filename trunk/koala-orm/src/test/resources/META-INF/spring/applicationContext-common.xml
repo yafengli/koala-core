@@ -24,43 +24,7 @@
         <property name="username" value="sa" />
         <property name="password" value="" />
     </bean>        
-    <!--JPA Config  -->
-    <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="persistenceUnitName" value="punit" />
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="database" value="H2" />
-                <property name="showSql" value="false" />
-                <property name="generateDdl" value="true" />
-            </bean>
-        </property>
-    </bean>
-    <bean id="jpatransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
-    </bean>
-    <!-- Hibernate Config -->
-    <bean id="mySessionFactory"
-          class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="mappingResources">
-            <list>
-                <value>META-INF/hbm/Account.hbm.xml</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <value>
-                hibernate.dialect=org.hibernate.dialect.H2Dialect
-                hibernate.hbm2ddl.auto=update
-                hibernate.show_sql=true
-            </value>
-        </property>
-    </bean>
-    <bean id="hbmtransactionManager"
-          class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="sessionFactory" ref="mySessionFactory" />
-    </bean>
+    
     <!--
     <bean id = "org.h2.tools.Server"
             class="org.h2.tools.Server"
