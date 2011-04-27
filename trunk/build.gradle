@@ -18,6 +18,8 @@ subprojects{
 		compile('org.springframework:spring-orm:3.0.5.RELEASE')
 		compile('org.hibernate:hibernate-validator:4.1.0.Final')
 		compile('org.hibernate:hibernate-entitymanager:3.6.3.Final')
+		compile('org.mybatis:mybatis:3.0.4')
+		compile('org.mybatis:mybatis-spring:1.0.0')
 		compile('org.apache.ibatis:ibatis-sqlmap:2.3.4.726')
 		compile('org.slf4j:slf4j-api:1.6.1')
 		compile('org.slf4j:slf4j-log4j12:1.6.1')
