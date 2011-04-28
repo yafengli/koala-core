@@ -22,6 +22,6 @@
     <context:component-scan base-package="test.dao.impl.mybatis" />
     <!--MyBatis Base DAO -->
     <bean id="baseMyBatisDao" class="org.koala.dao.mybatis.BaseMyBatisDao">
-        <constructor-arg index="0" ref="sqlSessionFactory" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
 </beans>

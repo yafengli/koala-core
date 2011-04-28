@@ -47,6 +47,10 @@
 			<groupId>javax.transaction</groupId>
 			<artifactId>jta</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.jyaml</groupId>
+			<artifactId>jyaml</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

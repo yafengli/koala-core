@@ -30,10 +30,10 @@ public class AccountDaoImpl implements AccountMyBatisService {
         acc.setAddress("nanjing");
         acc.setAdesc("nanjing jiangsu zhongguo");
         acc.setAdddesc("What the fuck!");
-        dao.insert("test.model.Account.saveone", acc);
-        Object obj = dao.selectOne("test.model.Account.findone", aid);
+        dao.getSqlSession().insert("test.model.Account.saveone", acc);
+        Object obj = dao.getSqlSession().selectOne("test.model.Account.findone", aid);
         logger.error("$:{}", obj);
-        List<Account> accs = (List<Account>) dao.selectList("test.model.Account.findall");
+        List<Account> accs = (List<Account>) dao.getSqlSession().selectList("test.model.Account.findall");
         logger.error("$:{}", accs);
     }
 }

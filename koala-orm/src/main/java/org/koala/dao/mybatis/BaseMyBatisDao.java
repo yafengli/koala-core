@@ -1,10 +1,6 @@
 package org.koala.dao.mybatis;
 
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.dao.support.PersistenceExceptionTranslator;
-
+import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 /**
  * User: liyafeng
@@ -13,17 +9,6 @@ import org.springframework.dao.support.PersistenceExceptionTranslator;
  * @version 1.0
  * @author YaFengLi
  */
-public class BaseMyBatisDao extends SqlSessionTemplate {
-
-    public BaseMyBatisDao(SqlSessionFactory sqlSessionFactory) {
-        super(sqlSessionFactory);
-    }
-
-    public BaseMyBatisDao(SqlSessionFactory sqlSessionFactory, ExecutorType executorType, PersistenceExceptionTranslator exceptionTranslator) {
-        super(sqlSessionFactory, executorType, exceptionTranslator);
-    }
-
-    public BaseMyBatisDao(SqlSessionFactory sqlSessionFactory, ExecutorType executorType) {
-        super(sqlSessionFactory, executorType);
-    }
+public class BaseMyBatisDao extends SqlSessionDaoSupport {
+    
 }
