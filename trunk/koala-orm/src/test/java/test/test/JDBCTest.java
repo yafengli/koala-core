@@ -30,7 +30,7 @@ public class JDBCTest {
 
     public JDBCTest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
-                    "applicationContext-common.xml", "applicationContext-jdbc.xml"});
+                    "META-INF/spring/applicationContext-common.xml", "META-INF/spring/applicationContext-jdbc.xml"});
         ctx.getBeanFactory().addBeanPostProcessor(new BeanPostProcessor() {
 
             public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
@@ -53,12 +53,7 @@ public class JDBCTest {
         }
     }
 
-    //    @Test
-    public void sayHello() {
-        System.out.println("[Hello Test!]");
-    }
-
-    //	@Test
+    @Test
     public void add() {
         ResourceBundle rb = ResourceBundle.getBundle("sql");
         System.out.printf("[classname][%s]\n", adao.getClass().getName());

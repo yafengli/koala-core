@@ -32,8 +32,7 @@
     </bean>
     <!--Hibernate TransactionManager -->
     <tx:annotation-driven transaction-manager="hbmtransactionManager" />
-    <bean id="haccountDao"
-          class="test.dao.impl.hibernate.AccountHDaoImpl">
+    <bean id="haccountDao" class="test.dao.impl.hibernate.AccountHBNServiceImpl">
         <property name="sessionFactory" ref="mySessionFactory" />
     </bean>
 </beans>

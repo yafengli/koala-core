@@ -8,6 +8,7 @@ import java.util.List;
  * Time: 09:06
  *
  * @author YaFengLi
+ * @since 1.0
  */
 public interface Page<T> {
 
