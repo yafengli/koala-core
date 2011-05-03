@@ -21,7 +21,7 @@ public class MethodTest {
 
     @Before
     public void before() {
-        ctx = new ClassPathXmlApplicationContext(new String[]{"applicationContext-method.xml"});
+        ctx = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/applicationContext-method.xml"});
     }
 
     @Test

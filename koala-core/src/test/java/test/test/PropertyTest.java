@@ -19,12 +19,11 @@ import java.util.SortedMap;
  */
 public class PropertyTest {
 
-
     private AbstractApplicationContext ctx = null;
 
     @Before
     public void init() {
-        ctx = new ClassPathXmlApplicationContext(new String[]{"applicationContext-property.xml"});
+        ctx = new ClassPathXmlApplicationContext(new String[]{"META-INF/spring/applicationContext-property.xml"});
     }
 
     //@Test

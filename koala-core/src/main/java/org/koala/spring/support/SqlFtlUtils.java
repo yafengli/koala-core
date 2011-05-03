@@ -77,21 +77,7 @@ public class SqlFtlUtils {
 
     @Deprecated
     public String process(String content, Map model) throws Exception {
-        StringWriter writer = new StringWriter();
-        try {
-            String keyToUse = content;
-            if (stl.findTemplateSource(keyToUse) == null) {
-                stl.putTemplate(keyToUse, content);
-            }
-            cfg.setTemplateLoader(stl);
-            Template temp = cfg.getTemplate(keyToUse);
-            /* Merge data-model with template */
-            temp.process(model, writer);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return writer.toString();
+        throw new UnsupportedOperationException("This method is Deprecated.");
     }
 
     public String process(String key, ResourceBundle rb, Map model) throws Exception {
