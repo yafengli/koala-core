@@ -1,4 +1,4 @@
-package org.koala.jsf;
+package org.koala.page.jsf;
 
 import org.koala.page.ListPage;
 

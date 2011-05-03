@@ -1,6 +1,7 @@
 package org.koala.spring;
 
 import java.lang.reflect.Field;
+import org.koala.spring.annotation.Properties;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;

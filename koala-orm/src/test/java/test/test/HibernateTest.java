@@ -15,8 +15,8 @@ public class HibernateTest {
 
     public HibernateTest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
-                    "applicationContext-common.xml",
-                    "applicationContext-hibernate.xml"});
+                    "META-INF/spring/applicationContext-common.xml",
+                    "META-INF/spring/applicationContext-hibernate.xml"});
         hadao = (AccountService) ctx.getBean(AccountHBNServiceImpl.beanName,
                 AccountService.class);
     }
@@ -41,7 +41,7 @@ public class HibernateTest {
         for (Account acc : hadao.find("find.all", 2, 5)) {
             System.out.println("[find(2,5)]" + acc.getAid() + "|" + acc.getAdesc());
         }
-        for (Account acc : hadao.find("find.all", null,null, 2, 6)) {
+        for (Account acc : hadao.find("find.all", 2, 6)) {
             System.out.println("[find(2,6)]" + acc.getAid() + "|" + acc.getAdesc());
         }
         System.out.println(hadao.find("find.count.all"));
