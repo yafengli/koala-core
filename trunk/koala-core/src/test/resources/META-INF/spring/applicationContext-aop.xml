@@ -11,8 +11,8 @@
     <bean id="loader" class="org.koala.spring.AnnotationBeanPostProcessor">
         <property name="locations">
             <list>
-                <value>classpath:jdbc.properties</value>
-                <value>classpath:jdbc.xml</value>
+                <value>classpath:aop.properties</value>
+                <value>classpath:aop.xml</value>
             </list>
         </property>
     </bean>
