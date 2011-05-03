@@ -14,7 +14,7 @@ public class AnnonationTest {
 
     public AnnonationTest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
-                    "applicationContext-common.xml", "applicationContext-aop.xml"});
+                    "META-INF/spring/applicationContext-common.xml", "META-INF/spring/applicationContext-aop.xml"});
     }
 
     @Test
