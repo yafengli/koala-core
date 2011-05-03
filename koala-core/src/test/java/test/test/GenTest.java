@@ -3,6 +3,7 @@ package test.test;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.Serializable;
+import org.junit.Test;
 
 /**
  * Date: 2009-9-24
