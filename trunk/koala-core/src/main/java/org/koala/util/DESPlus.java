@@ -1,17 +1,29 @@
-package test.test;
+package org.koala.util;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
 import java.security.Key;
 import java.security.Security;
-import org.koala.util.BASE64;
+import java.security.spec.KeySpec;
 
 public class DESPlus {
-
-    private static String strDefaultKey = "dzydl_jkgl";
     private Cipher encryptCipher = null;
     private Cipher decryptCipher = null;
+    private Key key;//密码，长度要是8的倍数
+
+    public Cipher getEncryptCipher() {
+        return encryptCipher;
+    }
+
+    public Cipher getDecryptCipher() {
+        return decryptCipher;
+    }
+
+    public Key getKey() {
+        return key;
+    }
 
     /**
      * 将byte数组转换为表示16进制值的字符串， 如：byte[]{8,18}转换为：0813， 和public static byte[]
@@ -63,15 +75,6 @@ public class DESPlus {
     }
 
     /**
-     * 默认构造方法，使用默认密钥
-     *
-     * @throws Exception
-     */
-    public DESPlus() throws Exception {
-        this(strDefaultKey);
-    }
-
-    /**
      * 指定密钥构造方法
      *
      * @param strKey 指定的密钥
@@ -79,8 +82,7 @@ public class DESPlus {
      */
     public DESPlus(String strKey) throws Exception {
         Security.addProvider(new com.sun.crypto.provider.SunJCE());
-//		Key key = getKey(strKey.getBytes());
-        Key key = getKey();
+        key = creatKey(strKey);
 
         encryptCipher = Cipher.getInstance("DES");
         encryptCipher.init(Cipher.ENCRYPT_MODE, key);
@@ -133,59 +135,16 @@ public class DESPlus {
         return new String(decrypt(hexStr2ByteArr(strIn)));
     }
 
-    private Key getKey() {
+    public Key creatKey(String keyStr) {
         try {
-            String keyStr = "LIMaBAEE99w=";
-
-            SecretKey key = new SecretKeySpec(BASE64.decode(keyStr), "DES");
-
-            return key;
+            DESKeySpec desKey = new DESKeySpec(keyStr.getBytes());
+            // 创建一个密匙工厂
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            // 将DESKeySpec对象转换成SecretKey对象
+            SecretKey securekey = keyFactory.generateSecret(desKey);
+            return securekey;
         } catch (Exception e) {
             return null;
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            String test = "Hello World,are kidding me!!~~";
-            DESPlus des = new DESPlus();//默认密钥
-            //  DESPlus des = new DESPlus("FUCK");// 自定义密钥
-            System.out.println("加密前的字符：" + test);
-            System.out.println("加密后的字符：" + des.encrypt(test));
-            System.out.println("解密后的字符：" + des.decrypt(des.encrypt(test)));
-            des.work(test);
-            des.work2(test);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void work(String test) {
-        try {
-            String keyStr = "LIMaBAEE99w=";
-
-            SecretKey key = new SecretKeySpec(BASE64.decode(keyStr), "DES");
-
-            byte[] bs = encryptCipher.doFinal(test.getBytes());
-            System.out.println(bs.length);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void work2(String test) {
-        try {
-            String keyStr = "LIMaBAEE99w=";
-            SecretKey key = new SecretKeySpec(BASE64.decode(keyStr), "DES");
-            Cipher cp = Cipher.getInstance("DES");
-            cp.init(Cipher.ENCRYPT_MODE, key);
-            byte[] bs = cp.doFinal(test.getBytes());
-
-//			byte[] bs = encryptCipher.doFinal(test.getBytes());
-            System.out.println(bs.length);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
