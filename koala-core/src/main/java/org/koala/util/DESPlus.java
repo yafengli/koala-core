@@ -4,6 +4,7 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
+import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.Security;
 import java.security.spec.KeySpec;
@@ -135,16 +136,15 @@ public class DESPlus {
         return new String(decrypt(hexStr2ByteArr(strIn)));
     }
 
-    public Key creatKey(String keyStr) {
-        try {
-            DESKeySpec desKey = new DESKeySpec(keyStr.getBytes());
-            // 创建一个密匙工厂
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-            // 将DESKeySpec对象转换成SecretKey对象
-            SecretKey securekey = keyFactory.generateSecret(desKey);
-            return securekey;
-        } catch (Exception e) {
-            return null;
+    public Key creatKey(String keyStr) throws Exception {
+        if (keyStr == null || keyStr.length() % 8 != 0) {
+            throw new InvalidKeyException("The key size is 8 and not null.");
         }
+        DESKeySpec desKey = new DESKeySpec(keyStr.getBytes());
+        // 创建一个密匙工厂
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+        // 将DESKeySpec对象转换成SecretKey对象
+        SecretKey securekey = keyFactory.generateSecret(desKey);
+        return securekey;
     }
 }

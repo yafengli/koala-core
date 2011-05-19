@@ -7,12 +7,12 @@ import javax.crypto.Cipher;
 
 public class DESTest {
     public static final String test = "Hello World,are kidding me!!~~";
-    public static final String keyStr = "12345678";
+    public static final String keyStr = "1234567887654321";
     private DESPlus des = null;
 
     public DESTest() {
         try {
-            des = new DESPlus(keyStr);//默认密钥
+            des = new DESPlus(keyStr);//密钥长度为8或者8的倍数
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -21,7 +21,6 @@ public class DESTest {
     @Test
     public void testDecAndEnc() {
         try {
-            //  DESPlus des = new DESPlus("FUCK");// 自定义密钥
             System.out.println("加密前的字符：" + test);
             System.out.println("加密后的字符：" + des.encrypt(test));
             System.out.println("解密后的字符：" + des.decrypt(des.encrypt(test)));
