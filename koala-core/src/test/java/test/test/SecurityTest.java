@@ -15,13 +15,14 @@ import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Set;
+
 import org.koala.util.BASE64;
 
 public class SecurityTest {
 
     public static final String plainText = "中环人民Hello World,arekidding me!!~~";
 
-    //	@Test
+    @Test
     public void testFind() {
         Set<String> set = SecurityTool.findServiceTypes();
         for (String serviceType : set) {
@@ -41,7 +42,7 @@ public class SecurityTest {
         }
     }
 
-    //	@Test
+    @Test
     public void testMac() {
 
         try {
@@ -58,7 +59,7 @@ public class SecurityTest {
         }
     }
 
-    //	@Test
+    @Test
     public void testFc() {
         try {
             KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");

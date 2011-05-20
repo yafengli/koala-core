@@ -14,18 +14,18 @@ public class AnnonationTest {
 
     public AnnonationTest() {
         ctx = new ClassPathXmlApplicationContext(new String[]{
-                    "META-INF/spring/applicationContext-common.xml", "META-INF/spring/applicationContext-aop.xml"});
+                "META-INF/spring/applicationContext-common.xml", "META-INF/spring/applicationContext-aop.xml"});
     }
 
     @Test
     public void aop() {
         HelloWorld aop = (HelloWorld) ctx.getBean("helloworldaop");
         aop.sayHello("sh");
-        aop.sayBefore("sb",1);
-        aop.sayAfter("sa",2);
+        aop.sayBefore("sb", 1);
+        aop.sayAfter("sa", 2);
     }
 
-    //@Test
+    @Test
     public void annoation() {
         AnnotationPojo ap = (AnnotationPojo) ctx.getBean("annonationPojo");
         PropertiesLoader pl = (PropertiesLoader) ctx.getBean("propertiesLoader");
