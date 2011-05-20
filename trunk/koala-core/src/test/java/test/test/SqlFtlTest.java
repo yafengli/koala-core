@@ -27,7 +27,6 @@ public class SqlFtlTest {
 
     @Test
     public void testSql() {
-
         SqlFtlUtils sfu = (SqlFtlUtils) ctx.getBean("sqlftlutil");
         Map map = new HashMap();
         Map hello = new HashMap();

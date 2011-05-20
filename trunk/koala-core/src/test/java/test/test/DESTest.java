@@ -24,7 +24,6 @@ public class DESTest {
             System.out.println("加密前的字符：" + test);
             System.out.println("加密后的字符：" + des.encrypt(test));
             System.out.println("解密后的字符：" + des.decrypt(des.encrypt(test)));
-
         } catch (Exception e) {
             e.printStackTrace();
         }

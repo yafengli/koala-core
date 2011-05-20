@@ -15,14 +15,13 @@ public class DownloadTest {
 
     @Test
     public void testDown() {
-        String urlStr = "http://apache.freelamp.com/velocity/tools/1.4/velocity-tools-1.4.zip";
+        String urlStr = "http://mirror.bjtu.edu.cn/apache//velocity/engine/1.7/velocity-1.7.zip";
         try {
             DownloadUtil downloadManager = new DownloadUtil();
 
             downloadManager.setUrl(new URL(urlStr));
             downloadManager.setFileDir("f:/");
             downloadManager.setSleepSeconds(5);
-
             String downladFileName = downloadManager.download();
         }
         catch (Exception e) {
