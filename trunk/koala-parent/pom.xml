@@ -139,7 +139,7 @@
 	</dependencyManagement>
 	<distributionManagement>
 		<repository>
-			<id>nexus-deploy</id>
+			<id>deploymentRepo</id>
 			<name>Nexus Deploy</name>
 			<url>http://221.231.148.247/nexus/content/repositories/thirdparty</url>
 		</repository>
