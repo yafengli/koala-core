@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>org.koala</groupId>
 		<artifactId>koala-parent</artifactId>
-		<version>2.0.2</version>
+		<version>2.0.1</version>
 	</parent>
 	<dependencies>
 		<dependency>
@@ -48,6 +48,13 @@
 			<artifactId>jta</artifactId>
 		</dependency>
 	</dependencies>
+<distributionManagement>
+		<repository>
+			<id>deploymentRepo</id>
+			<name>Nexus Deploy</name>
+			<url>http://221.231.148.247/nexus/content/repositories/thirdparty</url>
+		</repository>
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
