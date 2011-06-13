@@ -24,7 +24,7 @@ public class MD5Tool {
     }
 
     public String byteArrayToHexString(byte[] b) {
-        StringBuilder builder = new StringBuilder();
+        StringBuffer builder = new StringBuffer();
         for (int i = 0; i < b.length; i++) {
             builder.append(byteToHexString(b[i]));
         }
@@ -33,7 +33,7 @@ public class MD5Tool {
 
     public String byteToHexString(byte b) {
         int value = b & 0xFF;
-        StringBuilder builder = new StringBuilder();
+        StringBuffer builder = new StringBuffer();
         if (value >= 0x10) {
             builder.append(Integer.toHexString(value));
         } else {
@@ -72,5 +72,19 @@ public class MD5Tool {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(str.getBytes());
         return new String(byteArrayToHexString(md.digest()));
+    }
+
+    public String bytesToHex(byte[] b) {
+        StringBuffer buffer = new StringBuffer();
+        for (int i = 0; i < b.length; i++) {
+            int value = b[i] & 0xFF;
+            if (value >= 0x10) {
+                buffer.append(Integer.toHexString(value));
+            } else {
+                buffer.append("0");
+                buffer.append(Integer.toHexString(value));
+            }
+        }
+        return buffer.toString();
     }
 }

@@ -4,25 +4,22 @@ import org.junit.Test;
 import org.koala.util.MD5Tool;
 import org.koala.util.SecurityTool;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.Mac;
-import javax.crypto.SecretKey;
+import javax.crypto.*;
+import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.ByteBuffer;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.security.*;
+import java.security.spec.KeySpec;
 import java.util.Set;
 
 import org.koala.util.BASE64;
 
 public class SecurityTest {
 
-    public static final String plainText = "中环人民Hello World,arekidding me!!~~";
+    public static final String plainText = "sdtest1$12345678$test123";
+    public static final String KEY = "sdgreennet";
 
-    @Test
+    //    @Test
     public void testFind() {
         Set<String> set = SecurityTool.findServiceTypes();
         for (String serviceType : set) {
@@ -46,20 +43,26 @@ public class SecurityTest {
     public void testMac() {
 
         try {
-            SecretKey key = getKey();
+            SecretKey key = new SecretKeySpec(KEY.getBytes(), "HmacMD5");
+//            SecretKey key = getKey();
+
             if (key != null) {
                 System.out.println("密钥：" + MD5Tool.getInstance().byteArrayToHexString(key.getEncoded()) + ":" + key.getAlgorithm());
-                Mac mac = Mac.getInstance("HmacMD5");
+                Mac mac = Mac.getInstance(key.getAlgorithm());
                 mac.init(key);
                 mac.update(plainText.getBytes());
-                System.out.println("MAC:" + MD5Tool.getInstance().byteArrayToHexString(mac.doFinal()));
+
+                byte[] bts = mac.doFinal();
+                System.out.println(new String(bts, "UTF-8"));
+                System.out.println("MAC:" + MD5Tool.getInstance().bytesToHex(bts));
+                System.out.println("MAC:" + MD5Tool.getInstance().byteArrayToHexString(bts));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Test
+    //    @Test
     public void testFc() {
         try {
             KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
@@ -82,7 +85,7 @@ public class SecurityTest {
         }
     }
 
-    @Test
+    //    @Test
     public void testKey() {
         try {
 //			KeyGenerator kg = KeyGenerator.getInstance("DES");
@@ -124,6 +127,7 @@ public class SecurityTest {
         try {
             KeyGenerator kg = KeyGenerator.getInstance("DES");
             key = kg.generateKey();
+            key = new SecretKeySpec(KEY.getBytes(), "MAC");
         } catch (Exception e) {
             e.printStackTrace();
         }
