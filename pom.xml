@@ -13,5 +13,6 @@
 		<module>koala-parent</module>        
 		<module>koala-core</module>        
 		<module>koala-orm</module>        
+		<module>koala-test</module>        
 	</modules>
 </project>
