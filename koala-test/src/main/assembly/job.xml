@@ -8,6 +8,7 @@
         <format>jar</format>
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
+    <!--
     <dependencySets>
         <dependencySet>
             <unpack>false</unpack>
@@ -27,6 +28,7 @@
             </excludes>
         </dependencySet>
     </dependencySets>
+    -->
     <fileSets>
         <fileSet>
             <directory>${basedir}/target/classes</directory>
