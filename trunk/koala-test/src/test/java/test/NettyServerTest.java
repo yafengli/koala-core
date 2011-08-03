@@ -1,3 +1,5 @@
+package test;
+
 import netty.ClientHandler;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.ChannelFuture;
