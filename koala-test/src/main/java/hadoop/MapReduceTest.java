@@ -1,10 +1,14 @@
 package hadoop;
 
+import java.io.IOException;
 import org.apache.hadoop.fs.FsUrlStreamHandlerFactory;
 import org.apache.hadoop.io.IOUtils;
 
 import java.io.InputStream;
 import java.net.URL;
+import org.apache.hadoop.mapred.OutputCollector;
+import org.apache.hadoop.mapred.Reporter;
+import org.apache.hadoop.mapreduce.Mapper;
 
 
 public class MapReduceTest {
@@ -21,5 +25,5 @@ public class MapReduceTest {
         } finally {
             IOUtils.closeStream(in);
         }
-    }
+    }    
 }
