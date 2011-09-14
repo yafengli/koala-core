@@ -158,6 +158,11 @@
 				<artifactId>hadoop-core</artifactId>
 				<version>${hadoop.ver}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.ver}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<distributionManagement>
@@ -189,6 +194,7 @@
 		<xmemcached.ver>1.3.3</xmemcached.ver>
 		<jackson.ver>1.8.5</jackson.ver>
 		<hadoop.ver>0.20.203.0</hadoop.ver>
+		<mybatis.ver>3.0.5</mybatis.ver>
 		<jta.ver>1.1</jta.ver>
 	</properties>
 </project>
