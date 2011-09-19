@@ -16,6 +16,7 @@
 
     <!-- Enables the Spring MVC @Controller programming model -->
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/resources/**" location="/,classpath:META-INF/public-resources/"/>
 
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
