@@ -39,5 +39,6 @@ public class MyBatisTest {
         blog2.setId(1L);
         Blog blog3=blogMapper.selectBlogByTableName(blog2);
         System.out.printf("%d,%s\n", blog3.getId(), blog3.getMessage());
+		System.out.println(blogMapper.selectAll(blog2));
     }
 }

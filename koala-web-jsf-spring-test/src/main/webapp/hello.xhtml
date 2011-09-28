@@ -7,13 +7,7 @@
         <title>Hello JSF 2!</title>
     </head>
     <body>
-        <h5>JSF Annotaion ServiceBean: #{service.name}</h5>
-        <h5>JSF Annotaion WelcomeBean:${welcome.message}****#{welcome.helloWorld.message}</h5>
-        <h5>JSF ConfigBean:${confighello.message}</h5>
-        <h5> Spring Bean Hello:${hello.message}</h5>
-        <h:form>
-            <h:commandButton action="test" actionListener="#{welcome.action}" value="改变"/>
-        </h:form>
         <p:label name="hello" value="world"/>
+        <h5>${confighello.message}</h5>
     </body>
 </html>

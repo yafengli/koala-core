@@ -1,5 +1,6 @@
 package test;
 
+import java.util.*;
 import demo.Blog;
 import demo.BlogMapper;
 import org.junit.Before;
@@ -35,6 +36,22 @@ public class SpringInMyBatisTest {
         System.out.println(sblog.getMessage());
         Blog blog2 = mapper.selectBlogByTableName(sblog);
         System.out.println(blog2.getMessage());
+		System.out.println("*********************************");
+		for(Blog bg:mapper.selectAll(sblog)){
+			System.out.println(bg.getId()+","+bg.getMessage());
+		}
+		System.out.println("*********************************");
+		for(Integer i:getList()){
+			System.out.println(i);
+		}
     }
-
+	
+	private List<Integer> getList(){
+		System.out.println("@@@@List@@@@");
+		List<Integer> list=new ArrayList<Integer>();
+		for(int i=0;i<10;i++){
+			list.add(Integer.valueOf(i));
+		}
+		return list;
+	}
 }

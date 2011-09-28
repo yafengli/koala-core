@@ -9,4 +9,7 @@
     <select id="selectBlogByTableName" parameterType="Blog" resultType="Blog">
         SELECT * FROM ${tablename} where  id= #{id}
     </select>
+	<select id="selectAll" parameterType="Blog" resultType="Blog">
+        SELECT * FROM ${tablename} 
+    </select>
 </mapper>

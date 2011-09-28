@@ -1,5 +1,5 @@
 package demo;
-
+import java.util.*;
 /**
  * User: Administrator
  * Date: 11-9-13
@@ -8,5 +8,7 @@ package demo;
 public interface BlogMapper {
     public Blog selectBlog(int id);
 
-    public Blog selectBlogByTableName(Blog blog);
+    public Blog selectBlogByTableName(Object blog);
+
+	public List<Blog> selectAll(Object blog);
 }
