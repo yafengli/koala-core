@@ -56,7 +56,8 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/highcharts/highcharts.js"
 	type="text/javascript"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/highcharts/js/themes/gray.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/highcharts/js/themes/gray.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var chart1 = new Highcharts.Chart({
@@ -77,7 +78,7 @@
 			},
 			series : [ {
 				name : '珍妮弗.安妮斯顿',
-				data : [ 23,19,34 ]
+				data : [ 23, 19, 34 ]
 			}, {
 				name : '肖恩.康纳利',
 				data : [ 51, 27, 43 ]
