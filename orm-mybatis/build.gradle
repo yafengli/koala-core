@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+group = 'gb'
+version = '1.0'
+repositories {
+    mavenLocal()
+    mavenCentral()
+    mavenRepo name: 'greatbit_repo', url: 'http://221.231.148.247/nexus/content/groups/public/'
+}
+dependencies {
+    compile(
+            [group: 'org.mybatis', name: 'mybatis', version: '3.0.6'],
+            [group: 'org.mybatis', name: 'mybatis-guice', version: '3.2', transitive: false],
+            [group: 'org.mybatis', name: 'mybatis-spring', version: '1.0.2', transitive: false]
+    )
+    testCompile(
+            [group: 'junit', name: 'junit', version: '4.+'],
+            [group: 'org.testng', name: 'testng', version: '5.14.1']
+    )
+
+    testRuntime(
+            [group: 'postgresql', name: 'postgresql', version: '9.1-901.jdbc4']
+    )
+}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://e:/repository")
+        }
+    }
+}
+
