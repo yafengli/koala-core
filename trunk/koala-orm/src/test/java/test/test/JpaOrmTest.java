@@ -8,10 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.model.ExUser;
-import test.model.User;
 import test.model.UserDetail;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,22 +33,24 @@ public class JpaOrmTest {
     @Test
     public void testOne() {
         Long start = System.currentTimeMillis();
-
-//        for (int i = 0; i < 2; i++) {
-//            UserDetail ud = facade.get((long) (i + 150), UserDetail.class);
-//            logger.error("#ud:" + ud.getId() + "," + ud.getUsername());
-//            ExUser user = new ExUser();
-//            user.setId(i);
-//            user.setAge(String.valueOf(i));
-//            user.setUsername(String.valueOf(i));
-//            user.setPassword(String.valueOf(i));
-//            user.setExkey(String.valueOf(i));
-//            user.setUserDetail(ud);
-//
-//            facade.insert(user);
-//        }
         Long count = facade.count("find.count.exuser", null);
-        List<ExUser> list = facade.fetch("find.all.exuser", null,ExUser.class);
+        List<ExUser> list = facade.fetch("find.all.exuser", null, ExUser.class);
+
+        if (count <= 0) {
+            for (int i = 0; i < 2; i++) {
+                UserDetail ud = facade.get((long) (i + 150), UserDetail.class);
+                logger.error("#ud:" + ud.getId() + "," + ud.getUsername());
+                ExUser user = new ExUser();
+                user.setId(i);
+                user.setAge(String.valueOf(i));
+                user.setUsername(String.valueOf(i));
+                user.setPassword(String.valueOf(i));
+                user.setExkey(String.valueOf(i));
+                user.setUserDetail(ud);
+
+                facade.insert(user);
+            }
+        }
         Long end = System.currentTimeMillis();
         logger.info("#time:{}ms.", (end - start));
         logger.info("#count:{} list:{}.", count, list.size());
