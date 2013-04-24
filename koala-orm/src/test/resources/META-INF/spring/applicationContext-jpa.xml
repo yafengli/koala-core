@@ -7,35 +7,40 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
        default-autowire="byName" default-lazy-init="true">
-           
-           <!--JPA Config  -->
+
+    <!--JPA Config  -->
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="persistenceUnitName" value="punit" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitName" value="punit"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="database" value="H2" />
-                <property name="showSql" value="false" />
-                <property name="generateDdl" value="true" />
+                <property name="database" value="H2"/>
+                <property name="showSql" value="false"/>
+                <property name="generateDdl" value="true"/>
             </bean>
         </property>
     </bean>
     <bean id="jpatransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <!-- JPA TransactionManager -->
     <tx:annotation-driven transaction-manager="jpatransactionManager"/>
-    
+
     <bean id="baseJPADao" class="org.koala.dao.jpa.BaseJPADao">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    
-    <context:component-scan base-package="test.dao.impl.jpa" />
+    <!--spring scan jpa dao -->
+    <context:component-scan base-package="test.dao.impl.jpa"/>
     <!--replace context:component-scan-->
     <!--
     <bean id="userservice" class="test.dao.impl.jpa.UserServiceImpl">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    -->    
+    -->
+    <bean id="facade" class="org.koala.jdbc.helper.JpaOrmFacade">
+        <constructor-arg>
+            <value>punit</value>
+        </constructor-arg>
+    </bean>
 </beans>

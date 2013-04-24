@@ -32,6 +32,20 @@
 			]]>
         </query>
     </named-query>
+    <named-query name="find.count.exuser">
+        <query>
+            <![CDATA[
+			SELECT count(*) FROM ExUser
+			]]>
+        </query>
+    </named-query>
+    <named-query name="find.all.exuser">
+        <query>
+            <![CDATA[
+			SELECT u FROM ExUser u
+			]]>
+        </query>
+    </named-query>
     <named-query name="find.test.username">
         <query>
 			<![CDATA[
