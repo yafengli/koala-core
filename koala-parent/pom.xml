@@ -5,14 +5,14 @@
 	<groupId>org.koala</groupId>
 	<artifactId>koala-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>2.1.0</version>
+	<version>2.1.2</version>
 	<name>koala-parent</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- Database Driver -->
@@ -28,12 +28,7 @@
 			<version>${postgres.ver}</version>
 			<scope>test</scope>
 		</dependency>
-		<!--Spring-->              
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.ver}</version>
-		</dependency>   
+		<!--Spring-->    		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -75,6 +70,12 @@
 	</dependencies>    
 	<dependencyManagement>
 		<dependencies>
+			<!--spring-->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.ver}</version>
+			</dependency>   
 			<!-- MyBatis -->
 			<dependency>
 				<groupId>org.mybatis</groupId>
@@ -125,7 +126,7 @@
 				<version>${poi.ver}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.jboss.netty</groupId>
+				<groupId>io.netty</groupId>
 				<artifactId>netty</artifactId>
 				<version>${netty.ver}</version>
 			</dependency>
@@ -169,32 +170,31 @@
 		<repository>
 			<id>deploymentRepo</id>
 			<name>Nexus Deploy</name>
-			<url>http://221.231.148.247/nexus/content/repositories/thirdparty</url>
+			<url>http://221.231.148.202:8081/nexus/content/repositories/thirdparty</url>
 		</repository>
 	</distributionManagement>
 	<properties>
-		<spring.ver>3.0.5.RELEASE</spring.ver>
-		<aspectj.ver>1.6.10</aspectj.ver>
-		<hibernate-validator.ver>4.1.0.Final</hibernate-validator.ver>
-		<hibernate-entitymanager.ver>3.6.3.Final</hibernate-entitymanager.ver>
-		<mybatis.ver>3.0.4</mybatis.ver>
-		<mybatis-spring.ver>1.0.0</mybatis-spring.ver>
-		<slf4j.ver>1.6.1</slf4j.ver>        
-		<freemarker.ver>2.3.16</freemarker.ver>
-		<h2.ver>1.3.154</h2.ver>
-		<postgres.ver>8.4-702.jdbc4</postgres.ver>
-		<commons-lang.ver>2.4</commons-lang.ver>
-		<commons-fileupload.ver>1.2</commons-fileupload.ver>
-		<commons-net.ver>2.0</commons-net.ver>
-		<commons-io.ver>1.4</commons-io.ver>		
+		<spring.ver>3.2.2.RELEASE</spring.ver>
+		<aspectj.ver>1.7.2</aspectj.ver>
+		<hibernate-validator.ver>5.0.0.Final</hibernate-validator.ver>
+		<hibernate-entitymanager.ver>4.2.0.Final</hibernate-entitymanager.ver>
+		<mybatis.ver>3.2.2</mybatis.ver>
+		<mybatis-spring.ver>1.2.0</mybatis-spring.ver>
+		<slf4j.ver>1.7.4</slf4j.ver>        
+		<freemarker.ver>2.3.19</freemarker.ver>
+		<h2.ver>1.3.171</h2.ver>
+		<postgres.ver>9.1-901-1.jdbc4</postgres.ver>
+		<commons-lang.ver>2.6</commons-lang.ver>
+		<commons-fileupload.ver>1.3</commons-fileupload.ver>
+		<commons-net.ver>3.2</commons-net.ver>
+		<commons-io.ver>2.4</commons-io.ver>		
 		<dbcp.ver>1.4</dbcp.ver>
-		<poi.ver>3.7</poi.ver>
-		<netty.ver>3.2.4.Final</netty.ver>
+		<poi.ver>3.9</poi.ver>
+		<netty.ver>3.6.5.Final</netty.ver>
 		<jyaml.ver>1.3.1</jyaml.ver>
-		<xmemcached.ver>1.3.3</xmemcached.ver>
-		<jackson.ver>1.8.5</jackson.ver>
-		<hadoop.ver>0.20.203.0</hadoop.ver>
-		<mybatis.ver>3.0.5</mybatis.ver>
+		<xmemcached.ver>1.4.1</xmemcached.ver>
+		<jackson.ver>1.9.12</jackson.ver>
+		<hadoop.ver>1.1.2</hadoop.ver>
 		<jta.ver>1.1</jta.ver>
 	</properties>
 </project>
